@@ -31,7 +31,7 @@ Many of the frontend developer tools (e.g. webpack, gulp, etc) are built on top 
 
 ## Node.js architecture
 
-<img src="_media/nodejs.jpg" alt="node.js architecture" width="400"/>
+![node js architecture](_media/nodejs.jpg)
 
 - libuv: the low-level I/O engine of Node.js written in C. It encapsulates the details of different I/O APIs on various operating systems, and does the work needed to run tasks asyncronously.
 - V8: the open-source JavaScript engine written in C++ originally developed by Google for the Chrome browser
