@@ -61,7 +61,7 @@ console.log("5" - 1); // 4
 console.log("5" + 1); // 51
 ```
 
-JavaScript will sliently convert the types when an operator is applied to the "wrong" type.
+JavaScript will silently convert the types when an operator is applied to the "wrong" type.
 
 This is **type coercion**.
 
