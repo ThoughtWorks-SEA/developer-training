@@ -35,3 +35,28 @@
 - [Mocks](javascript/mocks)
 - [TDD](javascript/tdd)
 <!-- - [Labs for JavaScript](javascript/javascript-labs) -->
+
+- **Frontend Web Development**
+
+- [Single Page Application](frontend/single-page-application)
+- [Why React](frontend/why-react)
+- [Getting Started](frontend/react-hello-world)
+- [React JSX](frontend/react-jsx)
+- [Imports and Exports of Component](frontend/import-export-components)
+- [React Props with Functional Components](frontend/react-props-with-func)
+- [React States with Class Components](frontend/react-state-with-class)
+- [Lifecycle of React Components](frontend/react-lifecycle)
+- [React Hooks](frontend/react-hooks)
+- [React Router](frontend/react-router)
+- [Http request](frontend/http-request)
+- [React Testing Library](frontend/react-testing-library)
+- [[Optional] Set up React Bootstrap](frontend/react-bootstrap)
+- [Different ways to style React](frontend/ways-to-style-react)
+- [Webpack and Babel](frontend/webpack-babel)
+- [[Bonus] React Context](frontend/react-context)
+- [[Bonus] React Redux](frontend/react-redux)
+- [[Bonus] Redux Thunk](frontend/redux-thunk)
+- [[Bonus] React Environment Variable](frontend/react-env-variable)
+- [Lab: Todo list](frontend/react-todo-list)
+- [Publish React App](frontend/publish-react)
+- [Planning for a new UI project](frontend/planning-new-project)

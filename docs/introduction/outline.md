@@ -20,18 +20,20 @@ The following is a rough outline of the topics covered in the program. This is s
 
 ### Week 3 - Frontend Web Development
 
-- React
+- React basics
+- React Hooks
 - React Router
-- Axios
+- Fetch / Axios
 - Testing with React Testing Library
 - Styling in React
-- React Hooks
+- Webpack / Babel
 - Deploy on Heroku
 
-### Week 4 - Frontend Project
+### Week 4 - Frontend Web Development
 
 - Build a frontend application with React
 - Showcase
+- Feedback session with mentors
 
 ### Week 5 -
 
