@@ -2,9 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Document</title>
+    <title>Guides: SGUnited Traineeship</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="description" content="Description" />
+    <meta
+      name="description"
+      content="Guidebook for SGUnited Traineeship by ThoughtWorks"
+    />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
@@ -17,6 +20,21 @@
   <body>
     <div id="app"></div>
     <script>
+      function footerPlugin(hook) {
+        const year = new Date(Date.now()).getFullYear();
+        const footerContent = [
+          "<hr/>",
+          "<footer>",
+          "<span>&copy; " + year + " - </span>",
+          "<span>Content developed by the L&D team at ThoughtWorks</span>",
+          "</footer>",
+        ].join("");
+
+        hook.afterEach(function (html) {
+          return html + footerContent;
+        });
+      }
+
       window.$docsify = {
         name: "SGUnited Guides",
         repo: "https://github.com/thoughtworks-sgunited/guides",
@@ -25,6 +43,8 @@
         search: {
           paths: "auto",
         },
+        auto2top: true,
+        plugins: [footerPlugin],
       };
     </script>
     <!-- Docsify v4 -->
