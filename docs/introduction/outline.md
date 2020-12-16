@@ -15,6 +15,7 @@ The following is a rough outline of the topics covered in the program. This is s
 - JavaScript
 - Node.js
 - npm
+- Linting
 - Testing with Jest and mocks
 - TDD
 

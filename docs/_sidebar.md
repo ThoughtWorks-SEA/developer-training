@@ -3,6 +3,18 @@
 - [About Thoughtworks](introduction/thoughtworks)
 - [Program Outline](introduction/outline)
 
+- **Fundamentals**
+
+  - [How to learn effectively](fundamentals/how-to-learn)
+  - [Machine setup](fundamentals/machine)
+  - [Command line tools](fundamentals/command-line)
+  - [Common shortcuts](fundamentals/shortcuts)
+  - [Git basics](fundamentals/git-basics)
+  - [Lab: Git practice](fundamentals/git-practice)
+  - [How the Internet works](fundamentals/how-internet-works)
+  - [HTTP](fundamentals/http)
+  - [Technical terms](fundamentals/technical-terms)
+
 - **Javascript**
 
 - [JavaScript Basics](javascript/basics)
