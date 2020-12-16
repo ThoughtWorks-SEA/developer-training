@@ -201,7 +201,7 @@ Follow these instructions for all operating systems
 - Open the command palette (Mac: Cmd+Shift+P; Windows: Ctrl+Shift+P or just press F1.)
 - Type `shell` and select `Shell Command: Install 'code' command in PATH`.
 
-![code](../_media/code.png)
+![code](_media/code.png)
 
 You can now use the `code` command to open Visual Studio Code.
 
