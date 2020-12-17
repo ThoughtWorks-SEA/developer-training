@@ -248,7 +248,7 @@ Alternatively, use [MongoDB Compass](https://www.mongodb.com/products/compass).
 
 ### Configuring Git
 
-To attach your full name to every commit you, simply add this line (of course, change it to your own name):
+To attach your full name to every commit you make, simply add this line (of course, change it to your own name):
 
 ```sh
 git config --global user.name "Jane Doe"
@@ -258,17 +258,6 @@ You can keep your email address private by using `<username>@users.noreply.githu
 
 ```sh
 git config --global user.email "<username>@users.noreply.github.com"
-```
-
-Add the following optional, but recommended configurations:
-
-```sh
-git config --global push.default simple
-git config --global credential.helper cache
-git config --global core.autocrlf input
-git config --global pull.rebase true
-git config --global rebase.autoStash true
-git config --global core.editor 'code --wait'
 ```
 
 ### Verify installations
