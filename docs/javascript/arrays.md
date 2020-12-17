@@ -42,13 +42,13 @@ find function returns the value of the first element in the array that satisfies
 
 ```js
 const numbers = [10, 20, 30, 40, 50];
-const found = numbers.find(element => element > 20);
+const found = numbers.find((element) => element > 20);
 console.log(found);
 ```
 
 ```js
 const names = ["Alice", "Bob"];
-const isFound = !!names.find(name => name === "Charlie");
+const isFound = !!names.find((name) => name === "Charlie");
 console.log(isFound); // returns false
 ```
 
@@ -78,7 +78,7 @@ for (let i = 0; i < friends.length; i++) {
 using forEach
 
 ```js
-friends.forEach(friend => {
+friends.forEach((friend) => {
   console.log("Hi " + friend + "!");
 });
 ```
@@ -86,7 +86,7 @@ friends.forEach(friend => {
 Another example of forEach
 
 ```js
-[1, 2, 3].forEach(function(element, index, container) {
+[1, 2, 3].forEach(function (element, index, container) {
   console.log("----");
   console.log("element value : " + element);
   console.log("index number  : " + index);
@@ -114,4 +114,4 @@ Another example of forEach
 
 ## Exercises
 
-https://github.com/thoughtworks-jumpstart/javascript-basics/blob/solution/2-arrays.js
+https://github.com/thoughtworks-jumpstart/javascript-basics/blob/master/2-arrays.js

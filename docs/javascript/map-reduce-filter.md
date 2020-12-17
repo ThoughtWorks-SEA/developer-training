@@ -20,7 +20,7 @@ console.log(result);
 With map:
 
 ```js
-const result = [1, 2, 3].map(element => {
+const result = [1, 2, 3].map((element) => {
   return element * 2;
 });
 
@@ -31,7 +31,7 @@ Another example:
 
 ```js
 const numbers = [1, 2, 3];
-const multiplyBy2 = number => {
+const multiplyBy2 = (number) => {
   return number * 2;
 };
 
@@ -85,7 +85,7 @@ Not only can you accumulate numbers, you can also accumulate strings!
 
 ```js
 const epic = ["a", "long", "time", "ago", "in a", "galaxy", "far far", "away"];
-const result = epic.reduce(function(accumulator, element) {
+const result = epic.reduce(function (accumulator, element) {
   return accumulator + " " + element;
 }); // returns 'a long time ago in a galaxy far far away'
 ```
@@ -149,7 +149,7 @@ However, unlike .forEach() and .map(), the callback function must return true or
 ```js
 const numbers = [1, 2, 3, 4, 5, 6];
 
-const isEvenNumber = number => {
+const isEvenNumber = (number) => {
   return number % 2 == 0; // this returns true if the number has no remainder when divided by 2
 };
 
@@ -200,14 +200,14 @@ const groceries = [
 
 // one line solution
 groceries
-  .filter(element => element["isOnDiscount"]) // get items on discount
-  .map(element => element.price * 1.09) // map price to price*GST
+  .filter((element) => element["isOnDiscount"]) // get items on discount
+  .map((element) => element.price * 1.09) // map price to price*GST
   .reduce((accumulator, element) => accumulator + element); // reduce array of prices to get total price
 
 // let's break it down
 
-const discountedItems = groceries.filter(element => element["isOnDiscount"]);
-const pricesWithGST = discountedItems.map(element => element.price * 1.09);
+const discountedItems = groceries.filter((element) => element["isOnDiscount"]);
+const pricesWithGST = discountedItems.map((element) => element.price * 1.09);
 const totalPrice = pricesWithGST.reduce(
   (accumulator, element) => accumulator + element
 );
@@ -215,9 +215,8 @@ const totalPrice = pricesWithGST.reduce(
 
 ## Exercises
 
-map: https://github.com/thoughtworks-jumpstart/javascript-basics/blob/solution/4-map.js
-
-filter: https://github.com/thoughtworks-jumpstart/javascript-basics/blob/solution/5-filter.js
+map: https://github.com/thoughtworks-jumpstart/javascript-basics/blob/master/4-map.js
+filter: https://github.com/thoughtworks-jumpstart/javascript-basics/blob/master/5-filter.js
 
 ### Count words with reduce
 
