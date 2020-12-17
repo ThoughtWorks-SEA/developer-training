@@ -188,13 +188,7 @@ sudo dnf upgrade <package-name>
 
 ## General
 
-Follow these instructions for all operating systems
-
-- Download Slack and join the Jumpstart Slack workspace (please ask instructors for invite link)
-- Create a GitHub account (if you don't have one already)
-- Install Visual Studio Code for your operating system
-- Install Firefox web browser for your operating system
-- Install Google Chrome web browser for your operating system
+Follow these instructions for all operating systems:
 
 ### Install Visual Studio Code `code` command in PATH
 
@@ -213,11 +207,11 @@ code .
 
 ### Install Visual Studio Code extensions
 
-Install these useful Visual Studio Code [extensions](/miscellaneous/resources?id=vs-code-extenstions)
+Install these useful Visual Studio Code [extensions](/miscellaneous/resources?id=vs-code-extensions)
 
-### Install Node version manager (optional)
+### Install Node version manager
 
-We often need to use different versions of Node on different projects. The easiest way to manage different versions of Node for multiple projects on your computer, is to use a version manager like [`n`](https://github.com/tj/n).
+We often need to use different versions of Node on different projects. The easiest way to manage different versions of Node for multiple projects on your computer, is to use a version manager like [`n`](https://github.com/tj/n) or [`nvm`](https://github.com/nvm-sh/nvm).
 
 ```
 npm install --global n
