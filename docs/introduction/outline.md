@@ -1,4 +1,4 @@
-The following is a rough outline of the topics covered in the program. This is subject to change due to various factors, including public holidays. Some topics may not be covered at the discretion of the instructors.
+The following is a rough outline of the topics covered in the program. This is subject to change due to various factors, including public holidays. Some topics may not be covered, or may be shifted around, at the discretion of the instructors.
 
 ### Week 1 - Fundamentals
 
@@ -25,33 +25,67 @@ The following is a rough outline of the topics covered in the program. This is s
 - React Hooks
 - React Router
 - Fetch / Axios
-- Testing with React Testing Library
+- React Bootstrap
 - Styling in React
 - Webpack / Babel
-- Deploy on Heroku
+- Lab: Todo list
 
 ### Week 4 - Frontend Web Development
+
+- React Testing Library
+- React Context
+- React Redux
+- React Thunk
+- Deploy on Heroku
+- Planning for UI project
+
+### Week 5 - Frontend Project
 
 - Build a frontend application with React
 - Showcase
 - Feedback session with mentors
 
-### Week 5 -
+### Week 6 - Backend Web Development
 
-### Week 6 -
+- RESTful API
+- CRUD
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- Authentication
+- JWT
+- Deploy on Heroku
+- Labs
 
-### Week 7 -
+### Week 7 - Backend Web Development
 
-### Week 8 -
+- Labs
 
-### Week 9 -
+### Week 8 - Backend Project
 
-### Week 10 -
+- Build a backend application with Express and MongoDB
+- Showcase
+- Feedback session with mentors
 
-### Week 11 - Computer Science
+### Week 9 - Full-stack project (individual)
+
+- Build a fully-fledged frontend and backend project (individual)
+- Deploy on Heroku
+- Showcase
+- Feedback session with mentors
+
+### Week 10
 
 - Data structures and algorithms
-- Software Design
+- Improve on individual project
+
+### Week 11 - Software Design
+
+- Programming Paradigm
+- Object-oriented Programming
+- Design Principles
+- Design Patterns
 
 ### Week 12 - Agile
 
