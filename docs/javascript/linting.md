@@ -107,12 +107,12 @@ npm install --save-dev jest eslint-plugin-jest
 }
 ```
 
-## Sample for create react app
+## Sample for create-react-app
 
 ```json
 {
   "extends": [
-    "react-app",
+    "plugin:react/recommended",
     "eslint:recommended",
     "plugin:jest/recommended",
     "plugin:prettier/recommended"
@@ -122,7 +122,7 @@ npm install --save-dev jest eslint-plugin-jest
 
 ## Configure VS Code with ESLint Extension
 
-There is a very useful extension in VS Code that automatically run ESLint to check issues in your code.
+There is a very useful extension in VS Code that automatically runs ESLint to check issues in your code.
 
 VS Code ESLint Extension
 
