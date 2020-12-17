@@ -8,7 +8,7 @@ managing multiple views in a React app
 2. Setup
 3. Conditional rendering based on a path
 4. Navigating Pages
-5. Accessing Router information within Component.
+5. Accessing Router information within Component
 6. Params
 
 ## Why we want to use it
@@ -25,11 +25,11 @@ Say our application have
 - /photo-gallery
 - /weather
 
-When a user hit the URL `/weather` in a browser, the react app with React Router loads our react application, look at the URL, checks the mapping of what to render and then renders only the `todo-list` portion of the code.
+When a user appends `/weather` to the path in their browser, React Router will only render the components specified within the `/weather` route.
 
 ## Setup
 
-The package we are going to use is react-router.
+The package we are going to use is react-router-dom.
 
 ```sh
 npm install react-router-dom
@@ -53,7 +53,7 @@ function App() {
 export default App;
 ```
 
-## Conditional rendering based on a path
+## Conditional rendering
 
 ### Rendering JSX directly
 
@@ -99,18 +99,18 @@ Say `<Route path="/home" render={() => <h1>Home</h1>} />`
 - http://`<host>`/hom is **NOT** a match
 - http://`<host>`/homealone is **NOT** a match
 - http://`<host>`/home-alone is **NOT** a match
-- http://`<host>`/home/dinosaur a match
+- http://`<host>`/home/dinosaur is a match
 
 if we do not want `home/dinosaur` to be a match, we can add `exact` property
 `<Route path="/home" exact render={() => <h1>Home</h1>} />`
 
 ### Rendering Components with Route
 
-1. Move Home and Weather into Container folder.
-2. Import Home and Wether in App.js
+1. Move Home and Weather into a `containers` folder.
+2. Import Home and Weather in App.js
 3. Replace `render` with `component` and pass in the Component
 
-src/containers/Home
+src/containers/Home.js
 
 ```javascript
 import React from "react";
@@ -118,7 +118,7 @@ import React from "react";
 export default () => <h1>Home</h1>;
 ```
 
-src/containers/Weather
+src/containers/Weather.js
 
 ```javascript
 import React from "react";
@@ -126,7 +126,7 @@ import React from "react";
 export default () => <h1>Weather</h1>;
 ```
 
-src/App
+src/App.js
 
 ```javascript
 // ...
@@ -202,11 +202,11 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 We have learnt to set up Routes to do the conditional rendering.
 
-### Do not use anchor tag or windows object to navigate.
+### Anchor tags
 
-Using anchor tag or `window.location.href` causes the browser to reload the whole React app breaking the Single Page Application experience.
+Using anchor tags or `window.location.href` will cause the browser to reload the entire React app, breaking the Single Page Application experience.
 
-Let's try it out
+Let's try it out:
 
 ```javascript
 <BrowserRouter>
@@ -227,7 +227,9 @@ Let's try it out
 </BrowserRouter>
 ```
 
-### Using Link
+### Link
+
+Instead, we should be using `Link` components:
 
 ```javascript
 // ...
@@ -250,7 +252,7 @@ import { BrowserRouter, Route, Switch, Redirect, Link } from "react-router-dom";
 </BrowserRouter>;
 ```
 
-When we switch to the `Link` component, the React app no longer refreshes on load.
+This way, the React app no longer refreshes on load.
 
 ### Using Navlink to style active links
 
@@ -304,26 +306,24 @@ Is also possible to change the added class name with `activeClassName` or add in
 
 ![NavLink](_media/navLink.png)
 
-## Accessing Router information within Component
+## Accessing Router information
 
-React Router provides you will 3 objects.
+React Router provides you with 3 objects.
 
-1. history: allow you to `navigate` or `goback` to the previous page
-2. location: get the current path in the React app
-3. match: information about the `Route` and access to the query parameters.
+1. history: allows you to navigate, e.g. `goBack` to the previous page
+2. location: gets the current path in the React app
+3. match: contains information about the `Route` and access to the query parameters.
 
-You can refer to the official document for the usage, in here we going to focus on how to access them.
+You can refer to the [official document](https://reactrouter.com/web/guides/quick-start) for the usage; for now we will focus on how to access them.
 
-### Components that render from route.
-
-Components rendered from `Rotue` contains these 3 objects injected into the properties.
+Components rendered from `Route` contains these 3 objects injected into the properties.
 
 src/containers/Home.js
 
 ```javascript
 import React from "react";
 
-export default props => {
+export default (props) => {
   return (
     <div>
       <h1>Home</h1>
@@ -342,8 +342,8 @@ export default props => {
 };
 ```
 
-1. we gain access to location object which consist of the pathname
-2. on clicking the "to weather" link, it brings us to weather. Similarly, there are functions like `goBack` in the `history` object that allow us to return to the previous page.
+1. We gain access to location object, which consists of the pathname
+2. Clicking on the "to weather" link brings us to `/weather`.
 
 Note: we do not recommend inline styling in general.
 
@@ -368,7 +368,7 @@ src/containers/Home.js
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-const UserName = props => {
+const UserName = (props) => {
   return (
     <div>
       {props.name} {props.location ? props.location.pathname : "???"}
@@ -378,7 +378,7 @@ const UserName = props => {
 
 const UserNameWRouter = withRouter(UserName);
 
-export default props => {
+export default (props) => {
   return (
     <div>
       <h1>Home</h1>
@@ -395,7 +395,7 @@ export default props => {
 
 ### Query params
 
-Query params are helpful when it comes to filter down items from a list.
+Query params can be used to filter items from a list.
 
 src/containers/Food.js
 
@@ -411,15 +411,15 @@ const menu = [
   { name: "durian", type: "fruit" },
 ];
 
-const Food = props => {
+const Food = (props) => {
   const useQuery = new URLSearchParams(props.location.search);
   const type = useQuery.get("type");
-  const filteredFoods = menu.filter(food => food.type === type);
+  const filteredFoods = menu.filter((food) => food.type === type);
 
   return (
     <div>
       <span>you have selected: </span>
-      {filteredFoods.map(food => (
+      {filteredFoods.map((food) => (
         <b>{food.name}</b>
       ))}
     </div>
@@ -431,9 +431,9 @@ export default withRouter(Food);
 
 ### Path params
 
-path params are useful when select specific information to render
-For example, if we have a menu of items. Each food item maps to a specific id.
-We can fetch item based on the query params.
+Path params can be used to select specific information to render.
+
+For example: if we have a menu of items, and each food item maps to a specific id, we can fetch an item based on the query params.
 
 `/food/1`
 
@@ -447,7 +447,7 @@ const menu = {
   3: "durian",
 };
 
-const Food = props => {
+const Food = (props) => {
   const foodId = props.match.params.id;
   const foodName = menu[foodId] || "something not in the menu";
   return (
@@ -467,8 +467,7 @@ src/App.js
 <Route path="/food/:id" component={Food} />
 ```
 
-try accessing `/food/2`
-The Component will then displays "you have selected: laksa".
+Try accessing `/food/2` - the Component will display "you have selected: laksa".
 
 ## Exercise
 
