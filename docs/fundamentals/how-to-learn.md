@@ -122,4 +122,3 @@ There are two types of failures. There are the failures that are good for us tha
 ## Assignment
 
 - [Follow this example, track what you learned everyday](https://github.com/jbranchaud/til)
-- [Take the challenge to write code for 100 days](https://github.com/jbranchaud/til)

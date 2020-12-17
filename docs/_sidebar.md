@@ -78,7 +78,7 @@
 - [Publish React App](frontend/publish-react)
 - [Planning for a new UI project](frontend/planning-new-project)
 
-**Miscellaneous**
+- **Miscellaneous**
 
 - [Katas](miscellaneous/katas)
 - [Books](miscellaneous/books)
