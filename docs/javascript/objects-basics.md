@@ -57,7 +57,7 @@ const drink = {
   name: "Teh C",
   type: "milk tea",
 
-  printType: function() {
+  printType: function () {
     // alternative syntax for defining methods
     console.log(this.type); // milk tea
   },
@@ -76,8 +76,8 @@ const cat = {};
 cat.name = "Fluffy";
 
 // Add a new method
-myObject.awesomeMethod = function() {
-  console.log("i'm an awesome method!");
+cat.sing = function () {
+  console.log("Meow meow meow!");
 };
 ```
 
