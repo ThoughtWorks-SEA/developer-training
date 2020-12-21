@@ -19,6 +19,7 @@
 
   - [HTML Basics](html&css/html)
   - [Intro to CSS](html&css/css-basics)
+  - [Lab: Twitter clone](html&css/labs)
 
 - **Javascript**
 
