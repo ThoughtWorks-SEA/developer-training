@@ -94,6 +94,10 @@ CSS allows multiple selectors to the same declaration by using a `,` as a separa
 }
 ```
 
+## Lab: CSS selectors
+
+https://flukeout.github.io/
+
 ## Inheritance
 
 We know that HTML elements form a tree structure: one HTML element can have other HTML elements has children.
@@ -147,7 +151,7 @@ If you already set a property for an HTML element explicitly, then the element d
 
 If the default inheritance rule does not work for you in a specific situation, you can explicitly specify that an element needs (or doesn't need) to inherit property from its ancestor.
 
-For example, you can add a CSS rule on a div to force it inherits the border property from its parent.
+For example, you can add a CSS rule on a div to force it to inherit the border property from its parent.
 
 ```css
 div {
@@ -160,7 +164,7 @@ div {
 - [initial](https://developer.mozilla.org/en-US/docs/Web/CSS/initial) - set to default style based on css specification
 - [unset](https://developer.mozilla.org/en-US/docs/Web/CSS/unset) - inherit from immediate parent, set to initial on the rest of the case
 
-Use this sparsely, or you may create lots of confusion for yourself your team.
+Use this sparsely, or you may create lots of confusion for yourself and your team.
 
 ### Specification rules
 
@@ -174,8 +178,17 @@ Aim for specifications that indicate the item you are choosing without being so 
 - class `.button`
 - element `p`
 
-## Lab: CSS selectors
+## Lab: Flexbox
 
-https://flukeout.github.io/
+https://flexboxfroggy.com/
 
-![your css rocs](_media/you-rock-css.png)
+## Lab: Grid
+
+https://cssgridgarden.com/
+
+## Lab: Twitter clone
+
+1. Create a [codepen](https://codepen.io/) account.
+2. Recreate a static page with HTML and CSS to match this Twitter landing page, to the best of your abilities:
+
+![twitter clone](_media/twitter-clone.png)
