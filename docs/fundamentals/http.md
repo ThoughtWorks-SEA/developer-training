@@ -2,8 +2,6 @@
 
 HTTP stands for HyperText Transfer Protocol. An HTTP client sends a request message to an HTTP server. The server, in turn, returns a response message.
 
-See [this website](https://www.ntu.edu.sg/home/ehchua/programming/webprogramming/HTTP_Basics.html) for more diagrams.
-
 ## Request methods
 
 HTTP protocol defines a set of request methods, these are the common ones that we regularly use:
