@@ -40,6 +40,7 @@
   - [More objects](javascript/objects)
   - [Callbacks](javascript/callbacks)
   - [Scopes](javascript/scopes)
+  - [Closure and Currying](javascript/closure-currying)
   - [Classes](javascript/classes)
   - [Call, apply, bind](javascript/call-apply-bind)
   - [Node.js basics](javascript/node-basics)
