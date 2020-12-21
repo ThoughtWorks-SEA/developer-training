@@ -116,7 +116,7 @@ There’s a subtle difference between an arrow function => and a regular functio
 .bind(this) creates a “bound version” of the function.
 The arrow => doesn’t create any binding. The function simply doesn’t have this. The lookup of this is made exactly the same way as a regular variable search: in the outer lexical environment.
 
-We now use arrow functions instead of bind to have lexical scope. 
+We now use arrow functions instead of bind to have lexical scope.
 
 ## Exercises
 
@@ -124,6 +124,6 @@ Go through the 4 tasks here: http://javascript.info/bind#bound-function-as-a-met
 
 ## Further reading
 
-https://dev.to/alexantoniades/call-apply-bind-the-basic-usages-5gpl
-
-https://github.com/thoughtworks-jumpstart/learning-functions/blob/master/5_applyCallBind.js
+- http://medium.com/@omergoldberg/javascript-call-apply-and-bind-e5c27301f7bb
+- https://dev.to/alexantoniades/call-apply-bind-the-basic-usages-5gpl
+- https://github.com/thoughtworks-jumpstart/learning-functions/blob/master/5_applyCallBind.js
