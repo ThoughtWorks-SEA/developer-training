@@ -33,9 +33,6 @@ Another example is illustrated in the picture below:
 
 (image source: https://www.java-success.com/q1-q5-javascript-interview-qa-on-variable-scopes-context/)
 
-## this
+## Further reading
 
-`this` does not follow the lexical scope rule (except in arrow functions)
-Unfortunately, when you try to deduce the meaning of `this` in JavaScript, you cannot follow this lexical scope rule except when `this` appear in arrow functions.
-
-In normal functions, this follows something like `dynamic scoping` rule.
+- https://medium.com/better-programming/a-brief-introduction-to-closures-and-lexical-scoping-in-javascript-8a5866496232
