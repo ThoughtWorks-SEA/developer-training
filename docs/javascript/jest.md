@@ -104,20 +104,26 @@ it("should work", () => {
 
 #### Basic matcher methods
 
-expect() returns an 'expectation' object, which has several matcher methods (see full list of matcher methods on the Jest expect reference)
-`expect(actual).toEqual(someValue)`
-`expect(actual).toHaveLength(number)`
+`expect()` returns an 'expectation' object, which has several matcher methods.
 
-Some other matcher methods:
-`expect(actual).not.toEqual(someValue)` & `expect(actual).not.toBe(someObject)`
-`expect(actual).toBeGreaterThan(number)`
-`expect(actual).toBeLessThan(number)`
-`expect(actual).toContain(item)`
-`expect(actual).toContainEqual(item)`
-`expect(actual).toHaveProperty(keyPath, value)`
-`expect(actual).toBe(someObject)`
+Some matcher methods:
 
-Note: toBe() uses Object.is to test object equality. If you want to check the value of an object, use toEqual() instead:
+```
+expect(actual).toEqual(someValue)
+expect(actual).toHaveLength(number)
+expect(actual).not.toEqual(someValue)
+expect(actual).not.toBe(someObject)
+expect(actual).toBeGreaterThan(number)
+expect(actual).toBeLessThan(number)
+expect(actual).toContain(item)
+expect(actual).toContainEqual(item)
+expect(actual).toHaveProperty(keyPath, value)
+expect(actual).toBe(someObject)
+```
+
+See the full list of matcher methods on the [Jest expect reference](https://jestjs.io/docs/en/expect).
+
+Note: `toBe()` uses `Object.is` to test object equality. If you want to check the value of an object, use `toEqual()` instead:
 
 Example:
 
@@ -149,21 +155,17 @@ it("null", function () {
 
 ## VS Code Extension for snippets
 
-Install Jest Snippets (andys8.jest-snippets). This will be handy.
-
-Open command palette: `Shift + Cmd + P`
-
-Type **install extensions**.
-Search for **Jest Snippets**.
-
-Install and reload
-
-Start using the autocomplete feature in your test file.
+1. Install Jest Snippets (andys8.jest-snippets). This will be handy.
+1. Open command palette: `Shift + Cmd + P`
+1. Type **install extensions**.
+1. Search for **Jest Snippets**.
+1. Install and reload
+1. Start using the autocomplete feature in your test file.
 
 See list of commands here: https://github.com/andys8/vscode-jest-snippets
 
-Help: VS Code does not automatically show the choices for expect()
+**"Help! VSCode does not automatically show the choices for expect()!"**
 
-In VS Code, if you type `expect(something).`, then you should see a pop up of choices for what to expect (e.g. toEqual, toBeTrue). If you don't see this list, that means your project is not configured properly and VS Code does not know what to show.
+In VSCode, if you type `expect(something).`, then you should see a pop up of choices for what to expect (e.g. toEqual, toBeTrue). If you don't see this list, that means your project is not configured properly and VSCode does not know what to show.
 
-To fix this, run the command in your project directory `npm install add -D @types/jest`
+To fix this, run the command in your project directory `npm install add -D @types/jest`.
