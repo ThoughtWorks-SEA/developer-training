@@ -81,7 +81,7 @@
   - [[Bonus] React Environment Variable](frontend/react-env-variable)
   - [Lab: Todo list](frontend/react-todo-list)
   - [Publish React App](frontend/publish-react)
-  - [Planning for a new UI project](frontend/planning-new-project)
+  - [[Bonus] Planning for a new UI project](frontend/planning-new-project)
 
 - **Miscellaneous**
 

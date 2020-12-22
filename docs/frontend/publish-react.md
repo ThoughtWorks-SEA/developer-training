@@ -7,23 +7,23 @@ Covers:
 
 ## Netlify
 
-There are 2 ways we can deploy our application thru Netlify.
-One is to use the `netlify-cli`, the other using the GUI.
+There are 2 ways we can deploy our application through Netlify.
+One is to use the GUI, the other using `netlify-cli`.
 
 ### Setting up an account
 
 1. Go to https://app.netlify.com/
-2. create an account preferrable using Github
+2. Create an account, preferably using Github
 3. Create a new team
 
-### GUI
+### Option 1: GUI
 
 1. Push the app to Github
 2. on Netlify, select "New site from Git".
-3. under continuous deployment, select Github and authorities using 2FA if required
+3. Under continuous deployment, select Github and authorities using 2FA if required
 4. Select the repo to link with
 
-### Terminal
+### Option 2: Terminal
 
 1. install `serve` and `netlify-cli` package
 
@@ -84,7 +84,7 @@ More documentation can be found [here](https://devcenter.heroku.com/articles/con
 
 ![connect heroku app](_media/herokuConnectApp.png)
 
-### Trigger a manual depoly
+### Trigger a manual deploy
 
 (Only for the first time deploying this app) click on “Deploy branch” at the end of the page
 That's all! You can now visit the URL: https://randomly-generated-app-name.herokuapp.com/.
