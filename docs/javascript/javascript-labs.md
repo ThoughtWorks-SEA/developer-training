@@ -1,12 +1,17 @@
-# Labs for JavaScript
+## Labs: JavaScript
 
-### Programming JavaScript
+## JavaScript basics
 
-- [Functions](https://github.com/thoughtworks-jumpstart/learning-functions)
-- [Functions, arrays, objects](https://github.com/thoughtworks-jumpstart/javascript-basics)
-- [Creating classes](https://github.com/thoughtworks-jumpstart/code-along-classes/blob/master/index.js)
+https://github.com/thoughtworks-jumpstart/javascript-basics
 
-### Node.js
+1. Clone the repo: `git clone git@github.com:thoughtworks-jumpstart/javascript-basics.git`
+1. Follow the instructions in each file (e.g. 1-functions.js, 2-arrays.js, 3-objects.js, etc.) and make all the test cases pass.
+1. Run tests using `node <filename>.js`, e.g. `node 1-functions.js`
 
-- [Create simple Node.js modules with no server](https://github.com/thoughtworks-jumpstart/simple-node-modules)
-- [A simple server written in Node.js](https://github.com/thoughtworks-jumpstart/simple-node-server/blob/master/index.js)
+<!--
+## [Learning functions](https://github.com/thoughtworks-jumpstart/learning-functions)
+
+1. Clone the repo: `git clone git@github.com:thoughtworks-jumpstart/learning-functions.git`
+
+TODO
+-->
