@@ -169,3 +169,7 @@ See list of commands here: https://github.com/andys8/vscode-jest-snippets
 In VSCode, if you type `expect(something).`, then you should see a pop up of choices for what to expect (e.g. toEqual, toBeTrue). If you don't see this list, that means your project is not configured properly and VSCode does not know what to show.
 
 To fix this, run the command in your project directory `npm install add -D @types/jest`.
+
+## Lab: Jest
+
+Follow [this tutorial](https://www.valentinog.com/blog/jest/) to experiment with Jest and TDD (more on TDD soon!).
