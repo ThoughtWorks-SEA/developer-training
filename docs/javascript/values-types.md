@@ -28,7 +28,7 @@ Number.NEGATIVE_INFINITY === -Infinity // true
 - `` `half of 100 is ${100 / 2}. This can embed values.` ``
 - "con" + "cat" + "e" + "nate"
 - "This is the first line\nthis is the second line"
-- "we are\\\non the same line because of escaped character \\"
+- "we are\\\on the same line because of escaped character \\"
 
 ### Booleans
 
@@ -120,7 +120,7 @@ Try to give your variables meaningful names to make it easy for other people to 
 
 ### Scoping
 
-While `var` is **function scoped**, `let` and `const` is **block scoped**. We shall elaborate more in the [scopes](./scopes) topic.
+While `var` is **function scoped**, `let` and `const` is **block scoped**. We shall elaborate more in the [scopes](javascript/scopes) topic.
 
 ### Variable Hoisting
 
