@@ -105,17 +105,6 @@ const x = 15;
 const y = x + 20; // y is ???
 ```
 
-## Naming rules and conventions
-
-Try to give your variables meaningful names to make it easy for other people to understand what your code does.
-
-- Names are case-sensitive
-- Names cannot start with numbers
-- Generally speaking, use only alphabets
-- The name must not be a reserved keyword (e.g. var, for, if, while)
-- See full list of reserved keywords here
-- Use camelCase for names instead of snake_case or kebab-case
-
 ## Differences between var and let and const
 
 ### Scoping
@@ -198,3 +187,14 @@ console.log(a);
 ```
 
 See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let for more information.
+
+## Naming rules and conventions
+
+Try to give your variables meaningful names to make it easy for other people to understand what your code does.
+
+- Names are case-sensitive
+- Names cannot start with numbers
+- Generally speaking, use only alphabets
+- The name must not be a reserved keyword (e.g. var, for, if, while) (see full list of reserved keywords [here](https://mathiasbynens.be/notes/reserved-keywords))
+
+**Refer to this [blog post](https://www.robinwieruch.de/javascript-naming-conventions) for JavaScript naming conventions.**
