@@ -139,6 +139,13 @@
 
   - [Data structures and algorithms](computer-science/data-structures-algorithms)
 
+- **Software Design**
+
+  - [Programming paradigm](software-design/programming-paradigm)
+  - [Object-oriented programming](software-design/object-oriented-programming)
+  - [Design Principles](software-design/design-principles)
+  - [Design Patterns](software-design/design-patterns)
+
 - **Miscellaneous**
 
   - [Katas](miscellaneous/katas)
