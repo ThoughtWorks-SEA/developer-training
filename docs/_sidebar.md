@@ -135,6 +135,10 @@
   - [Clean code](delivering-software/clean-code)
   - [Refactoring](delivering-software/refactoring)
 
+- **Computer Science**
+
+  - [Data structures and algorithms](computer-science/data-structures-algorithms)
+
 - **Miscellaneous**
 
   - [Katas](miscellaneous/katas)
