@@ -125,6 +125,16 @@
   - [Lab: Company reviews](backend/company-reviews-lab)
   <!-- - [Labs: Express / Mongoose](backend/backend-labs) -->
 
+- **Delivering Software**
+
+  - [Agile software delivery](delivering-software/agile)
+  - [CI/CD](delivering-software/ci-cd)
+  - [Circle CI](delivering-software/circle-ci)
+  - [Git collab](delivering-software/git-collab)
+  - [Git advanced](delivering-software/git-advanced)
+  - [Clean code](delivering-software/clean-code)
+  - [Refactoring](delivering-software/refactoring)
+
 - **Miscellaneous**
 
   - [Katas](miscellaneous/katas)
