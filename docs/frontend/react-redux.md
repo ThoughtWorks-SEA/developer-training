@@ -1,6 +1,6 @@
 # React Redux
 
-## covers:
+## Covers
 
 1. What is Redux
 2. Do you still need redux
@@ -160,14 +160,14 @@ const FortuneList = ({ fortunes }) => {
   return (
     <div>
       <h1>Fortune List</h1>
-      {fortunes.predictions.map(data => (
+      {fortunes.predictions.map((data) => (
         <UserFortune name={data.name} prediction={data.fortune} />
       ))}
     </div>
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { fortunes } = state;
   return { fortunes };
 };
@@ -215,7 +215,7 @@ const initialState = {
   predictions: [],
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case ADD_FORTUNE_TYPE:
       return {
@@ -246,14 +246,14 @@ const FortuneList = ({ fortunes, addFortune }) => {
   return (
     <div>
       <h1>Fortune List</h1>
-      {fortunes.predictions.map(data => (
+      {fortunes.predictions.map((data) => (
         <UserFortune key={data.id} name={data.name} prediction={data.fortune} />
       ))}
 
       <div>
         <input
           type="input"
-          onChange={event => setNewName(event.target.value)}
+          onChange={(event) => setNewName(event.target.value)}
         />
         <button
           onClick={() => {
@@ -268,12 +268,12 @@ const FortuneList = ({ fortunes, addFortune }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { fortunes } = state;
   return { fortunes };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   addFortune: (id, name, fortune) => dispatch(addFortune(id, name, fortune)),
 });
 

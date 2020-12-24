@@ -1,6 +1,6 @@
 # Http Request
 
-## Covers:
+## Covers
 
 1. Overview
 2. [Optional] Fetch API
@@ -48,8 +48,8 @@ Fetch API is the browser default API to handle HTTP request and response. Fetch 
 
 ```javascript
 fetch("https://jsonplaceholder.typicode.com/todos/2")
-  .then(response => response.json()) // convert data to json
-  .then(json => console.log(json)); // log data
+  .then((response) => response.json()) // convert data to json
+  .then((json) => console.log(json)); // log data
 ```
 
 The above code assumes that the server is not going to throw an error.
@@ -59,7 +59,7 @@ There are other possible types such as `Body.blob()` for images, `Body.text()` f
 You can also face error when sending a request.
 
 ```javascript
-const checkResponse = res => {
+const checkResponse = (res) => {
   if (!res.ok) {
     throw Error(res.statusText);
   }
@@ -68,9 +68,9 @@ const checkResponse = res => {
 
 fetch("https://jsonplaceholder.typicode.com/todos/2")
   .then(checkResponse) // check if response is okay
-  .then(response => response.json()) // convert data to json
-  .then(json => console.log(json)) // log data
-  .catch(err => console.log(err)); // log error if an error was thrown
+  .then((response) => response.json()) // convert data to json
+  .then((json) => console.log(json)) // log data
+  .catch((err) => console.log(err)); // log error if an error was thrown
 ```
 
 Server sometimes can return you an invalid response. Is good to check your response before using them.
@@ -116,8 +116,8 @@ npm install axios
 fetching data
 
 ```javascript
-axios("https://jsonplaceholder.typicode.com/todos/2").then(res =>
-  console.log(res.data),
+axios("https://jsonplaceholder.typicode.com/todos/2").then((res) =>
+  console.log(res.data)
 ); // log data
 ```
 
@@ -136,7 +136,7 @@ export default class Todolist extends React.Component {
   }
 
   componentDidMount() {
-    axios("https://jsonplaceholder.typicode.com/todos").then(res => {
+    axios("https://jsonplaceholder.typicode.com/todos").then((res) => {
       this.setState({
         todos: res.data,
       });
@@ -146,7 +146,7 @@ export default class Todolist extends React.Component {
   render() {
     return (
       <div>
-        {this.state.todos.map(todo => (
+        {this.state.todos.map((todo) => (
           <div key={todo.id}>{todo.title}</div>
         ))}
       </div>
@@ -165,12 +165,12 @@ Handling error in Axios is simple. Axios function returns a Promise and Rejects 
 
 ```javascript
 axios("https://jsonplaceholder.typicode.com/todos")
-  .then(res => {
+  .then((res) => {
     this.setState({
       todos: res.data,
     });
   })
-  .catch(error => {
+  .catch((error) => {
     console.error(error);
     this.setState({ errorMessage: "Please Try Again" });
   });
@@ -223,20 +223,22 @@ export default class Todolist extends React.Component {
     });
 
     axios("https://jsonplaceholder.typicode.com/todos")
-      .then(res => {
+      .then((res) => {
         this.setState({
           isLoading: false,
           todos: res.data,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         this.setState({ isLoading: false, errorMessage: "Please Try Again" });
       });
   }
 
   printTodos() {
-    return this.state.todos.map(todo => <div key={todo.id}>{todo.title}</div>);
+    return this.state.todos.map((todo) => (
+      <div key={todo.id}>{todo.title}</div>
+    ));
   }
 
   render() {

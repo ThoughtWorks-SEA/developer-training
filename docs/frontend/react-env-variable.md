@@ -1,6 +1,6 @@
 # React Environment Variable
 
-## Covers:
+## Covers
 
 1. Checking the current environment
 2. Adding a custom environment variable

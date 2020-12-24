@@ -1,13 +1,13 @@
 # Lifecycle of react component
 
-## Cover:
+## Covers
 
 1. Introduction
-2. Commonly use lifecycle method
+2. Commonly used lifecycle methods
 
 ## Introduction
 
-Each class based React component has 11 “lifecycle methods” which you can override to run your own code at particular times in the process.
+Each class based React component has 11 "lifecycle methods" which you can override to run your own code at particular times in the process.
 
 React's lifecycle hooks
 
