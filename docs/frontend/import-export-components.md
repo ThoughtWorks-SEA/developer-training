@@ -71,22 +71,24 @@ We usually use this method to import functions that are closely related.
 
 ## Import and export of a default component
 
+src/components/SayHey.js
+
 ```javascript
 import React from "react";
 
 export default ({ name }) => {
-  return <div>{name} says Hi</div>;
+  return <div>Hey {name}</div>;
 };
 ```
 
 ```
 import React from "react";
-import SayHi from "./components/SayHi";
+import SayHey from "./components/SayHey";
 
 function App() {
   return (
     <div className="App">
-      <SayHi name="Alice" />
+      <SayHey name="Alice" />
     </div>
   );
 }
@@ -94,8 +96,7 @@ function App() {
 
 ## Import and export of a default object
 
-There is also an option to export all items as an Object to group related items together.
-Is more commonly to use utility functions than Component.
+There is also an option to export all items as an Object to group related items together. This is more commonly used for utility functions, rather than for rendering components.
 
 ```javascript
 import React from "react";
