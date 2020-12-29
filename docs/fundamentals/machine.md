@@ -229,7 +229,7 @@ Find the instructions for your specific OS and version for the [Community Editio
 
 If you're running Windows, please add the MongoDB bin folder to your System PATH (e.g. C:\Program Files\MongoDB\Server\4.0\bin) so that the `mongo` command will be able to work in the terminal.
 
-### Install a Visual Studio Code extension for viewing data in MongoDB
+### Install a Visual Studio Code extension for viewing data in MongoDB (optional)
 
 - Open the Extensions pane in Visual Studio Code
 - Search for the `Azure Cosmos DB extension` by Microsoft
@@ -238,7 +238,7 @@ If you're running Windows, please add the MongoDB bin folder to your System PATH
 - Create a new MongoDB connection by going to `Cosmos DB` and then clicking the 'plug' icon and selecting `MongoDB` from the dropdown
 - Make sure to start the server before connecting to it
 
-Alternatively, use [MongoDB Compass](https://www.mongodb.com/products/compass).
+**Alternatively, use [MongoDB Compass](https://www.mongodb.com/products/compass).**
 
 ### Configuring Git
 
