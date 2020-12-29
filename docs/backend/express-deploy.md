@@ -3,13 +3,14 @@
 ## Heroku
 
 - Follow the tutorial [here in the official documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up)
+- Add `JWT_SECRET_KEY` environment variable to Heroku
 - For the `Procfile` file, it should look something like this if you have a start script inside package.json.
 
 ```
 web: npm run start
 ```
 
-- What if my app still has an error? I already tried `heroku logs --tail`...
+**What if my app still has an error? I already tried `heroku logs --tail`...**
 
 ```sh
 2020-02-05T06:40:00.937983+00:00 heroku[web.1]: State changed from starting to crashed
@@ -28,15 +29,11 @@ const server = app.listen(process.env.PORT || PORT, () => {
 });
 ```
 
-### mLab MongoDB
+### MongoDB Atlas
 
-- Follow the tutorial [here in the official documentation](https://devcenter.heroku.com/articles/mongolab#connecting-to-your-mongodb-instance)
-- Note that the `MONGODB_URI` environment variable will automatically be set for you
-  Edit your `db.js` to look like this:
+- Follow these tutorials to [get started with MongoDB Atlas](https://docs.atlas.mongodb.com/getting-started) and [use MongoDB Atlas on Heroku](https://developer.mongodb.com/how-to/use-atlas-on-heroku).
+- Note that the `MONGODB_URI` environment variable will automatically be set for you. Edit your `db.js` to look like this:
 
 ```js
 const dbUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/" + dbName;
 ```
-
-- Add `JWT_SECRET_KEY` environment variable to Heroku
-- If you want, you can add another user to the mongolab
