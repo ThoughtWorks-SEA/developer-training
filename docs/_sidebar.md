@@ -75,12 +75,12 @@
   - [[Optional] Set up React Bootstrap](frontend/react-bootstrap)
   - [Different ways to style React](frontend/ways-to-style-react)
   - [Webpack and Babel](frontend/webpack-babel)
+  - [Lab: Todo list](frontend/react-todo-list)
+  - [Publish React App](frontend/publish-react)
   - [[Bonus] React Context](frontend/react-context)
   - [[Bonus] React Redux](frontend/react-redux)
   - [[Bonus] Redux Thunk](frontend/redux-thunk)
   - [[Bonus] React Environment Variable](frontend/react-env-variable)
-  - [Lab: Todo list](frontend/react-todo-list)
-  - [Publish React App](frontend/publish-react)
   - [[Bonus] Planning for a new UI project](frontend/planning-new-project)
 
 - **Backend Web Development**
