@@ -156,7 +156,7 @@ Conceptually, this is what React does in the previous example.
 this.state = Object.assign(this.state, { value: this.state.value + 1 });
 ```
 
-This means, in the newly created `state` object, only the `name` property is overwritten with the new value provided in the `setState` API. If the `state` object contains any other properties, those are remain unchanged.
+This means, in the newly created `state` object, only the `value` property is overwritten with the new value provided in the `setState` API. If the `state` object contains any other properties, those will remain unchanged.
 
 ### `setState` API is asynchronous
 
