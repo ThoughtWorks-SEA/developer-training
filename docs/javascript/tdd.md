@@ -18,3 +18,11 @@ We can achieve TDD with a process called "**Red - Green - Refactor**":
 6. Develop the simplest code you can do to make the test pass. (**Green**)
 7. Refactor the code if it is not clean (make sure the tests still pass). (**Refactor**)
 8. Repeat Steps 5-7 (Red - Green - Refactor) until the component is fully tested and developed.
+
+## Lab: TDD with Jest
+
+https://github.com/thoughtworks-jumpstart/tdd-with-jest
+
+1. Fork and clone the repo.
+1. Follow the instructions in the README.
+1. Commit your solutions as you go, and push them to your own GitHub account.
