@@ -91,12 +91,13 @@ expect(myMockFunction).toBeCalled();
 Checking the specific number of times that a mock function has been called:
 
 ```js
-expect(myMockFunction).toHaveBeenCallTimes(2);
+expect(myMockFunction).toHaveBeenCalledTimes(2);
 ```
 
 ### Verifying the arguments that were supplied to the mock
 
 ```js
+expect(mockFunc).toHaveBeenCalledWith(arg1, arg2);
 expect(mockFunc).toBeCalledWith(arg1, arg2);
 ```
 
@@ -105,8 +106,9 @@ expect(mockFunc).toBeCalledWith(arg1, arg2);
 Make myMockFunction() return 42 everytime you call myMockFunction()
 
 ```js
-const myMockFunction = jest.fn(() => 42);
+const myMockFunction = jest.fn();
 myMockFunction.mockReturnValue(42);
+myMockFunction(); // 42
 ```
 
 Make myMockFunction() return this value only once (it returns undefined the next time it's called)
@@ -153,6 +155,8 @@ Sometimes, a mock function needs to behave differently in each test case, then y
 If you find yourself calling `.mockReset()` on multiple mocks, there is a command that let you reset all mocks in one line: `jest.resetAllMocks()`.
 
 Thus there is a difference between clearing and resetting.
+
+See the [mock functions api reference](https://jestjs.io/docs/en/mock-function-api) for more.
 
 ### Creating spies on existing functions
 
