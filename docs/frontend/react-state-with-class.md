@@ -210,7 +210,7 @@ this.setState({ items: items });
 
 With the codes above, the changes in items cannot be detected by React because the items object is the same object before and after the state update.
 
-One example is given in this article. In the example, a parent component passes some of its state as props to a child component (which happens to be a PureComponent). If you modify the `state.items` of the parent component directly instead of creating a new items object, the child component could not detect the change in its items prop and does not re-render.
+One example is given in [this article](https://daveceddia.com/why-not-modify-react-state-directly/). In the example, a parent component passes some of its state as props to a child component (which happens to be a PureComponent). If you modify the `state.items` of the parent component directly instead of creating a new items object, the child component could not detect the change in its items prop and does not re-render.
 
 Hence it is generally a good practice to avoid mutating existing state object. If you need to update any field/value in the state, you should create a new copy of the value and call setState.
 
