@@ -211,14 +211,14 @@ Besides mocking a function, you can also mock a whole JavaScript module with jes
 
 Calls to jest.mock() will automatically be hoisted to the top of the code block
 
-In the example below, there are two modules:
+For example, imagine there are two existing modules:
 
-- someModule, a module written by you, which exports a function
-- mathjs, a module installed into node_modules, which exports a object with a function called randomInt
+1. `someModule`, a module written by you, which exports a function
+2. `mathjs`, a module installed into `node_modules`, which exports a object with a function called randomInt
 
-anotherModule which internally calls require("./someModule") and require("mathjs")
+You then create `anotherModule` which internally calls `require("./someModule")` and `require("mathjs")`.
 
-When you write tests for anotherModule, you may want to mock the behavior of someModule so that you can simulate different test scenarios.
+When you write tests for `anotherModule`, you may want to mock the behavior of `someModule` so that you can simulate different test scenarios.
 
 ### Mocking a module written by you
 
@@ -236,12 +236,6 @@ now, inside anotherModule.js, when a line says `const x = require('./someModule'
 x is the mock function returned from the factory function inside
 jest.doMock('./someModule', factoryFunction)
 */
-```
-
-Alternative to doMock:
-
-```js
-jest.mock("./someModule", () => () => "dummy value");
 ```
 
 ### Mocking a module in node_modules
@@ -278,13 +272,13 @@ Lab: https://github.com/thoughtworks-jumpstart/mocks-and-stubs-lab
 
 Solutions: https://github.com/songguoqiang/mocks-and-stubs-lab (don't peek unless you have to!)
 
-In the solutions repo, you can find examples on how to
+In the solutions repo, you can find examples on how to:
 
-- Create mock functions: Using jest.fn()
-- Make mock functions return specific values (i.e. stubbing): Using myMockFunction.mockReturnValue('any value') or myMockFunction.mockReturnValueOnce('any value')
-- Make expectations/assertions on mock functions: Using expect(myMockFunction).toBeCalled() or expect(myMockFunction).toHaveBeenCalledTimes(42)
-- Clear mocks: Using myMockFunction.mockClear() or jest.clearAllMocks()
-- Mock functions imported from another module (i.e. javascript file or javascript library): Using
+- Create mock functions: Using `jest.fn()`
+- Make mock functions return specific values (i.e. stubbing): Using `myMockFunction.mockReturnValue('any value')` or `myMockFunction.mockReturnValueOnce('any value')`
+- Make expectations/assertions on mock functions: Using `expect(myMockFunction).toBeCalled()` or `expect(myMockFunction).toHaveBeenCalledTimes(42)`
+- Clear mocks: `Using myMockFunction.mockClear()` or `jest.clearAllMocks()`
+- Mock functions imported from another module (i.e. javascript file or javascript library): Using:
 
 ```js
 jest.doMock("../src/queueService.js", () => {
