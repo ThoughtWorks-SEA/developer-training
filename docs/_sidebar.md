@@ -122,8 +122,8 @@
   - [Lab: Express.js Mongoose](backend/express-mongoose-lab)
   - [Express.js to production](backend/express-to-production)
   - [Express.js deploy](backend/express-deploy)
-  - [Lab: Company reviews](backend/company-reviews-lab)
-  <!-- - [Labs: Express / Mongoose](backend/backend-labs) -->
+    <!-- - [Lab: Company reviews](backend/company-reviews-lab) -->
+    <!-- - [Labs: Express / Mongoose](backend/backend-labs) -->
 
 - **Delivering Software**
 
