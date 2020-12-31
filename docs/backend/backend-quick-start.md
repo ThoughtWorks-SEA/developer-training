@@ -58,7 +58,9 @@ code .
 Add a `start` script to package.json
 
 ```json
-"scripts": {    "start": "node index.js",    ...}
+"scripts": {
+  "start": "node index.js",
+}
 ```
 
 Run project in production mode
@@ -76,7 +78,9 @@ npm install nodemon --save-dev
 Add a `start:dev` script to package.json
 
 ```json
-"scripts": {...    "start:dev": "nodemon index.js"   }
+"scripts": {
+  "start:dev": "nodemon index.js"
+}
 ```
 
 Run project in development mode
@@ -98,7 +102,7 @@ Update your package.json and add the following two scripts:
 
 ```json
 "scripts": {
-"test": "jest",
-"test:watch": "jest --watch"
+  "test": "jest",
+  "test:watch": "jest --watch"
 },
 ```
