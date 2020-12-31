@@ -49,7 +49,7 @@ It is an instance of _http.ServerResponse_. See [w3schools.com HTTP Server Respo
 ### Event emitter
 
 The `request` event is an example of an event emitter of Node.js.
-To know why Node.js use event emitters with the HTTP server, [read more here](https://codeburst.io/event-emitters-and-listeners-in-javascript-9cf0c639fd63).
+To know why Node.js uses event emitters with the HTTP server, [read more here](https://codeburst.io/event-emitters-and-listeners-in-javascript-9cf0c639fd63).
 
 ## Modifying the response
 
