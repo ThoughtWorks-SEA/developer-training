@@ -68,9 +68,9 @@ The following is a rough outline of the topics covered in the program. This is s
 - Showcase
 - Feedback session with mentors
 
-### Week 9 - Full-stack project (individual)
+### Week 9 - Full-stack project
 
-- Build a fully-fledged frontend and backend project (individual)
+- Build a fully-fledged frontend and backend project
 - Deploy on Heroku
 - Showcase
 - Feedback session with mentors
