@@ -4,7 +4,7 @@
 
 It's an architectural style for building web service APIs. REST stands for "Representational State Transfer" as described by Roy Fielding in his [dissertation](https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm). REST is not well-understood and people often have their own idea of what a RESTful API is.
 
-Its core principle is to define named _resources_ that can be manipulated using a small number of _methods_ (such as Creation/Read/Update/Delete). The _resources_ and _methods_ are the nouns and verbs of APIs.
+Its core principle is to define named _resources_ that can be manipulated using a small number of _methods_ (such as Create/Read/Update/Delete). The _resources_ and _methods_ are the nouns and verbs of APIs.
 
 REST also has _stateless_ servers. The server does not store any information of previous requests, every connection is like a "new" connection.
 
@@ -14,7 +14,7 @@ These constraints help to make the API easy to use.
 
 ## What is CRUD?
 
-Many applications make use of an application pattern: Create, Read, Update and Delete. It is so common that we call it CRUD, which is a cuter word.
+Many applications make use of an application pattern: Create, Read, Update and Delete.
 
 Imagine a photo-sharing app.
 
@@ -230,21 +230,6 @@ What is the HTTP status code of the response?
 ```
 
 What is the HTTP status code of the response?
-
-### Replace blogposts and users
-
-- PUT JSON in the HTTP request body to users (https://jumpstart-blogging-api.herokuapp.com/users/1)
-
-```js
-{
-    "username": "newUser",
-    "age": 55
-}
-```
-
-What is the HTTP status code of the response?
-
-Try it for blogposts.
 
 ### Delete blogposts and users
 
