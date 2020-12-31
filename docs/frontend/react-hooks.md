@@ -13,36 +13,38 @@ Typically, when you want to add state to a function component you need to conver
 First, import `useState` from React.
 
 ```js
-import React, {useState} from "react";
+import React, { useState } from "react";
 ```
 
 ### Managing state in class components
 
 First, lets recall how we manipulate state in a class component
 
-Declaring state in a class component
+**Declaring state in a class component:**
 
 ```js
 this.state = {
-  count: 0
+  count: 0,
 };
 ```
 
-Setting state in a class component
+**Setting state in a class component:**
 
 ```js
-this.setState({count: 1});
+this.setState({ count: 1 });
 ```
 
 ### Managing state in function components
 
-Declaring state in a function component with `useState`. `useState` is a function that takes one argument as the initial value of the state.
+**Declaring state in a function component with `useState`:**
 
 ```js
 const [count, setCount] = useState(0);
 ```
 
-Setting state in a function component
+`useState` is a function that takes one argument as the initial value of the state.
+
+**Setting state in a function component:**
 
 ```js
 setCount(1);
@@ -51,7 +53,7 @@ setCount(1);
 Here's an example
 
 ```js
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 function Example() {
   const [count, setCount] = useState(0);
@@ -74,7 +76,7 @@ How would we do this in function components? Answer, `useEffect`.
 Here's an example
 
 ```js
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 function Example() {
   const [count, setCount] = useState(0);
@@ -96,8 +98,8 @@ function Example() {
 
 It is important to note that **React relies on the order in which Hooks are called**. See [explanation](https://reactjs.org/docs/hooks-rules.html#explanation).
 
-0. Always use Hooks at the top level of your React function. Don’t call Hooks inside loops, conditions, or nested functions.
-1. Only call Hooks from React functions. Don’t call Hooks from regular JavaScript functions
+1. Only call Hooks at the top level of your React function. Don't call Hooks inside loops, conditions, or nested functions.
+1. Only call Hooks from React function components. Don't call Hooks from regular JavaScript functions.
 
 To ensure these rules are enforced, configure [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks).
 
