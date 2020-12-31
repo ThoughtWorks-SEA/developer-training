@@ -34,25 +34,25 @@ React's lifecycle hooks
 
   - componentDidCatch()
 
-- Methods prefixed with will are called right before something happens
-- Methods prefixed with did are called right after something happens.
+- Methods prefixed with `will` are called right _before_ something happens
+- Methods prefixed with `did` are called right _after_ something happens.
 
 ![react lifecycle hooks](_media/react-lifecycle.jpeg)
 
-## Commonly use lifecycle method
+## Common uses for lifecycle methods
 
 1. Fetch data from server
-2. Prevent component to rerender
+2. Prevent component from re-rendering
 
 ### Fetch data from server
 
 Lifecycle when mounting component
 
-1. consturctor: initialise default value of state.
+1. constructor: initialise default value of state.
 2. render: create the react DOM
 3. **componentDidMount**: fetch value from server.
 
-The lifecycle method we going to focus here is componentDidMount. We have already seen constructor and render in the previous chapters.
+The lifecycle method we going to focus here is `componentDidMount`. We have already seen constructor and render in the previous chapters.
 
 ```javascript
 class MyComponent extends React.Component {
@@ -92,7 +92,7 @@ function App() {
 
 componentDidMount happens right after render. This makes componentDidMount a good place to put logic that requires DOM node to be present or for fetching data that is required by the components.
 
-### Prevent component to rerender
+### Prevent component from re-rendering
 
 Lifecycle when updating component
 
@@ -100,7 +100,7 @@ Lifecycle when updating component
 2. render: creates the updated react DOM
 3. componentDidUpdate: called when component finishes rendering.
 
-Another frequently use component is `shouldComponentUpdate`. In this method, you will have access to the updated props and states values that will be used during the upcoming render.
+Another frequently used method is `shouldComponentUpdate`. In this method, you will have access to the updated props and states values that will be used during the upcoming render.
 
 - returning true will cause render to be called
 - returning a false will prevent rendering
@@ -108,7 +108,7 @@ Another frequently use component is `shouldComponentUpdate`. In this method, you
 Component update is typically triggered by a change in state from `setState` or change in value of `props` from a parent component.
 
 Say if we have a Counter and we only want to rerender the component when the value is odd number.
-We can check if the nextState value is 1 odd number. If is an odd number, we return true triggering a rerender. By default we will return a false.
+We can check if the nextState value is an odd number. If it is an odd number, we return true triggering a rerender. By default we will return a false.
 
 ```javascript
 class Counter extends React.Component {
