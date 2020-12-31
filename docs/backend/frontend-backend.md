@@ -2,17 +2,13 @@
 
 In the past, web applications used to have both frontend and backend in a single project. However, in recent years, clients often need apps that use a web application (and often a few of them, as there are also admin pages etc.) as a "front-end" and mobile applications on several platforms (Apple, Android etc). These applications might all depend on the same backend so that information across them will be consistent.
 
-![frontend vs backend](https://static1.squarespace.com/static/5a5f73f5d7bdcef66b1ec204/5a6207e771c10ba72c82ef1b/5ab29223758d46af93cd9065/1523468664033/Front-End+Vs+Back-End.png?format=2500w)
-
-Picture from: https://recruiterhacks.org/home/2018/3/23/back-end-vs-front-end
-
 Therefore in the course, we will learn how to develop a seperate backend that is not bundled together with our front-end, React.js in this case.
 
 ## What does the backend do?
 
 Example of how the backend interacts with frontend:
 
-![backend example](https://www.cloudflare.com/img/learning/serverless/what-is-serverless/frontend-vs-backend.svg)
+![frontend vs backend](_media/frontend-vs-backend.png)
 
 Picture from: https://www.cloudflare.com/learning/serverless/what-is-serverless/
 
