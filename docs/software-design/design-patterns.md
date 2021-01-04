@@ -1,23 +1,26 @@
 # Design Patterns
 
-Tested and proven patterns to solve programming problems. 
+Tested and proven patterns to solve programming problems.
 
 ## Content
+
 1. Creational patterns
 2. Structural patterns
 3. Behavioral patterns
- 
+
 ## Creational patterns
+
 Creating new instance
 
 ### Factory pattern
-Seperate object or function creations from its implementation. 
+
+Separate object or function creations from its implementation.
 A factory pattern can also use to create private variables(encapsulation) thru closure.
 
 ```javascript
 const createSayHi = (message) => {
-    return () => console.log(`Hi ${message}`)
-}
+  return () => console.log(`Hi ${message}`);
+};
 
 const sayHiToAlice = createSayHi("Alice");
 const sayHiToBob = createSayHi("Bob");
@@ -27,8 +30,10 @@ sayHiToBob(); // Bob
 ```
 
 ### Builder pattern
+
 Builder pattern allows creation of different object based on representation of input.
-It makes reading of data and creating objects 
+It makes reading of data and creating objects
+
 ```javascript
 const carsToBuild = ["car", "sport car", "van"];
 
@@ -36,54 +41,60 @@ const carsBuilder = (type) => {
     switch(type) {
         case "car":
             return new Car();
-        case "van": 
+        case "van":
             return new Van();
         case "sports car"
             return new SportsCar();
         default:
             throw new Error("invalid vehicle type");
     }
-} 
+}
 
 const carsBuilt = carsToBuild.map(type => carBuilder(type));
 ```
 
 ### Singleton
+
 Create a instance that can be used in multiple place.
 It can use as enum, or data stores like in redux reducer.
 
 ```javascript
 // directions.js
 const DIRECTIONS = Object.freeze({
-    North: "North",
-    South: "South",
-    East: "East",
-    West: "West",
+  North: "North",
+  South: "South",
+  East: "East",
+  West: "West",
 });
 ```
+
 ## Structural patterns
+
 Structural patterns help to bridge or connect different object t{}o work together.
 
-### Proxy 
+### Proxy
+
 an object that acts as a connector to connect to other object.
-It can also prevent object from directly talk to each other. 
+It can also prevent object from directly talk to each other.
 
 ```javascript
 class Person {
-    constructor(name) {
-        this._name = name;
-    }
+  constructor(name) {
+    this._name = name;
+  }
 
-    set name(newName) {
-        this._name = newName.toLowerCase();
-    }
+  set name(newName) {
+    this._name = newName.toLowerCase();
+  }
 
-    get name() {
-        return `my name is ${this._name}`;
-    }
+  get name() {
+    return `my name is ${this._name}`;
+  }
 }
 ```
+
 ### Adaptor
+
 Creates a middle layer to translate one component to be compatable with another
 
 ```javascript
@@ -125,6 +136,7 @@ shop.collect(multiCurrencyJapWallet.collect(5));
 ```
 
 ### Facade
+
 Create a new interface with for modules to simplifaction of logic
 
 ```javascript
@@ -149,6 +161,7 @@ class McdonaldKiosk() {
 ```
 
 ### Composite
+
 combine objects of similar signature to a parent object for representation
 
 ```javascript
@@ -166,7 +179,7 @@ class Playlist {
     }
 
     addSong(song) {
-        this.songList.push(song);    
+        this.songList.push(song);
     }
 
     playsongs() {
@@ -176,11 +189,13 @@ class Playlist {
 ```
 
 ## Behavioral pattern
-Identify common communication patterns among objects and realize these patterns. 
+
+Identify common communication patterns among objects and realize these patterns.
 By doing so, these patterns increase flexibility in carrying out this communication.
 
 ### Command
-create an interface that on a input, invoke certake methods or functions relate to it. 
+
+create an interface that on a input, invoke certake methods or functions relate to it.
 
 ```javascript
 class Television {
@@ -220,6 +235,7 @@ remote.execute("add volume");
 ```
 
 ### Stragegy
+
 Use to handle similar actions applying to different data but every data type needs special handlig.
 
 ```javascript
@@ -241,7 +257,7 @@ class ShapeCalculations {
 const circleStrategy {
     calculateArea: (circle) {
         return Math.PI * Math.pow(circle.radius, 2)
-    } 
+    }
 
     calculatePerimeter: (circle) {
         eturn Math.PI * 2 * circle.radius;

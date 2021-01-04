@@ -39,7 +39,7 @@ res.send("Welcome to my homepage");
 
 ### Sending a JSON response
 
-In the previous routing example. we have also already used `res.json()` to send JSON to the client as a response and to close the connection.
+In the previous routing example, we have also already used `res.json()` to send JSON to the client as a response and to close the connection.
 
 It is different from `res.send()` because it respects the JSON application settings such as `json spaces` and `json replacer`.
 

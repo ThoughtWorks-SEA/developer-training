@@ -2,7 +2,7 @@
 
 One of the very important middlewares is the one for parsing request body. It is built-in into Express.js. This is often forgotten and the cause of bugs.
 
-Note that it used to be a seperate middleware called body-parser but it has been re-added into Express.js as a built-in middleware.
+Note that it used to be a separate middleware called body-parser but it has been re-added into Express.js as a built-in middleware.
 
 ## Parsing json body
 

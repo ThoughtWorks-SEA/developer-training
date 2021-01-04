@@ -1,6 +1,6 @@
 # React Router
 
-managing multiple views in a React app
+Managing multiple views in a React app.
 
 ## Covers
 
@@ -19,7 +19,7 @@ One possible solution is to separate the contents into different workflows or di
 
 Having a Router within the application allows users to reach out to the different views while staying within our application. React Router is a handy JS library that allows us to achieve this functionality quickly.
 
-Say our application have
+Say our application has:
 
 - /home
 - /photo-gallery
