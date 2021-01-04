@@ -14,7 +14,8 @@ We should write tests to ensure that our API are:
 
 - returning the correct HTTP status code
 - returning the correct response in the body
-- for all of the routes defined
+
+for all of the routes defined.
 
 ## About Integration Test
 

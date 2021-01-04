@@ -53,13 +53,13 @@ The following is a rough outline of the topics covered in the program. This is s
 - Express.js
 - MongoDB
 - Mongoose
-- Authentication
-- JWT
-- Deploy on Heroku
 - Labs
 
 ### Week 7 - Backend Web Development
 
+- Authentication
+- JWT
+- Deploy on Heroku
 - Labs
 
 ### Week 8 - Backend Project
