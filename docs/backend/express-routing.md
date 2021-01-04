@@ -87,7 +87,7 @@ console.log("Method: " + req.method);
 console.log("Path: " + req.url);
 ```
 
-You are unable to access the body of a request with `req.body` if the body is not parsed yet. This will be further explained in the [parsing request body](express-parsing-request-body) page.
+You are unable to access the body of a request with `req.body` if the body is not parsed yet. This will be further explained in the [parsing request body](backend/express-parsing-request-body) page.
 
 ### Response object
 
@@ -174,7 +174,7 @@ req.params: {"bookId": "8989" }
 
 #### Multiple parameters
 
-Refer to the script: [Express.js playground: express_route_parameter_example_1](https://github.com/thoughtworks-jumpstart/express-playground/blob/master/express_route_parameter_example_1.js)
+Refer to the script: [Express.js playground: express_route_parameter_example_1](https://github.com/thoughtworks-jumpstart/express-playground/blob/master/route_parameter_example_1.js)
 
 it is possible to capture more than one value using multiple parameters.
 
