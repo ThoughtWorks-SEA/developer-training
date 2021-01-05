@@ -307,7 +307,3 @@ The API `https://jsonplaceholder.typicode.com/comments` returns an array of comm
 - when data is empty such as when user type in 999 as the postid: `https://jsonplaceholder.typicode.com/comments?postId=999`, display: `"No comments available for postid: 999"`
 
 4. [optional] create a `utils/axios` to configure the baseUrl of Axios.
-
-5. [optional] display the post followed by the comments
-
-- posts can be retrieved from `https://jsonplaceholder.typicode.com/posts/<postid>.`
