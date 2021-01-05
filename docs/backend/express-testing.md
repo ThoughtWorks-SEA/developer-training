@@ -239,29 +239,28 @@ describe("POST /", () => {
 
 Let's see an example of writing an actual test for a route.
 
-We want to make a test for the following endpoint:
+We want to make a test for the following endpoint: **POST /songs route of the songs API**
 
-POST /songs route of the songs API
+- Test: POST /songs should return a new song object
+- Route: POST /songs
+- Expected response status code: 201
 
-Test: POST /songs should return a new song object
-Route: POST /songs
-Expected response status code: 201
-Example request body:
+**Example request body:**
 
 ```json
-{ "name": "test movie", "artist": "rhianna" }
+{ "name": "Pink Moon", "artist": "Nick Drake" }
 ```
 
-Example JSON response:
+**Example JSON response:**
 
 ```json
-{ "id": 1, "name": "test movie", "artist": "rhianna" }
+{ "id": 1, "name": "Pink Moon", "artist": "Nick Drake" }
 ```
 
 ```js
 it("POST /songs should add a song and return a new song object", async () => {
-  const newSong = { name: "test movie", artist: "rhianna" };
-  const expectedSong = { id: 1, name: "test movie", artist: "rhianna" };
+  const newSong = { name: "Pink Moon", artist: "Nick Drake" };
+  const expectedSong = { id: 1, name: "Pink Moon", artist: "Nick Drake" };
 
   const { response } = await request(app)
     .post("/songs")
@@ -277,8 +276,8 @@ Could also be written as:
 
 ```js
 it("POST /songs should add a song and return a new song object", async () => {
-  const newSong = { name: "test movie", artist: "rhianna" };
-  const expectedSong = { id: 1, name: "test movie", artist: "rhianna" };
+  const newSong = { name: "Pink Moon", artist: "Nick Drake" };
+  const expectedSong = { id: 1, name: "Pink Moon", artist: "Nick Drake" };
 
   const { body: actualSong } = await request(app)
     .post("/songs")
@@ -297,7 +296,7 @@ One possible use of this is for the GET /songs/:id route.
 
 ```js
   it("GET /songs/:id should return the correct song", () => {
-    const expectedSong = {name: "test song", artist: "rhianna"};
+    const expectedSong = {name: "Pink Moon", artist: "Nick Drake"};
 
     const {body: actualSong} = await request(app)
     .get("/songs/1")
@@ -347,10 +346,11 @@ Let's try TDD for movie routes.
 
 Add the tests for the movies endpoints.
 
-Test: POST /movies should return a new movie object
-Route: POST /movies
-Expected response status code: 201
-Example request body:
+- Test: POST /movies should return a new movie object
+- Route: POST /movies
+- Expected response status code: 201
+
+**Example request body:**
 
 ```json
 {
@@ -358,7 +358,7 @@ Example request body:
 }
 ```
 
-Example JSON response:
+**Example JSON response:**
 
 ```json
 {
@@ -367,10 +367,11 @@ Example JSON response:
 }
 ```
 
-Test: GET /songs should return an array containing one song
-Route: GET /movies
-Expected response status code: 200
-Example JSON response:
+- Test: GET /songs should return an array containing one song
+- Route: GET /movies
+- Expected response status code: 200
+
+**Example JSON response:**
 
 ```json
 [
@@ -381,10 +382,11 @@ Example JSON response:
 ]
 ```
 
-Test: GET /movies/:id should return the movie with id
-Route: GET /movies/1
-Expected response status code: 200
-Example JSON response:
+- Test: GET /movies/:id should return the movie with id
+- Route: GET /movies/1
+- Expected response status code: 200
+
+**Example JSON response:**
 
 ```json
 {
@@ -393,32 +395,11 @@ Example JSON response:
 }
 ```
 
-Test: PUT /movies/:id should return the updated movie
-Route: PUT /movies/1
-Expected response status code: 200
+- Test: PUT /movies/:id should return the updated movie
+- Route: PUT /movies/1
+- Expected response status code: 200
 
-Example request body:
-
-```json
-{
-  "movieName": "Frozen 2"
-}
-```
-
-Example JSON response:
-
-```json
-{
-  "id": 1,
-  "movieName": "Frozen 2"
-}
-```
-
-Test: DELETE /movies/:id should return the deleted movie
-Route: DELETE /movies/1
-Expected response status code: 200
-
-Example request body:
+**Example request body:**
 
 ```json
 {
@@ -426,7 +407,7 @@ Example request body:
 }
 ```
 
-Example JSON response:
+**Example JSON response:**
 
 ```json
 {
@@ -435,11 +416,32 @@ Example JSON response:
 }
 ```
 
-Test: GET /movies should return an empty array
-Route: GET /movies
-Expected response status code: 200
+- Test: DELETE /movies/:id should return the deleted movie
+- Route: DELETE /movies/1
+- Expected response status code: 200
 
-Example JSON response:
+**Example request body:**
+
+```json
+{
+  "movieName": "Frozen 2"
+}
+```
+
+**Example JSON response:**
+
+```json
+{
+  "id": 1,
+  "movieName": "Frozen 2"
+}
+```
+
+- Test: GET /movies should return an empty array
+- Route: GET /movies
+- Expected response status code: 200
+
+**Example JSON response:**
 
 ```json
 []
