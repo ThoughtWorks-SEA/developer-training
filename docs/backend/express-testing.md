@@ -367,7 +367,7 @@ Add the tests for the movies endpoints.
 }
 ```
 
-- Test: GET /songs should return an array containing one song
+- Test: GET /movies should return an array containing one movie
 - Route: GET /movies
 - Expected response status code: 200
 
