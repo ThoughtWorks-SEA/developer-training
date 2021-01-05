@@ -70,7 +70,7 @@ Having a JS framework for creating components gives structure to your code and e
 - React motto, "learn once, write everywhere."
 
   - Desktop apps with React and Electron
-  - Mobile apps thru React Native
+  - Mobile apps through React Native
 
 - Popularity
 

@@ -56,7 +56,7 @@ The above code assumes that the server is not going to throw an error.
 We also see the line `.then(response => response.json())`, which gets the data in the body of the response and translates it to a JSON format for us.
 There are other possible types such as `Body.blob()` for images, `Body.text()` for plain text and `Body.arrayBuffer()` for array buffer. You will most likely use `json()` in most cases.
 
-You can also face error when sending a request.
+You may face errors when sending a request.
 
 ```javascript
 const checkResponse = (res) => {
@@ -73,7 +73,7 @@ fetch("https://jsonplaceholder.typicode.com/todos/2")
   .catch((err) => console.log(err)); // log error if an error was thrown
 ```
 
-Server sometimes can return you an invalid response. Is good to check your response before using them.
+The server can sometimes return you an invalid response - it is good to check the response before using it.
 
 Fetch allows you to take in a config object, within the config object you can also use other methods such as `POST` and `PATCH`.
 
@@ -247,13 +247,13 @@ export default class Todolist extends React.Component {
 }
 ```
 
-Try it out, and now you see the loader for a split second. Our server is local and doesn't require to navigate thru the long underground sea cable to reach the server. A real API call takes much longer, especially if it requests a complex query thru a database.
+Try it out, and now you see the loader for a split second. Our server is local and doesn't require to navigate through the long underground sea cable to reach the server. A real API call takes much longer, especially if it requests a complex query through a database.
 
 To simulate a longer wait time, we can add a timeout or even better make use or browser network feature. On Chome, open the developer tool, navigate to the `network` tab, under you should see an `online` dropdown. Click on it and select `Slow 3G`, refresh again and now you can see.
 
 ## [Optional] Common Config
 
-Axios allow us to do a standard config which can be convenient to reduce repetitive code to config Axios to do the same thing.
+Axios allows us to set a standard config, which can help reduce repetitive configuration code.
 
 Create a new file utils/axios.js
 
@@ -272,10 +272,12 @@ instance.defaults.headers.post["Content-Type"] = "application/json";
 export default instance;
 ```
 
-This consist of some of the more common settings.
+This consists of some of the more common settings.
+
 The above setting sets the baseUrl, now we can just pass in the path when we do Axios call, and everything should work the same.
-We also shorten the timeout, so API fails faster if the server keeps us wait for too long, default is `0` which waits till the connection get dropped.
-On POST request, we set the content-type to `application/json` the most common setting.
+We also shorten the timeout, so the API fails faster if the server keeps us waiting for too long (the default is `0`, which waits till the connection gets dropped).
+
+On POST request, we set the content-type to `application/json`, the most common setting.
 
 ## Exercise
 
@@ -292,8 +294,8 @@ The API `https://jsonplaceholder.typicode.com/comments` returns an array of comm
 
 - create an input box that takes in a post id
 - create a submit button
-- on clicking submit button fetch the comments based on the postid `https://jsonplaceholder.typicode.com/comments?postId=1`
-- feel free to add some styles to make it looks beautiful.
+- on clicking submit button fetch the comments based on the postId `https://jsonplaceholder.typicode.com/comments?postId=1`
+- feel free to add some styles to improve the design
 
 2. Add a loader
 
@@ -302,11 +304,10 @@ The API `https://jsonplaceholder.typicode.com/comments` returns an array of comm
 
 3. Handle no data
 
-- when data is empty such as when user type in 999 as the postid: `https://jsonplaceholder.typicode.com/comments?postId=999` shows a
-- "no comments available for postid: <postid>"
+- when data is empty such as when user type in 999 as the postid: `https://jsonplaceholder.typicode.com/comments?postId=999`, display: `"No comments available for postid: 999"`
 
 4. [optional] create a `utils/axios` to configure the baseUrl of Axios.
 
 5. [optional] display the post followed by the comments
 
-- post can get retrieve from `https://jsonplaceholder.typicode.com/posts/<postid>.`
+- posts can be retrieved from `https://jsonplaceholder.typicode.com/posts/<postid>.`

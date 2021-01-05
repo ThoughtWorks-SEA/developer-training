@@ -15,7 +15,7 @@ Creating new instance
 ### Factory pattern
 
 Separate object or function creations from its implementation.
-A factory pattern can also use to create private variables(encapsulation) thru closure.
+A factory pattern can also use to create private variables(encapsulation) through closure.
 
 ```javascript
 const createSayHi = (message) => {
