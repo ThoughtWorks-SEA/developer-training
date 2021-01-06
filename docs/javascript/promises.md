@@ -686,5 +686,5 @@ https://github.com/stevekane/promise-it-wont-hurt
 
 Note:
 
-- In the second step of the workshop, it requires you to install a library es6-promise and require it in your code. That's not necessary anymore because the latest Node version already has built-in support for Promise.
 - In the step on "Fetch JSON", the URL mentioned in the instruction should be "http://localhost:1337"
+- As the workshop is not actively maintained by the creator, there may be some exercises that do not work, e.g. due to outdated dependencies.
