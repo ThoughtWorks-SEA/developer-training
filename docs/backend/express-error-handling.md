@@ -49,7 +49,7 @@ app.use((err, req, res, next) => {
 });
 ```
 
-Since Express.js middleware run in the order that they are called, define error handler functions **last** so that they will be correctly called when there is an error.
+Since Express.js middleware runs in the order that they are called, define error handler functions **last** so that they will be correctly called when there is an error.
 
 Refer to the script: [Express.js playground: error_handler_example_2](https://github.com/thoughtworks-jumpstart/express-playground/blob/master/error_handler_example_2.js).
 

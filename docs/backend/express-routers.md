@@ -2,7 +2,7 @@
 
 For a very small app, we can define all the API endpoints in one file, like what we did in the previous examples. However, as our application grows, it's a good idea to break the application into smaller modules. In terms of the API end points, it would be better to group API endpoints by their nature.
 
-Use the express.Router class to create modular, mountable route handlers.Each Router is like a mini-app or subapplication, which means it can contain its own API endpoints, together with many other things such as middleware and error handlers, as you will notice later.
+Use the express.Router class to create modular, mountable route handlers. Each Router is like a mini-app or subapplication, which means it can contain its own API endpoints, together with many other things such as middleware and error handlers, as you will notice later.
 
 ## Example
 
@@ -121,7 +121,6 @@ Create a new file `library_v1.js` for version 1 of your API.
 // library_v1
 const express = require("express");
 const api = express.Router();
-const PORT = 3000;
 
 const booksRouter = require("./routes/books");
 const usersRouter = require("./routes/users");
@@ -143,9 +142,9 @@ Create a new file `library.js` for the main app code. We will use the version 1 
 ```js
 // library.js
 const express = require("express");
-const apiVersion1 = require("./library_v1");
 const app = express();
 const PORT = 3000;
+const apiVersion1 = require("./library_v1");
 
 app.use("/v1", apiVersion1);
 
@@ -160,7 +159,6 @@ When the time comes and you want to implement version 2 of your api, you can cre
 // library_v2
 const express = require("express");
 const api = express.Router();
-const PORT = 3000;
 
 const booksRouter = require("./routes/books");
 const usersRouter = require("./routes/users");
@@ -180,10 +178,10 @@ Use the version 2 API in your app `library.js`.
 ```js
 //library.js
 const express = require("express");
-const apiVersion1 = require("./library_v1");
-const apiVersion2 = require("./library_v2");
 const app = express();
 const PORT = 3000;
+const apiVersion1 = require("./library_v1");
+const apiVersion2 = require("./library_v2");
 
 app.use("/v1", apiVersion1);
 app.use("/v2", apiVersion2);
