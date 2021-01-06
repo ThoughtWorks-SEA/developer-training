@@ -1,4 +1,4 @@
-# Async Await
+# async/await
 
 ## What is it?
 
@@ -48,7 +48,7 @@ Note the two new keywords we use above:
 
 ## What is returned from an async function?
 
-In the example above, you may think the async function return a string (which is the user name), but remember the async function above is the same as the promise version, and the promise version returns an instance of Promise to the caller.
+In the example above, you may think the async function return a string (which is the user's skill), but remember, the async function above is the same as the promise version, and the promise version returns an instance of Promise to the caller.
 
 An async function **returns an instance of a Promise that resolves to the return value** as you put in the return statement of the function.
 
@@ -58,6 +58,7 @@ For example,
 
 ```js
 getUserSkills("fakeUserId").then((skills) => ...)
+// or:
 const skills = await getUserSkills("fakeUserId");
 ```
 
@@ -76,19 +77,19 @@ async function getUserSkills(userId) {
   } catch (error) {
     console.error(error);
     // this is just to demonstrate we can use try-catch block here to catch the errors
-    // actually it's not a good idea to return null
+    // returning null is in fact not a good idea
     return null;
   }
 }
 ```
 
-In this case, if the promise returned by Users.get(userId) or Users/getMetaDataFor(user) is rejected, await will translate that into normal Error that you can catch using try catch.
+In this case, if the promise returned by `Users.get(userId)` or `Users/getMetaDataFor(user)` is rejected, await will translate that into normal Error that you can catch using try catch.
 
 ## Understanding await using the Gift Box model
 
 The gift box model we introduced in the last section can also help us to understand the effect of await on a Promise object.
 
-await basically unwrap the gift box and shows you what's inside.
+await basically unwraps the gift box and shows you what's inside.
 
 If the promise is fulfilled, you will see the hidden secret value.
 
@@ -117,13 +118,13 @@ Compare this using promises:
 ```js
 fetch("https://dog.ceo/api/breeds/image/random")
   .then((response) => response.json())
-  .then((json) => console.log(JSON.stringify(json)))
+  .then((json) => console.log(json))
   .catch((error) => console.log(error));
 ```
 
 ## What if there are errors thrown directly from an Async Function?
 
-If you try to throw error from an Async function, can it be handled with try-catch when you call that async function? The answer is 'No'.
+If you try to throw an error from an Async function, can it be handled with try-catch when you call that async function? The answer is 'No'.
 
 For example, the async function below contains a throw statement:
 
@@ -147,7 +148,7 @@ function thisDoesntWork() {
 
 Why?
 
-Because An async functions always return a Promise object. If there are errors thrown from the function, the async function returns a rejected promise instead of throwing the error directly.
+An async functions always return a Promise object. If there are errors thrown from the function, the async function returns a **rejected promise** instead of throwing the error directly.
 
 That means you have to handle the error using promise-style:
 
@@ -205,13 +206,14 @@ https://stackoverflow.com/questions/46515764/how-can-i-use-async-await-at-the-to
 
 async/await is a part of ES7, and is supported in the [latest versions of main-stream browsers](https://caniuse.com/#feat=async-functions). It's also supported by Node.JS platform since 7.6.0 release.
 
-## Comparing async await to callbacks and promises
+## Comparing async/await to callbacks and promises
 
-In the code snippets below, you can compare and contrast the syntax differences between callbacks, promises and async await.
+In the code snippets below, you can compare the syntax differences between callbacks, promises and async/await.
 
 First snippet:
 
 ```js
+// 1. promises
 function watchTutorialPromise() {
   const userLeft = true;
   const userWatchingCatMeme = false;
@@ -240,6 +242,7 @@ watchTutorialPromise()
     console.log(error.name + " " + error.message);
   });
 
+// 2. async/await
 const watchTutorialAsyncAwait = async () => {
   try {
     const message = await watchTutorialPromise();
@@ -256,7 +259,7 @@ Second snippet:
 
 This snippet will be better understood if you have covered the chapters on express and mongoose. Nonetheless, even if you haven't learned those, it can still be useful to compare how the same thing is done in the 3 different flavours of handling asynchronous methods.
 
-Note: In this case, Book.find({}) is an asynchronous method defined by mongoose (we will learn next time for backend), and it supports all 3 callback approaches. If no function is passed in as a second argument in Book.find(), it will return a promise (and hence you can use .then() or async await).
+Note: In this case, Book.find({}) is an asynchronous method defined by mongoose (we will learn next time for backend), and it supports all 3 callback approaches. If no function is passed in as a second argument in Book.find(), it will return a promise (and hence you can use .then() or async/await).
 
 ```js
 router.get("/", function(req, res, next) {
@@ -279,7 +282,7 @@ router.get("/", function(req, res, next) {
     });
 });
 ​
-// 3. using async await
+// 3. using async/await
 router.get("/", async function(req, res, next) {
   try {
     const books = await Book.find({});
