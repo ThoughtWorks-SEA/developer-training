@@ -55,7 +55,7 @@ For more features, please visit the Joi library page at https://github.com/hapij
 
 ## Schema and validation
 
-A schema is a very concise way to describe (in code) what data you expect to recieve from the client.
+A schema is a very concise way to describe (in code) what data you expect to receive from the client.
 
 You can validate your JavaScript object against the Joi schema and get a result object that contains a value and an error attribute.
 
@@ -66,9 +66,9 @@ You can validate your JavaScript object against the Joi schema and get a result 
 }
 ```
 
-If the validation of the object passes, the value attribute contain the object validated and the error attribute will be undefined.
+If the validation of the object passes, the value attribute will contain the validated object, and the error attribute will be undefined.
 
-If the validation fails, the value attribute is undefined and the error attribute will contain an array of errors messages called `details`. There will be one _Error_ instance for each validation failure that occurred.
+If the validation fails, the value attribute will be undefined and the error attribute will contain an array of errors messages called `details`. There will be one _Error_ instance for each validation failure that occurrs.
 
 Let's define a schema for our object.
 

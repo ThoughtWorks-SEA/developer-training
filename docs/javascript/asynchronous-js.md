@@ -69,11 +69,11 @@ while (true) {
 
 ### Blocking vs Non-blocking (a.k.a Asynchronous) Tasks
 
-As we learnt in previous sessions, the JavaScript engine only provide one thread to run the event loop. We need to understand the implication of this fact.
+As we learnt in previous sessions, the JavaScript engine only provides one thread to run the event loop. We need to understand the implication of this fact.
 
-One of the implication is if a task takes too long to finish, all the other events in the Event Queue (or task queue) cannot be processed in time, then end users may feel the UI is not responsive.
+One implication is that if a task takes too long to finish, all the other events in the Event Queue (or task queue) cannot be processed in time, then end users may feel the UI is not responsive.
 
-For example, if a user clicks a button and the event handler is triggered and put into the Event Queue, however, there is a long-running task that hogs the Call Stack, then the button-click event handler will not be run in time, and the user would wonder why the button does not work.
+For example, a user clicks on a button and the event handler is triggered and put into the Event Queue. However, there is a long-running task hogging the Call Stack, and the button-click event handler will not be run in time, and the user would wonder why the button does not work.
 
 This kind of blocking behavior can be a result of CPU-intensive number-crunching task, or a result of calling some blocking API.
 

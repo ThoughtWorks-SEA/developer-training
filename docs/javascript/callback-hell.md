@@ -3,7 +3,7 @@
 In the previous section on JavaScript Event Loop, you see how the event handlers can be used to process events when they are ready (e.g. when a user clicks a button on browser page, or the operating system notifies JavaScript engine that a file is ready to be read).
 
 One typical way to implement event handlers is through Callbacks.
-In the example below, the codes call `readFile()` API (this is offered by Node.JS platform) which accept an event handler. The handler would be called when the data is ready.
+In the example below, the code calls `readFile()` API (this is offered by Node.JS platform) which accepts an event handler. The handler would be called when the data is ready.
 
 ```js
 const fs = require("fs");
@@ -84,7 +84,7 @@ fs.readdir(source, function (err, files) {
 
 ## Solutions to callback hell
 
-Needless to say, this kind of codes are hard to read and maintain. What can we do about it?
+Needless to say, this kind of code is hard to read and maintain. What can we do about it?
 
 ### Refactoring codes to avoid nested structure
 
@@ -94,7 +94,7 @@ Some examples can be found on [this website](http://callbackhell.com/).
 
 ### Use other JavaScript features (Promises, Async/Await)
 
-Because of the problems introduced by callbacks, JavaScript has introduced other syntax to help you write asynchronous codes.
+Because of the problems introduced by callbacks, JavaScript has introduced other syntax to help you write asynchronous code.
 
 We will cover two of them in the next sections:
 
