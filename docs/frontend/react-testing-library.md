@@ -39,12 +39,6 @@ As of create-react-app 3.3.0 (2019-12-04), you do not have to do the following s
 npm install --save-dev @testing-library/react @testing-library/jest-dom
 ```
 
-Import `jest-dom` at the beginning for test file
-
-```
-import '@testing-library/jest-dom/extend-expect';
-```
-
 ## Running test
 
 src/App.js
@@ -58,22 +52,34 @@ function App() {
 src/App.test.js
 
 ```javascript
-import React from "react";
 import { render } from "@testing-library/react";
 import App from "./App";
 
-test("renders learn react link", () => {
+test("renders Hello World text", () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/Hello World/);
-  expect(linkElement).toBeInTheDocument();
+  const element = getByText(/Hello World/);
+  expect(element).toBeInTheDocument();
 });
 ```
 
-`@testing-library/react"` provides us with API that helps us to interact and get information from out component.
+Or, another way:
+
+```javascript
+import { render, screen } from "@testing-library/react";
+import App from "./App";
+
+test("renders Hello World text", () => {
+  render(<App />);
+  const element = screen.getByText(/Hello World/i);
+  expect(element).toBeInTheDocument();
+});
+```
+
+`@testing-library/react"` provides us with API that helps us to interact and get information from our component.
 Available api: https://testing-library.com/docs/preact-testing-library/api
 
 The `render` functions render the component to a DOM and provide you with methods that let you interact with the DOM. In, `const { getByText } = render(<App />);`, the `getByText` function allow us to find the element with the matching text in the DOM.
-Avaialble functions: https://testing-library.com/docs/react-testing-library/cheatsheet
+Available functions: https://testing-library.com/docs/react-testing-library/cheatsheet
 
 `toBeInTheDocument` came from a library, `@testing-library/jest-dom`, that extends the available matches in `jest`. `toBeInTheDocument` checks if an element is inside the dom.
 Available matchers: https://github.com/testing-library/jest-dom
@@ -383,6 +389,5 @@ package.json
 
 Implement test using React Testing Library to
 
-1. Pokemon lab(functional component)
-2. FizzBuzz lab(class component)
-3. [Optional] Todolist code along
+1. Pokemon lab (functional component)
+2. FizzBuzz lab (class component)

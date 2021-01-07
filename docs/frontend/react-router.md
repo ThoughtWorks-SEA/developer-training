@@ -360,7 +360,7 @@ The second way is preferred to decouple Router related information from the comp
 In the example below, we try to print out the current pathname if we have access to the location object; if not we print "???".
 
 In our Home component, we render the Component and the same Component wrapped with `withRouter`.
-The same Component wrapped within the `withRouter` gain access to the location object and print out the current path as expected.
+The same Component wrapped within the `withRouter` gains access to the location object and print out the current path as expected.
 
 src/containers/Home.js
 
