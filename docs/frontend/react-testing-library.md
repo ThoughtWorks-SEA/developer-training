@@ -301,7 +301,7 @@ export class TodoList extends React.Component {
 Test
 
 ```javascript
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import { TodoList } from "./TodoList";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
@@ -334,7 +334,7 @@ describe("TodoList", () => {
 
     const { getByText } = render(<TodoList />);
 
-    await waitForElement(() => getByText("delectus aut autem"));
+    await waitFor(() => getByText("delectus aut autem"));
     expect(getByText("delectus aut autem")).toBeInTheDocument();
   });
 });
