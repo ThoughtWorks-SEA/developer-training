@@ -224,8 +224,6 @@ Hence it is generally a good practice to avoid mutating existing state object. I
   - The first button increases the count
   - The second button decreases the count.
 
-### Optional
-
 2.  Create a FizzBuzz Counter
 
 - Modify the counter above.
