@@ -359,7 +359,7 @@ describe("TodoList", () => {
 2. Independent: test should pass when run independently or as a suite
 3. Repeatable: the test is going to give the same result no matter how many times I run it
 4. Self Checking: result in a pass or fail. Expect statement should have a clear intent.
-5. Timely, written same time same as the code ideally using TDD
+5. Timely, written at the same time as the code, ideally using TDD
 
 ## Test Coverage
 
@@ -367,20 +367,18 @@ describe("TodoList", () => {
 npx react-scripts test --coverage --watchAll=false
 ```
 
-Ignoring files without code written by you.
+Ignoring files without code written by you:
+
 package.json
 
 ```javascript
 "scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject",
+  ...
   "coverage": "react-scripts test --coverage --watchAll=false"
 },
 "jest": {
   "coveragePathIgnorePatterns": [
-    "./src/serviceWorker.js",
+    "./src/reportWebVitals.js",
     "./src/index.js"
   ]
 }
