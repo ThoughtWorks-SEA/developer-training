@@ -13,8 +13,9 @@ We are creating an API to interact with the resources on the server.
 
 #### 0. Get API endpoints
 
-Route: GET /
-HTTP Response status code: 200  
+- Route: GET /
+- HTTP Response status code: 200
+
 Expected response:
 
 ```json
@@ -35,8 +36,9 @@ Notice the plural form. We have 8 endpoints.
 
 #### 1. Get jumplings
 
-Route: GET /jumplings
-HTTP Response status code: 200
+- Route: GET /jumplings
+- HTTP Response status code: 200
+
 Expected Response:
 
 ```json
@@ -48,8 +50,9 @@ Expected Response:
 
 #### 2. Add one jumpling
 
-Route: POST /jumplings
-HTTP Response status code: 201
+- Route: POST /jumplings
+- HTTP Response status code: 201
+
 Expected Response:
 
 ```json
@@ -58,8 +61,9 @@ Expected Response:
 
 #### 3. Get jumplings with id
 
-Route: GET /jumplings/:id
-HTTP Response status code: 200
+- Route: GET /jumplings/:id
+- HTTP Response status code: 200
+
 Expected Response:
 
 ```json
@@ -68,8 +72,9 @@ Expected Response:
 
 #### 4. Update (replace) jumpling with id
 
-Route: PUT /jumplings/:id
-HTTP Response status code: 200
+- Route: PUT /jumplings/:id
+- HTTP Response status code: 200
+
 Expected Response:
 
 ```json
@@ -78,8 +83,9 @@ Expected Response:
 
 #### 5. Delete jumplings with id
 
-Route: DELETE /jumplings/:id
-HTTP Response: 200
+- Route: DELETE /jumplings/:id
+- HTTP Response: 200
+
 Expected Response:
 
 ```json
@@ -88,8 +94,9 @@ Expected Response:
 
 #### 6. Generate the next winner - who is next?
 
-Route: POST /jumplings/presenters
-HTTP Response status code: 201
+- Route: POST /jumplings/presenters
+- HTTP Response status code: 201
+
 Expected Response:
 
 ```json
@@ -98,10 +105,11 @@ Expected Response:
 
 This is a POST request instead of a GET request because we are recording the history of participants that were next. This creates a resource on the server.
 
-#### 2. Get a history of who was next
+#### 7. Get a history of who was next
 
-Route: GET /jumplings/presenters
-HTTP Response status code: 200  
+- Route: GET /jumplings/presenters
+- HTTP Response status code: 200
+
 Expected response:
 
 ```json
@@ -110,10 +118,6 @@ Expected response:
   { "id": 2, "name": "xxx" }
 ]
 ```
-
-Setup a new Github project and install Express.js
-
-We will now do the first route together GET / in class.
 
 ## Routing
 
@@ -149,8 +153,12 @@ Integrate Joi validation library to validate data
 
 ## Folder structure
 
+```
 - package.json
 - package-lock.json
 - src
   - routes
-- \_\_tests\_\_
+  app.js
+  index.js
+- __tests__
+```
