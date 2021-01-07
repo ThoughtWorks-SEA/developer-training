@@ -35,21 +35,21 @@ The following is an example of an asynchronous route handler. Note that it makes
 ```js
 // this function simulates one asynchronous operation,
 // e.g. loading user profile from database after 10ms
-const loadUserProfileFromDB = userName => {
-  return new Promise(resolve => {
-    setTimeout(() => resolve({ name: userName, gender: "M" }), 10);
+const loadUserProfileFromDB = (username) => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve({ name: username, gender: "M" }), 10);
   });
 };
 
 // the async function using async/await
 const getUserProfile = async (req, res, next) => {
-  const userName = req.params.userName;
-  const userProfile = await loadUserProfileFromDB(userName);
+  const username = req.params.username;
+  const userProfile = await loadUserProfileFromDB(username);
   res.send(userProfile);
 };
 
 // register the asynchronous handler function to a path
-app.get("/users/:userName", getUserProfile);
+app.get("/users/:username", getUserProfile);
 ```
 
 Try going to http://localhost:3000/users/babel. The correct user profile should be returned by our fake database.
@@ -62,7 +62,7 @@ Imagine we would like to load a blog entry from our database. However, there is 
 
 ```js
 // this function simulates one asynchronous operation that generate errors
-const loadBlogPostFromDB = postId => {
+const loadBlogPostFromDB = (postId) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => reject(new Error("Network Connection Error")), 10);
   });
@@ -94,8 +94,8 @@ The above will result in a `UnhandledPromiseRejectionWarning`.
 
 We will need to put it into a _try/catch block_ to catch the error and pass it to error handlers.
 
-Notice that we call `next(err)` instead of immediately sending an error response back to th client.
-As in the [error handling examples](express-error-handling.md) as shown previously, we should make use of error handling middleware so that our error handling code is easier to manage.
+Notice that we call `next(err)` instead of immediately sending an error response back to the client.
+As in the [error handling examples](backend/express-error-handling.md) as shown previously, we should make use of error handling middleware so that our error handling code is easier to manage.
 
 ```js
 const getBlogPost = async (req, res, next) => {
@@ -116,8 +116,8 @@ We have to wrap every async function into it’s own try/catch block, handle the
 We can wrap our async function in another function so that we can refactor to make it cleaner.
 
 ```js
-const wrapAsync = fn => (req, res, next) => {
-  Promise.resolve(fn(req, res, next)).catch(err => next(err));
+const wrapAsync = (fn) => (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch((err) => next(err));
 };
 ```
 
