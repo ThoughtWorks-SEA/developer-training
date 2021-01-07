@@ -390,5 +390,5 @@ package.json
 
 Implement test using React Testing Library to
 
-1. Pokemon lab (functional component)
-2. FizzBuzz lab (class component)
+1. [Pokemon lab](frontend/react-props-with-func?id=exercise) (functional component)
+2. [FizzBuzz lab](frontend/react-state-with-class?id=exercise) (class component)
