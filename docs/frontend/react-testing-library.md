@@ -246,11 +246,11 @@ describe("NavLink", () => {
     expect(getByTestId("filter")).toBeInTheDocument();
   });
 
-  it("should render Counter component when click on filter link", () => {
+  it("should render Counter component when click on counter link", () => {
     const { getByText, getByTestId } = render(<App />);
-    const filterLink = getByText("Counter");
+    const counterLink = getByText("Counter");
 
-    fireEvent.click(filterLink);
+    fireEvent.click(counterLink);
     expect(getByTestId("counter")).toBeInTheDocument();
   });
 });
@@ -258,18 +258,20 @@ describe("NavLink", () => {
 
 ## Testing API
 
-Is common for react app to be interacting with web server outside of the app. Testing this interaction is good, but we want to limit it to the bare minimum, this is due to cost and stability.
+It is common for a React app to be interacting with web servers outside of the app. Testing this interaction is good, but we want to limit it to the bare minimum, this is due to cost and stability.
 We usually do this on a separate End to End test.
 
-So we want to mock our API.
-We can use another package to help use.
+So we want to mock our API, and wee can use another package to help us.
 
 ```sh
 npm install --save-dev axios-mock-adapter
 ```
 
 ```javascript
-export class Todolist extends React.Component {
+import React from "react";
+import axios from "axios";
+
+export class TodoList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -299,12 +301,13 @@ export class Todolist extends React.Component {
 Test
 
 ```javascript
-// ...
+import { render } from "@testing-library/react";
+import { TodoList } from "./TodoList";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 const mockAxios = new MockAdapter(axios);
 
-describe("Todolist", () => {
+describe("TodoList", () => {
   const userData = [
     {
       userId: 1,
@@ -329,7 +332,7 @@ describe("Todolist", () => {
       .onGet("https://jsonplaceholder.typicode.com/todos")
       .reply(200, userData);
 
-    const { getByText } = render(<Todolist />);
+    const { getByText } = render(<TodoList />);
 
     await waitForElement(() => getByText("delectus aut autem"));
     expect(getByText("delectus aut autem")).toBeInTheDocument();
