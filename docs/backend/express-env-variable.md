@@ -17,15 +17,18 @@ In Node.js, we use the global object `process.env` to access environment variabl
 
 It could also be set to **test**.
 
-> Jest will set process.env.NODE_ENV to 'test' if it's not set to something else. You can use that in your configuration to conditionally setup only the compilation needed for Jest, e.g.
-
-(From Jest documentation https://jestjs.io/docs/en/24.0/getting-started.html)
+Jest will set process.env.NODE_ENV to `test` if it's not already set to something else.
 
 #### But why specifically `NODE_ENV`? Why is it everywhere?
 
 This environment variable was popularised by Express.js.
 
-> The `NODE_ENV` environment variable specifies the environment in which an application is running (usually, development or production). Setting NODE_ENV to “production” makes Express: Cache view templates. Cache CSS files generated from CSS extensions. Generate less verbose error messages.
+> The `NODE_ENV` environment variable specifies the environment in which an application is running (usually, development or production).
+> Setting NODE_ENV to “production” makes Express:
+>
+> - Cache view templates
+> - Cache CSS files generated from CSS extensions.
+> - Generate less verbose error messages.
 
 (From Express.js documentation on best practices https://expressjs.com/en/advanced/best-practice-performance.html)
 
@@ -35,7 +38,7 @@ Read more about it [here at Packt about why it matters](https://hub.packtpub.com
 
 In Linux/Mac, the way to set an environment variable is to `NODE_ENV="production"`.
 
-Thus we can edit our package.json to be like this:
+Thus, we can edit our package.json to be like this:
 
 ```json
 "scripts": {
@@ -47,7 +50,7 @@ Thus we can edit our package.json to be like this:
 But for Windows, if it is PowerShell, an env var is set this way: `$env:NODE_ENV="production"`
 CMD will set it this way: `set NODE_ENV=production`.
 
-Therefore, different team members with computers of different operating systems will stumble having to use the same way of setting an enviornment variable. The above scripts will not work.
+Therefore, different team members with computers of different operating systems will stumble having to use the same way of setting an environment variable. The above scripts will not work.
 
 We can use a npm package to help us. It is called **cross-env**.
 
