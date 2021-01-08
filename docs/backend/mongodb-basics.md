@@ -24,6 +24,8 @@ Server is run via an executable called **mongod**
 mongod --dbpath ~/data/db
 ```
 
+Resources: https://zellwk.com/blog/install-mongodb/
+
 ### General
 
 The `--dbpath` option specifies the location where MongoDB should store data. It can be any folder you create. `/data/db` is just one example.
