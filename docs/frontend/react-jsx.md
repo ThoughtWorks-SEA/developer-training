@@ -119,7 +119,7 @@ function listDisneyMovies() {
     "Mulan",
   ];
 
-  return favDisneyMovies.map(movie => <div>{movie}</div>);
+  return favDisneyMovies.map((movie) => <div>{movie}</div>);
 }
 
 function App() {
@@ -127,7 +127,7 @@ function App() {
 }
 ```
 
-### Exercise
+## Lab
 
 1. create a function and use it to make the Hello World! All lowercase.
 2. create another function that makes odd number words uppercase and even number of word lowercase

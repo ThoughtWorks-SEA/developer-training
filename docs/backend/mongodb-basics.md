@@ -11,7 +11,7 @@ Learn more about [MongoDB](https://docs.mongodb.com/manual/tutorial/getting-star
 Server is run via an executable **mongod.exe** on Windows.
 
 ```cmd
-  mongod --dbpath /data/db
+mongod --dbpath /data/db
 ```
 
 Depending on the security level of your system, Windows may pop up a Security Alert dialog box about blocking “some features” of C:\Program Files\MongoDB\Server\VERSION_NUMBER\bin\mongod.exe from communicating on networks. All users should select `Private Networks`, such as my home or work network and click `Allow access`.
@@ -21,7 +21,7 @@ Depending on the security level of your system, Windows may pop up a Security Al
 Server is run via an executable called **mongod**
 
 ```sh
-  mongod --dbpath ~/data/db
+mongod --dbpath ~/data/db
 ```
 
 ### General
