@@ -7,16 +7,14 @@ Joi is a popular JavaScript object validation library.
 ### Installing Joi
 
 ```js
-npm install @hapi/joi
+npm install joi
 ```
 
 ### Requiring Joi in your module
 
 ```js
-const Joi = require("@hapi/joi");
+const Joi = require("joi");
 ```
-
-Why `@hapi`? Hapi [moved all their modules to the new Hapi scope](https://twitter.com/hapijs/status/1120237246425133057).
 
 ## Why use Joi?
 
