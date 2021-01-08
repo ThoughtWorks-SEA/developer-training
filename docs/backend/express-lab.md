@@ -42,13 +42,19 @@ Notice the plural form. We have 8 endpoints.
 Expected Response:
 
 ```json
+[]
+```
+
+Expected Response after Jumplings added:
+
+```json
 [
-  { "id": 3, "name": "xxx" },
-  { "id": 1, "name": "xxx" }
+  { "id": 1, "name": "xxx" },
+  { "id": 2, "name": "xxx" }
 ]
 ```
 
-#### 2. Add one jumpling
+#### 2. Add a jumpling
 
 - Route: POST /jumplings
 - HTTP Response status code: 201
@@ -56,10 +62,10 @@ Expected Response:
 Expected Response:
 
 ```json
-[{ "id": 1, "name": "xxx }]
+{ "id": 1, "name": "xxx" }
 ```
 
-#### 3. Get jumplings with id
+#### 3. Get a jumpling
 
 - Route: GET /jumplings/:id
 - HTTP Response status code: 200
@@ -67,21 +73,22 @@ Expected Response:
 Expected Response:
 
 ```json
-[{ "id": 1, "name": "xxx" }]
+{ "id": 1, "name": "xxx" }
 ```
 
-#### 4. Update (replace) jumpling with id
+#### 4. Update a jumpling's name
 
 - Route: PUT /jumplings/:id
 - HTTP Response status code: 200
+- Body: `{ "name": "xxx edited" }`
 
 Expected Response:
 
 ```json
-[{ "id": 1, "name": "xxx" }]
+{ "id": 1, "name": "xxx edited" }
 ```
 
-#### 5. Delete jumplings with id
+#### 5. Delete a jumpling
 
 - Route: DELETE /jumplings/:id
 - HTTP Response: 200
@@ -89,10 +96,10 @@ Expected Response:
 Expected Response:
 
 ```json
-[{ "id": 1, "name": "xxx" }]
+{ "id": 1, "name": "xxx edited" }
 ```
 
-#### 6. Generate the next winner - who is next?
+#### 6. Generate the next presenter
 
 - Route: POST /jumplings/presenters
 - HTTP Response status code: 201
@@ -100,12 +107,12 @@ Expected Response:
 Expected Response:
 
 ```json
-[{ "id": 1, "name": "xxx" }]
+{ "id": 1, "name": "xxx" }
 ```
 
 This is a POST request instead of a GET request because we are recording the history of presenters. This creates a resource on the server.
 
-#### 7. Get a history of who was next
+#### 7. Get a history of presenters
 
 - Route: GET /jumplings/presenters
 - HTTP Response status code: 200
