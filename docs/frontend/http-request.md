@@ -279,7 +279,7 @@ We also shorten the timeout, so the API fails faster if the server keeps us wait
 
 On POST request, we set the content-type to `application/json`, the most common setting.
 
-## Exercise
+## Lab: Comment searcher
 
 Create a comment searcher
 

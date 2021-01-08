@@ -98,7 +98,7 @@ function WelcomeText({ name: username }) {
 }
 ```
 
-## Exercise
+## Lab: Pokemon
 
 1. Pokemon Component
 

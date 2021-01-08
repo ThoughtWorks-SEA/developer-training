@@ -214,7 +214,7 @@ One example is given in [this article](https://daveceddia.com/why-not-modify-rea
 
 Hence it is generally a good practice to avoid mutating existing state object. If you need to update any field/value in the state, you should create a new copy of the value and call setState.
 
-## Exercise
+## Lab: Counter/FizzBuzzCounter
 
 1. Create a Counter component with 2 buttons
 

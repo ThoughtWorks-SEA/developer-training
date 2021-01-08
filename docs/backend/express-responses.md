@@ -117,7 +117,7 @@ See [Express.js api docs](https://expressjs.com/en/api.html#res.sendStatus) for 
 
 No. The more status codes your API deals with, the more status codes you have to maintain. Your clients (possibly your frontend) will also have to maintain more code to react accordingly to these status codes. Use the status codes only as needed.
 
-## Exercises
+## Lab: Songs
 
 Implement an API with the following endpoint:
 

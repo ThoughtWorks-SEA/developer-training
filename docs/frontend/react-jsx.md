@@ -127,7 +127,7 @@ function App() {
 }
 ```
 
-## Lab
+## Lab: Hello JavaScript World
 
 1. create a function and use it to make the Hello World! All lowercase.
 2. create another function that makes odd number words uppercase and even number of word lowercase
