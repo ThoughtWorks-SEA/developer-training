@@ -103,7 +103,7 @@ Expected Response:
 [{ "id": 1, "name": "xxx" }]
 ```
 
-This is a POST request instead of a GET request because we are recording the history of participants that were next. This creates a resource on the server.
+This is a POST request instead of a GET request because we are recording the history of presenters. This creates a resource on the server.
 
 #### 7. Get a history of who was next
 
@@ -119,37 +119,35 @@ Expected response:
 ]
 ```
 
-## Routing
+## Hints
 
-Lab: Add basic routes GET
+- Write a test first. (Use Jest and Supertest. Include testing for errors.)
+- Add routes into `app.js` and make the test pass. (later, refactor and move resources into their respective route files)
+- Rinse and repeat.
+- Middleware - Add middleware for requiring JSON:
 
-## Middleware
+```
+const requireJsonContent = (req, res, next) => {
+  if (req.headers["content-type"] !== "application/json") {
+    res.status(400).send("Server wants application/json!");
+  } else {
+    next();
+  }
+};
+```
 
-Add middleware for requiring JSON
+- Param processing - Integrate `app.param()` middleware to find `jumpling` from id
+- Routers - Integrate Express.js routers to extract your `jumpling` routes (put into routes folder)
+- Integrate a default error handler middleware:
 
-## Parse body and routing with param
+```
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  res.status(err.statusCode).send(err.message);
+});
+```
 
-Improve response and implementing proper POST, PUT, DELETE
-
-## Param processing
-
-Integrate app.param() middleware to find participant from id
-
-## Testing
-
-Implement tests with Jest and Supertest (include testing for errors)
-
-## Routers
-
-Integrate Express.js routers to organise your "who is next" routes (put into routes folder)
-
-## Error
-
-Integrate a default error handler middleware for your "who is next" routes
-
-## Joi
-
-Integrate Joi validation library to validate data
+- Integrate Joi validation library to validate data
 
 ## Folder structure
 
