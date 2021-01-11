@@ -198,13 +198,13 @@ WHERE tags.text = 'politics' AND posts.vote_count > 10;
 
 In MongoDB, we use a document (object literal in JavaScript) as a matcher. The relevant fields have to match but additional fields are allowed but ignored.
 
-Specifying the value directly checks for equality. The special `\$gt` key indicates the greater-than condition. The **AND** condition is indicated by the comma ",".
+Specifying the value directly checks for equality. The special `$gt` key indicates the greater-than condition. The **AND** condition is indicated by the comma `,`.
 
 ```js
 db.posts.find({ tags: "politics", vote_count: { $gt: 10 } });
 ```
 
-The SQL query relies on a strictly normalized model, where posts and tags are stored in distinct tables, whereas the MongoDB query assumes that tags are stored within each post document.
+The SQL query relies on a strictly normalized model, where posts and tags are stored in distinct tables, whereas the MongoDB query assumes that tags are stored within each 'Post' document.
 
 ### Indexing
 
@@ -216,10 +216,6 @@ Indexes are small portions of data which are ordered. They help find documents t
 (Source: MongoDB in Action 2nd Edition - 2016)
 
 However, too many indexes will affect database performance. They need to be deleted when no longer used.
-
-### Others
-
-- Reference
 
 ## MongoDB schema design
 
