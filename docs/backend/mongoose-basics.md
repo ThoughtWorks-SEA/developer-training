@@ -48,10 +48,10 @@ db.once("open", () => {
 
 We put this in a "db.js" file in a utils folder.
 
-To connect to the database, "require" this file in app.js:
+To connect to the database, "require" this file in index.js:
 
 ```js
-//app.js
+//index.js
 require("./utils/db");
 ```
 
@@ -89,7 +89,7 @@ We define a property called `name` with a schema type `String` which maps to an 
 
 `name` is also a `required` field, which means that a document using this schema must have this field. The value of `name` has to have a length of at least 3.
 
-The `unique` field of `name` does not enforce uniqueness with validation but instead will try to an unique index in your the MongoDB database. If the index is not built correctly, this might not always work. See the index being created in the database using MongoDB Compass.
+The `unique` field of `name` does not enforce uniqueness with validation but instead will try to generate a unique index in your the MongoDB database. If the index is not built correctly, this might not always work. See the index being created in the database using MongoDB Compass.
 
 (Note that if you try to enforce uniqueness for a field that could be null or empty, you might need to create the unique index as a partial index that ignores null or empty values. See https://stackoverflow.com/questions/52094484/mongodb-create-unique-index-on-a-field-not-in-all-documents for more details.)
 
@@ -150,10 +150,10 @@ const SimplePokemon = mongoose.model("SimplePokemon", simplePokemonSchema);
 
 Parameters:
 
-1st param - name <String> model name
-2nd param - [schema] <Schema> schema name
-3rd param - [collection] <String> collection name (optional: mongoose can guess from model name)
-4th param - [skipInit] <Boolean> whether to skip initialization (defaults to false)
+- 1st param - name <String> model name
+- 2nd param - [schema] <Schema> schema name
+- 3rd param - [collection] <String> collection name (optional: mongoose can guess from model name)
+- 4th param - [skipInit] <Boolean> whether to skip initialization (defaults to false)
 
 The third and fourth parameters are less commonly used.
 

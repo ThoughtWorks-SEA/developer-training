@@ -7,7 +7,7 @@ Refer to the repository: [Mongoose pokemon basics](https://github.com/thoughtwor
 Use `save` to save in to the database.
 
 ```js
-const createOne = async pokemon => {
+const createOne = async (pokemon) => {
   try {
     const newPokemon = new SimplePokemon(pokemon);
     await newPokemon.save();
@@ -129,14 +129,14 @@ We can use comparison operators `$lt`, `$gt`, `$lte`, and `$gte`
 Less than:
 
 ```js
-const filterHPGreaterThan = async HP => {
+const filterHPGreaterThan = async (HP) => {
   const filteredPokemons = await SimplePokemon.find({
     baseHP: { $gt: HP },
   });
   return filteredPokemons;
 };
 
-filterHPGreaterThan(40).then(data => {
+filterHPGreaterThan(40).then((data) => {
   console.log(`filterHPGreaterThan: ${data}`);
 });
 ```
@@ -150,17 +150,17 @@ How do you sort the results?
 Suppose you want to find characters whose rank contains 'turtle'. In SQL, you would use the LIKE operator. In Mongoose, you can simply query by a regular expression as shown below.
 
 ```js
-const filterByCategory = async category => {
+const filterByCategory = async (category) => {
   const regex = new RegExp(category, "gi");
   const filteredPokemons = await SimplePokemon.find({ category: regex });
   return filteredPokemons;
 };
 
-filterByCategory("turtle").then(docs => {
+filterByCategory("turtle").then((docs) => {
   console.log(`filterByCategory: ${docs}`);
 
   // MongoDB may return the docs in any order unless you explicitly sort
-  docs.map(doc => doc.name).sort();
+  docs.map((doc) => doc.name).sort();
 });
 ```
 
@@ -180,7 +180,7 @@ const docs = await SimplePokemon.find({
   category: /turtle/,
 });
 
-docs.map(doc => doc.name);
+docs.map((doc) => doc.name);
 ```
 
 ### Find One
@@ -194,7 +194,7 @@ doc instanceof mongoose.Document; // true
 ```
 
 ```js
-const findOneByName = async name => {
+const findOneByName = async (name) => {
   const foundPokemon = await SimplePokemon.findOne({ name: name });
   return foundPokemon;
 };
@@ -210,7 +210,7 @@ const CharacterModel = mongoose.model("Character", schema);
 
 const doc = await CharacterModel.create({
   name: "Jon Snow",
-  title: `Lord Commander of the Night's Watch`,
+  title: "Lord Commander of the Night's Watch",
 });
 
 // Update the document by setting a property and calling `save()`
@@ -241,9 +241,9 @@ If we do not have atomicity,
 
 ### findOneAndUpdate
 
-The Model.findOneAndUpdate() function behaves similarly to updateOne(): it atomically updates the first document that matches the first parameter filter.'
+The Model.findOneAndUpdate() function behaves similarly to updateOne(): it atomically updates the first document that matches the first parameter filter.
 
-Model.findOneAndUpdate() Parameters
+Model.findOneAndUpdate() parameters:
 
 - filter / conditions
 - update
@@ -263,13 +263,13 @@ const findOneAndUpdate = async (filter, update) => {
   return pokemon;
 };
 
-findOneAndUpdate({ name: "Squirtle" }, { baseHP: 100 }).then(data => {
+findOneAndUpdate({ name: "Squirtle" }, { baseHP: 100 }).then((data) => {
   console.log(data);
 });
 ```
 
-This is actually send as a `$set` [field update](https://docs.mongodb.com/manual/reference/operator/update-field/).
-This ensures that you do not override the entire document with `{ baseHP: 100 }`. Instead, the `baseHP` field is updated.
+This is actually sent as a `$set` [field update](https://docs.mongodb.com/manual/reference/operator/update-field/).
+This ensures that you do not override the entire document with `{ baseHP: 100 }`. Instead, only the `baseHP` field is updated.
 
 Note that by default, it does not run any validation nor does it create the object if it does not exist. Check the [official documentation](https://mongoosejs.com/docs/api.html#model_Model.findOneAndUpdate).
 
@@ -278,7 +278,7 @@ Setting the `runValidators` option lets it runs limited validation. If full vali
 ## Delete
 
 ```js
-const deleteOneById = async id => {
+const deleteOneById = async (id) => {
   try {
     await SimplePokemon.findByIdAndDelete(id);
   } catch (err) {
