@@ -16,6 +16,10 @@ mongod --dbpath /data/db
 
 Depending on the security level of your system, Windows may pop up a Security Alert dialog box about blocking “some features” of C:\Program Files\MongoDB\Server\VERSION_NUMBER\bin\mongod.exe from communicating on networks. All users should select `Private Networks`, such as my home or work network and click `Allow access`.
 
+References:
+
+- https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
+
 ### Linux / Mac
 
 Server is run via an executable called **mongod**
@@ -24,7 +28,10 @@ Server is run via an executable called **mongod**
 mongod --dbpath ~/data/db
 ```
 
-Resources: https://zellwk.com/blog/install-mongodb/
+References:
+
+- https://docs.mongodb.com/manual/administration/install-on-linux/
+- https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
 ### General
 
