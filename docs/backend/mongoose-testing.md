@@ -26,13 +26,13 @@ Here is an example on using it with Jest: https://github.com/nodkz/mongodb-memor
 
 before writing any test...
 
-pokemons.route.test.js
+`__tests__/pokemons.route.test.js`
 
 ```js
 const request = require("supertest");
 const app = require("../../src/app");
-const Pokemon = require("../../src/models/pokemon.model");
-const { teardownMongoose } = require("../../test/mongoose");
+const Pokemon = require("../src/models/pokemon.model");
+const { teardownMongoose } = require("../test/mongoose");
 
 describe("pokemons", () => {
   afterAll(async () => await teardownMongoose());
@@ -60,7 +60,7 @@ describe("pokemons", () => {
   afterEach(async () => {
     await Pokemon.deleteMany();
   });
-
+});
 ```
 
 In package.json:
@@ -79,7 +79,7 @@ const { MongoMemoryServer } = require("mongodb-memory-server");
 
 module.exports = async () => {
   const mongoServer = new MongoMemoryServer();
-  const mongoUri = await mongoServer.getConnectionString();
+  const mongoUri = await mongoServer.getUri();
   process.env.MONGODB_URI = mongoUri;
   // Set reference to mongo server in order to close the server during teardown
   global.__MONGOSERVER__ = mongoServer;
@@ -125,30 +125,27 @@ Add this to package.json
 First test for GET `/pokemons`
 
 ```js
-describe("/pokemons", () => {
-  it("GET should respond with all pokemons", async () => {
-    const expectedPokemonData = [
-      {
-        id: 1,
-        name: "Pikachu",
-        japaneseName: "ピカチュウ",
-        baseHP: 35,
-        category: "Mouse Pokemon",
-      },
-      {
-        id: 2,
-        name: "Squirtle",
-        japaneseName: "ゼニガメ",
-        baseHP: 44,
-        category: "Tiny Turtle Pokemon",
-      },
-    ];
+it("GET should respond with all pokemons", async () => {
+  const expectedPokemonData = [
+    {
+      id: 1,
+      name: "Pikachu",
+      japaneseName: "ピカチュウ",
+      baseHP: 35,
+      category: "Mouse Pokemon",
+    },
+    {
+      id: 2,
+      name: "Squirtle",
+      japaneseName: "ゼニガメ",
+      baseHP: 44,
+      category: "Tiny Turtle Pokemon",
+    },
+  ];
 
-    const { body: actualPokemons } = await request(app)
-      .get("/pokemons")
-      .expect(200);
-    expect(actualPokemons).toMatchObject(expectedPokemonData);
-  });
+  const response = await request(app).get("/pokemons").expect(200);
+
+  expect(response.body).toMatchObject(expectedPokemonData);
 });
 ```
 
