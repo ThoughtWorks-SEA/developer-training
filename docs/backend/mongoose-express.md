@@ -13,3 +13,11 @@ Refactor the controllers into the folder.
 In the MVC design pattern, controllers is the middleman between Express.js routes and mongoose models.
 
 ![MVC diagram](https://mdn.mozillademos.org/files/14456/MVC%20Express.png)
+
+## Exercises
+
+Integrate your songs routes with MongoDB and Mongoose!
+
+1. Replace joi validation with Mongoose validation for your Song model - `models/song.model.js`
+1. Create a database for your songs in your MongoDB - `utils/db.js`
+1. Refactor controllers - `controllers/songs.controller.js`

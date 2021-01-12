@@ -1,6 +1,6 @@
 # Mongoose validation
 
-Previously, we used Joi for validation of our data. With Mongoose, we can and should still use Joi, but now we want to learn about implementing this validation directly in Mongoose.
+Previously, we used Joi for validation of our data. With Mongoose, we can still use Joi, but now we want to learn about implementing this validation directly in Mongoose.
 
 In the schema, you can specify the validators. You have already saw some such as `required`.
 
@@ -54,11 +54,3 @@ const nameSchema = new Schema({
 var custom = [validator, 'Uh oh, {PATH} does not equal "something".'];
 new Schema({ name: { type: String, validate: custom } });
 ```
-
-## Exercises
-
-Integrate your songs routes with MongoDB and Mongoose!
-
-- Create a schema with validation and a model for your songs
-- Create a database for your songs in your MongoDB
-- Change your controllers 
