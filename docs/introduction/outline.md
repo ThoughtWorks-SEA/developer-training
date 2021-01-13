@@ -28,7 +28,6 @@ The following is a rough outline of the topics covered in the program. This is s
 - React Bootstrap
 - Styling in React
 - Webpack / Babel
-- Lab: Todo list
 
 ### Week 4 - Frontend Web Development
 
@@ -53,14 +52,13 @@ The following is a rough outline of the topics covered in the program. This is s
 - Express.js
 - MongoDB
 - Mongoose
-- Labs
 
 ### Week 7 - Backend Web Development
 
+- Security
 - Authentication
 - JWT
 - Deploy on Heroku
-- Labs
 
 ### Week 8 - Backend Project
 
@@ -78,7 +76,6 @@ The following is a rough outline of the topics covered in the program. This is s
 ### Week 10
 
 - Data structures and algorithms
-- Improve on individual project
 
 ### Week 11 - Software Design
 
@@ -89,8 +86,7 @@ The following is a rough outline of the topics covered in the program. This is s
 
 ### Week 12 - Agile
 
-- Agile manifesto
-- Agile methodologies/frameworks
+- Intro to Agile
 - CI/CD
 - Code collaboration with git
 - Clean code
