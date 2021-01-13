@@ -2,12 +2,12 @@
 
 Middleware are functions that run at specific stages of a pipeline. For Mongoose, [middleware is specified on the schema level](https://mongoosejs.com/docs/middleware.html).
 
-Mongoose has 4 types of middleware.
+Mongoose has 4 types of middleware:
 
-Aggregate
-Document
-Model
-Query
+- Aggregate
+- Document
+- Model
+- Query
 
 For instance, for document middleware, the `pre` and `post` functions will take two parameters:
 
