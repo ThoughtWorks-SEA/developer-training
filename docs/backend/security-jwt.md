@@ -104,7 +104,7 @@ There are two ways for the client side to submit JWT tokens to the server side:
 Authorization: Bearer <token>
 ```
 
-- Using cookies. If JWT token is saved in cookies, the cookie is sent automatically together with the request when ever the user visit the same server that issues the cookie.
+- Using cookies. If JWT token is saved in cookies, the cookie is sent automatically together with the request whenever the user visit the same server that issues the cookie.
 
 ### Using Authorization HTTP request header
 
@@ -117,7 +117,23 @@ In the app.js file:
 
 A library called jsonwebtoken is used to sign and verify JWT tokens.
 
-Clone the project, start the server, and test the API using REST API clients like Postman.
+## Lab: Quick start security-jwt
+
+Let's create a new simple project to practice.
+
+```bash
+mkdir security-jwt
+cd security-jwt
+npm init -y
+npm install express mongoose dotenv
+npm install nodemon supertest jest --save-dev
+npm install @shelf/jest-mongodb mongodb-memory-server --save-dev
+echo "node_modules" >> .gitignore
+echo ".env" >> .gitignore
+git init
+```
+
+You'll also need to create your `index.js`, `app.js`, `utils/db.js` files.
 
 ### Using cookies and same origin policy
 
@@ -257,7 +273,15 @@ router.get("/:username", protectRoute, async (req, res, next) => {
 
 ### Generating a JWT token and finding the secret
 
+- Create the config folder under your project root directory.
+- Then create a `jwt.js` file inside the config folder, with the `getJWTSecret` function.
+
+config/jwt.js
+
 ```js
+var jwt = require("jsonwebtoken");
+const createJWTToken = require("../config/jwt");
+
 const getJWTSecret = () => {
   const secret = process.env.JWT_SECRET_KEY;
   if (!secret) {
@@ -277,12 +301,9 @@ const createJWTToken = (username) => {
   const token = jwt.sign(payload, secret);
   return token;
 };
+
+module.exports = createJWTToken;
 ```
-
-You can refactor this to put `getJWTSecret` in a `config` folder.
-
-- Create the config folder under your project root directory.
-- Then create a `jwt.js` file inside the config folder, with the `getJWTSecret` function.
 
 For your tests and your code to be able to find the `JWT_SECRET_KEY`, you can load the environment variables using `dotenv` in **app.js**.
 
@@ -300,14 +321,14 @@ It represents **Token Expiration,** and you can find [more details here](https:/
 
 #### Login and logout
 
-Read documentation about `res.cookie` and `res.clearCookie` first.
+Read documentation about `res.cookie` and `res.clearCookie`:
+
+- http://expressjs.com/en/api.html#res.cookie
+- http://expressjs.com/en/api.html#res.clearCookie
 
 ```js
 const bcrypt = require("bcryptjs");
-
-router.post("/logout", (req, res) => {
-  res.clearCookie("token").send("You are now logged out!");
-});
+const jwt = require("jsonwebtoken");
 
 router.post("/login", async (req, res, next) => {
   try {
@@ -325,7 +346,6 @@ router.post("/login", async (req, res, next) => {
     const oneWeek = oneDay * 7;
     const expiryDate = new Date(Date.now() + oneWeek);
 
-    // Can expiry date on cookie be changed? How about JWT token?
     res.cookie("token", token, {
       expires: expiryDate,
       httpOnly: true, // client-side js cannot access cookie info
@@ -339,6 +359,10 @@ router.post("/login", async (req, res, next) => {
     }
     next(err);
   }
+});
+
+router.post("/logout", (req, res) => {
+  res.clearCookie("token").send("You are now logged out!");
 });
 ```
 
@@ -414,9 +438,9 @@ For example, you can maintain a blacklist of users on the server side. The serve
 
 This solution works, however, if you do this, there is not much benefit of using JWT compared with session cookies.
 
-## Clear session information when user logout
+## Clear session information when user logs out
 
-If you use JWT token for session tracking, all the session information is in the JWT token. When a user logout, your client side application needs to remove this token from its memory.
+If you use JWT token for session tracking, all the session information is in the JWT token. When a user logs out, your client side application needs to remove this token from its memory.
 If the JWT token is saved in a cookie, the logout route handler on the server side needs to delete the cookie that stores JWT token upon user logout. That can be done via the response.clearCookie() provided by Express framework.
 
 ## Exercises
