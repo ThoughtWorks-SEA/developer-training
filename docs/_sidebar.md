@@ -118,7 +118,7 @@
   - [Security cookie](backend/security-cookie)
   - [Mongoose middleware](backend/mongoose-middleware)
   - [Security jwt](backend/security-jwt)
-  - [Security jwt testing](backend/security-jwt-testing)
+  <!-- - [Security jwt testing](backend/security-jwt-testing) -->
   - [Lab: Express.js Mongoose](backend/express-mongoose-lab)
   - [Express.js to production](backend/express-to-production)
   - [Express.js deploy](backend/express-deploy)
