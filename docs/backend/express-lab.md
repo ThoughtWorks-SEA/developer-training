@@ -18,7 +18,7 @@ Expected response:
   "0": "GET    /",
   "1": "GET    /jumplings",
   "2": "POST   /jumplings",
-  "3": "GET /jumplings/:id",
+  "3": "GET /jumplings/:name",
   "4": "PUT /jumplings/:id",
   "5": "DELETE /jumplings/:id",
   "6": "-----------------------",
@@ -61,7 +61,7 @@ Expected Response:
 
 #### 3. Get a jumpling
 
-- Route: GET /jumplings/:id
+- Route: GET /jumplings/:name
 - HTTP Response status code: 200
 
 Expected Response:
