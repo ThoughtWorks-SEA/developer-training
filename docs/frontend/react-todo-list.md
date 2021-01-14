@@ -455,3 +455,4 @@ displayTodos() {
 1. Improve the UI of your todo list.
 2. Add a prop that takes in the title of the todo list and display it as the title.
 3. Add an input box and a button to create a new todo list.
+4. Try implementing the same todo list, but with React hooks. Refer to this repo if you need to: https://github.com/sabrina-tw/todo-list-hooks
