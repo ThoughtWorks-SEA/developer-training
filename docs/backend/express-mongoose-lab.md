@@ -1,128 +1,27 @@
-## Pokemon
+# Express.js + Mongoose lab
 
-We will be building an API for returning pokemon data with Mongoose.
+## who-is-next
 
-## Planning the CRUD API
+Let's continue working on our [`who-is-next`](backend/express-lab.md) project!
 
-Lab: Build a basic CRUD API for the pokemon list (Create / Read / Update / Delete)
+We already have these set up:
 
-Requirements
-In this lab we will implement a basic CRUD API in Express for pokemon list with the below 8 routes:
+- CRUD API
+- Routers
+- Default error handler
+- Joi validations
 
-We are creating an API to interact with the resources on the server.
-
-#### 0. Get API endpoints
-
-Route: GET /
-HTTP Response status code: 200  
-Expected response:
-
-```json
-{
-  "0": "GET    /",
-  "1": "GET   /pokemons",
-  "2": "GET   /pokemons?name=pokemonNameNotExact",
-  "3": "POST    /pokemons",
-  "4": "GET /pokemons/:id",
-  "5": "PUT /pokemons/:id",
-  "6": "PATCH /pokemons/:id",
-  "7": "DELETE /pokemons/:id"
-}
-```
-
-Notice the plural form. We have 8 endpoints.
-
-Pokemon looks like this:
-Note the slight change in schema, we have id now!
-
-```js
-const pokemonData = [
-  {
-    id: 1,
-    name: "Pikachu",
-    japaneseName: "ピカチュウ",
-    baseHP: 35,
-    category: "Mouse Pokemon",
-  },
-  {
-    id: 2,
-    name: "Squirtle",
-    japaneseName: "ゼニガメ",
-    baseHP: 44,
-    category: "Tiny Turtle Pokemon",
-  },
-];
-```
-
-#### 1. Find all pokemon
-
-Route: GET /pokemons
-HTTP Response status code: 200
-
-#### 2. Filter pokemon by name (not exact match, use regex)
-
-Route: GET /pokemons?name=pokemonNameNotExact
-HTTP Response status code: 200
-
-#### 3. Add pokemon
-
-Route: POST /pokemons
-HTTP Response status code: 201
-
-#### 4. Get pokemon by id
-
-Route: GET /pokemons/:id
-HTTP Response status code: 200
-
-#### 5. Replace pokemon with id
-
-Route: PUT /pokemons/:id
-HTTP Response status code: 200
-
-`findOneAndReplace`
-Respond with new pokemon
-
-#### 6. Update pokemon with id
-
-Route: PATCH /pokemons/:id
-HTTP Response status code: 200
-
-`findOneAndUpdate`
-Respond with updated pokemon
-
-#### 7. Delete pokemon with id
-
-Route: DELETE /pokemons/:id
-HTTP Response: 200
-
-Respond with deleted pokemon
-
-Setup a new Github project and install Express.js
-
-## Folder structure
-
-- package.json
-- package-lock.json
-- src
-  - controllers
-  - models
-  - routes
-  - utils
-  - app.js
-  - index.js
-- \_\_tests\_\_
-
-## Routing
-
-Lab: Add basic routes
-
-## Error
-
-Lab: Integrate a default error handler middleware for your songs routes
+We'll need to add a database.
 
 ## Mongo and Mongoose
 
+```bash
+npm install mongoose
+```
+
 ### Connect to database
+
+src/utils/db.js
 
 ```js
 const mongoose = require("mongoose");
@@ -134,42 +33,67 @@ const mongoOptions = {
   useCreateIndex: true, // for creating index with unique
 };
 
-const dbName = "expressPokemon";
+const dbName = "whoisnext";
 const dbUrl = process.env.MONGO_URI || "mongodb://localhost:27017/" + dbName;
 mongoose.connect(dbUrl, mongoOptions);
 const db = mongoose.connection;
 
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
-  console.log("connected to mongodb");
+  console.log(`connected to mongodb at ${dbUrl}`);
 });
 ```
 
-### Create schema, validate, create model
+### Create a Jumpling model and schema, with validation
 
-Remember a pokemon looks like this
+A Jumpling should minimally have a name, so the `name` property should be validated to be `required: true`:
 
-```json
-{
-  "id": 1,
-  "name": "Pikachu",
-  "japaneseName": "ピカチュウ",
-  "baseHP": 35,
-  "category": "Mouse Pokemon"
-}
+src/models/jumpling.model.js
+
+```javascript
+const jumplingSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+    minlength: 3,
+    unique: true,
+  },
+});
+```
+
+You can add more properties if you like, e.g. `favouriteFood` 🥟
+
+### Mongoose validation? What about our Joi validation?
+
+Although you can have both Joi validation and Mongoose validation, in our current context it may seem a bit repetitive. To keep our code cleaner and to avoid any unnecessary roadblocks for the lab, we can get rid of the Joi validation and simply use Mongoose validation via the schema definition.
+
+There are packages like [`joigoose`](https://www.npmjs.com/package/joigoose) that you may be interested to experiment with:
+
+> joigoose: Joi validation for your Mongoose models without the hassle of maintaining two schemas.
+
+The difference between the two is that Joi validation validates the data at the **request** level, while Mongoose validation validates the data at the **application** level.
+
+### Utilise new Jumpling model in routes
+
+Previously, we used `let jumplings = []` in our jumplings router.
+
+Let's implement it with the actual Jumpling model now; query the actual db, and make changes to the db using Mongoose.
+
+```javascript
+const Jumpling = require("../models/jumpling.model");
 ```
 
 ## Testing
 
-Lab: Implement route tests with Jest and Supertest (with database) and test for error too
+### Setting up db for testing
 
-## More routing
+Note that there are many ways to set up the db, and it all boils down to personal preference and what works for the project and team. Refer to the notes in this repo for some options on how to approach this: https://github.com/sabrina-tw/express-songs#setting-up-db-for-testing
 
-Lab: Integrate app.param() middleware to find pokemon from id
+Feel free to also explore alternative approaches!
 
-## Routers
+<!-- ### Jest + Supertest
 
-Lab: Integrate Express routers to organise your songs routes
+Implement route tests with Jest and Supertest (with database).
 
 ## Add authentication to protect routes
 
@@ -193,4 +117,4 @@ const protectRoute = (req, res, next) => {
 
 ## Add tests for protected routes
 
-jest.mock("jsonwebtoken");
+jest.mock("jsonwebtoken"); -->
