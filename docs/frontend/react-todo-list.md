@@ -53,7 +53,7 @@ We should now see the word "Todolist" displayed at the top left of the browser.
 2. Initialise it with some dummy value for now. A todo should be an object with a `name` and `isDone` property.
 
 ```javascript
-class Todolist extends React.Component {
+class TodoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,7 +83,7 @@ class Todolist extends React.Component {
   }
 }
 
-export default Todolist;
+export default TodoList;
 ```
 
 ## Creating a TodoItem Component
@@ -94,7 +94,7 @@ export default Todolist;
 ```javascript
 import React from "react";
 
-export default ({ name, isDone }) => (
+const TodoItem = ({ name, isDone }) => (
   <div>
     <span>
       {isDone && (
@@ -108,9 +108,11 @@ export default ({ name, isDone }) => (
     <span>{name}</span>
   </div>
 );
+
+export default TodoItem;
 ```
 
-2. Display todos using the TodoItem component in Todolist
+2. Display todos using the TodoItem component in TodoList
 
 ```javascript
   displayTodos() {
@@ -152,13 +154,13 @@ In TodoItem.css
 }
 ```
 
-In Todo.js
+In TodoItem.js
 
 ```javascript
 import React from "react";
 import "./TodoItem.css";
 
-export default ({ name, isDone }) => (
+const TodoItem = ({ name, isDone }) => (
   <div className="todo-item">
     <span className="todo-item__completed">
       {isDone && <img alt="done" src={`${process.env.PUBLIC_URL}/tick.png`} />}
@@ -166,6 +168,8 @@ export default ({ name, isDone }) => (
     <span className="todo-item__name">{name}</span>
   </div>
 );
+
+export default TodoItem;
 ```
 
 ![todo2](_media/todo2.png)
@@ -179,14 +183,14 @@ We can do this by assigning a Universally Unique Identifier(UUID) to the individ
 npm install uuid
 ```
 
-In Todolist
+In TodoList
 
 ```javascript
 import React from "react";
 import Todo from "./Todo";
 import { v4 as uuidv4 } from "uuid"; // 1. import the UUID
 
-class Todolist extends React.Component {
+class TodoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -232,7 +236,7 @@ class Todolist extends React.Component {
   }
 }
 
-export default Todolist;
+export default TodoList;
 ```
 
 In our TodoItem
@@ -318,7 +322,6 @@ export default ({ name, isDone, setTodo, deleteTodo }) => (
 }
 
 .todo-item__delete:hover {
-  font-size: 1.6rem;
   cursor: pointer;
 }
 ```
@@ -449,6 +452,6 @@ displayTodos() {
 
 ## Exercise
 
-1. Improve the UI of your Todolist.
+1. Improve the UI of your todo list.
 2. Add a prop that takes in the title of the todo list and display it as the title.
 3. Add an input box and a button to create a new todo list.
