@@ -86,9 +86,9 @@ class Todolist extends React.Component {
 export default Todolist;
 ```
 
-## Creating a Todo Component
+## Creating a TodoItem Component
 
-1. Create a Todo component to host todo logic
+1. Create a TodoItem component to host todo logic
 2. Find a good looking green tick image and put it inside the public folder
 
 ```javascript
@@ -110,13 +110,13 @@ export default ({ name, isDone }) => (
 );
 ```
 
-2. Display todos using the Todo component in Todolist
+2. Display todos using the TodoItem component in Todolist
 
 ```javascript
   displayTodos() {
     return this.state.todos.map(todo => (
       <div>
-        <Todo name={todo.name} isDone={todo.isDone} />
+        <TodoItem name={todo.name} isDone={todo.isDone} />
       </div>
     ));
 ```
@@ -125,18 +125,15 @@ export default ({ name, isDone }) => (
 
 Let's try to style the component a little.
 
-In Todo.css
+In TodoItem.css
 
 ```css
-.todo {
+.todo-item {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  font-size: 1rem;
-  margin-top: 0.25em;
 }
 
-.todo__completed {
+.todo-item__completed {
   height: 1.5em;
   width: 1.5em;
   border: 1px solid lightblue;
@@ -146,13 +143,12 @@ In Todo.css
   align-items: center;
 }
 
-.todo__completed img {
-  height: 90%;
-  width: 90%;
+.todo-item__completed img {
+  height: 20px;
 }
 
-.todo__name {
-  margin-left: 0.25em;
+.todo-item__name {
+  margin-left: 5px;
 }
 ```
 
@@ -160,14 +156,14 @@ In Todo.js
 
 ```javascript
 import React from "react";
-import "./Todo.css";
+import "./TodoItem.css";
 
 export default ({ name, isDone }) => (
-  <div className="todo">
-    <span className="todo__completed">
+  <div className="todo-item">
+    <span className="todo-item__completed">
       {isDone && <img alt="done" src={`${process.env.PUBLIC_URL}/tick.png`} />}
     </span>
-    <span className="todo__name">{name}</span>
+    <span className="todo-item__name">{name}</span>
   </div>
 );
 ```
@@ -221,7 +217,9 @@ class Todolist extends React.Component {
         this.setState({ todos: [...this.state.todos] });
       };
       // 5. pass in the method as a prop to Todo component
-      return <Todo name={todo.name} isDone={todo.isDone} setTodo={setTodo} />;
+      return (
+        <TodoItem name={todo.name} isDone={todo.isDone} setTodo={setTodo} />
+      );
     });
   }
 
@@ -238,7 +236,7 @@ class Todolist extends React.Component {
 export default Todolist;
 ```
 
-In our Todo item
+In our TodoItem
 
 ```javascript
 import React from "react";
@@ -246,12 +244,12 @@ import "./Todo.css";
 
 // destructure the new property "setTodo"
 export default ({ name, isDone, setTodo }) => (
-  <div className="todo">
+  <div className="todo-item">
     {/*on clicking the circle, toggle the status of the todo item*/}
-    <span className="todo__completed" onClick={() => setTodo(!isDone)}>
+    <span className="todo-item__completed" onClick={() => setTodo(!isDone)}>
       {isDone && <img alt="done" src={`${process.env.PUBLIC_URL}/tick.png`} />}
     </span>
-    <span className="todo__name">{name}</span>
+    <span className="todo-item__name">{name}</span>
   </div>
 );
 ```
@@ -283,7 +281,7 @@ export default ({ name, isDone, setTodo }) => (
       };
 
       return (
-        <Todo
+        <TodoItem
           name={todo.name}
           isDone={todo.isDone}
           setTodo={setTodo}
@@ -297,13 +295,13 @@ export default ({ name, isDone, setTodo }) => (
 
 ```javascript
 export default ({ name, isDone, setTodo, deleteTodo }) => (
-  <div className="todo">
-    <span className="todo__completed" onClick={() => setTodo(!isDone)}>
+  <div className="todo-item">
+    <span className="todo-item__completed" onClick={() => setTodo(!isDone)}>
       {isDone && <img alt="done" src={`${process.env.PUBLIC_URL}/tick.png`} />}
     </span>
-    <span className="todo__name">{name}</span>
+    <span className="todo-item__name">{name}</span>
 
-    <span onClick={() => deleteTodo()} className="todo__delete">
+    <span onClick={() => deleteTodo()} className="todo-item__delete">
       X
     </span>
   </div>
@@ -313,14 +311,14 @@ export default ({ name, isDone, setTodo, deleteTodo }) => (
 4. Style to make it look nice
 
 ```css
-.todo__delete {
+.todo-item__delete {
   color: red;
   font-weight: bold;
   font-size: 1.4rem;
   margin-left: 8px;
 }
 
-.todo__delete:hover {
+.todo-item__delete:hover {
   font-size: 1.6rem;
   cursor: pointer;
 }
@@ -398,7 +396,7 @@ The fix is to add a unique id as key in the array of Todo items.
       const deleteTodo = () => this.createDeleteTodo(todo);
 
       return (
-        <Todo
+        <TodoItem
           key={todo.id}
           name={todo.name}
           isDone={todo.isDone}
@@ -438,7 +436,7 @@ displayTodos() {
     const deleteTodo = this.createDeleteTodo(todo);
 
     return (
-      <Todo
+      <TodoItem
         key={todo.id}
         name={todo.name}
         isDone={todo.isDone}
