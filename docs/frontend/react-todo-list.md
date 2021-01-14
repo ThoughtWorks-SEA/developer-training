@@ -246,7 +246,7 @@ import React from "react";
 import "./Todo.css";
 
 // destructure the new property "setTodo"
-export default ({ name, isDone, setTodo }) => (
+const TodoItem = ({ name, isDone, setTodo }) => (
   <div className="todo-item">
     {/*on clicking the circle, toggle the status of the todo item*/}
     <span className="todo-item__completed" onClick={() => setTodo(!isDone)}>
@@ -255,6 +255,8 @@ export default ({ name, isDone, setTodo }) => (
     <span className="todo-item__name">{name}</span>
   </div>
 );
+
+export default TodoItem;
 ```
 
 ![todo3](_media/todo3.gif)
@@ -297,7 +299,7 @@ export default ({ name, isDone, setTodo }) => (
 3. Add an X, on clicking on the X. We can delete the item. We can also use an image like how we did for the tick.
 
 ```javascript
-export default ({ name, isDone, setTodo, deleteTodo }) => (
+const TodoItem = ({ name, isDone, setTodo, deleteTodo }) => (
   <div className="todo-item">
     <span className="todo-item__completed" onClick={() => setTodo(!isDone)}>
       {isDone && <img alt="done" src={`${process.env.PUBLIC_URL}/tick.png`} />}
@@ -309,6 +311,8 @@ export default ({ name, isDone, setTodo, deleteTodo }) => (
     </span>
   </div>
 );
+
+export default TodoItem;
 ```
 
 4. Style to make it look nice
@@ -369,7 +373,7 @@ Notice that the `handleChange` function is an arrow function. Arrow function bin
       todos: [
         ...this.state.todos,
         {
-          id: uuidv1(),
+          id: uuidv4(),
           name: name,
           isDone: false,
         },
