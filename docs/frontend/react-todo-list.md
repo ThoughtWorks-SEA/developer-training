@@ -182,10 +182,9 @@ npm install uuid
 In Todolist
 
 ```javascript
-import uuidv1 from "uuid/v1";
 import React from "react";
 import Todo from "./Todo";
-import uuidv1 from "uuid/v1"; // 1. import the UUID
+import { v4 as uuidv4 } from "uuid"; // 1. import the UUID
 
 class Todolist extends React.Component {
   constructor(props) {
@@ -193,12 +192,12 @@ class Todolist extends React.Component {
     this.state = {
       todos: [
         {
-          id: uuidv1(), // 2. add uuid to the item
+          id: uuidv4(), // 2. add uuid to the item
           name: "Buy Milk",
           isDone: false,
         },
         {
-          id: uuidv1(), // 3.add uuid to the item
+          id: uuidv4(), // 3.add uuid to the item
           name: "Do push up",
           isDone: true,
         },
