@@ -91,15 +91,79 @@ Note that there are many ways to set up the db, and it all boils down to persona
 
 Feel free to also explore alternative approaches!
 
-<!-- ### Jest + Supertest
+### Jest + Supertest
 
-Implement route tests with Jest and Supertest (with database).
+Let's implement our tests with database:
+
+```javascript
+const app = require("../src/app");
+const request = require("supertest");
+const Jumpling = require("../src/models/jumpling.model");
+const dbHandlers = require("../test/dbHandler");
+
+describe("jumplings", () => {
+  describe("GET /jumplings", () => {
+    it("should retrieve list of jumplings", async () => {
+
+    });
+  });
+
+  describe("GET /jumplings/presenter", () => {
+    it("should return a random jumpling", async () => {
+
+    });
+  });
+
+  describe("GET /jumplings/:name", () => {
+    it("should retrieve jumpling with requested name", async () => {
+
+    });
+  });
+
+  describe("POST /jumplings", () => {
+    it("should create new jumpling if fields are valid", async () => {
+
+    });
+
+    it("should throw error if name is empty", async () => {
+
+    });
+
+    it("should throw error if name is too short", async () => {
+
+    });
+  });
+
+  describe("PUT /jumplings/:id", () => {
+
+    });
+
+    it("should throw error if name is empty", async () => {
+
+    });
+
+    it("should throw error if request body is not json", async () => {
+
+    });
+  });
+
+  describe("DELETE /jumplings/:id", () => {
+    it("should delete jumpling if jumpling exists", async () => {
+
+    });
+  });
+});
+```
 
 ## Add authentication to protect routes
 
-cookie parser
-cors options
-jwt
+Following the guide from our [security jwt notes](backend/security-jwt?id=using-cookies-and-same-origin-policy), set up an `User` model with `username` and `password` to protect these routes:
+
+- POST /jumplings
+- PUT /jumplings:id
+- DELETE /jumplings:id
+
+We'll need to implement a protectRoute middleware, e.g.:
 
 ```js
 const protectRoute = (req, res, next) => {
@@ -114,7 +178,3 @@ const protectRoute = (req, res, next) => {
   }
 };
 ```
-
-## Add tests for protected routes
-
-jest.mock("jsonwebtoken"); -->
