@@ -1,6 +1,6 @@
 # Cascading Style Sheets
 
-adding presentational styles to HTML
+Adding presentational styles to HTML
 
 ## Terminology
 

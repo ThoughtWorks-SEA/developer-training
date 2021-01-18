@@ -12,7 +12,7 @@ One of the most important things we impart here is effective learning. When you 
 
 ## Stay in your learning zone
 
-Keep learning new skills. Staying in your learning zone. Expending your comfort zone. Be aware when you are in panic zone (and avoid it!)
+Keep learning new skills. Stay in your learning zone while expanding your comfort zone. Be aware when you are in panic zone (and avoid it!)
 
 ![learning zone](_media/learning-zone.png)
 
