@@ -80,8 +80,6 @@ if (food === "pizza") {
 }
 ```
 
-### While
-
 ### Switch case statements
 
 ```js

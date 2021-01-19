@@ -2,7 +2,7 @@
 
 There are many ways to loop through an array or object.
 
-## for loop
+## For loop
 
 Syntax:
 
@@ -22,18 +22,18 @@ for (var i = 0; i < someArray.length; i++) {
 }
 ```
 
-## while loop
-
-`n < 3` returns true or false.
-When it returns true, it does something.
-`n` is incremented inside the while loop.
+## While loop
 
 ```js
-var n = 0;
-while (n < 3) {
-  console.log("i is " + i);
-  n++;
+let text = "";
+let i = 1;
+
+while (i < 4) {
+  text += "The number is " + i;
+  i++;
 }
+
+console.log(text); // The number is 1The number is 2The number is 3
 ```
 
 ## for...of statement
@@ -56,9 +56,9 @@ for (const number of numbers) {
 Strings are also an iterable type, so you can use for...of on strings:
 
 ```js
-const str = "abcde";
+const string = "abcde";
 
-for (const char of str) {
+for (const char of string) {
   console.log(char.toUpperCase().repeat(3));
 }
 ```
@@ -88,11 +88,9 @@ for (const thing in car) {
 You can also use for...in to iterate over the index values of an iterable like an array or a string:
 
 ```js
-const str = "Turn the page";
+const string = "Turn the page";
 
-for (const index in str) {
-  console.log(`Index of ${str[index]}: ${index}`);
+for (const index in string) {
+  console.log(`Index of ${string[index]}: ${index}`);
 }
 ```
-
-Make sure you remember the difference between `for...of` and `for...in`!
