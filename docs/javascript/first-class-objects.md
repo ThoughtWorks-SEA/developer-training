@@ -12,7 +12,7 @@ like any normal object
 
 ```js
 // Declare
-const anotherAwesomeFunction = function() {
+const anotherAwesomeFunction = function () {
   console.log("I am another awesome function!");
 };
 
@@ -24,20 +24,20 @@ Instead of `const`, you can also use `let` or `var`. But should you?
 
 ## Storing functions in object
 
-Able to assign functions to variable means they can be stored anywhere!
+The ability to assign functions to variables means they can be stored anywhere!
 
 ```js
 const Calculator = {
-  add: function(a, b) {
+  add: function (a, b) {
     return a + b;
   },
-  multiply: function(a, b) {
+  multiply: function (a, b) {
     return a * b;
   },
-  divide: function(a, b) {
+  divide: function (a, b) {
     return a / b;
   },
-  subtract: function(a, b) {
+  subtract: function (a, b) {
     return a - b;
   },
 };
@@ -52,7 +52,8 @@ assert(Calculator.subtract(2, 7) === -5, "should add 2 numbers");
 
 ```js
 const array = [];
-array.push(function() {
+
+array.push(function () {
   return "hello";
 });
 
@@ -62,15 +63,15 @@ assert(array[0]() === "hello", "hello");
 ## Passing function as an argument
 
 ```js
-const add = function(a, b) {
+const add = function (a, b) {
   return a + b;
 };
 
-const subtract = function(a, b) {
+const subtract = function (a, b) {
   return a - b;
 };
 
-const modifyNumbers = function(modifyingFunc, a, b) {
+const modifyNumbers = function (modifyingFunc, a, b) {
   return modifyingFunc(a, b);
 };
 
@@ -82,7 +83,7 @@ console.log(modifyNumbers(subtract, 2, 1));
 
 ```js
 function speak(text) {
-  return function() {
+  return function () {
     return "says " + text;
   };
 }
@@ -117,9 +118,9 @@ function hoisted() {
 These are not hoisted.
 
 ```js
-expression(); // "TypeError: expression is not a function
+expression(); // TypeError: expression is not a function
 
-var expression = function() {
+var expression = function () {
   console.log("Will this work?");
 };
 ```
@@ -136,6 +137,6 @@ var expression = function hoisting() {
 };
 ```
 
-As we can see above, the variable declaration var expression is hoisted but it's assignment to a function is not. Therefore, the intepreter throws a TypeError since it sees expression as a variable and not a function.
+As we can see above, the variable declaration var expression is hoisted but its assignment to a function is not. Therefore, the interpreter throws a TypeError since it sees expression as a variable and not a function.
 
 Read [more at this tutorial](https://scotch.io/tutorials/understanding-hoisting-in-javascript).
