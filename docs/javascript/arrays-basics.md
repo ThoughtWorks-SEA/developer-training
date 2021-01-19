@@ -62,9 +62,9 @@ someArray.join(someDelimiter);
 ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"].join(""); // hello world
 ```
 
-## concat
+## Concat
 
-Merge two or more arrays together. See MDN docs!
+Merge two or more arrays together.
 
 ```js
 const cats = ["kitten", "tom"];
@@ -90,7 +90,7 @@ You can also create arrays from strings using Array.from()
 Array.from("hello world"); // returns ['h', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd']
 ```
 
-## sort
+## Sort
 
 Sorting an array in JavaScript looks simple as
 
@@ -103,7 +103,7 @@ console.log(letters);
 However, you will find that this does not work on numbers.
 
 ```js
-const numbers = [5, 4, 3, 2, 1];
+const numbers = [1000, 20, 500];
 numbers.sort();
 console.log(numbers); // not sorted!
 ```
@@ -111,7 +111,7 @@ console.log(numbers); // not sorted!
 We need to provide a comparison function as an argument to `sort` for it to work.
 
 ```js
-const numbers = [5, 4, 3, 2, 1];
+const numbers = [1000, 20, 500];
 numbers.sort((a, b) => a - b);
 ```
 
