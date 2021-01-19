@@ -58,7 +58,7 @@ Html element can have attributes that give additional information to the compone
 
 ```html
 <p title="title of hello">hello</p>
-<a href="www.google.com">google</a>
+<a href="http://www.google.com">google</a>
 ```
 
 ### Block elements
