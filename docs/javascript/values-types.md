@@ -140,7 +140,7 @@ A best practice is to place all var statements near to the top of the function. 
 Are `let` and `const` hoisted?
 Yes. There are many conflicting answers of this online but let's check the reliable [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_Types#Variable_hoisting).
 
-> In ECMAScript 2015, let and const are hoisted but not initialized. Referencing the variable in the block before the variable declaration results in a ReferenceError, because the variable is in a "temporal dead zone" from the start of the block until the declaration is processed.
+> In ECMAScript 2015, let and const are hoisted but not initialized. Referencing the variable in the block before the variable declaration results in a ReferenceError, because the variable is in a ["temporal dead zone"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#temporal_dead_zone_tdz) from the start of the block until the declaration is processed.
 > [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_Types#Variable_hoisting)
 
 Example of `let` being "declared" but not initialized throwing **ReferenceError**.
@@ -151,42 +151,6 @@ console.log(foo); // throws ReferenceError
 var name = "James";
 let foo = 1;
 ```
-
-### Temporal Dead Zone (optional)
-
-Temporal Dead Zone is a period between entering scope and variable being declared, in which variable can not be accessed, for `let` and `const`.
-
-The above behaviour of `var` is different from `let` and `const`.
-
-```js
-console.log(name); // prints undefined
-console.log(foo); // throws ReferenceError
-var name = "James";
-let foo = 1;
-```
-
-We get a similar error as before when `foo` is not defined at all as a variable. Has `foo` been declared before the console log?
-
-Test it out here in [a REPL](https://repl.it/@leeyh20/hoisting).
-
-This seems as if `let` and `const` are not hoisted. But this is not true.
-
-We can get a sense that `let` is hoisted due to the [following code](https://stackoverflow.com/questions/47589655/javascript-how-let-is-hoisted-or-not-inside-if-block):
-
-```js
-var a = 1;
-
-if (true) {
-  /* start of the Temporal Dead Zone */
-  console.log(a); /* code in the Temporal Dead Zone */
-  /* last line of the Temporal Dead Zone */
-  let a = 2; /* end of the Temporal Dead Zone */
-}
-
-console.log(a);
-```
-
-See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let for more information.
 
 ## Naming rules and conventions
 
