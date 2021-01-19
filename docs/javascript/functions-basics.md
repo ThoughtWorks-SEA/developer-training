@@ -92,7 +92,7 @@ Rest parameters `...` allow you to pass in more arguments than the number of par
 function sum(...rest) {
   console.log(rest); // [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
   let total = 0;
-  rest.forEach(item => (total += item));
+  rest.forEach((item) => (total += item));
   return total;
 }
 
@@ -112,14 +112,14 @@ function showName(firstName, lastName, ...nicknames) {
 showName("Kopi", "Lim", "Boss", "Kopi C");
 ```
 
-## IIFE, Immediate Invoke Function Expression
+## IIFE, Immediately Invoked Function Expression
 
 ```js
-(function() {
+(function () {
   console.log("this runs immediately");
 })();
 
-(function() {
+(function () {
   console.log("this runs immediately too!!");
 })();
 ```
@@ -152,16 +152,16 @@ However, in modern JavaScript, we have `let` and `const` now which gives us bloc
 
 ```js
 {
-  const initGame = function() {
+  const initGame = function () {
     const lives;
     const weapons;
 
-    const init = function() {
+    const init = function () {
       lives = 5;
       weapons = 10;
-    }
+    };
     init();
-  }
+  };
 }
 ```
 
