@@ -53,28 +53,17 @@ Brackets (()) are needed when your function has one of the following:
 - default parameters
 - destructuring argument
 
-## Difference between arrow function and ordinary `function`
+## Arrow function vs ordinary function
 
 Arrow functions do not have their own `this` value. The value of `this` inside an arrow function is always inherited from the enclosing scope.
 
 ### Context
 
-- "this" keyword refers to the the context(where the code has reference to)
+- "this" keyword refers to the the context (where the code has reference to)
 - the global "outermost" context, the global object in browser is the "window" object
 
 ```js
 console.log(this === window); // true
-```
-
-- the global context, the global object in a module in nodejs is `module.exports`
-- we will cover `module.exports` in another topic
-
-```js
-assert(module.exports === this, "hello from windows");
-
-this.hello = "hello";
-assert(this.hello === "hello", "hello from windows");
-assert(module.exports.hello === "hello", "hello from windows");
 ```
 
 Arrow function is the **preferred syntax** to declare a function in modern JavaScript because it allows `this` to follow the Lexical Scope rule.
@@ -85,17 +74,17 @@ Lexical Scope: functions are executed using the scope chain that was in effect w
 this.hello = "hello from out of wrapper";
 
 function normalFn() {
-  return this.hello;
+  console.log("normal: ", this.hello);
 }
 
 const arrowFn = () => {
-  return this.hello;
+  console.log("arrow: ", this.hello);
 };
 
 function wrapper() {
   this.hello = "hello from wrapper";
-  assert(normalFn() === "hello from wrapper", "from wrapper");
-  assert(arrowFn() === "hello from out of wrapper", "from out of wrapper");
+  normalFn();
+  arrowFn();
 }
 
 wrapper();
@@ -109,6 +98,10 @@ You should follow these rules:
 
 - Use non-arrow functions for methods that will be called using the object.method() syntax. Those are the functions that will receive a meaningful `this` value from their caller.
 - Use arrow functions for everything else.
+
+Further reading:
+
+- https://medium.com/better-programming/3-examples-of-when-not-to-use-javascript-arrow-functions-90eebfbf7bb0
 
 ## References
 
