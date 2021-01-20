@@ -28,7 +28,7 @@ Number.NEGATIVE_INFINITY === -Infinity // true
 - `` `half of 100 is ${100 / 2}. This can embed values.` ``
 - "con" + "cat" + "e" + "nate"
 - "This is the first line\nthis is the second line"
-- "we are\\\on the same line because of escaped character \\"
+- "we are\\\on the same line because of escaped character"
 
 ### Booleans
 
@@ -67,10 +67,10 @@ This is **type coercion**.
 
 ## Working with numbers
 
-- Arithmetic operators: +, -, /, \_, \*\*, %
+- Arithmetic operators: +, -, /, \*, %
 - Math methods (e.g. Math.pow(2,2))
 - Increment/decrement operators (++ and --)
-- Operators with assignment: +=, -=, /=, \_=
+- Operators with assignment: +=, -=, /=
 
 ## Working with strings
 
