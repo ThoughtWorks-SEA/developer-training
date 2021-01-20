@@ -219,16 +219,4 @@ tom.writeCode(); // new method
 
 ## Exercises
 
-### basics
-
 https://github.com/thoughtworks-jumpstart/javascript-classes
-
-### with inheritance
-
-Create a parent **Vehicle** class which has child classes **Car** and **Motorcycle**.
-The classes should have fields such as `manufacturer`, `numberOfWheels` and `color`.
-Which fields should be the parameters of the constructor and which should not be?
-
-**Motorcycle** class should have an extra field for `gear` because it has a 6th gear. There should also be a `getter` for the gear.
-
-What kind of fields and methods should be in the parent class?
