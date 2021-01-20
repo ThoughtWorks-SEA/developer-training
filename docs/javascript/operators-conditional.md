@@ -19,7 +19,7 @@
 - `!false` // returns true
 - `!(1===1)` // returns false
 
-You can also use [double-not operator](https://repl.it/@MabelLee/DoubleNotOperator) `!!` to convert a variable into a boolean type. For example, !!'foo' will return `true`.
+You can also use double-not operator `!!` to convert a variable into a boolean type. For example, !!'foo' will return `true`.
 
 Example:
 
