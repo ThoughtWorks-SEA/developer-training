@@ -215,8 +215,8 @@ const totalPrice = pricesWithGST.reduce(
 
 ## Exercises
 
-map: https://github.com/thoughtworks-jumpstart/javascript-basics/blob/master/4-map.js
-filter: https://github.com/thoughtworks-jumpstart/javascript-basics/blob/master/5-filter.js
+- map: https://github.com/thoughtworks-jumpstart/javascript-basics/blob/master/4-map.js
+- filter: https://github.com/thoughtworks-jumpstart/javascript-basics/blob/master/5-filter.js
 
 ### Count words with reduce
 
