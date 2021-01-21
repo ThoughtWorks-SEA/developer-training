@@ -25,13 +25,7 @@ Regardless of shadowing, scope look-up always starts at the innermost scope bein
 
 ## Lexical scope rule
 
-What we've described here is known as lexical scoping. Lexical scope means that scope is defined by author-time decisions of where functions are declared. The lexing phase of compilation is essentially able to know where and how all identifiers are declared, and thus predict how they will be looked-up during execution. Hence the name - lexical scope.
-
-Another example is illustrated in the picture below:
-
-![lexical scope](https://gblobscdn.gitbook.com/assets%2F-LBJBL3Fj_tcfkvqLj9P%2F-LYbQrlgEBgxBqQFAisk%2F-LYbSUTDFDFSaS1mQYOu%2Flexical-scope.jpg?generation=1550071495886586&alt=media)
-
-(image source: https://www.java-success.com/q1-q5-javascript-interview-qa-on-variable-scopes-context/)
+What we've described here is known as **lexical scoping**. Lexical scope means that scope is defined by author-time decisions of where functions are declared. The lexing phase of compilation is essentially able to know where and how all identifiers are declared, and thus predict how they will be looked-up during execution. Hence the name - lexical scope.
 
 ## Further reading
 
