@@ -62,6 +62,6 @@ console.log("Inside Global Execution Context");
 
 ## Further reading
 
-- https://tylermcginnis.com/ultimate-guide-to-execution-contexts-hoisting-scopes-and-closures-in-javascript/
+- **Execution contexts, scopes, closures:** https://ui.dev/ultimate-guide-to-execution-contexts-hoisting-scopes-and-closures-in-javascript/
 
 - https://www.freecodecamp.org/news/execution-context-and-the-call-stack-visually-illustrated-by-a-slice-of-tasty-cake-14f9a64dc460/
