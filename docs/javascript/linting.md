@@ -154,9 +154,11 @@ Most of the time, the console.log() statement is used for debugging purpose. Suc
 However, there are some cases where you genuinely use the console log statement to display some information on the console for the user (e.g. a command line node application). In those cases, you can temporarily disable the no-console rule.
 
 If you want to disable the rule in a file, just add the following line at the top of the file:
-/_ eslint-disable no-console _/
 
-If you just need to disable the rule in a specific line, use
-// eslint-disable-next-line no-console
+`/_ eslint-disable no-console _/`
+
+If you just need to disable the rule in a specific line, use:
+
+`// eslint-disable-next-line no-console`
 
 The same eslint-disable and eslint-disable-next-line trick can be used to temporarily disable other rules as well. But please make sure you have good reasons for using them.
