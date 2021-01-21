@@ -60,8 +60,8 @@ See more examples of a `package.json` file in the [npm docs for creating a packa
 In the above example, notice that there are already two scripts in the `scripts` object. npm scripts are just JSON key-value pairs where the key is the name of the script (such as `start`) and the value contains the script you want to execute (such as `node index.js`).
 
 ```json
-"scripts": {    
-  "start": "node index.js",    
+"scripts": {
+  "start": "node index.js",
   ...
 }
 ```
@@ -76,8 +76,8 @@ What if you have custom npm scripts such as `start:dev` like in the above exampl
 
 ```json
 "scripts": {
-  ...    
-  "start:dev": "nodemon index.js"   
+  ...
+  "start:dev": "nodemon index.js"
 }
 ```
 
@@ -102,6 +102,8 @@ When cloning an existing project and running it for the first time on your compu
 ```
 npm install
 ```
+
+... or `npm i` for short.
 
 The version of the packages that are downloaded will meet the semantic version requirements. You should realise by now that it would have been less confusing if `node_modules` was called npm packages or something similar.
 
@@ -135,7 +137,7 @@ This is rarely needed. Prefer local dependencies and npx where possible.
 
 If a package is installed globally, you will be able to run its command directly in the command line in any terminal. However, it is better to install locally, add it as a custom npm script and run it using `npm run <custom_script>`. Why is this better?
 
-Remove packages used in your project:
+To remove unused packages in your project:
 
 ```
 npm uninstall <packagename>
@@ -197,4 +199,4 @@ npm audit
 - Add custom scripts `start` and `start:dev` to the file
 - Install Express as a dependency
 - Install ESLint as a dev dependency
-- Install nodemon as a global dependency
+- Install nodemon as a dev dependency
