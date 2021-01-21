@@ -82,7 +82,7 @@ This is **type coercion**.
 
 ## Declaring and initialization variables
 
-![JavaScript variable lifecycle](https://scotch-res.cloudinary.com/image/upload/dpr_2,w_800,q_auto:good,f_auto/media/8976/bNTL1QI3RFebh7C1JPYC_variable%20hoisting.png)
+<img src="https://scotch-res.cloudinary.com/image/upload/dpr_2,w_800,q_auto:good,f_auto/media/8976/bNTL1QI3RFebh7C1JPYC_variable%20hoisting.png" alt="JavaScript variable lifecycle" width="500"/>
 
 Three types of declarations:
 
@@ -151,6 +151,14 @@ console.log(foo); // throws ReferenceError
 var name = "James";
 let foo = 1;
 ```
+
+### Further reading:
+
+**On variable "hoisting":**
+
+> The thing that’s confusing about “hoisting” is that nothing is actually “hoisted” or moved around. Now that you understand Execution Contexts and that variable declarations are assigned a default value of undefined during the Creation phase, you understanding “hoisting” because that’s literally all it is. [source](https://ui.dev/ultimate-guide-to-execution-contexts-hoisting-scopes-and-closures-in-javascript/)
+
+> JavaScript is not actually moving code to the top of the page. All this means is that before your code begins to be executed line by line, the JavaScript engine has already set aside memory space for the variables that you have created in that entire code that you have built and all of the functions that you have created, as well. [source](https://medium.com/javascript-in-plain-english/90-of-developers-get-this-wrong-fdbdb2e4bf66)
 
 ## Naming rules and conventions
 
