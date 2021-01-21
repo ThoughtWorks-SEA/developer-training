@@ -1,6 +1,6 @@
 # Node.js modules and packages
 
-Refer to the github repository: [Create simple Node.js modules with no server](https://github.com/thoughtworks-jumpstart/simple-node-modules)
+Refer to repository: https://github.com/sabrina-tw/node-modules
 
 ## Import modules in scripts
 
@@ -15,7 +15,7 @@ Import a module named `math.js` into `calculate.js` file and put whatever the mo
 
 ```js
 // calculate.js
-var math = require("./math.js");
+const math = require("./math.js");
 ```
 
 It is a loose convention to give the variable the same name as what you are importing but this is not enforced.
@@ -50,7 +50,7 @@ You can now execute the function in calculate.js.
 
 ```js
 // calculate.js
-var sum = math.add(1, 2); //sum is 3
+const sum = math.add(1, 2); //sum is 3
 ```
 
 How do you export a function but not export it inside an object? You can use the `module` object to do this.
@@ -90,9 +90,9 @@ The `math.js` module can now be used in `calculate.js` like this:
 
 ```js
 // calculate.js
-var math = require("./math.js");
+const math = require("./math.js");
 console.log(math); // [Function]
-var sum = math(1, 2);
+const sum = math(1, 2);
 console.log(sum); // 3
 ```
 
@@ -130,7 +130,7 @@ Importing `math.js` module in `calculate.js`:
 
 ```js
 // calculate.js
-var math = require("../lib/math");
+const math = require("../lib/math");
 ```
 
 The relative paths eventually becomes very difficult to determine as files get more nested.
@@ -155,7 +155,7 @@ Now you can import `math.js` file from the `lib` package.
 
 ```js
 // calculate.js
-var math = require("lib/math");
+const math = require("lib/math");
 ```
 
 Note that if you use `require("lib")`, Node.js will try to search for an **index.js** file inside the lib package directory.
@@ -182,7 +182,7 @@ When we require(<packagename>) a package, Node.js first searches for the package
 For example, to import the `fs` built-in package for reading files:
 
 ```js
-var fs = require("fs");
+const fs = require("fs");
 ```
 
 ## Commonly used Node.js libraries
