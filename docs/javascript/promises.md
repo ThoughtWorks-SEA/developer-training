@@ -199,7 +199,7 @@ It's wrapped nicely, and you don't know what's inside. All you can see is there 
 - A green LED light
 - A red LED light
 
-![promise as a gift box](https://gblobscdn.gitbook.com/assets%2F-LBJBL3Fj_tcfkvqLj9P%2F-LNZWCrS7GFDj-T haD9z%2F-LNZWHSIaNYRUhsU59s9%2Fpromise-gift-box.png?generation=1538211005440007&alt=media)
+![promise as a gift box](https://gblobscdn.gitbook.com/assets%2F-LBJBL3Fj_tcfkvqLj9P%2F-LNZWCrS7GFDj-ThaD9z%2F-LNZWHSIaNYRUhsU59s9%2Fpromise-gift-box.png?generation=1538211005440007&alt=media)
 
 When the promise is in pending state, neither LED light flashes.
 
