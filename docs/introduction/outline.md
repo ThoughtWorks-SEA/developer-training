@@ -1,6 +1,6 @@
 The following is a rough outline of the topics covered in the program. This is subject to change due to various factors, including public holidays. Some topics may not be covered, or may be shifted around, at the discretion of the instructors.
 
-### Week 1 - Fundamentals
+### Week 1 - Fundamentals, JavaScript
 
 - Introductions, ice breakers
 - Set up development environment (with checklist)
@@ -9,15 +9,18 @@ The following is a rough outline of the topics covered in the program. This is s
 - How the web works
 - HTML
 - CSS
-
-### Week 2 - JavaScript
-
 - JavaScript
 - Node.js
 - npm
 - Linting
-- Testing with Jest and mocks
-- TDD
+- Asynchronous JavaScript
+
+### Week 2 - JavaScript
+
+- Asynchronous JavaScript
+- Testing with Jest
+- Mocking in tests
+- Test-driven Development (TDD)
 
 ### Week 3 - Frontend Web Development
 
