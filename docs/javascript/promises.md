@@ -677,14 +677,21 @@ readFilePromise("path/to/file", "utf8")
 
 Here is a useful workshop that illustrates the basics of promises.
 
-Follow the instructions step-by-step to get some hands-on exercises on Promise. Promise it won't hurt!
-
-https://github.com/thoughtworks-jumpstart/promise-it-wont-hurt
-
-Original workshop:
 https://github.com/stevekane/promise-it-wont-hurt
 
-Note:
+Follow the instructions step-by-step to get some hands-on exercises on Promise. Promise it won't hurt (maybe)!
+
+Set up:
+
+```
+git clone git@github.com:stevekane/promise-it-wont-hurt.git
+cd promise-it-wont-hurt
+npm install -g promise-it-wont-hurt@latest
+
+promise-it-wont-hurt
+```
+
+**Notes:**
 
 - In the step on "Fetch JSON", the URL mentioned in the instruction should be "http://localhost:1337"
 - As the workshop is not actively maintained by the creator, there may be some exercises that do not work, e.g. due to outdated dependencies.
