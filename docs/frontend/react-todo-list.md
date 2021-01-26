@@ -391,7 +391,9 @@ When adding a new item, we clear the state of `newItemName` as the user is unlik
 In the console, we currently see the warning:
 `index.js:1 Warning: Each child in a list should have a unique "key" prop.`
 
-Having an array of elements without a `key` property creates a warning shown above. Having a key also helps React to improve performance when content within the array changes.
+Having an array of elements without a `key` property creates a warning shown above.
+
+**Read more about the `key` property [here](https://stackoverflow.com/questions/28329382/understanding-unique-keys-for-array-children-in-react-js/43892905#43892905)**
 
 The fix is to add a unique id as key in the array of Todo items.
 
