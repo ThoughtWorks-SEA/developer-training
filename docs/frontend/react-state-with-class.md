@@ -22,11 +22,7 @@ A React application typically needs to maintain some state information. For exam
 
 Props and `state` are both just JavaScript objects. While both hold information that influences the output of rendering of the pages, they are different in one crucial way:`props` **get passed** to the component (similar to function parameters) whereas `state` manages data **within** the component (similar to variables declared within a function).
 
-To find out whether a piece of data should reside in `state` or in `props`, simply ask three questions about the piece of data:
-
-1. Is it passed in from a parent via props? If so, it probably isn’t state.
-2. Does it remain unchanged over time? If so, it probably isn’t state.
-3. Can you compute it based on any other state or props in your component? If so, it isn’t state.
+**Read more on [props vs state](https://kentcdodds.com/blog/props-vs-state).**
 
 ## What is a `local state` in a React component?
 
