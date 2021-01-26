@@ -112,7 +112,7 @@ Credits to batch 6 trainee Yun
 
 2. Change content to your repo
 
-- Create a new react app "pokemon gallery" and push it to Github.
+- Create a new Github repo and set the origin, so that you can push your commits to your own repo:
 
 ```sh
 git remote remove origin
