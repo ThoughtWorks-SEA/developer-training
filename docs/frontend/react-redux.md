@@ -65,7 +65,9 @@ npm install redux react-redux
 
 ## Creating a store
 
-### Create a reducer.
+### Create a reducer
+
+Note that how you organise your reducers/store is entirely up to you. **Read more about redux file/folder structures [here](https://redux.js.org/faq/code-structure).**
 
 src/store/fortunes.js
 
