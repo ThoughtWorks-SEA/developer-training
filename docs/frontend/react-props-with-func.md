@@ -104,7 +104,7 @@ function WelcomeText({ name: username }) {
 
 - git clone https://github.com/thoughtworks-jumpstart/pokemon-react-lab
 - In App.js, create a component `PokemonCard` to return a Pokemon's image and states.
-- Style the Component
+- Style the component
 
 ![Pokemon Card](/_media/pokemonCard.png ":size=200")
 
@@ -112,15 +112,14 @@ Credits to batch 6 trainee Yun
 
 2. Change content to your repo
 
-- Create a new Github repo and set the origin, so that you can push your commits to your own repo:
+- Create a new Github repo and set the origin:
 
 ```sh
 git remote remove origin
 git remote add origin <your repo here, i.e. git@github.com:john-smith/pokemon-gallery>
 ```
 
-- Open package.json, change the name of the package to "Pokemon Gallery."
-- commit and push to master
+Now you can push your commits to your own repo:
 
 ```sh
 git push -u origin master
