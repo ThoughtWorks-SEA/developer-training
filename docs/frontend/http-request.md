@@ -256,34 +256,6 @@ Try it out, and now you see the loader for a split second. Our server is local a
 
 To simulate a longer wait time, we can add a timeout or even better make use or browser network feature. On Chome, open the developer tool, navigate to the `network` tab, under you should see an `online` dropdown. Click on it and select `Slow 3G`, refresh again and now you can see.
 
-## [Optional] Common Config
-
-Axios allows us to set a standard config, which can help reduce repetitive configuration code.
-
-Create a new file utils/axios.js
-
-utils/axios.js
-
-```javascript
-import axios from "axios";
-
-const instance = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com",
-  timeout: 1000,
-});
-
-instance.defaults.headers.post["Content-Type"] = "application/json";
-
-export default instance;
-```
-
-This consists of some of the more common settings.
-
-The above setting sets the baseUrl, now we can just pass in the path when we do Axios call, and everything should work the same.
-We also shorten the timeout, so the API fails faster if the server keeps us waiting for too long (the default is `0`, which waits till the connection gets dropped).
-
-On POST request, we set the content-type to `application/json`, the most common setting.
-
 ## Lab: Comment searcher
 
 Create a comment searcher
