@@ -121,6 +121,11 @@ axios("https://jsonplaceholder.typicode.com/todos/2").then((res) =>
 ); // log data
 ```
 
+**More resources:**
+
+- [axios repo](https://github.com/axios/axios)
+- [axios cheatsheet](https://kapeli.com/cheat_sheets/Axios.docset/Contents/Resources/Documents/index)
+
 ### Using in React
 
 ```javascript
