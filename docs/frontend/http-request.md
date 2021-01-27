@@ -132,7 +132,7 @@ axios("https://jsonplaceholder.typicode.com/todos/2").then((res) =>
 import React from "react";
 import axios from "axios";
 
-export default class Todolist extends React.Component {
+export default class TodoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -201,14 +201,14 @@ import Loader from "react-loader-spinner";
 export default () => <Loader type="ThreeDots" color="#00BFFF" />;
 ```
 
-src/containers/TodoPage.js
+src/containers/TodoList.js
 
 ```javascript
 import React from "react";
 import axios from "axios";
 import Loader from "../components/Spinner";
 
-export default class Todolist extends React.Component {
+export default class TodoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
