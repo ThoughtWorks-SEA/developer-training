@@ -393,7 +393,10 @@ In the console, we currently see the warning:
 
 Having an array of elements without a `key` property creates a warning shown above.
 
-**Read more about the `key` property [here](https://stackoverflow.com/questions/28329382/understanding-unique-keys-for-array-children-in-react-js/43892905#43892905)**
+**Read more about the `key` property:**
+
+- https://blog.arkency.com/2014/10/react-dot-js-and-dynamic-children-why-the-keys-are-important/
+- https://stackoverflow.com/questions/28329382/understanding-unique-keys-for-array-children-in-react-js/43892905#43892905
 
 The fix is to add a unique id as key in the array of Todo items.
 
