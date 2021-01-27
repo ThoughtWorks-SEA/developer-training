@@ -94,6 +94,8 @@ function Example() {
 }
 ```
 
+**Read: [A complete guide to useEffect](https://overreacted.io/a-complete-guide-to-useeffect/)**
+
 ## Rules of Hooks
 
 It is important to note that **React relies on the order in which Hooks are called**. See [explanation](https://reactjs.org/docs/hooks-rules.html#explanation).
