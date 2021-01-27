@@ -41,7 +41,7 @@ If your component requires lots of data sharing between component, your app is g
 
 ### Retrieving data:
 
-Redux helps you to create a common object(`store`) that hold all shared data. Data in `store` is a combination of all the different data for the individual component. Data in the `store` is made available to different components base on a subscription model(using `connect`). We can create a function(`mapStateToProps`) to map the data into the `props` of the component letting the component have access to the data.
+Redux helps you to create a common object (`store`) that holds all shared data. Data in `store` is a combination of all the different data for the individual component. Data in the `store` is made available to different components based on a subscription model (using `connect`). We can create a function (`mapStateToProps`) to map the data into the `props` of the component, thus allowing the component access to the data.
 
 store => mapStateToProps => component.props
 
@@ -76,23 +76,26 @@ const initialState = {
   predictions: [
     {
       id: 0,
-      name: "John Smith",
+      name: "John",
       fortune: "Over self-confidence is equal to being blind.",
     },
     {
       id: 1,
-      name: "Alice"
-      fortune: "Happiness isn't something you remember, it's something you experience."
-    }
+      name: "Alice",
+      fortune:
+        "Happiness isn't something you remember, it's something you experience.",
+    },
   ],
 };
 
-export default function(state = initialState, action) {
+function fortunesReducer(state = initialState, action) {
   switch (action.type) {
     default:
       return state;
   }
 }
+
+export default fortunesReducer;
 ```
 
 A reducer takes in the current state of the object, and an `action`. We are going to look at the `action` in a later section.
@@ -128,9 +131,8 @@ We then can connect our app to our store
 src/App.js
 
 ```javascript
-import React from "react";
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./store"; // remember, this automatically resolves for an index.js file
 import FortuneList from "./components/FortuneList";
 import "./App.css";
 
@@ -147,9 +149,27 @@ function App() {
 export default App;
 ```
 
-Here we import in the created `store` from `./store`. For our react app to use the data, we need a `Provider` wrap around the app component. Now, all component inside have access to the store.
+Here we import in the created `store` from `./store`. For our react app to use the data, we need a `Provider` wrapped around the app component. Now, all components inside will have access to the store.
 
 ## Get data from the store
+
+src/components/UserFortune.js
+
+```js
+import React from "react";
+
+const UserFortune = ({ name, prediction }) => {
+  return (
+    <React.Fragment>
+      <div>
+        <b>{name}</b>: {prediction}
+      </div>
+    </React.Fragment>
+  );
+};
+
+export default UserFortune;
+```
 
 src/components/FortuneList.js
 
@@ -178,9 +198,11 @@ export default connect(mapStateToProps)(FortuneList);
 ```
 
 First, we import `connect` form `react-redux`.
+
 Write a function, `mapStateToProps`, the function returns data that get added to the props. In the state, we have all the data inside the store.
+
 Recall in earlier section, `const reducers = combineReducers({ fortunes });`
-When data in the store gets updated. The method triggers, and if there is a change in the `props` that we return in `mapStateToProps`, the component gets re-render.
+When data in the store gets updated, the method triggers - and if there is a change in the `props` that we return in `mapStateToProps`, the component gets re-rendered.
 
 Now, the fortune data is available in the component.
 
@@ -193,10 +215,10 @@ First, we create an action creator. The action creator returns an object with `t
 src/actions/index.js
 
 ```javascript
-export const ADD_FORTUNE_TYPE = "ADD_FORTUNE";
+export const ADD_FORTUNE = "ADD_FORTUNE";
 export const addFortune = (id, name, fortune) => {
   return {
-    type: ADD_FORTUNE_TYPE,
+    type: ADD_FORTUNE,
     payload: {
       id,
       name,
@@ -211,26 +233,29 @@ When the reducer receives the `ADD_FORTUNE` action, we then add the new predicti
 src/store/fortunes.js
 
 ```javascript
-import { ADD_FORTUNE_TYPE } from "../actions";
+import { ADD_FORTUNE } from "../actions";
 
 const initialState = {
   predictions: [],
 };
 
-export default function (state = initialState, action) {
+function fortunesReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_FORTUNE_TYPE:
+    case ADD_FORTUNE:
       return {
         ...state,
         predictions: [...state.predictions, action.payload],
       };
+
     default:
       return state;
   }
 }
+
+export default fortunesReducer;
 ```
 
-Dispatching the add fortune action when the button gets pressed.
+Dispatching the `ADD_FORTUNE` action when the button gets pressed:
 
 src/components/FortuneList.js
 
@@ -239,8 +264,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import UserFortune from "./UserFortune";
 import { addFortune } from "../actions";
-import uuid from "uuid/v1";
-import fortuneTeller from "../utils/fortuneTeller";
+import { v4 as uuidv4 } from "uuid"; // npm install uuid
 
 const FortuneList = ({ fortunes, addFortune }) => {
   const [newName, setNewName] = useState("");
@@ -259,8 +283,7 @@ const FortuneList = ({ fortunes, addFortune }) => {
         />
         <button
           onClick={() => {
-            addFortune(uuid(), newName, fortuneTeller());
-            setNewName("");
+            addFortune(uuidv4(), newName, "your new fortune");
           }}
         >
           Get Fortune
