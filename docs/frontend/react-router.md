@@ -75,12 +75,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 Then we can add 2 Routes, `/home` and `weather`. For now, we are just going to render the title of the page.
 
 ```javascript
-<BrowserRouter
-  getUserConfirmation={(message, callback) => {
-    const allowTransition = window.confirm(message);
-    callback(allowTransition);
-  }}
->
+<BrowserRouter>
   <div>Hello World!</div>
   <Route path="/home" render={() => <h1>Home</h1>} />
   <Route path="/weather" render={() => <h1>Weather</h1>} />
