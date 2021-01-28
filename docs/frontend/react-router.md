@@ -29,6 +29,13 @@ When a user appends `/weather` to the path in their browser, React Router will o
 
 ## Setup
 
+Create a new React app.
+
+```
+npx create-react-app react-router-practice
+cd react-router-practice
+```
+
 The package we are going to use is react-router-dom.
 
 ```sh
