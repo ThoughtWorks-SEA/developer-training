@@ -148,11 +148,11 @@ Everything should work the same as before.
 When path matches, the `Route` component will then render the state component.
 
 ```javascript
-<Route path="/home/admin" render={() => <div>Admin</div>} />
-<Route path="/home" render={() => <div>User</div>} />
+<Route path="/user/admin" render={() => <div>Admin</div>} />
+<Route path="/user" render={() => <div>User</div>} />
 ```
 
-When we hit the path `<host>/home/admin`, both "Admin" and "User" is printed out.
+When we hit the path `<host>/user/admin`, both "Admin" and "User" is printed out.
 To fix this, we can add the Switch.
 
 Sometimes we only want to render the first matching component.
@@ -164,12 +164,12 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 ```javascript
 <Switch>
-  <Route path="/home/admin" render={() => <div>Admin</div>} />
-  <Route path="/home" render={() => <div>User</div>} />
+  <Route path="/user/admin" render={() => <div>Admin</div>} />
+  <Route path="/user" render={() => <div>User</div>} />
 </Switch>
 ```
 
-Hit `<host>/home/admin` again, now only "Admin" is printed out.
+Hit `<host>/user/admin` again, now only "Admin" is printed out.
 
 ### Showing a default page
 
@@ -177,8 +177,8 @@ Using `Switch`, we can prepare a "Page not found" Component and render out when 
 
 ```javascript
 < Switch>
-  <Route path="/home/admin" render={() => <div>Admin</div>} />
-  <Route path="/home" render={() => <div>User</div>} />
+  <Route path="/user/admin" render={() => <div>Admin</div>} />
+  <Route path="/user" render={() => <div>User</div>} />
   <Route path="/" render={() => <div>Page Not Found</div>}>
 </Switch>
 ```
@@ -193,8 +193,8 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 //...
 <Switch>
-  <Route path="/home/admin" render={() => <div>Admin</div>} />
-  <Route path="/home" render={() => <div>User</div>} />
+  <Route path="/user/admin" render={() => <div>Admin</div>} />
+  <Route path="/user" render={() => <div>User</div>} />
   <Route path="/404" render={() => <div>page Not Found</div>} />
   <Redirect to="/404" />
 </Switch>;
