@@ -206,7 +206,7 @@ We have learnt to set up Routes to do the conditional rendering.
 
 ### Anchor tags
 
-Using anchor tags or `window.location.href` will cause the browser to reload the entire React app, breaking the Single Page Application experience.
+Using anchor tags or `window.location.href` will cause the browser to reload the entire React app, breaking the Single Page Application experience. (**Update:** As of 28/01/21, this method does not even work anymore!)
 
 Let's try it out:
 
@@ -399,9 +399,9 @@ export default (props) => {
 
 Query params can be used to filter items from a list.
 
-src/containers/Food.js
-
 `/food?type=fruit`
+
+src/containers/FoodQuery.js
 
 ```javascript
 import React from "react";
@@ -413,7 +413,7 @@ const menu = [
   { name: "durian", type: "fruit" },
 ];
 
-const Food = (props) => {
+const FoodQuery = (props) => {
   const useQuery = new URLSearchParams(props.location.search);
   const type = useQuery.get("type");
   const filteredFoods = menu.filter((food) => food.type === type);
@@ -428,7 +428,17 @@ const Food = (props) => {
   );
 };
 
-export default withRouter(Food);
+export default withRouter(FoodQuery);
+```
+
+src/App.js
+
+```js
+<Switch>
+  ...
+  <Route path="/foodquery" component={FoodQuery} />
+  ...
+</Switch>>
 ```
 
 ### Path params
@@ -438,6 +448,8 @@ Path params can be used to select specific information to render.
 For example: if we have a menu of items, and each food item maps to a specific id, we can fetch an item based on the query params.
 
 `/food/1`
+
+src/containers/FoodPath.js
 
 ```javascript
 import React from "react";
@@ -449,7 +461,7 @@ const menu = {
   3: "durian",
 };
 
-const Food = (props) => {
+const FoodPath = (props) => {
   const foodId = props.match.params.id;
   const foodName = menu[foodId] || "something not in the menu";
   return (
@@ -460,16 +472,21 @@ const Food = (props) => {
   );
 };
 
-export default withRouter(Food);
+export default withRouter(FoodPath);
 ```
 
 src/App.js
 
 ```javascript
-<Route path="/food/:id" component={Food} />
+<Switch>
+  ...
+  <Route path="/foodpath/:id" component={FoodPath} />
+  <Route path="/foodpath" component={FoodPath} />
+  ...
+</Switch>
 ```
 
-Try accessing `/food/2` - the Component will display "you have selected: laksa".
+Try accessing `/foodpath/2` - the Component will display "you have selected: laksa".
 
 ## Exercise
 
