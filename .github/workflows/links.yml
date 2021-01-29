@@ -12,7 +12,7 @@ jobs:
       - name: Link Checker
         uses: lycheeverse/lychee-action@v1
         with:
-          args: docs/**/*.md
+          args: -E docs/**/*.md --exclude "localhost|example.com|us.gov|heroku"
       - name: Create Issue From File
         uses: peter-evans/create-issue-from-file@v2
         with:
