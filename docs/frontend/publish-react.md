@@ -43,13 +43,13 @@ npm run build
 serve -s build
 ```
 
-Deploy Netlify to a temp server
+Deploy to a temp Netlify server (publish directory: `./build`)
 
 ```sh
 netlify deploy
 ```
 
-select Netlify to deploy the build folder
+Deploy to Netlify production (publish directory: `./build`)
 
 ```sh
 netlify deploy --prod
