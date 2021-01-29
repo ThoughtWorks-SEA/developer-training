@@ -15,7 +15,7 @@ Managing multiple views in a React app.
 
 When our application grows, it is common to have too many contents to make sense within a page.
 
-One possible solution is to separate the contents into different workflows or different Views.
+One possible solution is to separate the contents into different workflows or different Views. (demo: https://react-router-lab.netlify.app/)
 
 Having a Router within the application allows users to reach out to the different views while staying within our application. React Router is a handy JS library that allows us to achieve this functionality quickly.
 
