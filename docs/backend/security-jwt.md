@@ -273,14 +273,13 @@ router.get("/:username", protectRoute, async (req, res, next) => {
 
 ### Generating a JWT token and finding the secret
 
-- Create the config folder under your project root directory.
-- Then create a `jwt.js` file inside the config folder, with the `getJWTSecret` function.
+- Create the config folder
+- Create a `jwt.js` file inside the config folder, with the `getJWTSecret` function.
 
-config/jwt.js
+src/config/jwt.js
 
 ```js
 var jwt = require("jsonwebtoken");
-const createJWTToken = require("../config/jwt");
 
 const getJWTSecret = () => {
   const secret = process.env.JWT_SECRET_KEY;
@@ -328,7 +327,7 @@ Read documentation about `res.cookie` and `res.clearCookie`:
 
 ```js
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const createJWTToken = require("../config/jwt");
 
 router.post("/login", async (req, res, next) => {
   try {
