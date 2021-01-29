@@ -26,12 +26,12 @@ npm install redux react-redux redux-thunk
 
 ## 1. Create a reducer
 
-In `src/store/todo.reducer.js`
+src/store/todo.reducer.js
 
 ```javascript
-const defaultState = [];
+const initialState = [];
 
-const todoReducer = (state = defaultState, action) => {
+const todoReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TODO":
       state.push(action.payload);
@@ -44,34 +44,36 @@ const todoReducer = (state = defaultState, action) => {
 export default todoReducer;
 ```
 
-## 2. Using the reducer Create a store
+## 2. Create a store
 
 The benefit of Redux lies within using a single store. The store will have access to all the data.
 
-In src/store/index.js
+src/store/index.js
 
 ```javascript
 import todoReducer from "./todo.reducer";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
-const rootReducer = combineReducers({
+const reducers = combineReducers({
   todolist: todoReducer,
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(reducers, applyMiddleware(thunk));
 
 export default store;
 ```
 
-### 3. Create Todo Component
+## 3. Create TodoList Component
 
 The Todo Component is the same as not using Redux Thunk. We use `connect` to map the states we get back from the store and pass it as props.
+
+src/components/TodoList.js
 
 ```javascript
 import React from "react";
 import { connect } from "react-redux";
-import { addTodoFromAPI } from "./actions";
+import { addTodoFromAPI } from "../actions";
 
 const TodoItem = ({ id, title, completed }) => {
   return <p>{`${id}. ${title} is ${completed ? "" : "not "}completed`}</p>;
@@ -111,12 +113,11 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps)(TodoList);
 ```
 
-### 4. Connect the Store to the App
+## 4. Connect the Store to the App
 
 Usually, we do it at the level that will wrap all our components.
 
 ```javascript
-import React from "react";
 import "./App.css";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -139,9 +140,9 @@ export default App;
 
 Here we add two action creators. The first `addTodo` is a typical action creator that returns an object with a type and a payload.
 
-The second action creator is something new for _Redux Thunk_ m we create an action creator `addTodoFromAPI` that returns a function taking in a single argument `dispatch`. When can then do whatever async code we want and in the `.then` we call `dispatch` with another action creator that does the actual updating of the data in the reducer.
+The second action creator is something new for _Redux Thunk_ - we create an action creator `addTodoFromAPI` that returns a function taking in a single argument `dispatch`. When can then do whatever async code we want and in the `.then` we call `dispatch` with another action creator that does the actual updating of the data in the reducer.
 
-In actions/index.js
+src/actions/index.js
 
 ```javascript
 export const addTodo = (payload) => {
@@ -161,12 +162,12 @@ export const addTodoFromAPI = () => {
 };
 ```
 
-## Lastly, We can now map the action creators back to our Todo Component and use them in the component
+## 6. Use Action Creators in Component
 
 ```javascript
 import React from "react";
 import { connect } from "react-redux";
-import { addTodoFromAPI } from "./actions";
+import { addTodoFromAPI } from "../actions";
 
 const TodoItem = ({ id, title, completed }) => {
   return <p>{`${id}. ${title} is ${completed ? "" : "not "}completed`}</p>;
