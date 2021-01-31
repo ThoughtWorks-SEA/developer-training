@@ -151,12 +151,37 @@ We want to display all the items. When I add text into an inbox box, we want to 
 ![data before filter](_media/dataBeforeFilter.png)
 
 ```javascript
-<input aria-label="filter-text" onChange={this.updateFilterText} />;
-{
-  this.state.data
-    .filter((text) => text.indexOf(this.state.filterText) >= 0)
-    .map((data) => <div key={data}>{data}</div>);
-}
+import React, { useState } from "react";
+
+const data = [
+  "apple",
+  "orange",
+  "apricot",
+  "durian",
+  "water melon",
+  "water chestnut",
+];
+
+const Filter = () => {
+  const [filterText, setFilterText] = useState("");
+
+  const handleFilterTextChange = (e) => {
+    setFilterText(e.target.value);
+  };
+
+  return (
+    <div>
+      <input aria-label="filter-text" onChange={handleFilterTextChange} />
+      {data
+        .filter((text) => text.indexOf(filterText) >= 0)
+        .map((data) => (
+          <div key={data}>{data}</div>
+        ))}
+    </div>
+  );
+};
+
+export default Filter;
 ```
 
 ![data after filter](_media/dataAfterFilter.png)
