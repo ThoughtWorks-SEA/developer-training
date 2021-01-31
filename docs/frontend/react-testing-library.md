@@ -263,7 +263,7 @@ In our Test file
 
 ```javascript
 describe("NavLink", () => {
-  it("should render Filter component when click on filter link", () => {
+  it("should render Filter component when filter link is clicked", () => {
     const { getByText, getByTestId } = render(<App />);
     const filterLink = getByText("Filter");
 
@@ -271,7 +271,7 @@ describe("NavLink", () => {
     expect(getByTestId("filter")).toBeInTheDocument();
   });
 
-  it("should render Counter component when click on counter link", () => {
+  it("should render Counter component when counter link is clicked", () => {
     const { getByText, getByTestId } = render(<App />);
     const counterLink = getByText("Counter");
 
@@ -283,10 +283,9 @@ describe("NavLink", () => {
 
 ## Testing API
 
-It is common for a React app to be interacting with web servers outside of the app. Testing this interaction is good, but we want to limit it to the bare minimum, this is due to cost and stability.
-We usually do this on a separate End to End test.
+It is common for a React app to be interacting with web servers outside of the app. Testing this interaction is good, but we want to limit it to the bare minimum due to cost and stability. We usually do this on a separate End to End test.
 
-So we want to mock our API, and wee can use another package to help us.
+So we want to mock our API, and we can use another package to help us.
 
 ```sh
 npm install --save-dev axios-mock-adapter
