@@ -5,39 +5,39 @@
 ## Creating the todo list skeleton
 
 1. Create a new folder called "components"
-2. Create a new file "Todolist.js", within the new folder
-3. Create a placeholder for the Todolist
+2. Create a new file "TodoList.js", within the new folder
+3. Create a placeholder for the TodoList
 
 ```javascript
 import React from "react";
 
-class Todolist extends React.Component {
+class TodoList extends React.Component {
   render() {
     return (
       <div>
-        <div>Todolist</div>
+        <div>TodoList</div>
       </div>
     );
   }
 }
 
-export default Todolist;
+export default TodoList;
 ```
 
 Our todo list holds some data about the items in the todo list.
 We are likely to use `state` to keep track of the items inside of the list so we can use a class component to help us.
 
-4. Import Todolist in App.js
+4. Import TodoList in App.js
 
 ```javascript
 import React from "react";
 import "./App.css";
-import Todolist from "./components/Todolist";
+import TodoList from "./components/TodoList";
 
 function App() {
   return (
     <div>
-      <Todolist />
+      <TodoList />
     </div>
   );
 }
@@ -45,7 +45,7 @@ function App() {
 export default App;
 ```
 
-We should now see the word "Todolist" displayed at the top left of the browser.
+We should now see the word "TodoList" displayed at the top left of the browser.
 
 ## Displaying Todo items
 
@@ -76,7 +76,7 @@ class TodoList extends React.Component {
   render() {
     return (
       <div>
-        <div>Todolist</div>
+        <div>TodoList</div>
         <div>{this.displayTodos()}</div>
       </div>
     );
@@ -229,7 +229,7 @@ class TodoList extends React.Component {
   render() {
     return (
       <div>
-        <div>Todolist</div>
+        <div>TodoList</div>
         <div>{this.displayTodos()}</div>
       </div>
     );
@@ -334,7 +334,7 @@ Now we have a todo list that items we can delete.
 
 ## Adding new todo items
 
-1. Add an input box in Todolist
+1. Add an input box in TodoList
 
 ```javascript
 <input
@@ -353,7 +353,7 @@ handleChange = (event) => {
 };
 ```
 
-Notice that the `handleChange` function is an arrow function. Arrow function bind the current context allowing `this` in `this.setState` pointing to the Todolist.
+Notice that the `handleChange` function is an arrow function. Arrow function bind the current context allowing `this` in `this.setState` pointing to the TodoList.
 
 3. Add a button below the input box and create a new function addNewTodo
 
