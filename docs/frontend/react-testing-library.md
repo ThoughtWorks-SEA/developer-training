@@ -131,7 +131,7 @@ clicking on the +1 button increases the counter value
 ```javascript
 describe("+1 button", () => {
   it("should increase the counter value by 1", () => {
-    const { getByText } = render(<App />);
+    const { getByText } = render(<Counter />);
     const addOneButton = getByText("+1");
     fireEvent.click(addOneButton);
     expect(() => getByText("Counter Value: 0")).toThrowError();
@@ -193,7 +193,7 @@ export default Filter;
 ```javascript
 describe("Filter", () => {
   it("should only show filtered data that contains input string", () => {
-    const { getByText, getByLabelText } = render(<App />);
+    const { getByText, getByLabelText } = render(<Filter />);
     const dataFilterTextInput = getByLabelText("filter-text");
     fireEvent.change(dataFilterTextInput, {
       target: { value: "ap" },
@@ -299,7 +299,7 @@ npm install --save-dev axios-mock-adapter
 import React from "react";
 import axios from "axios";
 
-export class TodoList extends React.Component {
+class TodoList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -324,13 +324,15 @@ export class TodoList extends React.Component {
     );
   }
 }
+
+export default TodoList;
 ```
 
 Test
 
 ```javascript
 import { render, waitFor } from "@testing-library/react";
-import { TodoList } from "./TodoList";
+import TodoList from "./TodoList";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 const mockAxios = new MockAdapter(axios);
