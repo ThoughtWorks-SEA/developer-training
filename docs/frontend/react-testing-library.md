@@ -31,9 +31,13 @@
   - tests that works with actual DOM nodes
   - provides facilitate querying the DOM in the same way the user would
 
+### Further reading
+
+- https://www.robinwieruch.de/react-testing-library
+
 ## Installation
 
-As of create-react-app 3.3.0 (2019-12-04), you do not have to do the following steps. `create-react-app` installs the required package for you.
+As of create-react-app 3.3.0 (2019-12-04), you **do not** have to do the following steps. `create-react-app` installs the required package for you.
 
 ```sh
 npm install --save-dev @testing-library/react @testing-library/jest-dom
