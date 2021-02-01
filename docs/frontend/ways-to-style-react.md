@@ -133,19 +133,7 @@ Learn more about styled-components [here](https://styled-components.com/).
 - Relative similar to CSS meaning there is a low learning curve
 - More intuitive than CSS
 - Allows for variables and computations
-- Allows nested styles
-
-### Disadvantage
-
-- Developers who only work on SASS tend not to understand how CSS selectors work
-- There is a learning curve to use SCSS features
-- There is not much benefit if you already separate its small components and style them individually
-- Requires an additional package
-
-1. Install sass `npm install node-sass` (recently [deprecated](https://sass-lang.com/blog/libsass-is-deprecated))
-2. Create an SCSS file `.scss`
-
-App.scss
+- Allows **variables** as well as **nested styles**:
 
 ```css
 $myColor: rebeccapurple;
@@ -161,20 +149,11 @@ $myColor: rebeccapurple;
 }
 ```
 
-3. Import Sass in our javascript file
+### Disadvantage
 
-```javascript
-import React from "react";
-import "./App.scss";
+- Developers who only work on SASS tend not to understand how CSS selectors work
+- There is a learning curve to use SCSS features
+- There is not much benefit if you already separate its small components and style them individually
+- Requires an additional package
 
-function App() {
-  return (
-    <div>
-      <h1>Hello</h1>
-      <p className="pink-text">pink text</p>
-    </div>
-  );
-}
-
-export default App;
-```
+**Note: The original package `node-sass` is [deprecated](https://sass-lang.com/blog/libsass-is-deprecated) - try [dart-sass](https://github.com/sass/dart-sass) instead!** Follow the documentation to give SCSS syntax a go.
