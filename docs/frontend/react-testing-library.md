@@ -416,6 +416,8 @@ package.json
 
 ![test coverage](_media/testCoverage.png)
 
+Reference repo: https://github.com/sabrina-tw/react-testing-library
+
 ## Exercise
 
 Implement test using React Testing Library to
