@@ -5,7 +5,7 @@ Here we are going to show you how to set it up quickly.
 
 ## Other common component libraries
 
-1. React Material-UI
+1. [React Material-UI](https://material-ui.com/getting-started/installation/)
 2. Semantic UI React
 
 ## Should you use a UI Component Library?
