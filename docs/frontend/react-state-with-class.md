@@ -18,6 +18,8 @@ A React application typically needs to maintain some state information. For exam
 - Which driver takes the task?
 - Location of the driver
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4ORZ1GmjaMc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## What is the difference between state and props?
 
 Props and `state` are both just JavaScript objects. While both hold information that influences the output of rendering of the pages, they are different in one crucial way:`props` **get passed** to the component (similar to function parameters) whereas `state` manages data **within** the component (similar to variables declared within a function).
