@@ -691,7 +691,8 @@ npm install -g promise-it-wont-hurt@latest
 promise-it-wont-hurt
 ```
 
+As the workshop is not actively maintained by the creator, there may be some exercises that do not work (attempting to run the 2nd exercise throws an error) Follow these instructions to fix it: https://github.com/stevekane/promise-it-wont-hurt/issues/159#issuecomment-731853947
+
 **Notes:**
 
 - In the step on "Fetch JSON", the URL mentioned in the instruction should be "http://localhost:1337"
-- As the workshop is not actively maintained by the creator, there may be some exercises that do not work, e.g. due to outdated dependencies.
