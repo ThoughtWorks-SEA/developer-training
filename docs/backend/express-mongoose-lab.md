@@ -87,7 +87,14 @@ const Jumpling = require("../models/jumpling.model");
 
 ### Setting up db for testing
 
-Note that there are many ways to set up the db, and it all boils down to personal preference and what works for the project and team. Refer to the notes in this repo for some options on how to approach this: https://github.com/sabrina-tw/express-songs#setting-up-db-for-testing
+Note that there are many ways to set up the db, and it all boils down to personal preference and what works for the project and team.
+
+Refer to these repos and have a look at what files are required and how to set up the tests.
+
+- https://github.com/thoughtworks-jumpstart/express-mongoose-feedbackform/ (example test [here](https://github.com/thoughtworks-jumpstart/express-mongoose-feedbackform/blob/master/src/routes/companies.route.test.js))
+- https://github.com/thoughtworks-jumpstart/express-mongoose-pokedex-lab (example test [here](https://github.com/thoughtworks-jumpstart/express-mongoose-pokedex-lab/blob/master/__tests__/routes/pokemon.route.test.js))
+
+You may also refer to [this gist](https://gist.github.com/sabrina-s/b9cdbb3541334e5fc60eb4153b714c4f).
 
 Feel free to also explore alternative approaches!
 
@@ -99,58 +106,40 @@ Let's implement our tests with database:
 const app = require("../src/app");
 const request = require("supertest");
 const Jumpling = require("../src/models/jumpling.model");
-const dbHandlers = require("../test/dbHandler");
 
 describe("jumplings", () => {
   describe("GET /jumplings", () => {
-    it("should retrieve list of jumplings", async () => {
-
-    });
+    it("should retrieve list of jumplings", async () => {});
   });
 
   describe("GET /jumplings/presenter", () => {
-    it("should return a random jumpling", async () => {
-
-    });
+    it("should return a random jumpling", async () => {});
   });
 
   describe("GET /jumplings/:name", () => {
-    it("should retrieve jumpling with requested name", async () => {
-
-    });
+    it("should retrieve jumpling with requested name", async () => {});
   });
 
   describe("POST /jumplings", () => {
-    it("should create new jumpling if fields are valid", async () => {
+    it("should create new jumpling if fields are valid", async () => {});
 
-    });
+    it("should throw error if name is empty", async () => {});
 
-    it("should throw error if name is empty", async () => {
-
-    });
-
-    it("should throw error if name is too short", async () => {
-
-    });
+    it("should throw error if name is too short", async () => {});
   });
 
   describe("PUT /jumplings/:id", () => {
+    it("should modify specified jumpling if fields are valid", async () => {});
 
-    });
+    it("should throw error if name is empty", async () => {});
 
-    it("should throw error if name is empty", async () => {
-
-    });
-
-    it("should throw error if request body is not json", async () => {
-
-    });
+    it("should throw error if request body is not json", async () => {});
   });
 
   describe("DELETE /jumplings/:id", () => {
-    it("should delete jumpling if jumpling exists", async () => {
+    it("should delete jumpling if jumpling exists", async () => {});
 
-    });
+    it("should throw error if jumpling does not exist", async () => {});
   });
 });
 ```
@@ -163,7 +152,7 @@ Following the guide from our [security jwt notes](backend/security-jwt?id=using-
 - PUT /jumplings:id
 - DELETE /jumplings:id
 
-We'll need to implement a protectRoute middleware, e.g.:
+We'll need to implement an auth/protectRoute middleware, e.g.:
 
 ```js
 const protectRoute = (req, res, next) => {
