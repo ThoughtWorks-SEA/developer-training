@@ -29,7 +29,8 @@ console.log(process.env.NODE_ENV)
 
 ### Persisted environment variable
 
-We can create a `.env` file in the root directory
+1. Create a `.env` file in the root directory of your React app.
+
 Custom environment variable requires you to name the variable starting with `REACT_APP_`.
 I.e. `REACT_APP_SERVER_URL` or `REACT_APP_USERNAME` or `REACT_APP_SECRET`.
 
@@ -40,6 +41,8 @@ REACT_APP_SERVER_URL=https://www.google.com/
 REACT_APP_USERNAME="John Smith"
 REACT_APP_SECRET=YsayE3FKcHHbN9A5g
 ```
+
+2. Add `.env` into your `.gitignore` file. DO NOT COMMIT .env files into your repository.
 
 ### Temporary enviroment variable
 
@@ -62,5 +65,3 @@ For example, when `process.env.NODE_ENV === "production"`, react will look into 
 3. `.env.production` | `.env.development` | `.env.test`
 4. `.env.local`
 5. `.env`
-
-**Do not commit files ending with `.local`**
