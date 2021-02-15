@@ -241,8 +241,7 @@ What is the HTTP status code of the response?
 
 ### RPC
 
-RPC (Remote Procedure Call) is when a computer program causes a procedure (subroutine) to execute in a different address space (commonly on another computer on a shared network), which is coded as if it were a normal (local) procedure call, without the programmer explicitly coding the details for the remote interaction.
-Two examples are:
+RPC (Remote Procedure Call) is when a computer program causes a procedure (subroutine) to execute in a different address space (commonly on another computer on a shared network), which is coded as if it were a normal (local) procedure call, without the programmer explicitly coding the details for the remote interaction. Some examples are:
 
 - SOAP
 - XML-RPC
