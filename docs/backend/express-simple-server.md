@@ -2,17 +2,30 @@
 
 Refer to the script: [Express.js playground: helloworld.js](https://github.com/thoughtworks-jumpstart/express-playground/blob/master/helloworld.js)
 
-Import Express.js package and create a new Express application using `express()`, putting it into the `app` variable. We will use the const `PORT` later to listen to port 3000.
+Import Express.js package and create a new Express application using `express()`, putting it into the `app` variable. Export the app variable.
+
+app.js
 
 ```js
 const express = require("express");
 const app = express();
-const PORT = 3000;
+
+module.exports = app;
+```
+
+Import the app variable to index.js
+
+index.js
+
+```js
+const app = require("./app");
 ```
 
 ## GET request method
 
 When loading the app (sending a GET request) at the root URL `/`, the server should send a response saying "Hello World!". Define a route like this:
+
+app.js
 
 ```js
 app.get("/", (req, res) => {
@@ -22,7 +35,12 @@ app.get("/", (req, res) => {
 
 You have just defined a route to the root of the app! Let's start the server by making it listen at port 3000.
 
+index.js
+
 ```js
+const app = require("./app");
+const PORT = 3000;
+
 const server = app.listen(PORT, () => {
   console.log(`Express app started on http://localhost:${PORT}`);
 });
