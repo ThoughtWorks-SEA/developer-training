@@ -260,19 +260,12 @@ req.query: { "color": "red", "type": "FRUIT" }
 ```js
 app.get("/food", (req, res) => {
   const results = data
-    // Using if statements
-    .filter((item) => {
-      if (req.query.type) {
-        return item.type === req.query.type;
-      }
-
-      return true;
-    })
-    // Using the ternary operator
-    .filter((item) => (req.query.name ? item.name === req.query.name : true))
-    .filter((item) =>
-      req.query.color ? item.color === req.query.color : true
-    );
+    // filters by type if needed
+    .filter((item) => (req.query.type ? req.query.type === item.type : true))
+    // filters by color if needed
+    .filter((item) => (req.query.color ? req.query.color === item.color : true))
+    // filters by name if needed
+    .filter((item) => (req.query.name ? req.query.name === item.name : true));
 
   res.json(results);
 });
