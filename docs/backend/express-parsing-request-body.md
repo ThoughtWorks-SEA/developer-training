@@ -55,6 +55,10 @@ Read https://codewithhugo.com/parse-express-json-form-body/ for more information
 
 ## Exercises
 
+```js
+const songs = [];
+```
+
 Add more API endpoints to the previous songs API that we had:
 
 Add middleware for parsing JSON request body.
@@ -72,6 +76,16 @@ JSON to include in the POST message body:
   "name": "someSongName",
   "artist": "someSongArtist"
 }
+```
+
+**For the purposes of this lab (that does not have an actual database yet), you can temporarily set the new song's id to `songs.length + 1`, e.g.:**
+
+```js
+let newSong = {
+  id: songs.length + 1,
+  name: req.body.name,
+  artist: req.body.artist,
+};
 ```
 
 Expected response:
