@@ -209,7 +209,7 @@ const requireJsonContent = (req, res, next) => {
 };
 
 app.post("/", requireJsonContent, (req, res, next) => {
-  res.send("Thanks for the JSON!");
+  res.status(201).send("Thanks for the JSON!");
 });
 ```
 
@@ -221,7 +221,7 @@ describe("POST /", () => {
     const { text } = await request(app)
       .post("/")
       .send({ thisIsJson: "json!" })
-      .expect(200);
+      .expect(201);
     expect(text).toEqual("Thanks for the JSON!");
   });
 
@@ -295,15 +295,13 @@ Sometimes, we do not want to test for an exact match for the response object. We
 One possible use of this is for the GET /songs/:id route.
 
 ```js
-  it("GET /songs/:id should return the correct song", () => {
-    const expectedSong = {name: "Pink Moon", artist: "Nick Drake"};
+it("GET /songs/:id should return the correct song", async () => {
+  const expectedSong = { name: "Pink Moon", artist: "Nick Drake" };
 
-    const {body: actualSong} = await request(app)
-    .get("/songs/1")
-    .expect(200)
+  const { body: actualSong } = await request(app).get("/songs/1").expect(200);
 
-    expect(actualSong).toMatchObject(expectedSong);
-  });
+  expect(actualSong).toMatchObject(expectedSong);
+});
 ```
 
 ### Accessing agent in SuperTest
