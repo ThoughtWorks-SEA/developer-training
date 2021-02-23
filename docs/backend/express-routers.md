@@ -160,8 +160,8 @@ When the time comes and you want to implement version 2 of your api, you can cre
 const express = require("express");
 const api = express.Router();
 
-const booksRouter = require("./routes/books");
-const usersRouter = require("./routes/users");
+const booksRouter = require("./routes/books_v2"); // using new books_v2 router
+const usersRouter = require("./routes/users_v2"); // using new users_v2 router
 
 api.use("/books", booksRouter);
 api.use("/users", usersRouter);
