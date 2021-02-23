@@ -6,11 +6,11 @@ There are many possible errors that could occur when our code runs. For example,
 
 Refer to the script: [Express.js playground: error_handler_example_1](https://github.com/thoughtworks-jumpstart/express-playground/blob/master/error_handler_example_1.js).
 
-If you want to handle a synchronous error, you can throw the error in an Express.js handler function. If the code has no calls to any asyncthronous API (like `fs.readFile`), you can throw the error like this.
+If you want to handle a synchronous error, you can throw the error in an Express.js handler function. If the code has no calls to any asynchronous API (like `fs.readFile`), you can throw the error like this.
 
 ```js
 app.get("/error", (req, res) => {
-  throw new Error(" 😱! Error! Error!");
+  throw new Error("Not found.");
 });
 ```
 
@@ -43,8 +43,8 @@ Within an error handler, you typically need to do one of two things:
 app.use((err, req, res, next) => {
   res.status(500);
   res.send(
-    `Error: ${err} </br>
-    Error stack: ${err.stack}`
+    `${err} </br>
+    <b>Error Stack:</b> ${err.stack}`
   );
 });
 ```
@@ -56,10 +56,10 @@ Refer to the script: [Express.js playground: error_handler_example_2](https://gi
 We can define properties to the error object such as a `code` so that we can return the correct status code in the response header.
 
 ```js
-app.get("/", (req, res) => {
+app.get("/error", (req, res) => {
   // synchronous error
-  error = new Error(" 😱! Error! Error!");
-  error.statusCode = 200;
+  const error = new Error("Not found.");
+  error.statusCode = 404;
   throw error;
 });
 ```
@@ -68,11 +68,11 @@ Return the correct status code in the response header if `err.statusCode` is def
 
 ```js
 app.use((err, req, res, next) => {
-  res.status(err.statusCode || 500);
+  err.statusCode = err.statusCode || 500;
   res.send(
-    `Error: ${err} </br>
-    Error Status Code: ${err.statusCode} <br>
-    Error stack: ${err.stack}`
+    `${err} </br>
+    <b>Error Status Code:</b> ${err.statusCode} <br>
+    <b>Error Stack:</b> ${err.stack}`
   );
 });
 ```
