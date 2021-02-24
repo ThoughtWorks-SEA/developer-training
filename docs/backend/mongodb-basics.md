@@ -145,7 +145,7 @@ You can also use [MongoDB Compass](https://www.mongodb.com/products/compass) to 
 - Maps to the objects in your application code, making data easy to work with
 - Scalable for large volume of data
 - Fast, indexing is supported by B-trees
-- Has high availablily due to it being a distributed database
+- Has high availability due to it being a distributed database
 
 > If you’ve experienced difficulties scaling relational databases, this may be great news. But not everyone needs to operate at scale. Maybe all you’ve ever needed is a single database server. Why would you use MongoDB? Perhaps the biggest reason developers use MongoDB isn’t because of its scaling strategy, but because of its intuitive data model.
 
