@@ -2,7 +2,9 @@
 
 MongoDB is a open-source **NoSQL** non-relational database. It is a document-orientated database that is flexible and scalable. It is best used for large amounts of unstructured data.
 
-Learn more about [MongoDB](https://docs.mongodb.com/manual/tutorial/getting-started/#getting-started)
+# Exercise
+
+Try it out [here](https://docs.mongodb.com/manual/tutorial/getting-started/#getting-started)!
 
 ## Start your MongoDB server
 
@@ -82,7 +84,7 @@ show dbs
 Newly created database `mydb` is not shown. This is because there is no documents in it yet.
 
 Insert a new document
-Insert a user `{name: "Babel"}` into a **users** collection
+Insert a user `{ name: "Babel" }` into a **users** collection
 
 ```sh
 db.users.insert({name: "Babel"})
