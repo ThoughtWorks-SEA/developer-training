@@ -18,6 +18,8 @@ In the MVC design pattern, controllers is the middleman between Express.js route
 
 Integrate your songs routes with MongoDB and Mongoose!
 
+**Make sure that all your existing tests are still passing! Keep `jest --watch` running while you make changes.**
+
 1. Replace joi validation with Mongoose validation for your Song model - `models/song.model.js`
 1. Create a database for your songs in your MongoDB - `utils/db.js`
 1. Refactor controllers - `controllers/songs.controller.js`
