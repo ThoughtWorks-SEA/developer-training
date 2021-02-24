@@ -16,7 +16,10 @@ Examples:
   - maxlength and minlength for the string.
 
 ```js
-var breakfastSchema = new Schema({
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const breakfastSchema = new Schema({
   eggs: {
     type: Number,
     min: [6, "Too few eggs"],
