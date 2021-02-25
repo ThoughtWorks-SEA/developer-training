@@ -8,37 +8,37 @@ Try it out [here](https://docs.mongodb.com/manual/tutorial/getting-started/#gett
 
 ## Start your MongoDB server
 
+Google is your best friend if you run into any issues!
+
 ### Windows
+
+[Follow the instructions for the installation](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
 Server is run via an executable **mongod.exe** on Windows.
 
-```cmd
-mongod --dbpath /data/db
-```
-
 Depending on the security level of your system, Windows may pop up a Security Alert dialog box about blocking “some features” of C:\Program Files\MongoDB\Server\VERSION_NUMBER\bin\mongod.exe from communicating on networks. All users should select `Private Networks`, such as my home or work network and click `Allow access`.
 
-References:
+Run this in your terminal to start up your mongo shell:
 
-- https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
+```
+$ "C:\Program Files\MongoDB\Server\4.4\bin\mongo.exe"
+```
 
 ### Linux / Mac
 
-Server is run via an executable called **mongod**
+Follow the instructions for the installation:
 
-```sh
-mongod --dbpath ~/data/db
+- [Mac](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
+- [Linux](https://docs.mongodb.com/manual/administration/install-on-linux/)
+
+Server is run via an executable called **mongod**.
+
+Run these in your terminal to start up your mongo shell:
+
+```shell
+$ brew services start mongodb-community@4.4
+$ mongo
 ```
-
-References:
-
-- https://docs.mongodb.com/manual/administration/install-on-linux/
-- https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
-
-### General
-
-The `--dbpath` option specifies the location where MongoDB should store data. It can be any folder you create. `/data/db` is just one example.
-Note that the path to mongod.exe and the path to your data folder could be different on your system.
 
 ## MongoDB command shell
 
