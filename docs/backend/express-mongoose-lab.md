@@ -50,7 +50,7 @@ Require the file at the top of your `index.js` file:
 require("./utils/db");
 ```
 
-This is added in index.js instead of app.js because tests will ignore index.js file, which is what we want, because you do not want your tests to connect to your actual db (it also will attempt to do so multiple times if placed in app.js, which will cause issues for you when you try to run your tests).
+This is added in index.js instead of app.js because tests will ignore the index.js file, and therefore ignore the require db statement, which is what we want, because we don't want the tests to connect to the db on an app level - we want to connect to the db on a test suite level, and tear it down after each test suite. This will also prevent the "ReferenceError: You are trying to `import` a file after the Jest environment has been torn down." warning when you run your tests.
 
 ### Create a Jumpling model and schema, with validation
 

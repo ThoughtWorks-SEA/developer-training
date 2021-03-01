@@ -136,7 +136,7 @@ You'll also need to create your `index.js`, `app.js`, `utils/db.js` files.
 
 Add the usual code necessary to start your server in these files (refer to your old practice projects!). Remember to:
 
-- add `require("./utils/db");` at the top of your `index.js` file (this is added in index.js instead of app.js because tests will ignore index.js file, which is what we want, because you do not want your tests to connect to your actual db)
+- add `require("./utils/db");` at the top of your `index.js` file
 - add a `"start:dev": "nodemon index.js"` script into your `package.json` file
 
 ### Using cookies and same origin policy
