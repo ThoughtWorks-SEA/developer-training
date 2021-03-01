@@ -44,6 +44,14 @@ db.once("open", () => {
 });
 ```
 
+Require the file at the top of your `index.js` file:
+
+```
+require("./utils/db");
+```
+
+This is added in index.js instead of app.js because tests will ignore index.js file, which is what we want, because you do not want your tests to connect to your actual db (it also will attempt to do so multiple times if placed in app.js, which will cause issues for you when you try to run your tests).
+
 ### Create a Jumpling model and schema, with validation
 
 A Jumpling should minimally have a name, so the `name` property should be validated to be `required: true`:

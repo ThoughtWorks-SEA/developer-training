@@ -48,10 +48,9 @@ db.once("open", () => {
 
 We put this in a "db.js" file in a utils folder.
 
-To connect to the database, "require" this file at the top of app.js:
+To connect to the database, "require" this file at the top of index.js:
 
 ```js
-//app.js
 require("./utils/db");
 ```
 
