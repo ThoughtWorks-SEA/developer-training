@@ -240,7 +240,77 @@ I can create trainers now! Note that the hash is different even for same passwor
 
 Try using Postman now!
 
+### Generating a JWT secret
+
+How to generate a good `JWT_SECRET_KEY`? Because we use HS256 algoithm for the signature, we should have a 256 bits key of 32 characters.
+
+You can generate a good random 256 bits key (crypographically strong pseudorandom) with
+
+```sh
+node -e "console.log(require('crypto').randomBytes(256 / 8).toString('hex'));"
+```
+
+You can also generate a base64 key with:
+
+```sh
+node -e "console.log(require('crypto').randomBytes(256 / 8).toString('base64'));"
+```
+
+If you choose to use a base64 key, read the key into a Buffer using `Buffer.from(key, "base64")` and use it with `jwt.sign` and `jwt.verify`.
+
+Save it in `.env` file and do not commit it. Remember to add the `.env` file to `.gitignore`.
+
+### Generating a JWT token and finding the secret
+
+- Create the config folder
+- Create a `jwt.js` file inside the config folder, with the `getJWTSecret` function.
+
+src/config/jwt.js
+
+```js
+var jwt = require("jsonwebtoken");
+
+const getJWTSecret = () => {
+  const secret = process.env.JWT_SECRET_KEY;
+  if (!secret) {
+    throw new Error("Missing secrets to sign JWT token");
+  }
+  return secret;
+};
+
+// the logic for creating a JWT token can also be moved to trainer.model.js instead, but will work here as well
+const createJWTToken = (username) => {
+  const today = new Date();
+  const exp = new Date(today);
+
+  const secret = getJWTSecret();
+  exp.setDate(today.getDate() + 60); // adding days
+
+  const payload = { name: username, exp: parseInt(exp.getTime() / 1000) };
+  const token = jwt.sign(payload, secret);
+  return token;
+};
+
+module.exports = createJWTToken;
+```
+
+For your tests and your code to be able to find the `JWT_SECRET_KEY`, you can load the environment variables using `dotenv` in **app.js**.
+
+```js
+require("dotenv").config();
+```
+
+#### More on the exp field in the JWT payload
+
+In the example above, the expiration date of the JWT token is set to 60 days later after it's generated. Then the expiration time is saved into the exp field of the JWT token.
+
+What is this exp field? Why must I use this term?
+
+It represents **Token Expiration,** and you can find [more details here](https://www.npmjs.com/package/jsonwebtoken#token-expiration-exp-claim). Once this field is set in a token, it's validated later on when we call the jwt.verify(token, secret). So a token that passes the expiration time will fail the verification.
+
 ### Protect a route trying to find trainers by username
+
+Now that we have our JWT_SECRET_KEY set up, let's create a `protectRoute` middleware and use it for our `GET /trainers/:username` route:
 
 ```js
 const protectRoute = (req, res, next) => {
@@ -275,52 +345,7 @@ router.get("/:username", protectRoute, async (req, res, next) => {
 
 `req.cookies` is populated by the `cookie-parser` middleware.
 
-### Generating a JWT token and finding the secret
-
-- Create the config folder
-- Create a `jwt.js` file inside the config folder, with the `getJWTSecret` function.
-
-src/config/jwt.js
-
-```js
-var jwt = require("jsonwebtoken");
-
-const getJWTSecret = () => {
-  const secret = process.env.JWT_SECRET_KEY;
-  if (!secret) {
-    throw new Error("Missing secrets to sign JWT token");
-  }
-  return secret;
-};
-
-const createJWTToken = (username) => {
-  const today = new Date();
-  const exp = new Date(today);
-
-  const secret = getJWTSecret();
-  exp.setDate(today.getDate() + 60); // adding days
-
-  const payload = { name: username, exp: parseInt(exp.getTime() / 1000) };
-  const token = jwt.sign(payload, secret);
-  return token;
-};
-
-module.exports = createJWTToken;
-```
-
-For your tests and your code to be able to find the `JWT_SECRET_KEY`, you can load the environment variables using `dotenv` in **app.js**.
-
-```js
-require("dotenv").config();
-```
-
-#### More on the exp field in the JWT payload
-
-In the example above, the expiration date of the JWT token is set to 60 days later after it's generated. Then the expiration time is saved into the exp field of the JWT token.
-
-What is this exp field? Why must I use this term?
-
-It represents **Token Expiration,** and you can find [more details here](https://www.npmjs.com/package/jsonwebtoken#token-expiration-exp-claim). Once this field is set in a token, it's validated later on when we call the jwt.verify(token, secret). So a token that passes the expiration time will fail the verification.
+Now, try making a call to `GET /trainers/:username`. The username should be of a Trainer that you have previously created. You should see an error: "You are not authorized". In order to be authorised, the request needs to have a cookie with a valid token in the headers. That's where our `/login` API comes in:
 
 #### Login and logout
 
@@ -350,6 +375,7 @@ router.post("/login", async (req, res, next) => {
     const expiryDate = new Date(Date.now() + oneWeek);
 
     res.cookie("token", token, {
+      // you are setting the cookie here, and the name of your cookie is `token`
       expires: expiryDate,
       httpOnly: true, // client-side js cannot access cookie info
       secure: true, // use HTTPS
@@ -369,23 +395,9 @@ router.post("/logout", (req, res) => {
 });
 ```
 
-How to generate a good `JWT_SECRET_KEY`? Because we use HS256 algoithm for the signature, we should have a 256 bits key of 32 characters.
+Log in with a valid trainer now and check the **Headers**. You should see a `Set-Cookie` key, with a value that looks something like: `token=eyJhbGciOiJIUzI1NsdsaCI6IkpXVCJ9.eyJuYW1lIjoiYasdhZG1pbiIsImV4cCI6MTYxOTc3MdaWF0IjoxNjE0NTg5Mzg5fQ.NYH7deb9asdpH4i3SSR0ic7DF3USv2xiGwVq6L-xiZM; Path=/; Expires=Mon, 08 Mar 2021 09:03:09 GMT; HttpOnly; Secure`.
 
-You can generate a good random 256 bits key (crypographically strong pseudorandom) with
-
-```sh
-node -e "console.log(require('crypto').randomBytes(256 / 8).toString('hex'));"
-```
-
-You can also generate a base64 key with:
-
-```sh
-node -e "console.log(require('crypto').randomBytes(256 / 8).toString('base64'));"
-```
-
-If you choose to use a base64 key, read the key into a Buffer using `Buffer.from(key, "base64")` and use it with `jwt.sign` and `jwt.verify`.
-
-Save it in `.env` file and do not commit it. Remember to add the `.env` file to `.gitignore`.
+Now that you have this token, go ahead and try calling `GET /trainers/:username` again. But before you submit the request, set the headers with a key `Cookie`, and copy paste the value of the entire string of the token. You should now be able to retrieve the user details of the specified username!
 
 ## Security Concerns of using JWT
 
