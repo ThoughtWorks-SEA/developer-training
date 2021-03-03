@@ -1,18 +1,26 @@
 # Mongoose with Express.js
 
-When adding a database to Express.js that the backend server will interact with, many of our route handlers will become more like controllers that interact with the database.
+When adding a database to Express.js that the backend server will interact with, **many of our route handlers will become more like controllers that interact with the database.**
 
 For example, route handlers that GET a single resource can be a controller named `findOne` that finds a single resource in the database.
 
 Similarly, when you POST a single resource in a route handler, it can be a controller named `createOne` that creates a single resource in the database.
 
-It is convention to put these controllers into a `controllers` folder. Controllers are these handlers interacting with the database that is linked to the routing in the routers.
-
-Refactor the controllers into the folder.
+**It is convention to put these controllers into a `controllers` folder.** Controllers are these handlers interacting with the database that is linked to the routing in the routers.
 
 In the MVC design pattern, controllers is the middleman between Express.js routes and mongoose models.
 
 ![MVC diagram](https://mdn.mozillademos.org/files/14456/MVC%20Express.png)
+
+Refactor your code by extracting the main logic into controllers. See [this example](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes#create_the_catalog_route_module) for a guide on how to implement this.
+
+### Do I _have_ to extract the logic into a controllers folder?
+
+> One of the cool things about Express (and Node in general) is it doesn't push a lot of opinions on you; one of the downsides is it doesn't push any opinions on you. Thus, you are free (and required!) to set up any such opinions (patterns) on your own.
+>
+> In the case of Express, you can definitely use an MVC pattern, and a route handler can certainly serve the role of a controller if you so desire--but you have to set it up that way.
+
+https://stackoverflow.com/questions/11076179/node-js-express-routes-vs-controller
 
 ## Exercises
 
