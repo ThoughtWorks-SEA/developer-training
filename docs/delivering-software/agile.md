@@ -108,6 +108,8 @@ Stories are assigned points to _estimate_ the complexity of its implementation. 
 
 Read more on how to do the estimation [here](https://www.visual-paradigm.com/scrum/what-is-story-point-in-agile/).
 
+Read what Ron Jeffries, one of the founders of Extreme Programming, has to say about story points [here](https://ronjeffries.com/articles/019-01ff/story-points/Index.html)
+
 ## Ceremonies
 
 ### Stand up meetings
