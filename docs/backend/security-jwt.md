@@ -24,7 +24,7 @@ This is beneficial, because when there are lots of users of a website, we can ad
 
 ## How does a JSON web token look like?
 
-Use https://github.com/thoughtworks-jumpstart/how-jwt-works/blob/master/how-jwt-works.js to demo the construction of a JWT token.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_XbXkVdoG_0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 In its compact form (JWS Compact Serialization format), JSON Web Tokens consist of three parts separated by dots (.), which are:
 
@@ -466,3 +466,7 @@ If the JWT token is saved in a cookie, the logout route handler on the server si
 ## Exercises
 
 Add `user` model to your songs API and protect the routes for PUT and DELETE. You will need to login to PUT and DELETE any of the songs.
+
+## JWT authorization in summary
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/soGRyl9ztjI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
