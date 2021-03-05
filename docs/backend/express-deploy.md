@@ -1,39 +1,36 @@
 # Express.js deployment
 
-## Heroku
+## MongoDB Atlas
 
-- Follow the tutorial [here in the official documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up)
-- Add `JWT_SECRET_KEY` environment variable to Heroku
-- For the `Procfile` file, it should look something like this if you have a start script inside package.json.
+Create a database on the cloud with MongoDB Atlas.
 
-```
-web: npm run start
-```
-
-**What if my app still has an error? I already tried `heroku logs --tail`...**
-
-```sh
-2020-02-05T06:40:00.937983+00:00 heroku[web.1]: State changed from starting to crashed
-2020-02-05T06:40:00.940830+00:00 heroku[web.1]: State changed from crashed to starting
-2020-02-05T06:40:00.846494+00:00 heroku[web.1]: Error R10 (Boot timeout) -> Web process failed to bind to $PORT within 60 seconds of launch
-2020-02-05T06:40:00.846494+00:00 heroku[web.1]: Stopping process with SIGKILL
-```
-
-Heroku dynamically assigns your app a port and adds the port to the environment variable `process.env.PORT`.
-
-```js
-// index.js
-const PORT = 3000;
-const server = app.listen(process.env.PORT || PORT, () => {
-  console.log(`Express app started on http://localhost:${PORT}`);
-});
-```
-
-### MongoDB Atlas
-
-- Follow these tutorials to [get started with MongoDB Atlas](https://docs.atlas.mongodb.com/getting-started) and [use MongoDB Atlas on Heroku](https://developer.mongodb.com/how-to/use-atlas-on-heroku).
-- Note that the `MONGODB_URI` environment variable will automatically be set for you. Edit your `db.js` to look like this:
+1. Follow this tutorial to [get started with MongoDB Atlas](https://docs.atlas.mongodb.com/getting-started). You only need to follow Parts 1 through 4.
+1. Under **Security > Network Access**, you'll need to "Add IP address". You may need to allow all IP addresses temporarily to get things up and running (for security reasons, you can fix this by [allowing only specific IP addresses](https://developer.mongodb.com/how-to/use-atlas-on-heroku/#configuring-heroku-ip-addresses-in-atlas)).
+1. Locate your cluster (if you did not rename it, it should be named something like "Cluster0") on the MongoDB Atlas site, and click on "CONNECT".
+1. You will be prompted to choose the connection method. Select "Connect your application".
+1. You should see something like `mongodb+srv://yourname:<password>@cluster0.xx7xx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`. This connection string is what you will be using later in your Heroku setup. For now, edit your `db.js` to look like this:
 
 ```js
 const dbUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/" + dbName;
 ```
+
+This way, you can connect to your local db during development, but in production you can set the connection string to connect to the db you just created. Note that the `MONGODB_URI` environment variable will automatically be set for you.
+
+## Heroku
+
+1. Login to your Heroku account and create a Heroku app.
+1. Under the **Deploy** tab, see **Deployment method**. Select "GitHub". Connect to your GitHub repo.
+1. Under the **Settings** tab, see **Config Vars**. Click on "Reveal Config Vars". Remember how we set config vars in our `.env` files? This is the same thing, just for Heroku. You'll need to add the key and values of your `JWT_SECRET_KEY` and your `MONGODB_URI` connection string.
+1. Heroku dynamically assigns your app a port and adds the port to the environment variable `process.env.PORT`.
+
+Add this condition into your index.js:
+
+```js
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  ...
+});
+```
+
+Once you have everything pushed on GitHub and all your config vars set, click on the **Deploy** tab and manually deploy your `main` branch. Once deployment is complete, you should be able to access your Heroku app and test your APIs using Postman.
