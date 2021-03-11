@@ -114,15 +114,15 @@ Another form of duplication.
 An example of a language issue can be the wrapAsync is a logic that calls `next(Error)`. That prevented some logic from duplicating. If we look at the code, every handler still has `wrapAsync`. It would be nice if we can have the try-catch mechanism as a global setting.
 
 ```javascript
-const wrapAsync = fn => async (req, res, next) => {
-  Promise.resolve(fn(req, res, next)).catch(err => next(err));
+const wrapAsync = (fn) => async (req, res, next) => {
+  Promise.resolve(fn(req, res, next)).catch((err) => next(err));
 };
 
 router.get(
   "/:articleId",
   wrapAsync(async (req, res, next) => {
     const singleArticle = await Publish.find({
-      id: req.params.articleId
+      id: req.params.articleId,
     });
     res.status(200).send(singleArticle);
   })
@@ -133,7 +133,7 @@ router.patch(
     const publishingArticle = req.body;
     const updatePublishedArticle = await Publish.findOneAndUpdate(
       {
-        id: req.params.articleId
+        id: req.params.articleId,
       },
       publishingArticle,
       { new: true }
@@ -190,7 +190,7 @@ class Shop {
 }
 ```
 
-## S.O.L.I.D Principle
+## S.O.L.I.D Principles
 
 Adapted from "Design Principles and Design Patterns" by Bob Martin, in 2000.
 In 2004, Michael Feathers realised that the principles could arrange to form the acronym SOLID.
@@ -204,27 +204,27 @@ Bob Martin started to assemble rules of what makes code that is easy to maintain
 
 The principles overlap each other.
 
-### SRP
+### Single Responsibility Principle
 
 _A Module should be responsible to one, and only one, actor_
 
 A Module is a part of the program that are closely related, put together to provide functionality. It can be a function, a class, a single file, a single server.
 
-### OCP
+### Open-Closed Principle
 
-_A software artifcat should be open for extension but closed for modification_
+_A software artifact should be open for extension but closed for modification_
 
 Classes should be able to extend without any modification of the internal structure.
 If a new requirement that doesn't affect the existing functionality, a code that fulfils OCP, should not result in changes in existing code.
 
 Think of Nintendo Labo, Nintendo controller have interface that opens to extensions of different controllers and Labo accessories. None of them requires you to dispense the controller itself. It does that by exposing the right interface.
 
-### Liscov Substituion principle
+### Liskov Substitution principle
 
-Created y Barbara Liskov in 1988:
+Created by Barbara Liskov in 1988:
 _Let Φ(x) be a property provable about objects x of type T. Then Φ(y) should be true for objects y of type S where S is a subtype of T._
 
-In Bob Martin's words
+In Bob Martin's words:
 _Objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program._
 
 Say we have a vehicle class that can drive, turn left, turn right, top-up fuel.
@@ -243,7 +243,7 @@ Class Vehicle
 vehicles.forEach(vehicle => vehicle.topUpFuel(5))
 ```
 
-### ISP
+### Interface Segregation Principle
 
 _Clients should not be forced to depend upon interfaces that they do not use._
 
@@ -297,12 +297,12 @@ class Car {
 }
 ```
 
-### DIP
+### Dependency Inversion Principle
 
 _Any higher-level modules should not depend on lower-level modules, and both should depend on abstract modules._
 _Abstraction of modules should not depend on its implementation or details, but the implementation should depend on abstraction._
 
-When using Mongoose, We import a Model. This model implements an abstraction. All model will contain similar generic features such as `findOneAndUpdate`. The router handler does not depend on the Schema. If the Schema change in the way that it doesn't break the functionality of the route handler, the handler will not need modification.
+When using Mongoose, we import a Model. This model implements an abstraction. All model will contain similar generic features such as `findOneAndUpdate`. The router handler does not depend on the Schema. If the Schema changes in the way that it doesn't break the functionality of the route handler, the handler will not need modification.
 
 ```javascript
 const articleSchema = new mongoose.Schema(
@@ -310,7 +310,7 @@ const articleSchema = new mongoose.Schema(
     id: { type: String, required: true, unique: true },
     title: { type: String, required: true, unique: true, trim: true },
     topicAndSubtopicArray: [topicSubtopicSchema],
-    isPublished: { type: Boolean, default: false }
+    isPublished: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
@@ -319,8 +319,8 @@ articleSchema.index(
   {
     unique: true,
     partialFilterExpression: {
-      "topicAndSubtopicArray.title": { $exists: true }
-    }
+      "topicAndSubtopicArray.title": { $exists: true },
+    },
   }
 );
 const Publish = mongoose.model("Publish", articleSchema);
@@ -331,7 +331,7 @@ router.patch(
     const publishingArticle = req.body;
     const updatePublishedArticle = await Publish.findOneAndUpdate(
       {
-        id: req.params.articleId
+        id: req.params.articleId,
       },
       publishingArticle,
       { new: true }
