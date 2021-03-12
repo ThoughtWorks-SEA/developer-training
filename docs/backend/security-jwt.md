@@ -291,7 +291,7 @@ const createJWTToken = (username) => {
   const secret = getJWTSecret();
   exp.setDate(today.getDate() + 60); // adding days
 
-  const payload = { name: username, exp: parseInt(exp.getTime() / 1000) };
+  const payload = { username: username, exp: parseInt(exp.getTime() / 1000) };
   const token = jwt.sign(payload, secret);
   return token;
 };
