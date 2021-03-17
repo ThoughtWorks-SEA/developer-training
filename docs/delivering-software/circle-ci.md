@@ -2,22 +2,22 @@
 
 ## Introduction
 
-[CircleCI](https://circleci.com/) - Our mission is to empower technology-driven organisations to do their best work.
-We want to make engineering teams more productive through intelligent automation.
+> Our mission is to empower technology-driven organisations to do their best work. <br>
+> We want to make engineering teams more productive through intelligent automation. <br> [CircleCI](https://circleci.com/)
 
-Manual deployment is a tedious and error-prone job. Running through all the steps of checking lint, testing, security scans, build, setting up the environment, running e2e test, provisioning network access or data, etc.
+Manual deployment involves running through all the steps of checking lint, testing, security scans, build, setting up the environment, running e2e test, provisioning network access or data, etc. It is a tedious and error-prone job.
 
 ### Overhead of doing manual deployment
 
-![manual deployment](_media/manualOverhead.png)
+<img src="delivering-software/_media/manualOverhead.png" alt="manual deployment" width="800"/>
 
-Morden days CD tools will take care of all these manual work for us once we create a pipeline.
+Modern CD tools will take care of all these manual work for us once we create a pipeline.
 
-A pipeline is a workflow that runs jobs we can configure. Example if we have three jobs, run lint checks, run unit test, deploy to Heroku. We can set the pipeline to run lint checks, if pass, we then run the unit test, and again if pass, we then deploy to Heroku.
+A pipeline is a workflow that runs jobs we can configure. For example if we have three jobs: run lint checks, run unit test, deploy to Heroku. We can set the pipeline to run lint checks, if pass, we then run the unit test, and again if pass, we then deploy to Heroku.
 
 ![manual deployment](_media/circleci-pipeline.png)
 
-Circle CI is simple to use, provide excellent features and have a free tier.
+Circle CI is simple to use, provides excellent features and has a free tier.
 
 ### Alternative tools in the market
 
@@ -27,14 +27,14 @@ Circle CI is simple to use, provide excellent features and have a free tier.
 4. [Travis](https://travis-ci.org/)
 5. [TeamCity](https://www.jetbrains.com/teamcity/)
 
-## Circle CI setup
+## CircleCI setup
 
 Signup CircleCI with your GitHub account.
 https://circleci.com/signup/.
 
-Signing up with GitHub also gives circle ci rights to access your repo and allow you to configure a new project.
+Signing up with GitHub also gives CircleCI rights to access your repo and allow you to configure a new project.
 
-Click on the Add project tab on the left and add a project.
+Click on the `Add projects` tab on the left and add a project.
 
 ![manual deployment](_media/circleci-addProject.png)
 
@@ -112,13 +112,13 @@ person:
 
 ### Docker
 
-CircleCi uses docker.
+CircleCI uses docker.
 
 Docker is a set of platform as a service products that use OS-level virtualisation to deliver software in packages called containers. - Wikipedia
 
-In simple, docker works like a VM and gives us an environment that we can run our application. In Docker term, this environment is called a "Container".
+Docker works like a VM (Virtual Machine) and gives us an environment that we can run our application in. In Docker term, this environment is called a "Container".
 
-Docker doesn't know about what our application does and will not recognise the dependencies we need. For docker to create a container that has the dependencies, we will need a docker image. A Docker image is the prewritten instructions or blueprints to create a Container. Ideally, we want a Container that already can run Node, and has access to git. CircleCI have already written the images for us. All we need to do is tell CircleCi which Docker Image to use.
+Docker doesn't know about what our application does and will not recognise the dependencies we need. For docker to create a container that has the dependencies, we will need a docker image. A Docker image is the prewritten instructions or blueprints to create a Container. Ideally, we want a Container that already can run Node, and has access to git. CircleCI has already written the images for us. All we need to do is tell CircleCI which Docker Image to use.
 
 ```yaml
 build:
@@ -130,9 +130,9 @@ We can specify a working directory where all our files in the Docker container w
 
 ### Workflow
 
-By default, CircleCi runs all your job sequentially. We can more tell CircleCi specifically how we want to run the jobs using workflow.
+By default, CircleCI runs all your job sequentially. We can tell CircleCI specifically how we want to run the jobs using workflow.
 
-The below workflow tell CircleCi to run two jobs, "test" and "deploy". "deploy" will only start to run after "test" runs successfully.
+The below workflow tells CircleCI to run two jobs, "test" and "deploy". "deploy" will only start to run after "test" runs successfully.
 
 ```yaml
 workflows:
@@ -145,11 +145,11 @@ workflows:
             - test
 ```
 
-### Deploying to Heroku
+### Deploying to Heroku (optional)
 
 Sidenote: Please make sure the application is already working, and you can push the app to Heroku manually. On local: `git push heroku master` and verify the application works.
 
-Heroku store the code we deployment code in their git repository. Using the `git push` and by specifying the API_KEY and APP_NAME, we can trigger a git push to Heroku from anywhere.
+Heroku stores the code we deploy in their git repository. Using the `git push` and by specifying the API_KEY and APP_NAME, we can trigger a git push to Heroku from anywhere.
 
 ```yaml
 deploy:
@@ -170,8 +170,8 @@ heroku login
 heroku authorisations:create
 ```
 
-Add the key/token into the circle ci environment variable, so it has access to it.
+Add the key/token into the CircleCI environment variable, so it has access to it.
 
 ![env var](_media/circleci-env.png)
 
-On your next push, you will see the jobs in action in the CircleCi dashboard.
+On your next push, you will see the jobs in action in the CircleCI dashboard.
