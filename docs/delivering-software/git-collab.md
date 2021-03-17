@@ -167,10 +167,7 @@ When we decide to merge to master...
 1. `git push`
 1. `git branch -d new-branch`. Delete the feature branch.
 
-## Practice
+## Labs
 
-We will clone a repo https://github.com/thoughtworks-jumpstart/git-team-pokemon for the lab.
-
-Another lab for git ignore, merge conflicts, pull request: https://github.com/thoughtworks-jumpstart/git-newsroom
-
-To experience merge hell for yourself, there is another lab: https://github.com/thoughtworks-jumpstart/merge-hell-simulation
+- [Merge hell simulation](https://github.com/thoughtworks-jumpstart/merge-hell-simulation)
+- [Git newsroom](https://github.com/thoughtworks-jumpstart/git-newsroom)
