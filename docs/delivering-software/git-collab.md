@@ -119,7 +119,7 @@ You might wonder, in a larger team, how do we enforce the reviewing of pull requ
 - Many frequent changes to master every day. If there are not enough automated tests or a poorly setup continuous integration server, an integration fault could go undetected.
 - Might need feature toggles to switch off features that are in testing but not supposed to be in production.
 
-Read more on [feature toggles](https://martinfowler.com/articles/feature-toggles.html).
+Read more on [feature toggles](https://martinfowler.com/bliki/FeatureToggle.html).
 
 #### How to merge to master for trunk-based
 
