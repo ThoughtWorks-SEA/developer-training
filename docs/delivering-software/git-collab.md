@@ -21,8 +21,7 @@ If you would like to review the latest commits without causing merge conflicts, 
 - Click on **Accept incoming change** to select your changes and delete the changes from remote
 - Click on **Accept both** to select all changes and keep both
 
-Use `Control + Z` to undo if you selected the wrong choice
-Alternatively, you can directly edit in VS Code.
+Use `Control + Z` to undo if you selected the wrong choice. In some cases, you may have to select "Accept both" and manually fix the conflict line by line to integrate both changes successfully.
 
 ### Why do we prefer to use rebase when pulling?
 
@@ -93,9 +92,9 @@ There are two common git workflows.
 ![smaller trunk based](_media/smaller-trunk-based.png)
 (Image from https://trunkbaseddevelopment.com/)
 
-In trunk-based development (TBD), developers always check into one branch, typically the **master branch** also called the “trunk”.
+In trunk-based development (TBD), developers always check into one branch, typically the **main/master branch** - also called the "trunk".
 
-They check in (git push) as frequently as possible to the master — at few times a day.
+They check in (git push) as frequently as possible to the trunk, e.g. a few times a day.
 
 Every developer is touching the trunk, so all features grow in the mainline which acts as a communication point.
 
@@ -112,60 +111,57 @@ You might wonder, in a larger team, how do we enforce the reviewing of pull requ
 
 #### Pros
 
-No integration problems later as all features are integrated everyday from the very start.
-
-Better communication between developers.
+- No integration problems later as all features are integrated everyday from the very start.
+- Better communication between developers.
 
 #### Cons
 
-Many frequent changes to master every day. If there is not enough automated tests or a poorly setup continuous integration server, an integration fault could go undetected.
+- Many frequent changes to master every day. If there are not enough automated tests or a poorly setup continuous integration server, an integration fault could go undetected.
+- Might need feature toggles to switch off features that are in testing but not supposed to be in production.
 
-Might need feature toggles to switch off features that are in testing but not supposed to be in production.
+Read more on [feature toggles](https://martinfowler.com/articles/feature-toggles.html).
 
 #### How to merge to master for trunk-based
 
-1. Start from master
-1. Develop a new feature on master
-1. `git add -p` and `git commit -m`
-1. `git pull --rebase`
-1. Run all tests. If failing, fix the error, amend the commit `git commit --amend` and back to Step 4
+1. Start from master. `git pull` to update your local master branch.
+1. Develop a new feature on master. Stage the necessary files.
+1. `git add -p` / `git commit -m 'xxx'`
+1. `git fetch --all` to fetch latest changes from remote (without updating your local copy)
+1. `git rebase origin master` / `git rebase origin main`
 1. If there are conflicts, solve the merge conflicts and then run `git rebase --continue`
 1. `git push`
-
-Note: if switching between different work (that should be in another commit) remember to stash your changes
 
 ### Feature Branch
 
 ![feature branch workflow](_media/feature-branch-workflow.png)
 Feature branch workflow
 
-- Developers pull the latest master and branch out to their individual feature branch
+- Developers pull the latest master and branch out to their individual feature branch.
 - They work on the feature on their branch and when it is complete, merge it to master locally.
-- They run tests after the merge as well to ensure that nothing is broken before pushing their changes to master
+- They run tests after the local merge to ensure that nothing is broken, before pushing their changes to remote master
 
 #### Pros
 
-Not that many changes to master branch in a day
+- Not that many changes to master branch in a day
 
 #### Cons
 
-If there are "long lived branches" (eg: developer keeps a branch for many days without merging to master) there could be a bigger merge conflict when they finally do merge to master. This causes integration delay.
-
-Not merging often may lead to less communication between developers and cause incompatible features to be developed by different developers.
+- If there are "long lived branches" (i.e. developer keeps a branch for many days without merging to master) there could be a bigger merge conflict when they finally do merge to master. This causes integration delay.
+- Not merging often may lead to less communication between developers and cause incompatible features to be developed by different developers.
 
 #### How to merge to master for feature branch
 
 1. Start on master do a git pull --rebase to get latest changes from remote.
-1. `git checkout -b new-branch` where `new-branch` is the name of your new feature branch name. This will create a new local branch.
-1. Develop a new feature on local branch.
-1. Periodically do `git pull --rebase origin master` this will get the latest changes from remote master and integrate it to your local branch so that you are not too far behind on your local branch. This reduces further merge conflicts.
-1. `git add -p` and `git commit -m "Add..."`
+1. Create a new local branch and specify the branch name, e.g. `git checkout -b feature/user-login`
+1. Develop a new feature on the new branch.
+1. Periodically do `git pull --rebase origin master` / `git pull --rebase origin main` this will get the latest changes from remote master/main and integrate it to your local branch so that you are not too far behind on your local branch. This reduces further merge conflicts.
+1. `git add -p` / `git commit -m 'xxx'`
 
 When we decide to merge to master...
 
-1. `git pull --rebase origin master` to pull latest changes from remote master
+1. `git pull --rebase origin master` / `git pull --rebase origin main` to pull latest changes from remote master/main
 1. There could be merge conflicts, solve them.
-1. `git checkout master`
+1. `git checkout master` / `git checkout main`
 1. `git merge new-branch` where `new-branch` is the name of your new feature branch name
 1. Run all tests. If failing, fix the error, and amend the commit
 1. `git push`
