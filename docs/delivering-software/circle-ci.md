@@ -147,6 +147,8 @@ workflows:
 
 ### Deploying to Heroku (optional)
 
+💡 **Alternative: In the Heroku dashboard under "deploys", you can enable automatic deploys from your `main` branch and check "Wait for CI to pass before deploy".**
+
 Sidenote: Please make sure the application is already working, and you can push the app to Heroku manually. On local: `git push heroku master` and verify the application works.
 
 Heroku stores the code we deploy in their git repository. Using the `git push` and by specifying the API_KEY and APP_NAME, we can trigger a git push to Heroku from anywhere.
