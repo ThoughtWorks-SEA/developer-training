@@ -18,12 +18,16 @@ _Technical debt_ is a metaphor first mentioned by Ward Cunningham. He was creati
 
 In this analogy, designing software without knowing what the best design should be is like borrowing money. You can do something with the money sooner (or even do greater things!), but then until you pay back that money you'll be paying interest. Interest, in this case, is slowing down the development of new features.
 
-However, this is easily misunderstood. This does not mean you can [code poorly down with the intention of paying back later](http://wiki.c2.com/?WardExplainsDebtMetaphor).
+However, this is easily misunderstood. This does not mean you can [code poorly now with the intention of paying back later](http://wiki.c2.com/?WardExplainsDebtMetaphor).
 
 ![technical debt quadrant](https://martinfowler.com/bliki/images/techDebtQuadrant.png)
 (From martinfowler.com)
 
-**Prudent** debt is that the team knows that they are having a debt. It is well-calculated and will be dealt with eventually. **Reckless** debt is a team taking on debt without knowing the consequences of their design decisions. **Delibrate** debt is when technical debt is created on purpose, **inadvertent** is when it is not.
+**Prudent** debt is that the team knows that they are having a debt. It is well-calculated and will be dealt with eventually.
+
+**Reckless** debt is a team taking on debt without knowing the consequences of their design decisions.
+
+**Deliberate** debt is when technical debt is created on purpose, **inadvertent** is when it is not.
 
 Is there really prudent-inadvertent debt?
 
@@ -74,7 +78,7 @@ const elapsedTime = 1;
 
 #### Pick one word per concept
 
-Pick one word for one abstract concept and stick with it. For instance, it’s confusing to have fetch, retrieve, and get as equivalent methods of different classes.
+Pick one word for one abstract concept and stick with it. For instance, it’s confusing to have **fetch**, **retrieve**, and **get** as equivalent methods of different classes.
 
 How about topic, subtopics vs article?
 
@@ -130,7 +134,7 @@ const placeOrder = ({ order }) => {
 After:
 
 ```js
-const getTotal = order =>
+const getTotal = (order) =>
   order.items.reduce(
     (item, totalAcc) => totalAcc + item.unitPrice * item.units,
     0
@@ -146,7 +150,7 @@ const pay = (total, invoiceInfo) => {
   sendInvoice(response.invoice);
 };
 
-const payOrder = order => {
+const payOrder = (order) => {
   const total = getTotal(order);
   const invoiceInfo = getInvoiceInfo(order);
 
@@ -162,38 +166,37 @@ const placeOrder = ({ order }) => {
 
 Code taken from https://medium.com/trabe/coding-react-components-single-level-of-abstraction-e60f25676235
 
-- arguments
-- name
-
 #### (mostly) Pure functions
 
-should not depend on some global object
+1. Should not depend on some global object (e.g. `window.innerWidth`)
 
 ```js
 function mouseOnLeftSide(mouseX) {
   return mouseX < window.innerWidth / 2;
 }
 
-document.onmousemove = function(e) {
+document.onmousemove = function (e) {
   console.log(mouseOnLeftSide(e.pageX));
 };
 ```
 
-Not testable!
+We can modify this by explicitly requiring a `windowWidth` argument:
 
 ```js
 function mouseOnLeftSide(mouseX, windowWidth) {
   return mouseX < windowWidth / 2;
 }
 
-document.onmousemove = function(e) {
+document.onmousemove = function (e) {
   console.log(mouseOnLeftSide(e.pageX, window.innerWidth));
 };
 ```
 
-Code from https://alistapart.com/article/making-your-javascript-pure/
+Read more here: https://alistapart.com/article/making-your-javascript-pure/
 
-Should not have unnecessary "side-effects"
+2. Should not have unnecessary "side-effects"
+
+In pure functions, given the same input, it should always return the same result.
 
 ```js
 const answer = [];
@@ -212,12 +215,13 @@ Correct naming can prevent comments. Code can be read like prose, a story. Comme
 ### Objects and data structures
 
 - If using objects, keep data private and use getters, setters to manipulate data.
-- If using pure data structures, getters and setters does not make it OOP.
-
-Reference: https://medium.com/mindorks/how-to-write-clean-code-lessons-learnt-from-the-clean-code-robert-c-martin-9ffc7aef870c
 
 ### Exercises
 
-Suggest code in the current codebase that is possibly tech debt. Write on post its and paste on a priortisation graph to decide what technical debt to priortise.
+Suggest code in the current codebase that is possibly tech debt. Write on post its and paste on a prioritisation graph to decide what technical debt to prioritise.
 
 ![product value matrix](https://reforge-brevity-uploads-prod.s3.amazonaws.com/brief/uploads/post/image_path/58/emma1530748538874.png)
+
+References:
+
+- https://medium.com/mindorks/how-to-write-clean-code-lessons-learnt-from-the-clean-code-robert-c-martin-9ffc7aef870c
