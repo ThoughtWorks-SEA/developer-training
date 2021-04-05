@@ -146,6 +146,12 @@
   - [Design Principles](software-design/design-principles)
   - [Design Patterns](software-design/design-patterns)
 
+- **What's next?**
+
+  - [Career advice](whats-next/career-advice)
+  - [Preparing for technical interviews](whats-next/interviews)
+  - [Becoming a better programmer](whats-next/becoming-a-better-programmer)
+
 - **Miscellaneous**
 
   - [Katas](miscellaneous/katas)
