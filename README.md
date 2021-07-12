@@ -4,6 +4,14 @@ This repository contains the most recent guides for thoughtworks-led developer t
 
 **Changes made to this repository will automatically be updated in the guides that the trainees will use to supplement their learning: https://thoughtworks-sea.github.io/developer-training/#/**
 
+You can run the guidebook locally by doing:
+
+```
+$ docsify serve docs
+```
+
+This way, you will also be able to easily preview your changes before pushing them to the repo.
+
 Here are some older resources that are not currently maintained but may still have relevant material:
 - https://thoughtworks-jumpstart.gitbook.io/book/
 - https://github.com/thoughtworks-jumpstart/guides
