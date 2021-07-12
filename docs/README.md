@@ -1,5 +1,7 @@
-## SGUnited Traineeship
+# Guides
 
-SGUnited Traineeship is a 16 week full-time program geared towards individuals who have showcased a passion for software development want to begin their journey into the world of software development using agile and modern software delivery practices.
+This repository contains the most recent guides for thoughtworks-led developer training. Trainees will use this guide to supplement their learning.
 
-Successful candidates will go through a training programme together with a hands-on project to apply the skills they have learned. Programme participants that stand out positively may be offered contract extensions beyond this attachment/traineeship.
+Here are some older resources that are not currently maintained but may still have relevant material:
+- https://thoughtworks-jumpstart.gitbook.io/book/
+- https://github.com/thoughtworks-jumpstart/guides
