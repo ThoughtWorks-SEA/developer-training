@@ -58,6 +58,8 @@ Now check that you have added it correctly.
 git remote --verbose
 ```
 
+You can also do `git remote -v`.
+
 ## Git lifecycle
 
 There are two types of files in Git - tracked and untracked files. When you add a new file, it will be untracked. Once Git tracks a file, it falls under one of three states - unmodified, modified, and staged.
@@ -72,7 +74,14 @@ Check the status of your files
 git status
 ```
 
-Create a `README.md` file and add some content to it. Now check the status again.
+Create a `README.md` file and add some content to it.
+
+Some ways you can do this:
+
+1. `vi README.md` -> `i` to enter insert mode and add your content -> `esc` -> `:wq` to exit and save the file
+2. `touch README.md` to create the file -> `code .` to open the current directory in VS Code -> add content to file and save
+
+Now check the status again.
 
 You should see that `README.md` is now an untracked file.
 
@@ -107,7 +116,7 @@ git commit -m "Initial commit"
 Push your changes (remote)
 
 ```sh
-git push origin master
+git push origin main
 ```
 
 ## Ignore files and folders
@@ -128,24 +137,37 @@ The seven rules of a great Git commit message
 1. Wrap the body at 72 characters
 1. Use the body to explain what and why vs. how
 
-When committing code as a team, it is often also good practice to include your name in the commit message:
+When pairing (or mob pairing), it is often also good practice to include your names in the commit message:
 
-`[Sabrina] Remove deprecated methods`
+```
+Author: Sabrina Sulong <sabrina.sulong@thoughtworks.com>
+Date:   Mon Jul 12 14:10:32 2021 +0800
 
-When pairing, you can include both you and your pair's names:
+[Sabrina/Bernie] Remove deprecated methods
+```
 
-`[Sabrina/Bernie] Implement export function for reports`
+or
+
+```
+Author: Sabrina Sulong <sabrina.sulong@thoughtworks.com>
+Date:   Mon Jul 12 14:10:32 2021 +0800
+
+Implement export function for reports
+
+Co-authored by Bernie <bernie@thoughtworks.com>
+Co-authored by Spangle <spangle@thoughtworks.com>
+```
 
 ## Fork an existing repository
 
 When you fork a repository, you are making a copy of that repository into your own GitHub account.
 
-Head to an existing repository on GitHub and click on the `fork` button.
+Head to an existing repository on GitHub and click on the `fork` button: https://github.com/thoughtworks-jumpstart/git-basics.git
 
 ## Clone an existing repository
 
 Once you have forked someone's repository, you want to clone it into your own machine.
 
 ```sh
-git clone https://github.com/thoughtworks-jumpstart/git-basics.git
+git clone https://github.com/<your-github-username>/git-basics.git
 ```
