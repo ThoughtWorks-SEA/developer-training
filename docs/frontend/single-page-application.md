@@ -43,7 +43,7 @@ Browser
 Server
 
 - Presentation Layer(View)
-  - Controllers the view to show to the user.
+  - Controls the view to show to the user.
 - Controller
   - Expose API to the user
   - Handles the Business logic

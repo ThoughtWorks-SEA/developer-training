@@ -90,7 +90,7 @@ More documentation can be found [here](https://devcenter.heroku.com/articles/con
 That's all! You can now visit the URL: https://randomly-generated-app-name.herokuapp.com/.
 Subsequently, with every push to GitHub, your code is automatically deployed and accessible by anyone with internet access. Awesome!
 
-### Resources
+## Resources
 
 - For deploying `create-react-app` apps
   - https://blog.heroku.com/deploying-react-with-zero-configuration

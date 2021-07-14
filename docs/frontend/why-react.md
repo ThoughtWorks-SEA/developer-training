@@ -17,7 +17,7 @@ You are not required to use React or other JS libraries to create UI components 
 
 ## How is React different from Bootstrap or Material UI
 
-Bootstrap and Material UI are libraries for UI components. Though it might sound the same, the difference is significant. A _UI component library_ provides you with plug-and-play components that are immediately ready for use. They are pre-build and already styled and have interaction functionality. A JS library, like React, is usually used to create new components and group them.
+Bootstrap and Material UI are libraries for UI components. Though it might sound the same, the difference is significant. A _UI component library_ provides you with plug-and-play components that are immediately ready for use. They are pre-built and already styled and have interaction functionality. A JS library, like React, is usually used to create new components and group them.
 
 A JS library used to create UI components like React is often used together with UI component libraries to speed up development time. This means we can use Bootstrap or Material UI along with React.
 

@@ -83,3 +83,7 @@ App.css
   - add the image into the public folder
   - use img tag
   - access the image with `src={process.env.PUBLIC_URL + "/<image name>.jpg"}`
+
+## Resources
+
+- JavaScript fundamentals before learning React (this is useful to keep bookmarked): https://www.robinwieruch.de/javascript-fundamentals-react-requirements
