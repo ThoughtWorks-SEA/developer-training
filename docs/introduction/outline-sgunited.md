@@ -3,7 +3,7 @@ The following is a rough outline of the topics covered in the program. This is s
 ### Week 1 - Fundamentals, JavaScript
 
 - Introductions, ice breakers
-- Set up development environment (with checklist)
+- Set up development environment
 - Command line tools
 - Git
 - How the web works
@@ -18,9 +18,11 @@ The following is a rough outline of the topics covered in the program. This is s
 ### Week 2 - JavaScript
 
 - Asynchronous JavaScript
+- Promises
+- Async/await
 - Testing with Jest
 - Mocking in tests
-- Test-driven Development (TDD)
+- Test-driven Development
 
 ### Week 3 - Frontend Web Development
 
@@ -38,7 +40,7 @@ The following is a rough outline of the topics covered in the program. This is s
 - React Context
 - React Redux
 - React Thunk
-- Deploy on Heroku
+- Deploy on Netlify
 - Planning for UI project
 
 ### Week 5 - Frontend Project
@@ -59,8 +61,7 @@ The following is a rough outline of the topics covered in the program. This is s
 ### Week 7 - Backend Web Development
 
 - Security
-- Authentication
-- JWT
+- Authentication with JWT
 - Deploy on Heroku
 
 ### Week 8 - Backend Project
