@@ -103,10 +103,14 @@ Further reading:
 
 - https://medium.com/better-programming/3-examples-of-when-not-to-use-javascript-arrow-functions-90eebfbf7bb0
 
-## References
+## What is 'this'?
 
-- [Mozilla hacks: arrow functions](https://hacks.mozilla.org/2015/06/es6-in-depth-arrow-functions/)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YOlr79NaAtQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Exercises
 
 https://github.com/thoughtworks-jumpstart/learning-functions/blob/master/lab3.js
+
+## References
+
+- [Mozilla hacks: arrow functions](https://hacks.mozilla.org/2015/06/es6-in-depth-arrow-functions/)

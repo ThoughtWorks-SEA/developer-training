@@ -21,7 +21,7 @@ When you call a function that may throw errors, and if you have a proper way to 
 
 ```js
 try {
-  loadConfiguratoniFile(filePath);
+  loadConfigurationFile(filePath);
 } catch (error) {
   if (error.message === "file not found") {
     // use default configuration
