@@ -15,7 +15,7 @@ Follow the following instructions to run commands with administrator privileges:
 
 ### Git for Windows
 
-Download and install [Git for Windows](https://gitforwindows.org/).
+Download and install [Git for Windows](https://gitforwindows.org/). You may follow [this tutorial](https://www.stanleyulili.com/git/how-to-install-git-bash-on-windows/) to install git bash.
 
 ### Install Chocolatey package manager
 
