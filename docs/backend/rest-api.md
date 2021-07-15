@@ -175,7 +175,7 @@ The sample REST API can be found at https://jumpstart-blogging-api.herokuapp.com
 The API supports CRUD operations on two resources
 
 - blogposts
-- user
+- users
 
 If you try to GET https://jumpstart-blogging-api.herokuapp.com/ by visiting it on your browser, you can find the supported CRUD operations.
 

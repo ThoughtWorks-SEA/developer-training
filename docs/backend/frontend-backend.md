@@ -8,7 +8,7 @@ Therefore in the course, we will learn how to develop a separate backend that is
 
 Example of how the backend interacts with frontend:
 
-![frontend vs backend](_media/frontend-vs-backend.png)
+<img src="backend/_media/frontend-vs-backend.png" alt="frontend vs backend" width="700"/>
 
 Picture from: https://www.cloudflare.com/learning/serverless/what-is-serverless/
 
