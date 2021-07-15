@@ -104,14 +104,15 @@
   - [Express.js async await](backend/express-async-await)
   - [Lab: Express.js express](backend/express-lab)
   - [Express.js env variable](backend/express-env-variable)
-  - [MongoDB basics](backend/mongodb-basics)
-  - [MongoDB vs relational](backend/mongodb-vs-relational)
-  - [Mongoose basics](backend/mongoose-basics)
-  - [Mongoose CRUD](backend/mongoose-crud)
-  - [Mongoose virtuals](backend/mongoose-virtuals)
-  - [Mongoose validation](backend/mongoose-validation)
-  - [Mongoose and express controllers](backend/mongoose-express)
-  - [Mongoose testing](backend/mongoose-testing)
+  <!-- MongoDB -->
+  - [MongoDB basics](backend/mongodb/mongodb-basics)
+  - [MongoDB vs relational](backend/mongodb/mongodb-vs-relational)
+  - [Mongoose basics](backend/mongodb/mongoose-basics)
+  - [Mongoose CRUD](backend/mongodb/mongoose-crud)
+  - [Mongoose virtuals](backend/mongodb/mongoose-virtuals)
+  - [Mongoose validation](backend/mongodb/mongoose-validation)
+  - [Mongoose and express controllers](backend/mongodb/mongoose-express)
+  - [Mongoose testing](backend/mongodb/mongoose-testing)
   - [Security auth](backend/security-auth)
     <!-- - [Security cryptography basics](backend/security-cryptography-basics) -->
     <!-- - [Security encrypt decrypt](backend/security-encrypt-decrypt) -->
@@ -120,7 +121,7 @@
   - [Mongoose middleware](backend/mongoose-middleware)
   - [Security jwt](backend/security-jwt)
   <!-- - [Security jwt testing](backend/security-jwt-testing) -->
-  - [Lab: Express.js Mongoose](backend/express-mongoose-lab)
+  - [Lab: Express.js Mongoose](backend/mongodb/express-mongoose-lab)
   - [Express.js to production](backend/express-to-production)
   - [Express.js deploy](backend/express-deploy)
     <!-- - [Lab: Company reviews](backend/company-reviews-lab) -->
