@@ -74,7 +74,7 @@ What is a "buildpack"? Check the explanation [here](https://devcenter.heroku.com
 If you build your React application using create-react-app, you can put some of the environment variables into .env file. During build and deployment, these environment variables would be filled into the HTML/JavaScript files that refers to those variables. You can read the [create-react-app documentation](https://create-react-app.dev/docs/adding-custom-environment-variables/) for more details.
 
 However, some environment variables (e.g. the secret keys for calling those APIs) cannot be put into the .env files (because they are secret and should not be checked into code repository), you should declare those variables in Heroku.
-On Heroku dashbaord, you can set this under "Settings" -> "Config Variables"
+On Heroku dashboard, you can set this under "Settings" -> "Config Variables"
 More documentation can be found [here](https://devcenter.heroku.com/articles/config-vars)
 
 ### Connect your Heroku app to the Github repository
@@ -89,6 +89,12 @@ More documentation can be found [here](https://devcenter.heroku.com/articles/con
 (Only for the first time deploying this app) click on “Deploy branch” at the end of the page
 That's all! You can now visit the URL: https://randomly-generated-app-name.herokuapp.com/.
 Subsequently, with every push to GitHub, your code is automatically deployed and accessible by anyone with internet access. Awesome!
+
+## Netlify vs Heroku
+
+> Both Netlify and Heroku are offered as a Platform where you can deploy your web apps, written in the language of your choice at affordable pricing. However, a closer look at their documentation and features shows that **Netlify is geared more towards frontend developers and is ideal for static websites**, where as **Heroku has a more robust and functional backend support**. You can launch apps written in Go, Scala, Ruby, PHP, Closure, Python and a few other popular languages directly on Heroku.
+
+https://linuxhint.com/netlify_vs_heroku/
 
 ## Resources
 
