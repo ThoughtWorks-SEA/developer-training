@@ -113,9 +113,9 @@
   - [Mongoose and express controllers](backend/mongoose-express)
   - [Mongoose testing](backend/mongoose-testing)
   - [Security auth](backend/security-auth)
-  - [Security cryptography basics](backend/security-cryptography-basics)
-  - [Security encrypt decrypt](backend/security-encrypt-decrypt)
-  - [Security hashing and others](backend/security-hash-others)
+    <!-- - [Security cryptography basics](backend/security-cryptography-basics) -->
+    <!-- - [Security encrypt decrypt](backend/security-encrypt-decrypt) -->
+    <!-- - [Security hashing and others](backend/security-hash-others) -->
   - [Security cookie](backend/security-cookie)
   - [Mongoose middleware](backend/mongoose-middleware)
   - [Security jwt](backend/security-jwt)
