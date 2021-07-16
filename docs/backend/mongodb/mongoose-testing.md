@@ -184,4 +184,4 @@ Without that library, another possible solution is to explicitly delete all data
 
 Integrate mongoose into your testing for your song routes.
 
-Refer to [these notes](backend/express-mongoose-lab?id=setting-up-db-for-testing) on how to set up the db for testing.
+Refer to [these notes](backend/mongodb/express-mongoose-lab?id=setting-up-db-for-testing) on how to set up the db for testing.
