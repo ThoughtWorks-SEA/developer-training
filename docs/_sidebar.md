@@ -115,6 +115,7 @@
   - [Mongoose testing](backend/mongodb/mongoose-testing)
   <!-- PostgreSQL -->
   - [PostgreSQL basics](backend/postgresql/postgresql-basics)
+  - [Postgres testing](backend/postgresql/postgres-testing)
   - [Security auth](backend/security-auth)
     <!-- - [Security cryptography basics](backend/security-cryptography-basics) -->
     <!-- - [Security encrypt decrypt](backend/security-encrypt-decrypt) -->
