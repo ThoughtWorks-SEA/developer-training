@@ -66,6 +66,44 @@ If you can successfully launch the Postgres terminal, your server is running.
 
 [PostgreSQL command line cheatsheet](https://gist.github.com/Kartones/dd3ff5ec5ea238d4c546)
 
+```
+# list databases
+\l
+
+# connect to a database
+\c <database-name>
+
+# show currently connected database
+SELECT current_database();
+
+# list roles
+\du
+
+# list tables
+\dt
+
+# help
+\?
+```
+
+**Create Users table**
+
+```
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+```
+
+**Create User records**
+
+```
+INSERT into users VALUES
+  (1, 'Sabrina'),
+  (2, 'Sabrino'),
+  (3, 'Sabrine');
+```
+
 ### Using Postico
 
 You can use [Postico](https://eggerapps.at/postico/) to explore your Postgres databases.
