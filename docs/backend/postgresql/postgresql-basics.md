@@ -2,9 +2,15 @@
 
 PostgreSQL is an open source object-relational database system. It has a strong reputation for reliability, feature robustness, and performance.
 
+# SQL vs NoSQL
+
+Other than SQL databases like (e.g. PostgreSQL, MySQL), there are also NoSQL databases (e.g. MongoDB, DynamoDB).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ruz-vK8IesE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 # Exercise
 
-Try it out [here](https://sqlbolt.com/lesson/introduction)!
+Now that we know what the structure looks like and how to access the data, try it out [here](https://sqlbolt.com/lesson/introduction)!
 
 ## Getting started
 
