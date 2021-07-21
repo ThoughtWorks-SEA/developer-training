@@ -1,6 +1,12 @@
 # Cascading Style Sheets
 
-Adding presentational styles to HTML
+CSS adds presentational styles to HTML, and determines the colors, fonts, layout and animations that you see in your browser. It can drastically change the way your website looks. See [CSS Zen Garden](http://www.csszengarden.com/).
+
+We will briefly cover the crucial parts, but here are some additional resources and tools you can use to learn more:
+
+- [CSS fundamentals](https://runestone.academy/runestone/books/published/webfundamentals/CSS/toctree.html)
+- [HTML & CSS is hard (but it doesn't have to be)](https://www.internetingishard.com/html-and-css/)
+- [CSS property reference](https://cssreference.io/)
 
 ## Terminology
 
@@ -98,77 +104,24 @@ CSS allows multiple selectors to the same declaration by using a `,` as a separa
 
 https://flukeout.github.io/
 
-## Inheritance
+## Specificity
 
-We know that HTML elements form a tree structure: one HTML element can have other HTML elements has children.
-On some HTML element, if we don't define some CSS property (e.g. colour), and the same property has been defined in its parent. Would the element inherit the property from its parent?
-The answer is not very straightforward.
+Two or more competing rules might be applicable to a given element in one HTML page. And the rules may define different property values for the same element. In such cases, which should be applied?
 
-### The inheritance rules only apply when there is no explicit value set for the property
+CSS standard has defined three ways to resolve conflicts.
 
-If you already set a property for an HTML element explicitly, then the element does not need to inherit the property from its parent.
+- Specificity rules
+- Importance hint
+- The order of rules when they are loaded by browser
 
-### Commonly used properties with inheritance behaviour
+### Specificity rules
 
-- border-spacing
-- color
-- cursor
-- font-family
-- font-size
-- font-style
-- font-variant
-- font-weight
-- font
-- letter-spacing
-- line-height
-- list-style-image
-- list-style-position
-- list-style-type
-- list-style
-- text-align
-- text-indent
-- text-transform
-- visibility
-- white-space
-- word-spacing
+All CSS selectors are assigned a weight, and the heaviest selector takes precedence when conflicting CSS rules exist.
 
-### Commonly used properties with **NO** inheritance behaviour
-
-- border
-- background
-- float
-- height
-- top
-- right
-- bottom
-- left
-- position
-- vertical-align
-- width
-- z-index
-
-### Overwrite inherit behaviour
-
-If the default inheritance rule does not work for you in a specific situation, you can explicitly specify that an element needs (or doesn't need) to inherit property from its ancestor.
-
-For example, you can add a CSS rule on a div to force it to inherit the border property from its parent.
-
-```css
-div {
-  border: inherit;
-}
-```
-
-- [revert](https://developer.mozilla.org/en-US/docs/Web/CSS/revert) - set the browser default style
-- [inherit](https://developer.mozilla.org/en-US/docs/Web/CSS/inherit) - take style from immediate parent, set to revert on the rest of the case
-- [initial](https://developer.mozilla.org/en-US/docs/Web/CSS/initial) - set to default style based on css specification
-- [unset](https://developer.mozilla.org/en-US/docs/Web/CSS/unset) - inherit from immediate parent, set to initial on the rest of the case
-
-Use this sparsely, or you may create lots of confusion for yourself and your team.
-
-### Specification rules
-
-Aim for specifications that indicate the item you are choosing without being so strict that variations of the element cannot overwrite the style. In practice, we should avoid using `!important` and inline styling.
+- Inline styles are worth 1,000 points;
+- IDs are worth 100 points;
+- classes are worth 10 points;
+- elements are worth 1 point each.
 
 **Highest to lowest priority**
 
@@ -177,3 +130,43 @@ Aim for specifications that indicate the item you are choosing without being so 
 - id `#submit-button`
 - class `.button`
 - element `p`
+
+For example:
+
+```css
+p {
+  /* 1 point */
+}
+
+p.chicken {
+  /* 11 points */
+}
+
+p#fish {
+  /* 101 points */
+}
+```
+
+The selector with the highest points will win and its styles will override those of other selectors.
+
+Aim for specifications that indicate the item you are choosing, without being so strict that variations of the element cannot overwrite the style. In practice, **we should avoid using `!important` and inline styling.**
+
+### The order of rules
+
+If a rule is defined after one with same specificity, the second rule wins.
+
+For example:
+
+```css
+p {
+  color: black;
+}
+
+p {
+  color: white;
+}
+```
+
+The rule that wins is `color: white`.
+
+In general, the browser loads rules one by one, and the rules loaded later takes precedence over the rules loaded earlier (when they have the same specificity).

@@ -30,7 +30,7 @@ HTML defines the structure of the code. Considering the HTML below taken from [C
 
 ### Element
 
-Elements using consist of an opening and close tag and represents some content or information to the browser.
+Elements consist of an opening and close tag and represents some content or information to the browser.
 
 With opening and closing tags:
 `<p>apple</p>`
@@ -65,7 +65,7 @@ Html element can have attributes that give additional information to the compone
 
 Block elements take the whole width of the page, and any new element will appear on a new line.
 
-some common block elements
+Some common block elements:
 
 - div
 - form
@@ -79,7 +79,7 @@ some common block elements
 
 An inline element will render beside each other.
 
-some common inline element
+Some common inline elements:
 
 - span
 - strong, b
@@ -120,7 +120,7 @@ Must be the first thing to be declared in an HTML file. Tells you the version of
 
 ### Head tag
 
-The `head` tag display information about the page.
+The `head` tag displays information about the page.
 
 ```html
 <head>
@@ -157,7 +157,7 @@ We can also add comments, code in our code that will not be acknowledged by the 
 ### Emmet
 
 Typing HTML can be tedious. Many developer tools support emmet, a toolkit that provides snippets to generate HTML tags.
-The `!` is especially useful to give us a template to start creating HTML pages. Don't get too good at it! We won't be writing much HTML
+The `!` is especially useful to give us a template to start creating HTML pages. Don't get too good at it! We won't be writing much HTML.
 
 see full Emmet cheat sheet here: https://docs.emmet.io/cheat-sheet/
 
