@@ -10,6 +10,12 @@ You can run the guidebook locally by doing:
 $ docsify serve docs
 ```
 
+If you didn't install `docsify-cli` on global level:
+```
+$ npm install
+$ npm start
+```
+
 This way, you will also be able to easily preview your changes before pushing them to the repo.
 
 Here are some older resources that are not currently maintained but may still have relevant material:
