@@ -23,11 +23,11 @@ There can be any number of function execution contexts.
 
 ### Eval Function Execution Context
 
-Code executed inside an `eval` function also gets its own execution context, but as we usually do not use `eval` in JavaScript and will not discuss it here.
+Code executed inside an `eval` function also gets its own execution context, but we will not discuss it here as we usually do not use `eval` in JavaScript.
 
 ## Execution Stack
 
-Execution stack, also known as “calling stack” in other programming languages, is a stack which is used to store all the execution contexts created during the code execution.
+Execution stack, also known as "calling stack" in other programming languages, is a stack which execused to store all the execution contexts created during the code execution.
 
 ```js
 let a = "Hello World!";
@@ -46,22 +46,16 @@ first();
 console.log("Inside Global Execution Context");
 ```
 
-![Execution Context Stack for the above code](https://miro.medium.com/max/2000/1*ACtBy8CIepVTOSYcVwZ34Q.png)
+<img src="javascript/_media/execution-context.png" alt="Execution Context Stack for the above code" width="1000"/>
 
 1. The JavaScript engine creates a global execution context and pushes it to the current execution stack.
-
 2. When a call to first() is encountered, the JavaScript engine creates a new execution context for that function and pushes it to the top of the current execution stack
-
 3. When the second() function is called from within the first() function, the JavaScript engine creates a new execution context for that function and pushes it to the top of the current execution stack.
-
 4. When the second() function finishes, its execution context is popped off from the current stack, and the control reaches to the execution context below it, that is the first() function execution context.
-
 5. When the first() finishes, its execution stack is again popped from the stack and control reaches to the global execution context.
-
 6. Once all the code is executed, the JavaScript engine removes the global execution context from the current stack.
 
 ## Further reading
 
 - **Execution contexts, scopes, closures:** https://ui.dev/ultimate-guide-to-execution-contexts-hoisting-scopes-and-closures-in-javascript/
-
 - https://www.freecodecamp.org/news/execution-context-and-the-call-stack-visually-illustrated-by-a-slice-of-tasty-cake-14f9a64dc460/
