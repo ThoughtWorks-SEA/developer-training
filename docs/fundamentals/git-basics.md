@@ -1,64 +1,11 @@
-# Git basics
+# Git
 
-It is worth noting that there are GUI tools to help you with Git commands, but we do not recommend you start learning Git this way. To become a proficient software developer, you must learn Git through the command line.
+Git is a powerful distributed version control tool. With git, every developer's working copy of the code is also a repository that contains the full history of all changes. The content of the files are secured with a cryptographically secure hashing algorithm. This protects the code and the change history against both accidental and malicious change and ensures that the history is fully traceable.
+While there are GUI tools to help you with git commands, we recommend learning git through the command line.
 
-## Create a local repository
+<img src="fundamentals/_media/git.png" alt="git" width="300"/>
 
-Create a new directory from the Terminal
-
-```sh
-mkdir my-first-repo
-cd my-first-repo
-```
-
-Initialize your Git repository.
-
-```sh
-git init
-```
-
-This creates a new `.git` folder. Let's take a look inside.
-
-```sh
-ls -lah .git
-```
-
-These are the files and folders inside `.git`
-
-```sh
-.git
-├── COMMIT_EDITMSG
-├── FETCH_HEAD
-├── HEAD
-├── config
-├── description
-├── hooks
-├── index
-├── info
-├── logs
-├── objects
-└── refs
-```
-
-## Create a remote repository
-
-You've just created a local Git repository, but if anything was to happen to your computer you would lose all your data. Now we want to create a remote repository and push our changes there so that we have a backup.
-
-You can use any Git SaaS service provider, such as GitLab, GitHub, Bitbucket, or even roll out your own. We will be using GitHub.
-
-Create a new repository on GitHub and copy the Git repository URL.
-
-```sh
-git remote add origin <your-git-repo-url>
-```
-
-Now check that you have added it correctly.
-
-```sh
-git remote --verbose
-```
-
-You can also do `git remote -v`.
+Read more on git [here](https://www.atlassian.com/git/tutorials/what-is-git).
 
 ## Git lifecycle
 
@@ -66,64 +13,24 @@ There are two types of files in Git - tracked and untracked files. When you add 
 
 ![Git lifecycle](https://git-scm.com/book/en/v2/images/lifecycle.png)
 
-## Add your changes
-
-Check the status of your files
-
-```sh
-git status
-```
-
-Create a `README.md` file and add some content to it.
-
-Some ways you can do this:
-
-1. `vi README.md` -> `i` to enter insert mode and add your content -> `esc` -> `:wq` to exit and save the file
-2. `touch README.md` to create the file -> `code .` to open the current directory in VS Code -> add content to file and save
-
-Now check the status again.
-
-You should see that `README.md` is now an untracked file.
-
-To tell Git to track your `README.md` file, run the following command
-
-```sh
-git add -N README.md
-git status
-```
-
-What do you notice about `README.md` now?
-
-View changes you have made
-
-```sh
-git diff
-```
-
-Add your changes
-
-```sh
-git add README.md
-git status
-```
-
-Commit your changes (local)
-
-```sh
-git commit -m "Initial commit"
-```
-
-Push your changes (remote)
-
-```sh
-git push origin main
-```
-
 ## Ignore files and folders
 
 You can use .gitignore to ignore files and folders that we do not want inside the repository. A folder commonly ignored is `node_modules` and a file commonly ignored is `.env`.
 
-## Write good commit messages
+## Basic git commands
+
+```
+git log
+git status
+git pull
+git commit
+git commit -m 'Your commit message'
+git push
+```
+
+We will try these commands out later in a lab.
+
+## Writing good commit messages
 
 Adding a good commit message is very important in a project. Follow these [rules](https://chris.beams.io/posts/git-commit/) for good commit messages.
 
@@ -140,7 +47,7 @@ The seven rules of a great Git commit message
 When pairing (or mob pairing), it is often also good practice to include your names in the commit message:
 
 ```
-Author: Sabrina Sulong <sabrina.sulong@thoughtworks.com>
+Author: Sabrina Sulong <sabrina@email.com>
 Date:   Mon Jul 12 14:10:32 2021 +0800
 
 [Sabrina/Bernie] Remove deprecated methods
@@ -149,13 +56,13 @@ Date:   Mon Jul 12 14:10:32 2021 +0800
 or
 
 ```
-Author: Sabrina Sulong <sabrina.sulong@thoughtworks.com>
+Author: Sabrina Sulong <sabrina@email.com>
 Date:   Mon Jul 12 14:10:32 2021 +0800
 
 Implement export function for reports
 
-Co-authored by Bernie <bernie@thoughtworks.com>
-Co-authored by Spangle <spangle@thoughtworks.com>
+Co-authored by Bernie <bernie@email.com>
+Co-authored by Spangle <spangle@email.com>
 ```
 
 ## Fork an existing repository
