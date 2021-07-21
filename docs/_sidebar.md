@@ -12,6 +12,7 @@
   - [Common shortcuts](fundamentals/shortcuts)
   - [Git basics](fundamentals/git-basics)
   - [Lab: Git practice](fundamentals/git-practice)
+  - [Git advanced](fundamentals/git-advanced)
   - [How the Internet works](fundamentals/how-internet-works)
   - [HTTP](fundamentals/http)
   - [Technical terms](fundamentals/technical-terms)
@@ -136,7 +137,6 @@
   - [CI/CD](delivering-software/ci-cd)
   - [Circle CI](delivering-software/circle-ci)
   - [Git collab](delivering-software/git-collab)
-  - [Git advanced](delivering-software/git-advanced)
   - [Clean code](delivering-software/clean-code)
   - [Refactoring](delivering-software/refactoring)
 
