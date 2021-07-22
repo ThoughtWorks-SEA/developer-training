@@ -55,7 +55,8 @@ console.log("Inside Global Execution Context");
 5. When the first() finishes, its execution stack is again popped from the stack and control reaches to the global execution context.
 6. Once all the code is executed, the JavaScript engine removes the global execution context from the current stack.
 
-## Further reading
+## More resources
 
 - **Execution contexts, scopes, closures:** https://ui.dev/ultimate-guide-to-execution-contexts-hoisting-scopes-and-closures-in-javascript/
-- https://www.freecodecamp.org/news/execution-context-and-the-call-stack-visually-illustrated-by-a-slice-of-tasty-cake-14f9a64dc460/
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/exrc_rLj5iw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
