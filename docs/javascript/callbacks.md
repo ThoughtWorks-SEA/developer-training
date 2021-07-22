@@ -31,7 +31,7 @@ function sleepInSeptember(wakeMeUpWhenSeptemberEnds) {
 We can pass in a callback function:
 
 ```js
-sleepInSeptember(function() {
+sleepInSeptember(function () {
   console.log("wake up");
 });
 ```
@@ -68,6 +68,7 @@ Let's code our own Map and Filter functions to understand callbacks:
 
 ```js
 const assert = require("assert");
+
 const myMap = (array, callback) => {
   // fill in your code
 };
@@ -76,17 +77,17 @@ const myFilter = (array, callback) => {
   // fill in your code
 };
 
-assert.deepEqual(
-  myMap([1, 2, 3, 4], (element, index) => element * 2) === [2, 4, 6, 8]
+assert.deepStrictEqual(
+  myMap([1, 2, 3, 4], (element) => element * 2),
+  [2, 4, 6, 8]
 );
 
-assert.deepEqual(
-  myFilter([1, 2, 3, 4], (element, index) => element < 3) === [1, 2]
+assert.deepStrictEqual(
+  myFilter([1, 2, 3, 4], (element) => element < 3),
+  [1, 2]
 );
 ```
 
-where the callback should be expected to have two parameters, element and index.
-
-Do not use the original map or filter function. You can use loops.
-
-Your functions should return a new array.
+- Do not use the original map or filter function
+- You can use loops
+- Your functions should return a new array
