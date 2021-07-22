@@ -20,7 +20,7 @@ In the example below, we implement some logic to handle user logins to a server 
 
 (asynchronous tasks in a chain)
 
-If these tasks were synchronous tasks (i.e. if they do not involve any asynchronous operations), we could have written the codes like below:
+If these tasks were synchronous tasks (i.e. if they do not involve any asynchronous operations), we could have written it like this:
 
 ```js
 let user = User.login("user", "pass");
@@ -66,6 +66,8 @@ Note: you still need to use callbacks with Promise. However, now the callbacks a
 
 # Promise API (in ES6)
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RvYYCGs45L4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Mother's day promise example
 
 It's Mother's day this Friday.
@@ -84,7 +86,7 @@ At that time, there are two possible outcomes:
 
 ### Reaction to a promise
 
-Knowing that I don't always keep my promise (:( oh no ), my mother has the following plans:
+Knowing that I don't always keep my promise (oh no 😞), my mother has the following plans:
 
 - If the promise is **fulfilled**, she will buy me a gift in return.
 - If the promise is **rejected**, she will complain to my father.
@@ -133,7 +135,7 @@ Note that this Promise constructor takes in one callback function (called execut
 
 The executor function basically does some asynchronous task, and invoke either **fulfill** or **reject** based on the success/failure of that asynchronous task. When one of those callbacks is called, the promise is changed from **pending** state to either **fulfilled** state, or **rejected** state.
 
-If there are any error thrown from the executor function, the promise is also **rejected** automatically.
+If there are any errors thrown from the executor function, the promise is also **rejected** automatically.
 
 ### What is this fulfill and reject parameter?
 
