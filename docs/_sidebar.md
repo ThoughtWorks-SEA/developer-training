@@ -122,7 +122,7 @@
     <!-- - [Security encrypt decrypt](backend/security-encrypt-decrypt) -->
     <!-- - [Security hashing and others](backend/security-hash-others) -->
   - [Security cookie](backend/security-cookie)
-  - [Mongoose middleware](backend/mongoose-middleware)
+  - [Mongoose middleware](backend/mongodb/mongoose-middleware)
   - [Security jwt](backend/security-jwt)
   <!-- - [Security jwt testing](backend/security-jwt-testing) -->
   - [Lab: Express.js Mongoose](backend/mongodb/express-mongoose-lab)
