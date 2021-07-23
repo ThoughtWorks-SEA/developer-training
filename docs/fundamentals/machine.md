@@ -223,7 +223,7 @@ Verify `n` was installed.
 n --version
 ```
 
-### Install MongoDB
+<!-- ### Install MongoDB
 
 Find the instructions for your specific OS and version for the [Community Edition](https://docs.mongodb.com/manual/administration/install-community/).
 
@@ -231,7 +231,7 @@ If you're running Windows, please add the MongoDB bin folder to your System PATH
 
 ### Install client to view data in MongoDB
 
-[MongoDB Compass](https://www.mongodb.com/products/compass).
+[MongoDB Compass](https://www.mongodb.com/products/compass). -->
 
 ### Configuring Git
 
@@ -258,5 +258,6 @@ node --version
 which npm
 npm --version
 code --version
-mongod --version
 ```
+
+<!-- mongod --version -->

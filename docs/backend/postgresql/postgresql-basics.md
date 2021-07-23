@@ -18,9 +18,7 @@ Now that we know what the structure looks like and how to access the data, try i
 
 **Mac**
 
-Follow the instructions for the installation [here](https://www.postgresqltutorial.com/install-postgresql-macos/).
-
-Alternatively, you can use Homebrew:
+Follow the instructions for the installation [here](https://www.postgresqltutorial.com/install-postgresql-macos/). Alternatively, you can use Homebrew:
 
 ```
 brew install postgresql
@@ -28,9 +26,7 @@ brew install postgresql
 
 **Windows**
 
-Follow the instructions for the installation [here](https://www.postgresqltutorial.com/install-postgresql/).
-
-Google is your best friend if you run into any issues. 🔎
+Follow the instructions for the installation [here](https://www.postgresqltutorial.com/install-postgresql/). Google is your best friend if you run into any issues. 🔎
 
 ### Start/Stop Postgres server
 
