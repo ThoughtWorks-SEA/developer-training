@@ -64,6 +64,12 @@ psql
 
 If you can successfully launch the Postgres terminal, your server is running.
 
+You might need to run the following if you hit `psql: error: FATAL:  database <database-name> does not exist`.
+
+```
+createdb
+```
+
 ### Using the command shell
 
 [PostgreSQL command line cheatsheet](https://gist.github.com/Kartones/dd3ff5ec5ea238d4c546)
@@ -84,8 +90,20 @@ SELECT current_database();
 # list tables
 \dt
 
+# quit
+\q
+
 # help
 \?
+```
+
+**Create Another Database And Enter Command Shell**
+
+In the terminal, run the following.
+
+```
+createdb devTraining
+psql -d devTraining
 ```
 
 **Create Users table**
@@ -106,6 +124,15 @@ INSERT into users VALUES
   (3, 'Sabrine');
 ```
 
-### Using Postico
+## Exploring the PostgreSQL databases
 
-You can use [Postico](https://eggerapps.at/postico/) to explore your Postgres databases.
+### Graphical Tools
+
+If you follow the installation step in [PostgreSQL Tutorial](https://www.postgresqltutorial.com/), you should already have access to the [pgAdmin](https://www.pgadmin.org/download/), which is a GUI tool for managing and developing your databases.
+
+**On Mac OS**
+
+You can also install [pgAdmin](https://www.pgadmin.org/download/) via Homebrew. Alternatively, here are some of the other [GUI Clients Apps for PostgreSQL on the Mac](https://postgresapp.com/documentation/gui-tools.html).
+```
+brew install --cask pgadmin4
+```
