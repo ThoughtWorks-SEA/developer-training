@@ -264,11 +264,11 @@ Besides putting the mock implementation in the test case itself, you can also pu
 
 The benefit of this approach is that the mock implementation can be shared/reused by multiple test cases.
 
-More details can be found in Jest documentation on manual mocks.
+More details can be found in Jest documentation on [manual mocks](https://jestjs.io/docs/manual-mocks).
 
-Putting it altogether
+## Lab: Mocks and Stubs
 
-Lab: https://github.com/thoughtworks-jumpstart/mocks-and-stubs-lab
+Practice mocks and stubs in this lab: https://github.com/thoughtworks-jumpstart/mocks-and-stubs-lab
 
 Solutions: https://github.com/songguoqiang/mocks-and-stubs-lab (don't peek unless you have to!)
 
