@@ -23,7 +23,6 @@ Use the `dotenv` package.
 "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "start:dev": "cross-env NODE_ENV=development nodemon index.js",
-    "start:db": "mongod --dbpath ~/data/db",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -113,7 +112,7 @@ Without using the npm package `cors`, you will have to add the headers to the re
 The following code is taken from [enable-cors.org](enable-cors.org).
 
 ```js
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",

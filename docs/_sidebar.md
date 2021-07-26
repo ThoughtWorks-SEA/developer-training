@@ -127,7 +127,8 @@
   <!-- - [Security jwt testing](backend/security-jwt-testing) -->
   - [Lab: Express.js Mongoose](backend/mongodb/express-mongoose-lab)
   - [Express.js to production](backend/express-to-production)
-  - [Express.js deploy](backend/express-deploy)
+  <!-- - [Express.js deploy](backend/express-deploy-mongo) -->
+  - [Express.js deploy](backend/express-deploy-postgres)
     <!-- - [Lab: Company reviews](backend/company-reviews-lab) -->
     <!-- - [Labs: Express / Mongoose](backend/backend-labs) -->
 
