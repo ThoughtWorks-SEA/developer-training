@@ -4,22 +4,18 @@ Follow the instructions with the specific operating system for your machine.
 
 Once that's done, follow instructions in the [General](#general) section.
 
-## Windows
-
-**⚠️ You MUST run all installation commands with administrator privileges**
-
-Follow the following instructions to run commands with administrator privileges:
-
-- Run [PowerShell with administrator privilege](https://www.thewindowsclub.com/how-to-open-an-elevated-powershell-prompt-in-windows-10)
-- Run [Command Prompt with administrator privilege](https://www.howtogeek.com/194041/how-to-open-the-command-prompt-as-administrator-in-windows-8.1/).
+# Windows
 
 ### Git for Windows
 
-Download and install [Git for Windows](https://gitforwindows.org/). You may follow [this tutorial](https://www.stanleyulili.com/git/how-to-install-git-bash-on-windows/) to install git bash.
+Download and install [Git for Windows](https://gitforwindows.org/). Select all default values.
 
 ### Install Chocolatey package manager
 
-Install Chocolatey by following these [instructions](https://chocolatey.org/install).
+**⚠️ Note: You MUST run all installation commands with administrator privileges**
+
+1. Run [PowerShell with administrator privilege](https://www.thewindowsclub.com/how-to-open-an-elevated-powershell-prompt-in-windows-10)
+1. On PowerShell, install Chocolatey by following these [instructions](https://chocolatey.org/install).
 
 ### Upgrading outdated packages
 
@@ -34,21 +30,15 @@ choco upgrade <package-name>
 Install Node.js and npm
 
 ```sh
-choco install nodejs
+choco install nodejs-lts
 ```
 
-If node is already installed, upgrade to the latest version of node
-
-```sh
-choco upgrade nodejs
-```
-
-For more details, see https://chocolatey.org/packages/nodejs.
+For more details, see [nodejs](https://chocolatey.org/packages/nodejs) / [nodejs-lts](https://community.chocolatey.org/packages/nodejs-lts).
 Alternatively, you can also download nodejs and npm from the [official website](https://nodejs.org/en/).
 
-## Windows Subsystem for Linux (WSL)
+# Windows Subsystem for Linux (WSL)
 
-If you're on Windows 10, you can use [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/about?redirectedfrom=MSDN), which provides a familiar Bash environment with Unix command line utilities.
+If you're on Windows 10, you can use [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/about?redirectedfrom=MSDN), which provides a familiar Bash environment with Unix command line utilities. **Running on WSL tends to require a lot of troubleshooting, so keep this in mind before deciding to explore it.**
 
 - WSL is available only in 64-bit versions of Windows 10 from version 1607. It is also available in Windows Server 2019.
 
@@ -96,7 +86,7 @@ If you're on Windows 10, you can use [Windows Subsystem for Linux (WSL)](https:/
 
 ```
 
-## Mac
+# Mac
 
 ### Install Homebrew package manager
 
@@ -136,7 +126,7 @@ If you already have these packages previously installed on your computer, then y
 brew upgrade <package-name>
 ```
 
-## Linux
+# Linux
 
 ### Package manager
 
@@ -186,11 +176,17 @@ sudo apt install --only-upgrade <package-name>
 sudo dnf upgrade <package-name>
 ```
 
-## General
+# General
 
 Follow these instructions for all operating systems:
 
-### Install Visual Studio Code `code` command in PATH
+### Install Visual Studio Code
+
+Install VS Code [here](https://code.visualstudio.com/download).
+
+### Install VS Code `code` command in PATH
+
+For Windows, this should already enabled by default, so you can skip this step.
 
 - Open the command palette (Mac: Cmd+Shift+P; Windows: Ctrl+Shift+P or just press F1.)
 - Type `shell` and select `Shell Command: Install 'code' command in PATH`.
@@ -205,13 +201,17 @@ To open the entire folder / directory:
 code .
 ```
 
-### Install Visual Studio Code extensions
+### Install VS Code extensions
 
 Install these useful Visual Studio Code [extensions](/miscellaneous/resources?id=vs-code-extensions)
 
 ### Install Node version manager
 
-We often need to use different versions of Node on different projects. The easiest way to manage different versions of Node for multiple projects on your computer, is to use a version manager like [`n`](https://github.com/tj/n) or [`nvm`](https://github.com/nvm-sh/nvm).
+We often need to use different versions of Node on different projects. The easiest way to manage different versions of Node for multiple projects on your computer, is to use a version manager like [`n`](https://github.com/tj/n) or [`nvm`](https://github.com/nvm-sh/nvm#installing-and-updating).
+
+For Windows, install [`nvm-windows`](https://github.com/coreybutler/nvm-windows) instead.
+
+To install `n`:
 
 ```
 npm install --global n
