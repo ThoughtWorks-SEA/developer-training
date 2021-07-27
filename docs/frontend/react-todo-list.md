@@ -89,7 +89,9 @@ export default TodoList;
 ## Creating a TodoItem Component
 
 1. Create a TodoItem component to host todo logic
-2. Find a good looking green tick image and put it inside the public folder
+2. Find a good looking green tick image (or use the one below) and put it inside the public folder
+
+<img src="frontend/_media/tick.png" alt="green tick" width="300"/>
 
 ```javascript
 import React from "react";
@@ -121,6 +123,7 @@ export default TodoItem;
         <TodoItem name={todo.name} isDone={todo.isDone} />
       </div>
     ));
+  }
 ```
 
 ![todo1](_media/todo1.png)
@@ -187,7 +190,7 @@ In TodoList
 
 ```javascript
 import React from "react";
-import Todo from "./Todo";
+import TodoItem from "./TodoItem";
 import { v4 as uuidv4 } from "uuid"; // 1. import the UUID
 
 class TodoList extends React.Component {
@@ -243,7 +246,7 @@ In our TodoItem
 
 ```javascript
 import React from "react";
-import "./Todo.css";
+import "./TodoItem.css";
 
 // destructure the new property "setTodo"
 const TodoItem = ({ name, isDone, setTodo }) => (
