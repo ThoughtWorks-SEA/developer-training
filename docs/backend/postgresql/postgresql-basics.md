@@ -26,7 +26,7 @@ brew install postgresql
 
 **Windows**
 
-Follow the instructions for the installation [here](https://www.postgresqltutorial.com/install-postgresql/). Google is your best friend if you run into any issues. 🔎
+Follow the instructions for the installation [here](https://www.postgresqltutorial.com/install-postgresql/).
 
 ### Start/Stop Postgres server
 
@@ -44,14 +44,18 @@ brew services stop postgresql
 
 **Windows**
 
-Find the PostgreSQL database directory, e.g. `C:\Program Files\PostgreSQL\12.7\data`, then:
+Find the PostgreSQL directory, e.g. `C:\Program Files\PostgreSQL\13` (Check that the path is correct! The version may be different), then:
+
+Add this path into your system's [environment variables](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html#GUID-DD6F9982-60D5-48F6-8270-A27EC53807D0): `C:\Program Files\PostgreSQL\13\bin` (Note the additional `\bin`)
+
+On PowerShell:
 
 ```
-pg_ctl -D "C:\Program Files\PostgreSQL\12.7\data" start
+pg_ctl -D "C:\Program Files\PostgreSQL\13\data" start
 ```
 
 ```
-pg_ctl -D "C:\Program Files\PostgreSQL\12.7\data" stop
+pg_ctl -D "C:\Program Files\PostgreSQL\13\data" stop
 ```
 
 ## PostgreSQL command shell
@@ -64,7 +68,7 @@ psql
 
 If you can successfully launch the Postgres terminal, your server is running.
 
-You might need to run the following if you hit `psql: error: FATAL:  database <database-name> does not exist`.
+You might need to run the following if you hit `psql: error: FATAL: database <database-name> does not exist`.
 
 ```
 createdb
@@ -133,6 +137,7 @@ If you follow the installation step in [PostgreSQL Tutorial](https://www.postgre
 **On Mac OS**
 
 You can also install [pgAdmin](https://www.pgadmin.org/download/) via Homebrew. Alternatively, here are some of the other [GUI Clients Apps for PostgreSQL on the Mac](https://postgresapp.com/documentation/gui-tools.html).
+
 ```
 brew install --cask pgadmin4
 ```
