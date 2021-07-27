@@ -140,6 +140,7 @@
   - [Git collab](delivering-software/git-collab)
   - [Clean code](delivering-software/clean-code)
   - [Refactoring](delivering-software/refactoring)
+  - [Deploying on Heroku](delivering-software/deploying-full-stack)
 
 - **Computer Science**
 

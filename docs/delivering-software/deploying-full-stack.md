@@ -1,0 +1,70 @@
+# Deploying on Heroku
+
+A rough guide to deploying your full-stack app on Heroku.
+
+Note that there are many other ways to accomplish this. For example, you can choose to deploy your backend on Heroku and your frontend on Netlify - the configuration will just be different.
+
+## Getting started
+
+1. Create your backend Express app
+1. Within your Express app, create a React app named `client`
+1. You may need to add this into `client/.env`: `SKIP_PREFLIGHT_CHECK=true`
+
+### File structure
+
+An approximate of how your file structure might look:
+
+```
+𝗏 client
+  > build
+  > node_modules
+  > public
+  > src
+  .env
+  .gitignore
+  package-lock.json
+  package.json
+  README.md
+> db
+> models
+> node_modules
+> routes
+> controllers
+.env
+.gitignore
+app.js
+index.js
+package-lock.json
+package.json
+README.md
+```
+
+### App config
+
+```json
+// package.json
+"scripts": {
+  ...
+  "heroku-postbuild": "npm install --prefix ./client && npm run build --prefix ./client"
+}
+```
+
+`npm install path`
+
+```js
+// app.js
+const path = require("path");
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("./client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+```
+
+### Heroku config
+
+1. Create new Heroku app, link it to your Github repo
+1. You may need to add this into your Heroku config vars: `SKIP_PREFLIGHT_CHECK=true`
