@@ -68,3 +68,11 @@ if (process.env.NODE_ENV === "production") {
 
 1. Create new Heroku app, link it to your Github repo
 1. You may need to add this into your Heroku config vars: `SKIP_PREFLIGHT_CHECK=true`
+
+### [WIP] Database config
+
+On Heroku:
+
+1. Add the "Heroku Postgres" add-on under free "hobby dev" tier. In your config vars, you should see a new variable populated for you called `DATABASE_URL`.
+<!-- 1. Add config var: `PROJECT_PATH=.`
+1. Add buildpack `https://github.com/timanovsky/subdir-heroku-buildpack.git` and drag to top of list -->
