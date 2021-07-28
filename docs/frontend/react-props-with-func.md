@@ -70,7 +70,7 @@ function App() {
 
 Sidenote:
 
-It is nice to keep things **DRY**(Don't Repeat Yourself) and have reusable components but ensure that the components are rightfully designed to have similar behaviour or appearance - the behaviour and appearance are not just concidentally similar. I.E. if a username and shopping cart item have the same style and format, it would still be better to separate them to use separate components and apply the same style as they work independently and are likely to change independently from one another.
+While it is nice to keep things **DRY** (Don't Repeat Yourself) and have reusable components, **ensure that the components are rightfully designed to have similar behaviour or appearance**, i.e. if a username item and a shopping cart item both have the same style and format, it would still be better to separate them into separate components and apply the same style as they work independently and are likely to change independently from one another.
 
 It is sometimes more readable to destructure out the value in a Component.
 

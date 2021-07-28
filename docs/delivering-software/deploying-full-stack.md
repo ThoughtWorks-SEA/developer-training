@@ -10,26 +10,26 @@ Note that there are many other ways to accomplish this. For example, you can cho
 1. Within your Express app, create a React app named `client`
 1. You may need to add this into `client/.env`: `SKIP_PREFLIGHT_CHECK=true`
 
-### File structure
+### Folder structure
 
-An approximate of how your file structure might look:
+An approximate of how your folder structure might look:
 
 ```
-𝗏 client
-  > build
-  > node_modules
-  > public
-  > src
+client
+  build
+  node_modules
+  public
+  src
   .env
   .gitignore
   package-lock.json
   package.json
   README.md
-> db
-> models
-> node_modules
-> routes
-> controllers
+db
+models
+node_modules
+routes
+controllers
 .env
 .gitignore
 app.js

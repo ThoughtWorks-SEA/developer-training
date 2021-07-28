@@ -67,6 +67,7 @@
   - [Getting Started](frontend/react-hello-world)
   - [React JSX](frontend/react-jsx)
   - [Imports and Exports of Component](frontend/import-export-components)
+  - [Folder structure](frontend/folder-structure)
   - [React Props with Functional Components](frontend/react-props-with-func)
   - [React States with Class Components](frontend/react-state-with-class)
   - [Lifecycle of React Components](frontend/react-lifecycle)
