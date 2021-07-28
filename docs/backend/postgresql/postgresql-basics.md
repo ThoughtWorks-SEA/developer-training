@@ -143,3 +143,7 @@ You can also install [pgAdmin](https://www.pgadmin.org/download/) via Homebrew. 
 ```
 brew install --cask pgadmin4
 ```
+
+## Troubleshooting
+
+- To reset your PostgreSQL admin password: https://community.progress.com/s/article/How-to-reset-PostgreSQL-admin-password (Windows)
