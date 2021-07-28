@@ -1,4 +1,6 @@
-# Folder structure
+# Conventions
+
+## Folder structure
 
 **For simple applications:**
 
@@ -43,7 +45,11 @@ src/
     ProfileAPI.js
 ```
 
-### Naming conventions
+**Additional resources:**
+
+- [Presentational/Container components](https://github.com/krasimir/react-in-patterns/blob/master/book/chapter-06/README.md)
+
+## Naming
 
 - directories should be kebab-case, e.g. `my-component`
 - js/css files should be PascalCase, e.g. `MyComponent.js`
