@@ -46,7 +46,9 @@ brew services stop postgresql
 
 Find the PostgreSQL directory, e.g. `C:\Program Files\PostgreSQL\13` (Check that the path is correct! The version may be different), then:
 
-Add this path into your system's [environment variables](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html#GUID-DD6F9982-60D5-48F6-8270-A27EC53807D0): `C:\Program Files\PostgreSQL\13\bin` (Note the additional `\bin`)
+Add this path into your machine's `Path` [system variable](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html#GUID-DD6F9982-60D5-48F6-8270-A27EC53807D0):
+
+`C:\Program Files\PostgreSQL\13\bin` (Note the additional `\bin`)
 
 On PowerShell:
 
