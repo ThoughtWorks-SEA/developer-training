@@ -8,83 +8,17 @@ Once that's done, follow instructions in the [General](#general) section.
 
 ### Git for Windows
 
-Download and install [Git for Windows](https://gitforwindows.org/). Select all default values.
-
-### Install Chocolatey package manager
-
-**⚠️ Note: You MUST run all installation commands with administrator privileges**
-
-1. Run [PowerShell with administrator privilege](https://www.thewindowsclub.com/how-to-open-an-elevated-powershell-prompt-in-windows-10)
-1. On PowerShell, install Chocolatey by following these [instructions](https://chocolatey.org/install).
-
-### Upgrading outdated packages
-
-If you already have these packages previously installed on your computer, then you would want to make sure they are up to date. If you previously installed them via `choco` then run the following command to upgrade your packages.
-
-```sh
-choco upgrade <package-name>
-```
+Download and install [Git for Windows](https://gitforwindows.org/) (LTS version). Select all default values.
 
 ### Install Node.js and npm
 
-Install Node.js and npm
+Download nodejs and npm from the [official website](https://nodejs.org/en/).
 
-```sh
-choco install nodejs-lts
-```
+### Additional resources
 
-For more details, see [nodejs](https://chocolatey.org/packages/nodejs) / [nodejs-lts](https://community.chocolatey.org/packages/nodejs-lts).
-Alternatively, you can also download nodejs and npm from the [official website](https://nodejs.org/en/).
+The following is **NOT REQUIRED**, and is meant for your personal exploration outside of this training.
 
-# Windows Subsystem for Linux (WSL)
-
-If you're on Windows 10, you can use [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/about?redirectedfrom=MSDN), which provides a familiar Bash environment with Unix command line utilities. **Running on WSL tends to require a lot of troubleshooting, so keep this in mind before deciding to explore it.**
-
-- WSL is available only in 64-bit versions of Windows 10 from version 1607. It is also available in Windows Server 2019.
-
-### Update windows to latest version
-
-1. Click on the Home screen button and search for update
-2. Select check for updates, this should bring you to the Windows Update page
-3. Click on download, go for a break, it will take awhile and require several restart
-
-### Enable Window Subsystem
-
-1. Open powershell with admin privillege
-2. Run command `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
-3. Restart computer
-
-### Install Ubuntu
-
-1. Go to microsoft page to install Ubuntu
-2. Initialise a new distro instance
-3. Create user with password
-4. Remember your password or store in password manager
-
-### Install Node
-
-1. Open Ubuntu on windows
-2. Update package manager `sudo apt update && sudo apt upgrade`
-3. Update node source `curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -`
-4. Install node `sudo apt-get install nodejs`
-5. Check node version `node --version`
-6. Check npm version `npm --version`
-
-### Set up VS Code
-
-1. Install VS code
-2. Install wsl extension `remote wsl extension`
-   `https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl`
-3. restart vscode
-4. Open settings.json (ctrl + shift + p, type `settings.json`)
-5. Add configuration for terminal integrated shell windows
-
-```json
-{
-   "terminal.integrated.shell.windows": "C:\\Windows\\System32\\bash.exe"`
-}
-
-```
+1. You can also use [Chocolatey](https://chocolatey.org/install) to install and manage your packages. For example, you would be able to install [nodejs](https://chocolatey.org/packages/nodejs) with `choco install nodejs`. Note that you will need to run all installation commands on [PowerShell with administrator privilege](https://www.thewindowsclub.com/how-to-open-an-elevated-powershell-prompt-in-windows-10).
 
 # Mac
 
@@ -184,7 +118,7 @@ Follow these instructions for all operating systems:
 
 Install VS Code [here](https://code.visualstudio.com/download).
 
-### Install VS Code `code` command in PATH
+#### Install VS Code `code` command in PATH (optional)
 
 For Windows, this should already enabled by default, so you can skip this step.
 
@@ -201,11 +135,11 @@ To open the entire folder / directory:
 code .
 ```
 
-### Install VS Code extensions
+#### Install VS Code extensions (optional)
 
-Install these useful Visual Studio Code [extensions](/miscellaneous/resources?id=vs-code-extensions)
+Here are some useful Visual Studio Code [extensions](/miscellaneous/resources?id=vs-code-extensions). For now, install **GitLens**. Throughout the training, you can explore the other extensions and install the ones you find useful.
 
-### Install Node version manager
+### Install Node version manager (optional)
 
 We often need to use different versions of Node on different projects. The easiest way to manage different versions of Node for multiple projects on your computer, is to use a version manager like [`n`](https://github.com/tj/n) or [`nvm`](https://github.com/nvm-sh/nvm#installing-and-updating).
 
@@ -235,16 +169,18 @@ If you're running Windows, please add the MongoDB bin folder to your System PATH
 
 ### Configuring Git
 
-To attach your full name to every commit you make, simply add this line (of course, change it to your own name):
+To attach your full name to every commit you make, simply add this line:
 
 ```sh
-git config --global user.name "Jane Doe"
+git config --global user.name "<your name>"
 ```
 
-You can keep your email address private by using `<username>@users.noreply.github.com`. Just replace `<username>` with your actual GitHub username (e.g. `janedoe@users.noreply.github.com`)
+For example, `git config --global user.name "Jane Doe"`.
+
+And your email:
 
 ```sh
-git config --global user.email "<username>@users.noreply.github.com"
+git config --global user.email "<your email>"
 ```
 
 ### Verify installations
