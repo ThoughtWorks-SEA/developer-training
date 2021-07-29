@@ -3,7 +3,7 @@
 ## Covers
 
 1. Overview
-2. [Optional] Fetch API
+2. Fetch API
 3. Axios
 4. Handling Error
 5. Waiting for an item to load
@@ -42,7 +42,7 @@ In this course, we are going to use JavaScript Object Notation(JSON) to transfer
 }
 ```
 
-## [Optional] Fetch API
+## Fetch API
 
 Fetch API is the browser default API to handle HTTP request and response. Fetch allows us a quick and easy way to retrieve data from the server without building an `XMLHttpRequest` object.
 
@@ -91,6 +91,17 @@ fetch(url, {
 ```
 
 `method`, `headers`, `body` are standard config options you might use. There are other more advanced configurations.
+
+## Lab: Hacker news reader
+
+https://github.com/thoughtworks-jumpstart/fetch-react-lab
+
+- Implement your new Article component with React Hooks
+- For simplicity, display just the article's `Author` and `Content`
+
+The final result should look something like this (feel free to style it differently):
+
+![hacker news reader](_media/hacker-news-reader.png)
 
 ## Axios
 
