@@ -285,7 +285,7 @@ The API `https://jsonplaceholder.typicode.com/comments` returns an array of comm
 - on clicking submit button fetch the comments based on the postId `https://jsonplaceholder.typicode.com/comments?postId=1`
 - feel free to add some styles to improve the design
 
-2. Add a loader
+2. Add a loader with `react-loader-spinner`
 
 - when the postId changes, it takes some time to load the data
 - show a loader before the data returns
@@ -294,4 +294,4 @@ The API `https://jsonplaceholder.typicode.com/comments` returns an array of comm
 
 - when data is empty such as when user type in 999 as the postid: `https://jsonplaceholder.typicode.com/comments?postId=999`, display: `"No comments available for postid: 999"`
 
-4. [optional] create a `utils/axios` to configure the baseUrl of Axios.
+4. [Optional] Since we are calling from the same API, let's try to refactor to reduce repetition. Create a `utils/axios.js` to configure the [baseURL](https://github.com/axios/axios#creating-an-instance) of Axios.
