@@ -22,8 +22,8 @@ For a long explanation, you can refer to the [official documentation](https://we
 
 ## Simple demo on Webpack
 
-1. create a new folder: `mkdir webpack-demo`
-2. create an `index.html` file
+1. Create a new folder: `mkdir webpack-demo`
+2. Create an `index.html` file
 
 ```html
 <!DOCTYPE html>
@@ -38,15 +38,14 @@ For a long explanation, you can refer to the [official documentation](https://we
 </html>
 ```
 
-3. install Webpack
+3. Install Webpack
 
 ```sh
 npm init -y
-npm install webpack webpack-cli
-npm install moment
+npm install webpack webpack-cli moment
 ```
 
-4. create an `index.js` file in the `src` folder
+4. Create an `index.js` file in the `src` folder
 
 ```javascript
 import moment from "moment";
@@ -54,6 +53,8 @@ import moment from "moment";
 const container = document.getElementById("container");
 container.appendChild(document.createTextNode(moment()));
 ```
+
+View index.html on a browser or run in live server. Do you see anything show up?
 
 5. Create a Webpack config file `webpack.config.js`
 
@@ -76,9 +77,9 @@ module.exports = {
 
 7. Run the build script `npm run webpack:dev`, a file is created for you `dist/bundle.js`
 
-8. View index.html on a browser or run in live server. The time should show correctly.
+8. View index.html on a browser again. The time, it should display successfully.
 
-Webpack have successfully bundle `moment.js` with `index.js` to a single file `bundle.js`
+Webpack has successfully bundled `moment.js` with `index.js` to a single file `bundle.js`!
 
 ## What is Babel
 
@@ -111,7 +112,7 @@ function SayHello(_ref) {
       },
     },
     "Hello ",
-    name,
+    name
   );
 }
 ```
