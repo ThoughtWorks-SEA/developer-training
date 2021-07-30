@@ -5,6 +5,7 @@
 1. Login to your Heroku account and create a Heroku app.
 1. Under the **Deploy** tab, see **Deployment method**. Select "GitHub". Connect to your GitHub repo.
 1. Under the **Overview** tab, see **Installed add-ons**. Add "Heroku Postgres" under the free "Hobby Dev" tier.
+1. Under the **Settings** tab, see **Buildpacks**. Add `https://github.com/timanovsky/subdir-heroku-buildpack.git` and drag it to the top of the list.
 
 ### Connect to Heroku Postgres database
 

@@ -67,12 +67,26 @@ if (process.env.NODE_ENV === "production") {
 ### Heroku config
 
 1. Create new Heroku app, link it to your Github repo
-1. You may need to add this into your Heroku config vars: `SKIP_PREFLIGHT_CHECK=true`
+1. Add buildpack `https://github.com/timanovsky/subdir-heroku-buildpack.git` and drag to top of list
+1. You may need to add this into your Heroku config vars: `SKIP_PREFLIGHT_CHECK` = `true`
 
-### [WIP] Database config
+### Database config
 
-On Heroku:
+**Heroku:**
 
-1. Add the "Heroku Postgres" add-on under free "hobby dev" tier. In your config vars, you should see a new variable populated for you called `DATABASE_URL`.
-<!-- 1. Add config var: `PROJECT_PATH=.`
-1. Add buildpack `https://github.com/timanovsky/subdir-heroku-buildpack.git` and drag to top of list -->
+1. Add the "Heroku Postgres" add-on under free "hobby dev" tier. In your config vars, you should see a new variable populated for you called `DATABASE_URL` with the url to your Postgres db.
+1. Add config var: `PROJECT_PATH` = `.`
+1. Add config var: `PGSSLMODE` = `no-verify`
+
+**App:**
+
+```js
+// db/index.js
+const { Pool } = require("pg");
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
+module.exports = pool;
+```
