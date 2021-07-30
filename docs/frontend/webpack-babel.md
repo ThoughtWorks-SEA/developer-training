@@ -83,13 +83,13 @@ Webpack has successfully bundled `moment.js` with `index.js` to a single file `b
 
 ## What is Babel
 
-Babel is a JS compiler. You can also think of it as a translator typically translating a syntax that a newer browser can understand to a format that everyone else can also understand them.
+Babel is a JS compiler. You can also think of it as a translator that translates syntax that a newer browser can understand, into a format that everyone else can also understand.
 
-Browser doesn't understand JSX, so we will need the help of Babel to translate JSX to something browser can understand.
+The browser doesn't understand JSX, so we will need the help of Babel to translate JSX into something it can understand.
 
 Try it out here: https://babeljs.io/repl
 
-In JSX
+In JSX:
 
 ```javascript
 function SayHello({ name }) {
@@ -97,14 +97,13 @@ function SayHello({ name }) {
 }
 ```
 
-after compiling using babel
+After compiling using Babel:
 
 ```javascript
 "use strict";
 
-function SayHello(_ref) {
-  var name = _ref.name;
-  return React.createElement(
+function SayHello({ name }) {
+  return /*#__PURE__*/ React.createElement(
     "div",
     {
       style: {
@@ -117,15 +116,15 @@ function SayHello(_ref) {
 }
 ```
 
-## Very Simple React App from scratch
+## React App from scratch
 
 ### Starting a new project
 
-We are going to start by creating a folder and create a package.json file.
+We are going to start by creating a folder and a package.json file.
 
 ```sh
-  mkdir my-react-app
-  cd my-react-app
+  mkdir react-webpack-babel
+  cd react-webpack-babel
   npm init -y
 ```
 
@@ -138,9 +137,8 @@ npm i -D webpack webpack-cli html-webpack-plugin
 ```
 
 Create a template HTML file.
-[Emmet](https://docs.emmet.io/) can create a template for us.
-We could easily create the same thing ourselves.
-The only line added bellow was `<h1>Hello World</h1>`.
+
+_Tip: You can use [Emmet](https://docs.emmet.io/) to quickly generate the HTML boilerplate code, then just add `<h1>Hello World</h1>`._
 
 src/index.html
 
@@ -149,10 +147,11 @@ src/index.html
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
   </head>
+
   <body>
     <h1>Hello World</h1>
   </body>
@@ -167,12 +166,12 @@ In src/index.js
 console.log("hello to javascript land");
 ```
 
-Then we need to create a webpack.config.json to tell Webpack what are the input and output file
+Then we need to create a `webpack.config.js` to tell Webpack what are the input and output file
 Files and node modules imported from the `entry` is bundled up for you into the stated file name `index_bundle.js` inside the `dist`.
 
 ```javascript
-var HtmlWebpackPlugin = require("html-webpack-plugin");
-var path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 module.exports = {
   entry: "./src/index.js",
@@ -203,32 +202,29 @@ After running `npm run webpack:dev`, webpack is going to create 2 files for us.
 
 `dist/index_bundle.js` contains all our javascript code.
 
-In `dist/index.html` a script tag is added for us, this script tag imports the index_bundle.js.
+In `dist/index.html`, a script tag is added for us, which imports the index_bundle.js:
 
 dist/index.html
 
 ```html
-<body>
-  <h1>Hello World</h1>
-  <div id="app"></div>
-  <script type="text/javascript" src="index_bundle.js"></script>
-</body>
+<script defer src="index_bundle.js"></script>
 ```
 
-Open `dist/index.html` in a browser, and you can see the `Hello World` printed.
-Open the developer tool and refresh, you should see the `console.log` message printed.
+Open `dist/index.html` in a browser - you can see the `Hello World` printed.
+Open the developer tool and refresh - you should see the `console.log` message printed.
 
 ### Adding React and Babel
 
 We want to code in react and JSX, but the browser doesn't understand JSX.
-We are going to use Babel in Webpack to compile the code from JSX to regular javascript so the browser can understand what we wrote.
 
-Let's add some react code.
+We are going to use Babel in Webpack to compile the code from JSX to regular Javascript so that the browser can understand what we wrote.
 
-Install react and react-dom which is required for React to work
+Let's add some React code.
+
+Install react and react-dom which is required for React to work:
 
 ```sh
-npm install --save react react-dom # or simply npm i react react-dom
+npm install react react-dom
 ```
 
 src/index.js
@@ -243,19 +239,29 @@ ReactDOM.render(<App />, document.getElementById("app"));
 ```
 
 Realise that we need to import App as `App.jsx`.
-In our regular create react app, there is another Webpack plugin that can help you omit the `.jsx`. Since we want the most simple setup, we are going to skip this part.
 
-src/App.js
+With `create-react-app`, there is another Webpack plugin that can help you omit the `.jsx`. Since we want the most simple setup, we are going to skip this part.
+
+src/App.jsx
 
 ```javascript
 import React from "react";
 
-export default () => <p>This is a react app</p>;
+export default () => <p>this is a react app</p>;
 ```
 
-We going to print out a single line, `This is a react app`. If Webpack and babel help us compile successfully, we should see this when opening up the HTML file.
+src/index.html
 
-Installing babel dependencies
+```html
+<body>
+  ...
+  <div id="app"></div>
+</body>
+```
+
+We are going to print out a single line, `this is a react app`. If Webpack and Babel helps us compile successfully, we should see this when opening up the HTML file.
+
+Install babel dependencies:
 
 ```sh
 npm i -D @babel/core @babel/preset-env @babel/preset-react babel-loader
@@ -294,13 +300,10 @@ module.exports = {
   },
   entry: "./src/index.js",
   output: {
-    path: path.resolve(__dirname, "./dist"),
-    filename: "index_bundle.js",
+    ...
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "./src/index.html",
-    }),
+    ...
   ],
 };
 ```
@@ -310,7 +313,7 @@ In the Webpack configurations, we added a new module. Modules are small programs
 `test` is a regular expression that finds all of the files that we want to apply the rule too. We can also `excludes` files and folder such as `node_modules`, and the `module` we are using is the `babel-loader`. There are other loaders such as `css-loader`..
 
 Run `npm run webpack:dev` again.
-Open `dist/index.html` in the browser, and you should now see `This is a react app` gets printed out.
+Open `dist/index.html` in the browser, and you should now see `this is a react app` gets printed out.
 
 ![react-custom-webpack](_media/react-helloworld-custom-webpack.png)
 
@@ -319,7 +322,7 @@ The code can be found here: https://github.com/thoughtworks-jumpstart/Babel-Reac
 ### End note
 
 In the demo above, we took a look at a straightforward setup to get a React app up and running.
-We are using Webpack and `html-webpack-plugin` to compile all our javascript file into `dist/index_bundle.js` using our HTML file as a template.
+We are using Webpack and `html-webpack-plugin` to compile all our javascript file into `dist/index_bundle.js`, using our HTML file as a template.
 We also look at using Babel to translate JSX to JS before compiling.
 
 The actual Webpack configuration from create-react-app is highly sophisticated and intelligent. It compiles CSS, SASS, JSX and many other functionalities seamlessly to give the best possible developer experience.
