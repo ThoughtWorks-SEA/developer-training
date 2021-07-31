@@ -119,6 +119,7 @@
   <!-- PostgreSQL -->
   - [PostgreSQL basics](backend/postgresql/postgresql-basics)
   - [Postgres testing](backend/postgresql/postgres-testing)
+  - [Postgres advanced topics](backend/postgresql/postgres-advanced)
   <!-- Backend App Security -->
   - [Security auth](backend/security-auth)
     <!-- - [Security cryptography basics](backend/security-cryptography-basics) -->
