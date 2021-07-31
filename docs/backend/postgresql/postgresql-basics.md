@@ -2,17 +2,13 @@
 
 PostgreSQL is an open source object-relational database system. It has a strong reputation for reliability, feature robustness, and performance.
 
-# SQL vs NoSQL
+## SQL exercises
 
-Other than SQL databases like (e.g. PostgreSQL, MySQL), there are also NoSQL databases (e.g. MongoDB, DynamoDB).
+SQL, or Structured Query Language, is a language designed to allow both technical and non-technical users query, manipulate, and transform data from a relational database.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ruz-vK8IesE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+Try it out [here](https://sqlbolt.com/lesson/introduction)!
 
-# Exercise
-
-Now that we know what the structure looks like and how to access the data, try it out [here](https://sqlbolt.com/lesson/introduction)!
-
-## Getting started
+# Getting started
 
 ### Installation
 
@@ -108,8 +104,8 @@ SELECT current_database();
 In the terminal, run the following.
 
 ```
-createdb devTraining
-psql -d devTraining
+createdb devtraining
+psql -d devtraining
 ```
 
 **Create Users table**
