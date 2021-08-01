@@ -118,6 +118,7 @@
   - [Databases](backend/database-basics)
   <!-- PostgreSQL -->
   - [PostgreSQL basics](backend/postgresql/postgresql-basics)
+  - [Sequelize basics](backend/postgresql/sequelize-basics)
   - [Postgres testing](backend/postgresql/postgres-testing)
   - [Postgres advanced topics](backend/postgresql/postgres-advanced)
   <!-- Backend App Security -->

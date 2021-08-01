@@ -4,6 +4,7 @@
 Sequelize does not use transactions by default.
 - [It's recommended to use managed transactions for production-ready usage of Sequelize](https://sequelize.org/master/manual/transactions.html)
 - [Sequelize Hooks and Transactions](https://sequelize.org/master/manual/hooks.html#hooks-and-transactions)
+- We could configure Sequelize ORM to use transaction, while `pg` driver \([node-postgres](https://github.com/brianc/node-postgres)\) [has no abstractions specifically around transactions](https://node-postgres.com/features/transactions).
 
 ## Hooks
 - [Available hooks & Hooks Firing Order](https://sequelize.org/master/manual/hooks.html)
