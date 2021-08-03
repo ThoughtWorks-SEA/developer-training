@@ -23,7 +23,7 @@ const aggressivePets = ["dragon", "cobra", "tiger"];
 
 const allPets = [...gentlePets, "kitten", ...aggressivePets];
 
-for (p of gentlePets) {
+for (p of allPets) {
   console.log(p);
 }
 ```
