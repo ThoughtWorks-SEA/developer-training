@@ -92,7 +92,7 @@ const sayHi = speak("hi");
 const sayMuahaha = speak("Muahaha");
 assert(sayHi() === "says hi", "said hi");
 assert(sayMuahaha() === "says Muahaha", "said Muahaha");
-assert(speak("something")() === "says something", "said Muahaha");
+assert(speak("something")() === "says something", "said something");
 ```
 
 ## Exercises
