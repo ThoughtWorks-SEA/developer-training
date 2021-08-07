@@ -1,4 +1,4 @@
-# Postgres - Advanced Topics
+# Sequelize / Postgres - Advanced Topics
 
 ## Transactions
 Sequelize does not use transactions by default.

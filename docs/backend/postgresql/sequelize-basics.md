@@ -99,14 +99,56 @@ import sequelize from './utils/db.js';
 ## Key Concepts
 
 ### What is a model?
-Models are the essence of Sequelize. A model is an abstraction that represents a table in your database.
+Models are the essence of Sequelize.
 
-In Sequelize, the model contains the information:
+The model tells Sequelize several information about the entity it represents, such as:
 - the name of the table in the database
 - the columns and their data types (the fields that a model has)
 
-These models are also used to represent the instances in Express.js.
+A Model represents a table in the database. Instances of this class represent a database row.
 
-## (WIP) Creating the Model
+By default, when the table name is not given, Sequelize automatically pluralizes the model name and uses that as the table name.
 
-## (Coming Soon) Defining Associataions
+The Sequelize models are ES6 classes. You can very easily [add custom instance or class level methods](https://sequelize.org/master/manual/model-basics.html#taking-advantage-of-models-being-classes).
+
+### Model Options
+Sequelize support additional options on the model. These options are passed on to the `Model#init` functions, and then used to define the table in the database.
+
+Some notable options are:
+
+ Option           | Default Value | Description
+ :--------------  | :------------ | :---------------------
+ `freezeTableName`| false         | If freezeTableName is true, sequelize use the model name to get the table name. Otherwise, the model name will be pluralized.
+ `tableName`      | optional      | Override the name of the table directly. Otherwise, defaults to pluralized model name, unless `freezeTableName` is set.
+ `indexes`        | optional      | Define an array of index
+ `timestamps`     | true          | Adds createdAt and updatedAt timestamps to the database model.
+ `paranoid`       | false         | If set to true, calling destroy will not delete the model, but instead set a deletedAt timestamp
+ `createdAt`      | "createdAt"   | Override the name of the createdAt attribute. Timestamps must be true. Disable it if false.
+ `updatedAt`      | "updatedAt"   | Override the name of the updatedAt attribute. Timestamps must be true. Disable it if false.
+ `updatedAt`      | false         | Override the name of the deletedAt attribute. Timestamps must be true. Disable it if false.
+ `hooks`          | optional      | An object of hook function that are called before and after certain lifecycle events. See: [hooks](https://sequelize.org/master/manual/hooks.html)
+ `validate`       | optional      | An object of model wide validations. See: [Validations and constraints](https://sequelize.org/master/manual/validations-and-constraints.html#model-wide-validations)
+
+See Params starting with `options.*` in [Model#init](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-init) for the full list.
+
+### Column Options
+Apart from specifying the [DataTypes](https://sequelize.org/master/manual/model-basics.html#data-types) of the column, there are a lot more options that can be used to define a database column.
+See Params starting with `attributes.column.*` in [Model#init](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-init) for the full list.
+
+Some notable column options are:
+
+ Option                   | Default Value | Description
+ :------------------------| :------------ | :---------------------
+ `type`                   |               | A string or a data type
+ `allowNull`              | true          | If false, the column will have a NOT NULL constraint, and a not null validation will be run before an instance is saved.
+ `defaultValue`           |               | A literal default value, a JavaScript function, or an SQL function (see sequelize.fn)
+ `unique`                 | false         | If true, the column will get a unique constraint. If a string is provided and multiple columns have the same string, all of them will form an composite unique index.
+ `primaryKey`             | false         |
+ `autoIncrement`          | false         |
+ `autoIncrementIdentity`  | false         |
+ `references`             | null          | For references to another table, see associations.
+ `validate`               |               | An object of validations to execute for this column every time the model is saved. Can be either the name of a validation provided by validator.js, a validation function provided by extending validator.js (see the [Sequelize.prototype.Validator](https://github.com/sequelize/sequelize/blob/main/lib/sequelize.js#L1315-L1320) for more details), or a custom validation function. Custom validation functions could also be asynchronous or synchronous functions.
+
+## (WIP) Create a Simple Model
+
+## (Coming Soon) Defining Associations
