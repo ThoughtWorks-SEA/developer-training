@@ -99,17 +99,66 @@ import sequelize from './utils/db.js';
 ## Key Concepts
 
 ### What is a model?
-Models are the essence of Sequelize.
+Models are the essence of Sequelize. A Model represents a table in the database. Instances of this class represent a database row.
 
 The model tells Sequelize several information about the entity it represents, such as:
 - the name of the table in the database
 - the columns and their data types (the fields that a model has)
 
-A Model represents a table in the database. Instances of this class represent a database row.
-
 By default, when the table name is not given, Sequelize automatically pluralizes the model name and uses that as the table name.
 
-The Sequelize models are ES6 classes. You can very easily [add custom instance or class level methods](https://sequelize.org/master/manual/model-basics.html#taking-advantage-of-models-being-classes).
+The Sequelize models are ES6 classes.
+
+#### Create a Simple Model
+
+There are two equivalent ways to define a model in Sequelize. Internally, `sequelize.define` calls `Model.init`, so both approaches are essentially equivalent.
+- Calling `sequelize.define(modelName, attributes, modelOptions)`
+- Extending Model and calling `init(attributes, modelOptions)`
+We will choose the later, as we could easily [add custom instance or class level methods](https://sequelize.org/master/manual/model-basics.html#taking-advantage-of-models-being-classes) to the ES6 classes.
+
+Every column you define in your model must have a [data type](https://sequelize.org/master/manual/model-basics.html#data-types). Sequelize provides a lot of built-in data types. Refer to [github (sequelize)](https://github.com/sequelize/sequelize/blob/main/lib/data-types.js#L1003-L1043).
+
+Let's begin to create our first model file `db/models/simple-pokemon.model.js`.
+
+```javascript
+// simple-pokemon.model.js
+
+import sequelizeConnection from '../../db.js'; // Reference to the database connection instance
+import { DataTypes, Model } from 'sequelize';
+
+class SimplePokemon extends Model { };
+
+SimplePokemon.init({
+  name: {
+    type: DataTypes.STRING
+  },
+  japaneseName: {
+    type: DataTypes.STRING
+  },
+  baseHP: {
+    type: DataTypes.INTEGER
+  },
+  category: {
+    type: DataTypes.STRING
+  },
+  nameWithJapanese: {
+    type: DataTypes.VIRTUAL,
+    get() {
+      return `${this.name} ${this.japaneseName}`;
+    },
+    set(value) {
+      throw new Error('Do not try to set the `nameWithJapanese` value!');
+    }
+  }
+}, {
+  sequelizeConnection, // We need to pass the connection instance
+  // modelName: 'SimplePokemon', // We could set the model name instead of using the Class name
+  // freezeTableName: true, // We could skip the pluralization for database naming
+  tableName: 'Simple_Pokemon' // We could lock the name of the database table directly
+});
+
+export default SimplePokemon;
+```
 
 ### Model Options
 Sequelize support additional options on the model. These options are passed on to the `Model#init` functions, and then used to define the table in the database.
@@ -118,6 +167,7 @@ Some notable options are:
 
  Option           | Default Value | Description
  :--------------  | :------------ | :---------------------
+ `modelName`      | optional      | Set name of the model. By default its same as Class name.
  `freezeTableName`| false         | If freezeTableName is true, sequelize use the model name to get the table name. Otherwise, the model name will be pluralized.
  `tableName`      | optional      | Override the name of the table directly. Otherwise, defaults to pluralized model name, unless `freezeTableName` is set.
  `indexes`        | optional      | Define an array of index
@@ -149,6 +199,10 @@ Some notable column options are:
  `references`             | null          | For references to another table, see associations.
  `validate`               |               | An object of validations to execute for this column every time the model is saved. Can be either the name of a validation provided by validator.js, a validation function provided by extending validator.js (see the [Sequelize.prototype.Validator](https://github.com/sequelize/sequelize/blob/main/lib/sequelize.js#L1315-L1320) for more details), or a custom validation function. Custom validation functions could also be asynchronous or synchronous functions.
 
-## (WIP) Create a Simple Model
+### Custom Getters and Setters
+Sequelize allows you to define custom getters and setters for the attributes of your models. This feature is useful for data conversion on certain database columns, such as performing password hashing before sending/retriving the data to/from the database.
+
+### Virtual Fields
+[Virtual fields](https://sequelize.org/master/manual/getters-setters-virtuals.html#virtual-fields) are fields that Sequelize populates under the hood, but in reality they don't even exist in the database. Sequelize provides `DataTypes.VIRTUAL` that does not cause a column in the table to exist. However, the model will appear to have the virtual field after we define the custom getter.
 
 ## (Coming Soon) Defining Associations
