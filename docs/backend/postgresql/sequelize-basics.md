@@ -151,11 +151,14 @@ SimplePokemon.init({
     }
   }
 }, {
-  sequelizeConnection, // We need to pass the connection instance
+  sequelize: sequelizeConnection, // We need to pass the connection instance
   // modelName: 'SimplePokemon', // We could set the model name instead of using the Class name
   // freezeTableName: true, // We could skip the pluralization for database naming
   tableName: 'Simple_Pokemon' // We could lock the name of the database table directly
 });
+
+const synchronizeModel = async () => await SimplePokemon.sync();
+await synchronizeModel();
 
 export default SimplePokemon;
 ```
