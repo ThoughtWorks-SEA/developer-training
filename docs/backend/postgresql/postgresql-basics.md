@@ -219,16 +219,39 @@ In general, there are mainly 4 steps to designing a database
 
 ## Application Interaction with database - Native or ORM ?
 
-The term ORM most commonly refers to an actual ORM library — an object relational mapper — that carries out the work of object relational mapping for you.
+In layered architecture, this interaction is often referred as Data Access Layer. The database models are also known as Data Access Objects (DAOs).
 
-Some experienced SQL users might prefer to use Query Builder instead of ORM, however ORM could be a better choice if the project is complex.
+The term ORM most commonly refers to an actual ORM library — an object relational mapper — that carries out the work of object relational mapping for you. Object relational mapping is a technique for converting a database query result into entity class instances. An entity is simply an object wrapper for a database table.
 
-- [Sequelize](https://sequelize.org/) ORM
-- [TypeORM](https://github.com/oguimbal/pg-mem/wiki/Libraries-adapters#-typeorm)
+There are 2 popular archictectural patterns that are used in the data access layer.
+- **Data Mapper** pattern: CRUD operations and business rules are implemented in containers known as repositories.
+- **Active Record** pattern: CRUD operations and business rules are implemented within entity classes.
+
+Some experienced SQL users might prefer to use Query Builder instead of ORM, because 
+- the surface area of an ORM is very large and learning it inside and out is no easy task
+- ORM often generate comparatively complex queries which could be inefficient
+- Without raw query, out-of-box ORM is less flexible, and thus developer has to learn both ORM syntax as well as some underlying SQL syntax
+
+However an ORM is quite beneficial for medium-to-large-scale projects that source data from hundreds of database tables, since:
+- ORM often support eager loading
+- entity classes could also be designed to encapsulate logic for implementing business rules.
+
+For Postgres DB, all of the below mentioned libraries are using [node-postgres (pg)](https://www.npmjs.com/package/pg) as the Postgres database driver.
+- [Sequelize](https://sequelize.org/) ORM with **Active Record** pattern
+- [TypeORM](https://github.com/oguimbal/pg-mem/wiki/Libraries-adapters#-typeorm) : supports both **Active Record** and **Data Mapper** patterns
 - [knex](https://github.com/knex/knex) query builder
 
-All of the above mentioned libraries are using [node-postgres (pg)](https://www.npmjs.com/package/pg) as the Postgres database driver.
+Some notable features that is common for database libraries include:
+- query builders
+- migration scripts
+- CLI tool to generate boilerplate code
+- seeding feature for pre-populating tables with test data
+- connection pooling
+- transaction support
+- lazy loading or eager loading of associated models
 
 References:
 - https://www.sitepoint.com/javascript-typescript-orms/
 - https://blog.logrocket.com/why-you-should-avoid-orms-with-examples-in-node-js-e0baab73fa5/
+
+In following examples, we will be using `Sequelize` to demonstrate features of ORM.
