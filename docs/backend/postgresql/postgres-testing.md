@@ -16,41 +16,23 @@ Another solution is to set up an **in-memory database** for each test case progr
 
 For unit testing Sequelize, mocking models becomes essential — Sequelize Mock offers decent capabilities like mimicking models as well as mocking many if not all Sequelize methods. Reference: https://medium.com/@kvr2277/sequelize-mocking-with-jest-and-node-933c1f439579
 
-For integration test / contract testing, with Sequelize Mock, we could avoid the need to maintain a real database. The benefit of doing so:
+For integration test / contract testing, we could occasionally avoid the need to maintain a real database with Sequelize Mock. Since we generated models using Sequelize, sequelize-mock offers excellent mocking capabilities using which we can mock models and proceed with testing our core functionalities. The benefit of doing so:
 1. No actual database calls invoked for every test run. Tests could be completed in shorter time and with lower maintenance cost.
 2. With actual database involved for testing, data can change in database and your tests are prone to fail for influences outside your code.
-
-Since we generated models using Sequelize, sequelize-mock offers excellent mocking capabilities using which we can mock models and proceed with testing our core functionalities.
-
 **Caveats:** Since the database layer is already abstracted by the ORM, it's important to ensure the functionalities of the ORM mocking library is actually up-to-date with the ORM library.
 
 ## pg-mem
 
-To write API tests for an Express app that uses Postgres as the database, we are going to use a library called **pg-mem**. It spins up an in-memory instance of a Postgres database, which is faster than running a separate Postgres instance.
+Usage of **in-memory database** offers us a clean/empty database for each test case, so that the test cases do not interfere with each other (e.g. if a test case fails and leave some garbage data in its copy of database, that failure will not affect other test cases because each test case starts with a clean database).
 
-The library helps to give us a clean/empty database for each test case, so that the test cases do not interfere with each other (e.g. if a test case fails and leave some garbage data in its copy of database, that failure will not affect other test cases because each test case starts with a clean database).
+To write API integration tests for an Express app that uses Postgres as the database, we could choose to use `pg-mem` along with `jest` and `supertest`. It spins up an in-memory instance of a Postgres database, which is faster than running a separate Postgres instance. The library provides handy shortcuts to create instances of popular libraries that will be bound to pg-mem instead of a real postgres db.
 
-Thus along with jest and supertest, we will need pg-mem.
+Some of the popular library adapters that shipped with **pg-mem** includes:
+- [node-postgres (pg)](https://github.com/oguimbal/pg-mem/wiki/Libraries-adapters#-node-postgres-pg)
+- [TypeORM](https://github.com/oguimbal/pg-mem/wiki/Libraries-adapters#-typeorm)
+- [Knex](https://github.com/oguimbal/pg-mem/wiki/Libraries-adapters#-knex)
 
-```sh
-npm install pg-mem --save-dev
-```
-
-Before writing any test...
-
-<!-- TODO: example of setting up and tearing down db in beforeEach/afterEach -->
-
-```
-WIP
-```
-
-First test for GET `/pokemons`
-
-<!-- TODO: example of GET test with .toMatchObject -->
-
-```
-WIP
-```
+Although there isn't any direct support for testing `sequelize` ORM with Postgres, we could extend the usage of `pg-mem` since sequelize is using `pg` as the underlying Postgres client.
 
 ## Jest Expect Function
 

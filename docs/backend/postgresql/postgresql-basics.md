@@ -144,7 +144,7 @@ brew install --cask pgadmin4
 
 - To reset your PostgreSQL admin password: https://community.progress.com/s/article/How-to-reset-PostgreSQL-admin-password (Windows)
 
-## Key Concepts
+## (WIP) Key Concepts
 You could refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/13/sql.html) for details.
 
 * Concepts
@@ -216,3 +216,19 @@ In general, there are mainly 4 steps to designing a database
 
 ## (WIP) Best Practices
   - **Normalization**
+
+## Application Interaction with database - Native or ORM ?
+
+The term ORM most commonly refers to an actual ORM library — an object relational mapper — that carries out the work of object relational mapping for you.
+
+Some experienced SQL users might prefer to use Query Builder instead of ORM, however ORM could be a better choice if the project is complex.
+
+- [Sequelize](https://sequelize.org/) ORM
+- [TypeORM](https://github.com/oguimbal/pg-mem/wiki/Libraries-adapters#-typeorm)
+- [knex](https://github.com/knex/knex) query builder
+
+All of the above mentioned libraries are using [node-postgres (pg)](https://www.npmjs.com/package/pg) as the Postgres database driver.
+
+References:
+- https://www.sitepoint.com/javascript-typescript-orms/
+- https://blog.logrocket.com/why-you-should-avoid-orms-with-examples-in-node-js-e0baab73fa5/

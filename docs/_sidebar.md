@@ -120,8 +120,8 @@
   - [PostgreSQL basics](backend/postgresql/postgresql-basics)
   - [Sequelize basics](backend/postgresql/sequelize-basics)
   - [Postgres testing](backend/postgresql/postgres-testing)
-  <!-- - [Sequelize Associations](backend/postgresql/sequelize-associations) -->
-  <!-- - [Sequelize / Postgres advanced topics](backend/postgresql/postgres-advanced) -->
+  - [Sequelize Associations](backend/postgresql/sequelize-associations)
+  - [Sequelize / Postgres advanced topics](backend/postgresql/postgres-advanced)
   <!-- Backend App Security -->
   - [Security auth](backend/security-auth)
     <!-- - [Security cryptography basics](backend/security-cryptography-basics) -->
