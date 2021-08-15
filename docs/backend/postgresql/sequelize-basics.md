@@ -35,7 +35,7 @@ npm install pg pg-hstore sequelize
 
 Let's begin by creating a file `db.js`. 
 
-Following the Sequelize documentation on [connection pool](https://sequelize.org/master/manual/connection-pool.html), we will create only one Sequelize instanced and export the instance from the module. This will serve as our entry point to the database.
+Following the Sequelize documentation on [connection pool](https://sequelize.org/master/manual/connection-pool.html), we will create only one Sequelize instance and export the instance from the module. This will serve as our entry point to the database.
 
 Some reading materials for details on why connection pooling is recommended.
 - https://node-postgres.com/features/pooling
@@ -57,6 +57,11 @@ const sequelize = new Sequelize(dbName, dbUser, dbPass, {
   host: dbHost,
   port: dbPort,
   dialect: dbDialect,
+  dialectOptions: {
+    ssl: {
+      rejectUnauthorized: false
+    }
+  },
   // logging: console.log,                  // Default, displays the first parameter of the log function call
   // logging: (...msg) => console.log(msg), // Displays all log function call parameters
   // logging: false,                        // Disables logging
@@ -84,15 +89,17 @@ export default sequelize;
 
 We put this in a "db.js" file in a utils folder.
 
-To connect to the database, "require" this file at the top of index.js:
+To connect to the database, we will import the function and invoke it in "index.js":
 
 ```js
+// index.js
 import { connectDb } from './utils/db.js';
 await connectDb();
 ```
 
-To access the sequelize instance later, we could use:
+To access the sequelize instance later, in order to initialize sequelize models, we could use:
 ```js
+// *.model.js
 import sequelize from './utils/db.js';
 ```
 
@@ -123,7 +130,7 @@ Let's begin to create our first model file `db/models/simple-pokemon.model.js`.
 ```javascript
 // simple-pokemon.model.js
 
-import sequelizeConnection from '../../db.js'; // Reference to the database connection instance
+import sequelizeConnection from '../../utils/db.js'; // Reference to the database connection instance
 import { DataTypes, Model } from 'sequelize';
 
 class SimplePokemon extends Model { };
@@ -157,7 +164,9 @@ SimplePokemon.init({
   tableName: 'Simple_Pokemon' // We could lock the name of the database table directly
 });
 
-const synchronizeModel = async () => await SimplePokemon.sync();
+// Not recommended for production level due to destructive operation, but we will use this to demonstrate.
+// For production level, to consider Migration support (advanced topic)
+const synchronizeModel = async () => await SimplePokemon.sync({ force: true });
 await synchronizeModel();
 
 export default SimplePokemon;
