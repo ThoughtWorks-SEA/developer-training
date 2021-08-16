@@ -175,10 +175,15 @@ Without advance preparation, the database system would have to scan the entire t
 It is the task of the database programmer to foresee which indexes will be useful. The index naming could be named freely, thus it is recommended to pick something that we could easily remember later what the index was for.
 
 Some of the commonly used index types are:
-- Primary Key
-- Foreign Key
-- Unique
+- Unique Index: [PostgreSQL automatically creates a unique index when a unique constraint or primary key is defined for a table. The index covers the columns that make up the primary key or unique constraint (a multicolumn index, if appropriate), and is the mechanism that enforces the constraint.](https://www.postgresql.org/docs/current/indexes-unique.html)
+- Foreign Key ?
 
+#### Index Types
+PostgreSQL provides several index types: `B-tree`, `Hash`, `GiST`, `SP-GiST`, `GIN` and `BRIN`. Each index type uses a different algorithm that is best suited to different types of queries. By default, the `CREATE INDEX` command creates `B-tree` indexes, which fit the most common situations.
+
+References:
+- https://www.postgresql.org/docs/current/indexes.html
+- https://www.postgresql.org/docs/current/indexes-types.html
 ### ACID compliance
 ACID properties stands for:
   - Atomaticity

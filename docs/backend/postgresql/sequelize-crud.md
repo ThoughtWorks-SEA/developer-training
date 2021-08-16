@@ -5,24 +5,14 @@ This page of notes is simplified from [Sequelize Core Concepts - Model Instances
 - [API reference for Sequelize Model](https://sequelize.org/master/class/lib/model.js~Model.html)
 
 ## Pre-requisite
-Assuming that you followed the notes in [Sequelize Basics](https://thoughtworks-sea.github.io/developer-training/#/backend/postgresql/sequelize-basics?id=create-a-simple-model), you should have created the `SimplePokemon` model for and acquired a database connection instance. The folder structure should looks like
-```sh
-.
-├── index.js
-├── package-lock.json
-├── package.json
-├── db
-│   └── models
-│       └── simple-pokemon.model.js
-└── utils
-    └── db.js
-```
+Assuming that you followed the notes in [Sequelize Basics](https://thoughtworks-sea.github.io/developer-training/#/backend/postgresql/sequelize-basics?id=create-a-simple-model), you should have created the `SimplePokemon` model for and acquired a database connection instance.
 
 Alternatively, a model could be generated using `sequelize-cli`. This will generate different folder structure. However, [Migrations](https://sequelize.org/master/manual/migrations.html#project-bootstrapping) is another topic, which is recommended for production level software, however it requires manual configuration.
 ```sh
 npx sequelize-cli init
 npx sequelize-cli model:generate --name SimplePokemon --attributes name:string,japaneseName:string,baseHP:integer,category:string,nameWithJapanese:virtual
 ```
+## Give it a try!
 
 To explore Sequelize CRUD through the use of Sequelize Models, we could import the `SimplePokemon` model into "index.js".
 ```js

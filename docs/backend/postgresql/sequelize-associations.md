@@ -120,14 +120,14 @@ const ActorMovies = sequelize.define('ActorMovies', {
   MovieId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Movie, // 'Movies' would also work
+      model: Movie, // 'Movies' (table name) is recommended instead of the Model.
       key: 'id'
     }
   },
   ActorId: {
     type: DataTypes.INTEGER,
     references: {
-      model: Actor, // 'Actors' would also work
+      model: 'Actors', // Table name is recommended instead. If this column references another table, provide it here as a Model, or a string.
       key: 'id'
     }
   }
@@ -146,3 +146,9 @@ CREATE TABLE IF NOT EXISTS "ActorMovies" (
   PRIMARY KEY ("MovieId","ActorId")
 );
 ```
+
+### Defining Reference Key in a model
+Note that on the above `Many-To-Many` example, we are manually defining a key that references another model. It's not usual to do this, but if you have to, you should use the table name there. This is because the reference is created upon the referenced table name. Assuming that the model was created with the default settings (Sequelize making its underlying table automatically pluralized).
+
+References:
+- https://sequelize.org/master/manual/naming-strategies.html#when-defining-a-reference-key-in-a-model

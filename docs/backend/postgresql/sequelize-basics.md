@@ -193,6 +193,14 @@ Some notable options are:
 
 See Params starting with `options.*` in [Model#init](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-init) for the full list.
 
+#### Primary Key
+[If you don't define a primary key, then sequelize uses id by default. You could also use `primaryKey: true` on any column to mark it as primary key for the database table.](https://stackoverflow.com/questions/29233896/sequelize-table-without-column-id)
+
+Sequelize will assume your table has a `id` primary key property by default, as well as support a Model without primary key (through `Model.removeAttribute('id')`). See: [Working with Legacy Tables#Primary Key](https://sequelize.org/master/manual/legacy.html#primary-keys)
+
+#### Indexes
+Sequelize supports adding indexes to the model definition which will be created on sequelize.sync().See: [Indexes](https://sequelize.org/master/manual/indexes.html)
+
 ### Column Options
 Apart from specifying the [DataTypes](https://sequelize.org/master/manual/model-basics.html#data-types) of the column, there are a lot more options that can be used to define a database column.
 See Params starting with `attributes.column.*` in [Model#init](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-init) for the full list.
