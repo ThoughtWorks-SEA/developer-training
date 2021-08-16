@@ -68,9 +68,9 @@ Looking in details , the following fields are returned in addition to the attrib
 
 **ToDo: Update Model** If you try to repeat the save operation above, you should probably get an error because we have specified that the name field should be unique. (and a unique index was created in the database)
 
-```
-??
-```
+Let's try to update our model slightly, following the notes in [Sequelize Basics - More about Model Definition](https://thoughtworks-sea.github.io/developer-training/#/backend/postgresql/sequelize-basics?id=more-about-model-definition)
+
+**ToDo**: What do you find?
 
 ## (WIP ?) Read
 
