@@ -33,11 +33,11 @@ import SimplePokemon from './db/models/simple-pokemon.model.js';
 ## (WIP) Create
 
 Although a model is an ES6 class, you should not create instances by using the `new` operator directly. Instead, Sequelize Model exposes 2 methods for specific process.
-- [`build`](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build): class-level method to create an object that represents data that can be mapped to a database record. This is a synchronous method that does not communicate with the database at all.
-- [`save`](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save): instance-level method to save / persist the information into database. This is an asynchronous method, so you will need `await` or promise handling.
+- [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build): class-level method to create an object that represents data that can be mapped to a database record. This is a synchronous method that does not communicate with the database at all.
+- [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save): instance-level method to save / persist the information into database. This is an asynchronous method, so you will need `await` or promise handling.
 
 To facilitate the process, Sequelize Model offers another method to combines the above 2 into a single method.
-- [`create`](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-create): class-level method to create an object and save the database record. This is an asynchronous method, so you will need `await` or promise handling.
+- [create](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-create): class-level method to create an object and save the database record. This is an asynchronous method, so you will need `await` or promise handling.
 
 Use `create` to create a new instance and save the record into the database table `Simple_Pokemon`.
 
@@ -274,7 +274,7 @@ const updated = await SimplePokemon.update({ baseHP: 40 }, {
 console.log(updated.toJSON());
 ```
 
-- **TODO**: How to update just One ? Need to invoke [`count()`](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-count) and validate first ?
+- **TODO**: How to update just One ? Need to invoke [count()](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-count) and validate first ?
 - Try running Sequelize with debug logging to see what queries Sequelize executes.
 
 ### update(), upsert() vs save()
