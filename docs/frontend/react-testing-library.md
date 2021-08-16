@@ -92,34 +92,25 @@ Available matchers: https://github.com/testing-library/jest-dom
 
 In most cases, the things we want to test haven't appeared on the screen yet. We will have to interact with the DOM and trigger the actual interaction to get results we want to show.
 
-Say we have a counter.
+Say we have a counter:
+
+Counter.js
 
 ```javascript
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      counter: 0,
-    };
-  }
+import React, { useState } from "react";
 
-  render() {
-    return (
-      <div className="App">
-        <div>Counter Value: {this.state.counter}</div>
-        <button
-          onClick={() =>
-            this.setState({
-              counter: this.state.counter + 1,
-            })
-          }
-        >
-          +1
-        </button>
-      </div>
-    );
-  }
-}
+const Counter = () => {
+  const [value, setValue] = useState(0);
+
+  return (
+    <div>
+      Counter Value: {value}
+      <button onClick={() => setValue(value + 1)}>+1</button>
+    </div>
+  );
+};
+
+export default Counter;
 ```
 
 ![counter value 0](_media/counter1.png)
@@ -127,6 +118,10 @@ class App extends React.Component {
 clicking on the +1 button increases the counter value
 
 ![counter value 1](_media/counter2.png)
+
+We can write a test for our Counter component, to ensure this behaviour is true.
+
+Counter.test.js
 
 ```javascript
 describe("+1 button", () => {
