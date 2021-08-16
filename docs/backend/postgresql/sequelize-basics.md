@@ -296,4 +296,23 @@ SimplePokemon.init({
   ],
   underscored: true
 });
+
+const synchronizeModel = async () => await SimplePokemon.sync({ force: true });
+await synchronizeModel();
+```
+
+Upon starting the application, you will find in the logs, the SQL statements that Sequelize generated for us. Compare the logs as above, you will see the changes in database column naming strategy and a unique index being created.
+Recap on the PostgreSQL basics, [PostgreSQL automatically creates a unique index when a primary key is defined for a table.](https://www.postgresql.org/docs/current/indexes-unique.html).
+
+```sh
+# previous logs
+Executing (default): DROP TABLE IF EXISTS "Simple_Pokemon" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "Simple_Pokemon" ("id"   SERIAL , "name" VARCHAR(255), "japaneseName" VARCHAR(255), "baseHP" INTEGER, "category" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'Simple_Pokemon' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+
+# new logs with unique index
+Executing (default): DROP TABLE IF EXISTS "Simple_Pokemon" CASCADE;
+Executing (default): CREATE TABLE IF NOT EXISTS "Simple_Pokemon" ("id"   SERIAL , "name" VARCHAR(255), "japanese_name" VARCHAR(255), "base_h_p" INTEGER, "category" VARCHAR(255), "created_at" TIMESTAMP WITH TIME ZONE NOT NULL, "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'Simple_Pokemon' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
+Executing (default): CREATE UNIQUE INDEX "simple__pokemon_name" ON "Simple_Pokemon" ("name")
 ```
