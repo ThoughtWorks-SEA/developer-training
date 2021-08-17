@@ -197,6 +197,20 @@ At this point of time, you should have a NodeJS folder structure looks like belo
     └── db.js
 ```
 
+Your package.json should include these:
+
+```json
+{
+  ...
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js"
+  },
+  ...
+}
+```
+
 Let's start the application, and check out the application logs.
 
 ```sh
@@ -210,7 +224,7 @@ Executing (default): SELECT 1+1 AS result
 Connection has been established successfully.
 ```
 
-The below logs are generated from us invoking `await SimplePokemon.sync({ force: true })` which is a Class-level method of Sequelize Model class. We could also synchronise all Sequelize models at once. See: [Model syncthonization](https://sequelize.org/master/manual/model-basics.html#model-synchronization) for the 3 available model synchronization options.
+The below logs are generated from us invoking `await SimplePokemon.sync({ force: true })` which is a Class-level method of Sequelize Model class. We could also synchronise all Sequelize models at once. See: [Model synchronization](https://sequelize.org/master/manual/model-basics.html#model-synchronization) for the 3 available model synchronization options.
 
 ```
 Executing (default): DROP TABLE IF EXISTS "Simple_Pokemon" CASCADE;
