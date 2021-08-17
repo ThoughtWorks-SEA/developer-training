@@ -3,6 +3,7 @@
 [Sequelize](https://github.com/sequelize/sequelize) is a NodeJS _Object Relational Mapping_ (ORM) tool. Some of the notable features solid transaction support, relations, eager and lazy loading, read replication, the support on raw queries.
 
 Sequelize is such an ORM which supports multiple dialects, includes:
+
 - PostgreSQL
 - MySQL
 - MariaDB
@@ -23,6 +24,7 @@ We should also refer to [Sequelize API Reference](https://sequelize.org/master/i
 ## Installation
 
 The npm packages
+
 - `pg` : The database driver, a non-blocking PostgreSQL client for Node.js.
 - `pg-hstore` : A node package for serializing and deserializing JSON data to hstore format
 - `sequelize` : The ORM library
@@ -33,18 +35,19 @@ npm install pg pg-hstore sequelize
 
 ## Connecting to PostgreSQL server
 
-Let's begin by creating a file `db.js`. 
+Let's begin by creating a file `db.js`.
 
 Following the Sequelize documentation on [connection pool](https://sequelize.org/master/manual/connection-pool.html), we will create only one Sequelize instance and export the instance from the module. This will serve as our entry point to the database.
 
 Some reading materials for details on why connection pooling is recommended.
+
 - https://node-postgres.com/features/pooling
 - https://stackoverflow.blog/2020/10/14/improve-database-performance-with-connection-pooling/
 
 ```js
-// db.js
+// utils/db.js
 
-import Sequelize from 'sequelize';
+import Sequelize from "sequelize";
 
 const dbDialect = "postgres";
 const dbName = process.env.PG_DB_NAME;
@@ -59,29 +62,29 @@ const sequelize = new Sequelize(dbName, dbUser, dbPass, {
   dialect: dbDialect,
   dialectOptions: {
     ssl: {
-      rejectUnauthorized: false
-    }
+      rejectUnauthorized: false,
+    },
   },
   // logging: console.log,                  // Default, displays the first parameter of the log function call
   // logging: (...msg) => console.log(msg), // Displays all log function call parameters
   // logging: false,                        // Disables logging
   pool: {
-    max: 10,        // default: 5
-    min: 0,         // default: 0
-    idle: 10000,    // default: 10000ms
+    max: 10, // default: 5
+    min: 0, // default: 0
+    idle: 10000, // default: 10000ms
     acquire: 30000, // default: 60000ms
-    evict: 1000     // default: 1000ms
+    evict: 1000, // default: 1000ms
   },
 });
 
 const connectDb = async () => {
   try {
     await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
+    console.log("Connection has been established successfully.");
   } catch (error) {
-    console.error('Unable to connect to the database:', error);
+    console.error("Unable to connect to the database:", error);
   }
-}
+};
 
 export { connectDb };
 export default sequelize;
@@ -93,22 +96,25 @@ To connect to the database, we will import the function and invoke it in "index.
 
 ```js
 // index.js
-import { connectDb } from './utils/db.js';
+import { connectDb } from "./utils/db.js";
 await connectDb();
 ```
 
 To access the sequelize instance later, in order to initialize sequelize models, we could use:
+
 ```js
 // *.model.js
-import sequelize from './utils/db.js';
+import sequelize from "./utils/db.js";
 ```
 
 ## Key Concepts
 
 ### What is a model?
+
 Models are the essence of Sequelize. A Model represents a table in the database. Instances of this class represent a database row.
 
 The model tells Sequelize several information about the entity it represents, such as:
+
 - the name of the table in the database
 - the columns and their data types (the fields that a model has)
 
@@ -119,8 +125,10 @@ The Sequelize models are ES6 classes.
 #### Create a Simple Model
 
 There are two equivalent ways to define a model in Sequelize. Internally, `sequelize.define` calls `Model.init`, so both approaches are essentially equivalent.
+
 - Calling `sequelize.define(modelName, attributes, modelOptions)`
 - Extending Model and calling `init(attributes, modelOptions)`
+
 We will choose the later, as we could easily [add custom instance or class level methods](https://sequelize.org/master/manual/model-basics.html#taking-advantage-of-models-being-classes) to the ES6 classes.
 
 Every column you define in your model must have a [data type](https://sequelize.org/master/manual/model-basics.html#data-types). Sequelize provides a lot of built-in data types. Refer to [github (sequelize)](https://github.com/sequelize/sequelize/blob/main/lib/data-types.js#L1003-L1043).
@@ -130,39 +138,42 @@ Let's begin to create our first model file `db/models/simple-pokemon.model.js`.
 ```javascript
 // simple-pokemon.model.js
 
-import sequelizeConnection from '../../utils/db.js'; // Reference to the database connection instance
-import { DataTypes, Model } from 'sequelize';
+import sequelizeConnection from "../../utils/db.js"; // Reference to the database connection instance
+import { DataTypes, Model } from "sequelize";
 
-class SimplePokemon extends Model { };
+class SimplePokemon extends Model {}
 
-SimplePokemon.init({
-  name: {
-    type: DataTypes.STRING
-  },
-  japaneseName: {
-    type: DataTypes.STRING
-  },
-  baseHP: {
-    type: DataTypes.INTEGER
-  },
-  category: {
-    type: DataTypes.STRING
-  },
-  nameWithJapanese: {
-    type: DataTypes.VIRTUAL,
-    get() {
-      return `${this.name} ${this.japaneseName}`;
+SimplePokemon.init(
+  {
+    name: {
+      type: DataTypes.STRING,
     },
-    set(value) {
-      throw new Error('Do not try to set the `nameWithJapanese` value!');
-    }
+    japaneseName: {
+      type: DataTypes.STRING,
+    },
+    baseHP: {
+      type: DataTypes.INTEGER,
+    },
+    category: {
+      type: DataTypes.STRING,
+    },
+    nameWithJapanese: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        return `${this.name} ${this.japaneseName}`;
+      },
+      set(value) {
+        throw new Error("Do not try to set the `nameWithJapanese` value!");
+      },
+    },
+  },
+  {
+    sequelize: sequelizeConnection, // We need to pass the connection instance
+    // modelName: 'SimplePokemon', // We could set the model name instead of using the Class name
+    // freezeTableName: true, // We could skip the pluralization for database naming
+    tableName: "Simple_Pokemon", // We could lock the name of the database table directly
   }
-}, {
-  sequelize: sequelizeConnection, // We need to pass the connection instance
-  // modelName: 'SimplePokemon', // We could set the model name instead of using the Class name
-  // freezeTableName: true, // We could skip the pluralization for database naming
-  tableName: 'Simple_Pokemon' // We could lock the name of the database table directly
-});
+);
 
 // Not recommended for production level due to destructive operation, but we will use this to demonstrate.
 // For production level, to consider Migration support (advanced topic)
@@ -187,82 +198,92 @@ At this point of time, you should have a NodeJS folder structure looks like belo
 ```
 
 Let's start the application, and check out the application logs.
+
 ```sh
 npm start
 ```
 
 The following logs are generated from the function call `connectDb()`, which setup and test the database connection.
+
 ```
 Executing (default): SELECT 1+1 AS result
 Connection has been established successfully.
 ```
 
 The below logs are generated from us invoking `await SimplePokemon.sync({ force: true })` which is a Class-level method of Sequelize Model class. We could also synchronise all Sequelize models at once. See: [Model syncthonization](https://sequelize.org/master/manual/model-basics.html#model-synchronization) for the 3 available model synchronization options.
+
 ```
 Executing (default): DROP TABLE IF EXISTS "Simple_Pokemon" CASCADE;
 Executing (default): CREATE TABLE IF NOT EXISTS "Simple_Pokemon" ("id"   SERIAL , "name" VARCHAR(255), "japaneseName" VARCHAR(255), "baseHP" INTEGER, "category" VARCHAR(255), "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL, "updatedAt" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
 ```
 
 Compare the SQL `CREATE TABLE` statement with our model definition. You will find the following.
+
 1. The database table is named `Simple_Pokemon`, while our model is named `SimplePokemon`.
 1. Database column is not created for virtual field `nameWithJapanese`.
 1. There are additional columns being generated by Sequelize.
-    - `id` (type SERIAL)
-    - `createdAt`, `updatedAt` (type TIMESTAMP WITH TIME ZONE) : This are default options which could be turn off.
+   - `id` (type SERIAL)
+   - `createdAt`, `updatedAt` (type TIMESTAMP WITH TIME ZONE) : This are default options which could be turn off.
 1. A Primary Key for the database table is set to the `id` field, which is auto-generated by Sequelize. Its value is a unique identifier for the database record.
 1. There isn't any index created upon `sequelize.sync()`, because we didn't define any index in the model.
 
 ### Model Options
+
 Sequelize support additional options on the model. These options are passed on to the `Model#init` functions, and then used to define the table in the database.
 
 Some notable options are:
 
- Option           | Default Value | Description
- :--------------  | :------------ | :---------------------
- `modelName`      | optional      | Set name of the model. By default its same as Class name.
- `freezeTableName`| false         | If freezeTableName is true, sequelize use the model name to get the table name. Otherwise, the model name will be pluralized.
- `tableName`      | optional      | Override the name of the table directly. Otherwise, defaults to pluralized model name, unless `freezeTableName` is set.
- **`indexes`**    | optional      | Define an array of index
- `timestamps`     | true          | Adds createdAt and updatedAt timestamps to the database model.
- `paranoid`       | false         | If set to true, calling destroy will not delete the model, but instead set a deletedAt timestamp
- `createdAt`      | "createdAt"   | Override the name of the createdAt attribute. Timestamps must be true. Disable it if false.
- `updatedAt`      | "updatedAt"   | Override the name of the updatedAt attribute. Timestamps must be true. Disable it if false.
- `updatedAt`      | false         | Override the name of the deletedAt attribute. Timestamps must be true. Disable it if false.
- `hooks`          | optional      | An object of hook function that are called before and after certain lifecycle events. See: [hooks](https://sequelize.org/master/manual/hooks.html)
- `validate`       | optional      | An object of model wide validations. See: [Validations and constraints](https://sequelize.org/master/manual/validations-and-constraints.html#model-wide-validations)
+| Option            | Default Value | Description                                                                                                                                                          |
+| :---------------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `modelName`       | optional      | Set name of the model. By default its same as Class name.                                                                                                            |
+| `freezeTableName` | false         | If freezeTableName is true, sequelize use the model name to get the table name. Otherwise, the model name will be pluralized.                                        |
+| `tableName`       | optional      | Override the name of the table directly. Otherwise, defaults to pluralized model name, unless `freezeTableName` is set.                                              |
+| **`indexes`**     | optional      | Define an array of index                                                                                                                                             |
+| `timestamps`      | true          | Adds createdAt and updatedAt timestamps to the database model.                                                                                                       |
+| `paranoid`        | false         | If set to true, calling destroy will not delete the model, but instead set a deletedAt timestamp                                                                     |
+| `createdAt`       | "createdAt"   | Override the name of the createdAt attribute. Timestamps must be true. Disable it if false.                                                                          |
+| `updatedAt`       | "updatedAt"   | Override the name of the updatedAt attribute. Timestamps must be true. Disable it if false.                                                                          |
+| `updatedAt`       | false         | Override the name of the deletedAt attribute. Timestamps must be true. Disable it if false.                                                                          |
+| `hooks`           | optional      | An object of hook function that are called before and after certain lifecycle events. See: [hooks](https://sequelize.org/master/manual/hooks.html)                   |
+| `validate`        | optional      | An object of model wide validations. See: [Validations and constraints](https://sequelize.org/master/manual/validations-and-constraints.html#model-wide-validations) |
 
 See Params starting with `options.*` in [Model#init](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-init) for the full list.
 
 #### Primary Key
+
 [If you don't define a primary key, then sequelize uses id by default. You could also use `primaryKey: true` on any column to mark it as primary key for the database table.](https://stackoverflow.com/questions/29233896/sequelize-table-without-column-id)
 
 Sequelize will assume your table has a `id` primary key property by default, as well as support a Model without primary key (through `Model.removeAttribute('id')`). See: [Working with Legacy Tables#Primary Key](https://sequelize.org/master/manual/legacy.html#primary-keys)
 
 #### Indexes
+
 Sequelize supports adding indexes to the model definition which will be created on sequelize.sync().See: [Indexes](https://sequelize.org/master/manual/indexes.html)
 
 ### Column Options
+
 Apart from specifying the [DataTypes](https://sequelize.org/master/manual/model-basics.html#data-types) of the column, there are a lot more options that can be used to define a database column.
 See Params starting with `attributes.column.*` in [Model#init](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-init) for the full list.
 
 Some notable column options are:
 
- Option                   | Default Value | Description
- :------------------------| :------------ | :---------------------
- `type`                   |               | A string or a data type
- `allowNull`              | true          | If false, the column will have a NOT NULL constraint, and a not null validation will be run before an instance is saved.
- `defaultValue`           |               | A literal default value, a JavaScript function, or an SQL function (see sequelize.fn)
- `unique`                 | false         | If true, the column will get a unique constraint. If a string is provided and multiple columns have the same string, all of them will form an composite unique index.
- `primaryKey`             | false         |
- `autoIncrement`          | false         |
- `autoIncrementIdentity`  | false         |
- `references`             | null          | For references to another table, see associations.
- `validate`               |               | An object of validations to execute for this column every time the model is saved. Can be either the name of a validation provided by validator.js, a validation function provided by extending validator.js (see the [Sequelize.prototype.Validator](https://github.com/sequelize/sequelize/blob/main/lib/sequelize.js#L1315-L1320) for more details), or a custom validation function. Custom validation functions could also be asynchronous or synchronous functions.
+| Option                  | Default Value | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| :---------------------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `type`                  |               | A string or a data type                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `allowNull`             | true          | If false, the column will have a NOT NULL constraint, and a not null validation will be run before an instance is saved.                                                                                                                                                                                                                                                                                                                                                  |
+| `defaultValue`          |               | A literal default value, a JavaScript function, or an SQL function (see sequelize.fn)                                                                                                                                                                                                                                                                                                                                                                                     |
+| `unique`                | false         | If true, the column will get a unique constraint. If a string is provided and multiple columns have the same string, all of them will form an composite unique index.                                                                                                                                                                                                                                                                                                     |
+| `primaryKey`            | false         |
+| `autoIncrement`         | false         |
+| `autoIncrementIdentity` | false         |
+| `references`            | null          | For references to another table, see associations.                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `validate`              |               | An object of validations to execute for this column every time the model is saved. Can be either the name of a validation provided by validator.js, a validation function provided by extending validator.js (see the [Sequelize.prototype.Validator](https://github.com/sequelize/sequelize/blob/main/lib/sequelize.js#L1315-L1320) for more details), or a custom validation function. Custom validation functions could also be asynchronous or synchronous functions. |
 
 #### Custom Getters and Setters
+
 Sequelize allows you to define custom getters and setters for the attributes of your models. This feature is useful for data conversion on certain database columns, such as performing password hashing before sending/retriving the data to/from the database.
 
 #### Virtual Fields
+
 [Virtual fields](https://sequelize.org/master/manual/getters-setters-virtuals.html#virtual-fields) are fields that Sequelize populates under the hood, but in reality they don't even exist in the database. Sequelize provides `DataTypes.VIRTUAL` that does not cause a column in the table to exist. However, the model will appear to have the virtual field after we define the custom getter.
 
 ### More about Model Definition
@@ -272,6 +293,7 @@ It's recommended to explore Sequelize CRUD before continuing to this section. Cr
 The model that we define previously doesn't define any unique index.
 
 Let's update the model as below.
+
 1. Add unique index to the `name` field
 2. Change the database columne to snake_case via [the underscored option](https://sequelize.org/master/manual/naming-strategies.html)
 
