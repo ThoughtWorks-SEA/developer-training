@@ -131,7 +131,7 @@ By default, when the table name is not given, Sequelize automatically pluralizes
 
 The Sequelize models are ES6 classes.
 
-#### Create a Simple Model
+## Create a Simple Model
 
 There are two equivalent ways to define a model in Sequelize. Internally, `sequelize.define` calls `Model.init`, so both approaches are essentially equivalent.
 
@@ -309,9 +309,9 @@ Sequelize allows you to define custom getters and setters for the attributes of 
 
 [Virtual fields](https://sequelize.org/master/manual/getters-setters-virtuals.html#virtual-fields) are fields that Sequelize populates under the hood, but in reality they don't even exist in the database. Sequelize provides `DataTypes.VIRTUAL` that does not cause a column in the table to exist. However, the model will appear to have the virtual field after we define the custom getter.
 
-### More about Model Definition
+## More about Model Definition
 
-It's recommended to explore Sequelize CRUD before continuing to this section. Creating a database record will help better understand how a model could be use, and appreciate the differences for model definition.
+It's recommended to follow [Sequelize CRUD - Create](https://thoughtworks-sea.github.io/developer-training/#/backend/postgresql/sequelize-crud?id=create) and [Unit Testing with Jest and SuperTest](https://thoughtworks-sea.github.io/developer-training/#/backend/postgresql/postgres-testing?id=unit-testing-with-jest-and-supertest) before continuing to this section. Creating a database record will help better understand how a model could be use, and appreciate the differences for model definition.
 
 The model that we define previously doesn't define any unique index.
 
