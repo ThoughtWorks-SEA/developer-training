@@ -56,15 +56,24 @@ const dbPass = process.env.PG_PASS;
 const dbHost = process.env.PG_HOST || "localhost";
 const dbPort = process.env.PG_PORT || 5432;
 
+// SSL connection
+// https://github.com/sequelize/sequelize/issues/10015
+// https://stackoverflow.com/questions/58965011/sequelizeconnectionerror-self-signed-certificat
+const dbConnectViaSsl = process.env.PG_SSL_MODE !== "false"; // Note: Set PG_SSL_MODE=false in your local .env
+const dbDialectOptions = dbConnectViaSsl
+  ? {
+      ssl: {
+        require: dbConnectViaSsl,
+        rejectUnauthorized: false,
+      },
+    }
+  : {};
+
 const sequelize = new Sequelize(dbName, dbUser, dbPass, {
   host: dbHost,
   port: dbPort,
   dialect: dbDialect,
-  dialectOptions: {
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  },
+  dialectOptions: dbDialectOptions,
   // logging: console.log,                  // Default, displays the first parameter of the log function call
   // logging: (...msg) => console.log(msg), // Displays all log function call parameters
   // logging: false,                        // Disables logging
