@@ -153,13 +153,13 @@ You could refer to the [PostgreSQL documentation](https://www.postgresql.org/doc
     * Schema Migration
   * Primary Key, Foreign Key
   * [Index](https://8thlight.com/blog/kyle-annen/2018/10/09/an-introduction-to-database-indexing.html)
-  * Transactions
-    * [ACID Compliance](https://mariadb.com/resources/blog/acid-compliance-what-it-means-and-why-you-should-care)
-    * Lock
   * [View](https://ecomputernotes.com/fundamental/what-is-a-database/what-is-a-database-view)
   * SQL Query
     * Selection
     * Join
+  * Transactions
+    * [ACID Compliance](https://mariadb.com/resources/blog/acid-compliance-what-it-means-and-why-you-should-care)
+    * Lock
 
 ### (WIP) Primary Key
 **Entity Integrity Rule**
@@ -184,7 +184,8 @@ PostgreSQL provides several index types: `B-tree`, `Hash`, `GiST`, `SP-GiST`, `G
 References:
 - https://www.postgresql.org/docs/current/indexes.html
 - https://www.postgresql.org/docs/current/indexes-types.html
-### ACID compliance
+
+## ACID compliance
 ACID properties stands for:
   - Atomaticity
   - Consistency
