@@ -162,8 +162,22 @@ const pokemons = await query;
 
 #### (WIP ?) basic filter
 
+You can filter through Pokemon by their attributes, using `where`.
+
+For example, to find all instances where `category` == "Mouse Pokemon":
+
 ```js
-const filteredPokemons = await SimplePokemon.find({ name: "Pikachu" });
+const filteredPokemons = await SimplePokemon.findAll({
+  where: { category: "Mouse Pokemon" },
+});
+```
+
+Or to find 1 instance where `name` == "Pikachu":
+
+```js
+const filteredPokemons = await SimplePokemon.findOne({
+  where: { name: "Pikachu" },
+});
 ```
 
 ### (WIP ?) Query operator

@@ -280,7 +280,7 @@ Sequelize will assume your table has a `id` primary key property by default, as 
 
 #### Indexes
 
-Sequelize supports adding indexes to the model definition which will be created on sequelize.sync().See: [Indexes](https://sequelize.org/master/manual/indexes.html)
+Sequelize supports adding indexes to the model definition which will be created on sequelize.sync(). See: [Indexes](https://sequelize.org/master/manual/indexes.html)
 
 ### Column Options
 
@@ -303,7 +303,7 @@ Some notable column options are:
 
 #### Custom Getters and Setters
 
-Sequelize allows you to define custom getters and setters for the attributes of your models. This feature is useful for data conversion on certain database columns, such as performing password hashing before sending/retriving the data to/from the database.
+Sequelize allows you to define custom getters and setters for the attributes of your models. This feature is useful for data conversion on certain database columns, such as performing password hashing before sending/retrieving the data to/from the database.
 
 #### Virtual Fields
 
@@ -318,7 +318,7 @@ The model that we define previously doesn't define any unique index.
 Let's update the model as below.
 
 1. Add unique index to the `name` field
-2. Change the database columne to snake_case via [the underscored option](https://sequelize.org/master/manual/naming-strategies.html)
+2. Change the database column to snake_case via [the underscored option](https://sequelize.org/master/manual/naming-strategies.html)
 
 ```javascript
 // simple-pokemon.model.js (simplified for readability)
@@ -327,7 +327,7 @@ Let's update the model as below.
 SimplePokemon.init({
   name: {
     type: DataTypes.STRING,
-    // unique: true // This column options is quivalent to the model options "indexes" below
+    // unique: true // This column options is equivalent to the model options "indexes" below
   },
   ...
 }, {
