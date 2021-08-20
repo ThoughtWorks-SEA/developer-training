@@ -14,7 +14,9 @@ Try it out [here](https://sqlbolt.com/lesson/introduction)!
 
 **Mac**
 
-Follow the instructions for the installation [here](https://www.postgresqltutorial.com/install-postgresql-macos/). Alternatively, you can use Homebrew:
+Follow the instructions for the installation [here](https://www.postgresqltutorial.com/install-postgresql-macos/). 
+
+Alternatively, you can use Homebrew:
 
 ```
 brew install postgresql
@@ -25,7 +27,13 @@ brew install postgresql
 Follow the instructions for the installation [here](https://www.postgresqltutorial.com/install-postgresql/).
 
 ### Start/Stop Postgres server
+#### For installation via download of Postgres App
+1. Open the Postgres App.
+1. You should see the postgres icon in your system tray when the App is running
+1. If the server is new/empty, click the initialise button.  
+1. Click the start button to start the postgres server
 
+#### For installation via homebrew
 https://tableplus.com/blog/2018/10/how-to-start-stop-restart-postgresql-server.html
 
 **Mac**
@@ -161,8 +169,28 @@ You could refer to the [PostgreSQL documentation](https://www.postgresql.org/doc
     * [ACID Compliance](https://mariadb.com/resources/blog/acid-compliance-what-it-means-and-why-you-should-care)
     * Lock
 
-### (WIP) Primary Key
-**Entity Integrity Rule**
+### Primary Key
+In a database table(also known as schema), it is a common requirement for rows to be uniquely identifiable.  
+Primary key refers to a column or a set of columns in a database table that uniquely identifies every record in the table.
+
+Similarly, think about how you would refer to a row in an Excel sheet table.
+For example, a unique number `customerID` can be used as a primary key for the Customers table and `isbn` for a Books table.
+
+A primary key is called a simple key if it is a single column. It is called a composite key if it is made up of several columns.
+
+Consideration for choosing primary key:
+- The primary key shall be simple and familiar, employeeID for employees table and isbn for books table.
+- The value of the primary key should not change. Primary key is used as a reference to other tables. If you change its value, you have to change all its references; otherwise, the references will be lost. For example, phoneNumber may not be appropriate to be used as primary key for table Customers, because it might change.
+- Primary key often uses integer (or number) type. But it could also be other types, such as texts. However, it is best to use numeric column as primary key for efficiency as it require lesser bytes for storage.
+- Primary key could take an arbitrary number. Most RDBMSs support so-called auto-increment (or AutoNumber type) for integer primary key, where (current maximum value + 1) is assigned to the new record. This arbitrary number is fact-less, as it contains no factual information. Unlike factual information such as phone number, fact-less number is ideal for primary key, as it does not change.
+- In the case of auto-incremental primary key, it is not recommended to be used in cases when the key would be exposed to end-users. For example, if it is present in a URL (/orders/1234). There might be certain security concerns since it's sequential and guessable. In this case, a UUID will be more suitable. 
+- Primary key is usually a single column (e.g., customerID or productCode). But it can also consist of several columns. However, the rule of thumb is to use as few columns as possible.
+
+An example - a customers tables contains the following columns
+- lastName, firstName, phoneNumber,address, city, state, zipCode
+- The candidates for primary key are name=(lastName, firstName), phoneNumber, Address1=(address, city, state), Address1=(address, zipCode).
+- Name may not be unique. Phone number and address may change.
+- Hence, it is better to create a fact-less auto-increment number, say customerID, as the primary key.
 
 ### (WIP) Relationship
 **Primary Key + Foreign Key**
