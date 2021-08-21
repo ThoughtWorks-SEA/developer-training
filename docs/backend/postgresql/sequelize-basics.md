@@ -18,12 +18,19 @@ Let's explore a few key concepts using Sequelize:
 - Using models to query and save data
 
 While exploring [Sequelize Documentation](https://sequelize.org/master/index.html), let's try to use modern JS syntax including async/await.
+To support usage of `import`, `export` syntax, add the line `"type": "module"` to `package.json` to use ECMAScript Modules (ESM) instead of the default CommonJS. With release of Node.js v14, it offers full support of ECMAScript modules, and it is enabled by default.
 
 We should also refer to [Sequelize API Reference](https://sequelize.org/master/identifiers.html) for more configuration options.
 
 ## Installation
 
-You have previously created a database through the terminal command `createdb devtraining`. You could verify via `psql -d devtraining`.
+You have previously created a database through the terminal command `createdb devtraining`. You could verify via `psql -d devtraining`. If the default user isn't `devtraining`, please run the following in the psql terminal.
+```sh
+CREATE USER devtraining;
+GRANT all privileges ON DATABASE "devtraining" TO devtraining;
+```
+
+Let's quick start a NodeJS repo with ES6 support, refer to GitHub repo: ?? .
 
 We need the following npm packages to connect to the database instance.
 
@@ -37,7 +44,7 @@ npm install pg pg-hstore sequelize
 
 ## Connecting to PostgreSQL server
 
-Let's begin by creating a file `db.js`.
+Let's start exploring sequelize by creating a file `utils/db.js`.
 
 Following the Sequelize documentation on [connection pool](https://sequelize.org/master/manual/connection-pool.html), we will create only one Sequelize instance and export the instance from the module. This will serve as our entry point to the database.
 
@@ -60,7 +67,7 @@ const dbPort = process.env.PG_PORT || 5432;
 
 // SSL connection
 // https://github.com/sequelize/sequelize/issues/10015
-// https://stackoverflow.com/questions/58965011/sequelizeconnectionerror-self-signed-certificat
+// https://stackoverflow.com/questions/58965011/sequelizeconnectionerror-self-signed-certificate
 const dbConnectViaSsl = process.env.PG_SSL_MODE !== "false"; // Note: Set PG_SSL_MODE=false in your local .env
 const dbDialectOptions = dbConnectViaSsl
   ? {
@@ -100,8 +107,6 @@ const connectDb = async () => {
 export { connectDb };
 export default sequelize;
 ```
-
-We put this in a "db.js" file in a utils folder.
 
 To connect to the database, we will import the function and invoke it in "index.js":
 
@@ -149,8 +154,10 @@ Let's begin to create our first model file `db/models/simple-pokemon.model.js`.
 ```javascript
 // simple-pokemon.model.js
 
-import sequelizeConnection from "../../utils/db.js"; // Reference to the database connection instance
-import { DataTypes, Model } from "sequelize";
+import sequelizeConnection from '../../utils/db.js'; // Reference to the database connection instance
+
+import sequelize from 'sequelize';
+const { DataTypes, Model } = sequelize;
 
 class SimplePokemon extends Model {}
 
@@ -190,9 +197,14 @@ SimplePokemon.init(
 // Not recommended for production level due to destructive operation, but we will use this to demonstrate.
 // For production level, to consider Migration support (advanced topic).
 const synchronizeModel = async () => await SimplePokemon.sync({ force: true });
-await synchronizeModel();
+synchronizeModel();
 
 export default SimplePokemon;
+```
+
+Import the model in our entry point `index.js`.
+```js
+import SimplePokemon from './db/models/simple-pokemon.model.js';
 ```
 
 At this point of time, you should have a NodeJS folder structure looks like below.
@@ -367,12 +379,13 @@ Executing (default): CREATE UNIQUE INDEX "simple__pokemon_name" ON "Simple_Pokem
 
 ## Sequelize Validation & Database Constraints
 
-**Validations vs Contraints**
+### Validations vs Contraints
+
 No SQL query will be sent to the database at all if a validation fails, but SQL query was performed in the case of constraint violations.
 
 Read this page for details: https://sequelize.org/master/manual/validations-and-constraints.html .
 
-**Sequelize Validation**
+### Sequelize Validation
 
 Sequelize supports per-attribute level validation and model-wide validation. Validations are automatically run on create, update and save. You can also call validate() to manually validate an instance.
 Refer to: https://sequelize.org/master/manual/validations-and-constraints.html#validators
@@ -405,10 +418,10 @@ SimplePokemon.init({
 ```
 
 Restart the application, and retry. You should see the following in the application log.
-Note `NOT NULL` constraint is created in the column "name".
+- `ValidationError [SequelizeValidationError]: notNull Violation: SimplePokemon.name cannot be null`
+- `ValidationError [SequelizeValidationError]: Validation error: Validation notEmpty on name failed`.
+
+Also, you should find that the `NOT NULL` constraint is created in the column "name".
 ```sh
 Executing (default): CREATE TABLE IF NOT EXISTS "Simple_Pokemon" ("id"   SERIAL , "name" VARCHAR(255) NOT NULL, "japanese_name" VARCHAR(255), "base_h_p" INTEGER, "category" VARCHAR(255), "created_at" TIMESTAMP WITH TIME ZONE NOT NULL, "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
 ```
-
-- `ValidationError [SequelizeValidationError]: notNull Violation: SimplePokemon.name cannot be null`
-- `ValidationError [SequelizeValidationError]: Validation error: Validation notEmpty on name failed`.

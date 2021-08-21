@@ -148,20 +148,6 @@ const foundPokemons = await SimplePokemon.findAll();
 return foundPokemons;
 ```
 
-#### (WIP ?) Raw Query
-
-??? find() returns a query. ??? queries are not promises. They have a `then()` function so that they can be used with async/await. However, unlike promises, calling a query's then() can execute the query multiple times.
-
-[Read more about raw queries here](https://sequelize.org/master/manual/raw-queries.html).
-
-```js
-const query = SimplePokemon.find();
-query instanceof ??? ; // true
-
-// Execute the query
-const pokemons = await query;
-```
-
 #### (WIP ?) basic filter
 
 You can filter through Pokemon by their attributes, using `where`.
@@ -254,24 +240,6 @@ const pokemons = await SimplePokemon.findAll({
 pokemons.map((pokemon) => pokemon.name);
 ```
 
-### (WIP ??) Find One
-
-https://sequelize.org/master/manual/model-querying-finders.html
-
-```js
-const pokemon = await SimplePokemon.findOne();
-
-pokemon instanceof SimplePokemon; // true
-pokemon instanceof sequelize.Model; // true
-```
-
-```js
-const findOneByName = async (name) => {
-  const foundPokemon = await SimplePokemon.findOne({ where: { name: 'Pikachu' } });
-  return foundPokemon;
-};
-```
-
 ## (WIP ?) Update
 
 The model static method `update()` update multiple instances that match the where options.
@@ -354,3 +322,16 @@ References:
 - [`where(checkVersion: boolean)`](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-where)
   - **Upcoming**: How to use [`sequelize.where`](https://sequelize.org/master/manual/model-querying-basics.html#advanced-queries-with-functions--not-just-columns-)
 - [Read Replication](https://sequelize.org/master/manual/read-replication.html)
+
+## FYI: Sequelize Convenience Methods for aggregations
+
+Sequelize Model offers some convenient methods to support operations with query with database. Please read their documentation and [API Reference - Model](https://sequelize.org/master/class/lib/model.js~Model.html) for more.
+- [findAndCountAll](https://sequelize.org/master/manual/model-querying-finders.html#-code-findandcountall--code-) : This is useful while we want to have paginated result.
+- [Utility Methods](https://sequelize.org/master/manual/model-querying-basics.html#utility-methods) like `count`, `max`, `min`, `sum`
+
+## FYI: Raw Query
+As Sequelize offers good database abstraction to the developers and the the developers to be familiar with database dialect to dealing with raw queries, we are not covering this topic in the course.
+
+The `sequelize.query` method returns a Promise, so that they can be used with async/await. It also allows you to map a query to a predefined model.
+
+You could read [Raw Queries](https://sequelize.org/master/manual/raw-queries.html) for details.
