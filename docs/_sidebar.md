@@ -120,6 +120,7 @@
   - [PostgreSQL basics](backend/postgresql/postgresql-basics)
   - [Sequelize basics](backend/postgresql/sequelize-basics)
   - [Sequelize CRUD](backend/postgresql/sequelize-crud)
+  - [Backend Architecture / Design Patterns](backend/backend-design-patterns)
   - [Postgres testing](backend/postgresql/postgres-testing)
   - [Sequelize Associations](backend/postgresql/sequelize-associations)
   - [Sequelize / Postgres advanced topics](backend/postgresql/postgres-advanced)
