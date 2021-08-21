@@ -7,7 +7,7 @@ If we want to process parameters (those in the `req.params` object) before calli
 The callback function that we will provide will look something like this.
 
 ```js
-    function(req, res, next, parameterVar) {
+    const cbFunc = (req, res, next, parameterVar) => {
         // do something with parameterVar
     }
 ```

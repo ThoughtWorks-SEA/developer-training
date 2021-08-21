@@ -27,7 +27,7 @@ Express’s default error handler will:
 They have a signature of:
 
 ```js
-function(err, req, res, next)
+(err, req, res, next) => { /* function body */ }
 ```
 
 While defining them, it is absolutely necessary to have all four params in the signature so that Express.js can differentiate them from other middleware. Even if you don’t need to use the next object, you must specify it to maintain the signature.

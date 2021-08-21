@@ -143,7 +143,7 @@ app.use((err, req, res, next) => {
 - package-lock.json
 - src
   - routes
-  app.js
-  index.js
+- app.js
+- index.js
 - __tests__
 ```

@@ -13,6 +13,9 @@
 2. `heroku login`
 3. `heroku pg:psql -a <app name>`
 
+### Default NODE_ENV
+By default `NODE_ENV` is set to production. See: https://devcenter.heroku.com/articles/nodejs-support#node_env-is-not-production
+
 ### Set environment variables
 
 1. Under the **Settings** tab, see **Config Vars**. Click on "Reveal Config Vars". Remember how we set config vars in our `.env` files? This is the same thing, just for Heroku. You'll need to add the key and values of your `JWT_SECRET_KEY`.
@@ -33,3 +36,6 @@ app.listen(PORT, () => {
 Once you have everything pushed on GitHub and all your config vars set, click on the **Deploy** tab and manually deploy your `main` branch. Once deployment is complete, you should be able to access your Heroku app and test your APIs using Postman.
 
 Under the **Deploy** tab, you can also choose to enable automatic deploys from the `main` branch, so that any new pushes to the main branch will trigger a new deployment. However, this should typically only be enabled if you have sufficient automated tests in place.
+
+### For More Information
+You could follow the Get Started articles here: https://devcenter.heroku.com/articles/getting-started-with-nodejs

@@ -121,6 +121,17 @@ const wrapAsync = (fn) => (req, res, next) => {
 };
 ```
 
-We use `Promise.resolve` to ensure we are always dealing with a promise when we use `.catch` on it. Read more about `Promise.resolve` on [JavaScript Info](https://javascript.info/promise-api).
+We use `Promise.resolve` to ensure we are always dealing with a promise when we use `.catch` on it. Read more about `Promise.resolve` on [JavaScript Info](https://javascript.info/promise-api#promise-resolve).
 
 Read more about the wrapping async functions on [Stack Overflow](https://stackoverflow.com/questions/51391080/handling-errors-in-express-async-middleware/51391081) and [the 80/20 guide to Express Error Handling](http://thecodebarbarian.com/80-20-guide-to-express-error-handling).
+
+If you prefer to use async/await syntax, this is the equivalent code.
+```js
+const asyncFunctionHandler = customFunc => async (req, res, next) => {
+  try {
+    return await customFunc(req, res);
+  } catch (err) {
+    next(err);
+  }
+};
+```
