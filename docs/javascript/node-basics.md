@@ -60,6 +60,16 @@ Node.js uses the CommonJS module system. This is because prior to ES6 of JavaScr
 
 Node.js has a set of built-in modules which you can use without any further installation. You can also use third-party modules developed by others or write your own modules.
 
+## ECMAScript modules
+
+Quoted from this blog [ECMAScript Modules Are Now in Node.js v14: Why We Are So Excited About the News?](https://keenethics.com/blog/ecmascript-modules-nodejs-v14)
+
+> Once ECMAScript modules were introduced in JavaScript, the lives of all JS developers became much easier. Only Node.js developers were the exception to the rule — Node still had its own module system, Common JS. All these years, Node developers had to find their way around two module systems — Common JS in Node and ECMAScript in any other framework used on the project. To organize code in modules, developers had to use transpilers, such as Babel. Respectively, the number of development hours and the probability of compatibility errors increased.
+>
+> Node.js v14 offers full support of ECMAScript modules, and it is enabled by default. However, the interoperability between ECMAScript modules and CommonJS modules is still limited.
+
+For files to be treated as ECMAScript modules (support usage of `import` `export`), we could define `"type": "module"` in the nearest `package.json` file.
+
 ### Package management
 
 Node.js by default uses `npm`, short for Node Package Manager, for managing packages.

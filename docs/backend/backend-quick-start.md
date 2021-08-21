@@ -91,7 +91,7 @@ npm run start:dev
 
 ## Tests
 
-Run the following steps if you're including tests in your project:
+Run the following steps if you're including tests in your project.
 Install libraries which we'll use for writing tests:
 
 ```
@@ -103,6 +103,31 @@ Update your package.json and add the following two scripts:
 ```json
 "scripts": {
   "test": "jest",
-  "test:watch": "jest --watch"
+  "test:coverage": "jest --coverage",
+  "test:watch": "jest --watch",
 },
 ```
+
+## Testing with ECMAScript Modules
+[Jest ships with experimental support for ECMAScript Modules (ESM)](https://jestjs.io/docs/ecmascript-modules).
+
+Configure `package.json`
+```json
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch"
+  },
+  "jest": {
+    "transform": {},
+    "verbose": true
+  }
+```
+
+**Notable Issues on Jest with ECMAScript**
+- [Meta: Native support for ES Modules](https://github.com/facebook/jest/issues/9430)
+- [jest.mock does not mock an ES module without Babel](https://github.com/facebook/jest/issues/10025)
+- [To disable any source code transformations in Jest] https://stackoverflow.com/questions/64582674/jest-mock-of-es6-class-yields-referenceerror-require-is-not-defined
+
+## ESLint
+See: [Linting](javascript/linting?id=sample-eslintrcjson-for-node-based-app)
