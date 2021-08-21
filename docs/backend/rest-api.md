@@ -80,7 +80,7 @@ PUT http://api.example.com/customers/12345
 
 ### Return proper HTTP status codes
 
-HTTP protocol defines a set of status codes that you can use in HTTP responses. Make sure you understand the meaning of commonly used HTTP status codes and use them appropriately in your APIs. See the [HTTP](../fundamentals/http) page.
+HTTP protocol defines a set of status codes that you can use in HTTP responses. Make sure you understand the meaning of commonly used HTTP status codes and use them appropriately in your APIs. See the [HTTP](fundamentals/http) page.
 
 ### Follow naming convention on resources
 
