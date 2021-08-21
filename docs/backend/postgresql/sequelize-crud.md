@@ -86,8 +86,10 @@ you will find the application is hitting an error `UniqueConstraintError [Sequel
 
 Change `id` to 2 and restart your application. You will find 2 identical pokemons in the database table `Simple_Pokemons` (both are having same attributes). This is because we didn't add any unique constraint onto the name column.
 
-Let's try to update our model slightly, following the notes in [Sequelize Basics - More about Model Definition](https://thoughtworks-sea.github.io/developer-training/#/backend/postgresql/sequelize-basics?id=more-about-model-definition).
+Let's try to update our model slightly.
+1. Following the notes in [Sequelize Basics - More about Model Definition](backend/postgresql/sequelize-basics?id=more-about-model-definition).
 In the example, we will add an unique index to the `name` field. Let's restart your application with the codes above to create 2 pokemons named `pikachu` with differrent `id`. What do you find?
+1. Next, we explore [field validation](backend/postgresql/sequelize-basics?id=sequelize-validation) done by Sequelize.
 
 ## (WIP ?) Read
 

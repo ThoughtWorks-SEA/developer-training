@@ -23,7 +23,9 @@ We should also refer to [Sequelize API Reference](https://sequelize.org/master/i
 
 ## Installation
 
-The npm packages
+You have previously created a database through the terminal command `createdb devtraining`. You could verify via `psql -d devtraining`.
+
+We need the following npm packages to connect to the database instance.
 
 - `pg` : The database driver, a non-blocking PostgreSQL client for Node.js.
 - `pg-hstore` : A node package for serializing and deserializing JSON data to hstore format
@@ -50,7 +52,7 @@ Some reading materials for details on why connection pooling is recommended.
 import Sequelize from "sequelize";
 
 const dbDialect = "postgres";
-const dbName = process.env.PG_DB_NAME;
+const dbName = process.env.PG_DB_NAME || "devtraining";
 const dbUser = process.env.PG_USER || "user";
 const dbPass = process.env.PG_PASS;
 const dbHost = process.env.PG_HOST || "localhost";
@@ -106,7 +108,7 @@ To connect to the database, we will import the function and invoke it in "index.
 ```js
 // index.js
 import { connectDb } from "./utils/db.js";
-await connectDb();
+connectDb();
 ```
 
 To access the sequelize instance later, in order to initialize sequelize models, we could use:
@@ -184,8 +186,9 @@ SimplePokemon.init(
   }
 );
 
+// This will drop the database table and recreate empty table whenever application restarts.
 // Not recommended for production level due to destructive operation, but we will use this to demonstrate.
-// For production level, to consider Migration support (advanced topic)
+// For production level, to consider Migration support (advanced topic).
 const synchronizeModel = async () => await SimplePokemon.sync({ force: true });
 await synchronizeModel();
 
@@ -361,3 +364,51 @@ Executing (default): CREATE TABLE IF NOT EXISTS "Simple_Pokemon" ("id"   SERIAL 
 Executing (default): SELECT i.relname AS name, ix.indisprimary AS primary, ix.indisunique AS unique, ix.indkey AS indkey, array_agg(a.attnum) as column_indexes, array_agg(a.attname) AS column_names, pg_get_indexdef(ix.indexrelid) AS definition FROM pg_class t, pg_class i, pg_index ix, pg_attribute a WHERE t.oid = ix.indrelid AND i.oid = ix.indexrelid AND a.attrelid = t.oid AND t.relkind = 'r' and t.relname = 'Simple_Pokemon' GROUP BY i.relname, ix.indexrelid, ix.indisprimary, ix.indisunique, ix.indkey ORDER BY i.relname;
 Executing (default): CREATE UNIQUE INDEX "simple__pokemon_name" ON "Simple_Pokemon" ("name")
 ```
+
+## Sequelize Validation & Database Constraints
+
+**Validations vs Contraints**
+No SQL query will be sent to the database at all if a validation fails, but SQL query was performed in the case of constraint violations.
+
+Read this page for details: https://sequelize.org/master/manual/validations-and-constraints.html .
+
+**Sequelize Validation**
+
+Sequelize supports per-attribute level validation and model-wide validation. Validations are automatically run on create, update and save. You can also call validate() to manually validate an instance.
+Refer to: https://sequelize.org/master/manual/validations-and-constraints.html#validators
+
+- For field validator, we could define our custom validators or use several built-in validators.
+- Model validator methods are called with the model object's context (`this`) and are deemed to fail if the custom validators throw an error.
+
+So far, the `pokemon` model we created allow saving pokemon with name: empty string or undefined / `null`. You will see that the database record will be created for this JSON object.
+```json
+{
+    "name": "",
+    "japaneseName": "ピカチュウ",
+    "baseHP": 35,
+    "category": "Mouse Pokemon"
+}
+```
+
+Let's try to update our model.
+```javascript
+SimplePokemon.init({
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false, // mix of sequelize validaion and database constraints
+    validate: {
+      notEmpty: true, // sequelize validation only, don't allow empty strings
+    }
+  },
+  ...
+}
+```
+
+Restart the application, and retry. You should see the following in the application log.
+Note `NOT NULL` constraint is created in the column "name".
+```sh
+Executing (default): CREATE TABLE IF NOT EXISTS "Simple_Pokemon" ("id"   SERIAL , "name" VARCHAR(255) NOT NULL, "japanese_name" VARCHAR(255), "base_h_p" INTEGER, "category" VARCHAR(255), "created_at" TIMESTAMP WITH TIME ZONE NOT NULL, "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL, PRIMARY KEY ("id"));
+```
+
+- `ValidationError [SequelizeValidationError]: notNull Violation: SimplePokemon.name cannot be null`
+- `ValidationError [SequelizeValidationError]: Validation error: Validation notEmpty on name failed`.
