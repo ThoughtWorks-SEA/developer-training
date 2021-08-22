@@ -17,8 +17,19 @@ You'll also need to create your `index.js`, `app.js`, `utils/db.js` files.
 
 Add the usual code necessary to start your server in these files (refer to your old practice projects!). Remember to:
 
-- add `require("./utils/db");` at the top of your `index.js` file
-- add a `"start:dev": "nodemon index.js"` script into your `package.json` file
+Connect to the database in app.js:
+
+```js
+import { connectDb } from "./utils/db.js";
+await connectDb();
+```
+
+Add your start scripts in your `package.json` file:
+
+```js
+"start": "node index.js",
+"start:dev": "nodemon index.js",
+```
 
 ### Using cookies and same origin policy
 
@@ -32,7 +43,7 @@ In app.js, we use this middleware.
 
 ```js
 // app.js
-const cookieParser = require("cookie-parser");
+import cookieParser from "cookie-parser";
 
 app.use(cookieParser());
 ```
@@ -53,31 +64,114 @@ npm install bcryptjs
 
 ### Add a Trainer model with username and password
 
+```js
+import sequelize from "sequelize";
+import bcrypt from "bcryptjs";
+const { DataTypes, Model } = sequelize;
+
+class Trainer extends Model {}
+
+export default async (sequelizeConnection) => {
+  Trainer.init(
+    {
+      username: {
+        type: DataTypes.STRING,
+        unique: true,
+      },
+      password: {
+        type: DataTypes.STRING,
+      },
+    },
+    {
+      sequelize: sequelizeConnection, // We need to pass the connection instance
+      underscored: true,
+      hooks: {
+        beforeCreate: async (trainer) => {
+          if (trainer.password) {
+            const salt = await bcrypt.genSaltSync(10);
+            trainer.password = bcrypt.hashSync(trainer.password, salt);
+          }
+        },
+        beforeUpdate: async (trainer) => {
+          if (trainer.password) {
+            const salt = await bcrypt.genSaltSync(10);
+            trainer.password = bcrypt.hashSync(trainer.password, salt);
+          }
+        },
+      },
+    }
+  );
+
+  // Not recommended for production level due to destructive operation
+  const synchronizeModel = async () => await Trainer.sync({ force: true });
+  await synchronizeModel();
+
+  return Trainer;
+};
+```
+
 ### New trainer route for creating a new Trainer
 
-<!-- ```js
-router.post("/", async (req, res, next) => {
+routes/trainers.route.js
+
+```js
+import express from "express";
+import dbConnection from "../utils/db.js";
+
+import InitTrainer from "../db/models/trainer.model.js";
+let Trainer;
+
+const router = express.Router();
+
+// Add POST /trainers route
+router.post("/", async (req, res) => {
   try {
     const newTrainer = await Trainer.create(req.body);
     res.send(newTrainer);
   } catch (err) {
-    next(err);
+    console.error(err);
   }
 });
+
+export default () => {
+  return router;
+};
+
+export const mockTrainerModel = (mockModel) => {
+  Trainer = mockModel;
+};
+
+export const initTrainerModel = async () => {
+  Trainer = await InitTrainer(dbConnection);
+};
 ```
+
+app.js
+
+```js
+import { initTrainerModel } from "./routes/trainers.route.js";
+import trainersRouter from "./routes/trainers.route.js";
+await initTrainerModel();
+
+app.use("/trainers", trainersRouter());
+```
+
+Using [Postman](https://www.postman.com/downloads/), try to create a Trainer through the `POST` method and `http://localhost:XXXX/trainers` request URL.
+
+You should also include some data in the body (body -> raw -> JSON), e.g.:
 
 ```json
 {
   "username": "ash3",
   "password": "iWannaB3DVeryBest"
 }
-``` -->
+```
 
 I can create trainers now! Note that the hash is different even for same passwords. This is thanks to the salting of bcrypt.
 
-Try using Postman now!
-
 ### Generating a JWT secret
+
+<!-- WIP -->
 
 How to generate a good `JWT_SECRET_KEY`? Because we use HS256 algoithm for the signature, we should have a 256 bits key of 32 characters.
 
