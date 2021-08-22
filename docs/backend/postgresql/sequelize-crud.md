@@ -12,12 +12,87 @@ Alternatively, a model could be generated using `sequelize-cli`. This will gener
 npx sequelize-cli init
 npx sequelize-cli model:generate --name SimplePokemon --attributes name:string,japaneseName:string,baseHP:integer,category:string,nameWithJapanese:virtual
 ```
-## Give it a try!
+## Independent Imports of Sequelize Models
 
-To explore Sequelize CRUD through the use of Sequelize Models, we could import the `SimplePokemon` model into "index.js".
+In the model that we have defined previously, the database table is synchronised whenever the model is imported, ie. Database table will be dropped whenever it's imported.
+
+We need to some refactoring before we explore CRUD functions.
+1. We will switch to request sequelize to synchronize all the models at once, and remove the database synchronisation code from `simple-pokemon.model.js`.
+2. As [sequelize model is having dependency to sequelize connection](backend/postgresql/sequelize-basics?id=inject-sequelize-dependency-into-models), we will refactor the model to export a function to accept a database connection instance and return the Sequelize model.
+
+After the refactoring, we could then import the `SimplePokemon` model into our preferred javascript file eg. "index.js", "create.js", without worry of the database connectivity.
+
+`simple-pokemon.model.js`
+```js
+import sequelize from 'sequelize';
+const { DataTypes, Model } = sequelize;
+
+class SimplePokemon extends Model { }
+
+// Extract constant to faciliate checking if a model has been initialized.
+const MODEL_NAME = 'SimplePokemon';
+
+// Wrap `SimplePokemon.init` into an async function
+const initializeModel = async (sequelizeConnection) => {
+  SimplePokemon.init(
+    {
+      name: {
+        type: DataTypes.STRING
+      },
+      japaneseName: {
+        type: DataTypes.STRING
+      },
+      baseHP: {
+        type: DataTypes.INTEGER
+      },
+      category: {
+        type: DataTypes.STRING
+      },
+      nameWithJapanese: {
+        type: DataTypes.VIRTUAL,
+        get () {
+          return `${this.name} ${this.japaneseName}`;
+        },
+        set (value) {
+          throw new Error('Do not try to set the `nameWithJapanese` value!');
+        }
+      }
+    },
+    {
+      sequelize: sequelizeConnection, // Dependency of the connection instance
+      modelName: MODEL_NAME, // Pass in local constant MODEL_NAME to facilitate checking of the initialization state
+      tableName: 'Simple_Pokemon'
+    }
+  );
+
+  // Remove these dead code: We sychronise all the database tables only when the application starts instead
+  // const synchronizeModel = async () => await SimplePokemon.sync({ force: true });
+  // synchronizeModel();
+};
+
+export const initOrGetSimplePokemonModel = async (sequelizeConnection) => {
+  console.log('===================DEBUG====================');
+  console.log(`Has model ${MODEL_NAME} defined?`, sequelizeConnection.isDefined(MODEL_NAME));
+  console.log('===================DEBUG====================');
+
+  if (!sequelizeConnection.isDefined(MODEL_NAME)) {
+    await initializeModel(sequelizeConnection);
+  }
+  return SimplePokemon;
+};
+```
+
+`index.js`
 ```js
 // index.js
-import SimplePokemon from './db/models/simple-pokemon.model.js';
+import sequelizeConnection from './utils/db.js';
+import { initOrGetSimplePokemonModel } from './db/models/simple-pokemon.model.js';
+
+await sequelizeConnection.sync({ force: true });
+console.info("All models were synchronized successfully.");
+
+// A sequelize model instance that has been connected to the database for usage later.
+const SimplePokemon = await initOrGetSimplePokemonModel(sequelizeConnection);
 ```
 
 ## Create
@@ -29,7 +104,7 @@ Although a model is an ES6 class, you should not create instances by using the `
 To facilitate the process, Sequelize Model offers another method to combines the above 2 into a single method.
 - [create](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-create): class-level method to create an object and save the database record. This is an asynchronous method, so you will need `await` or promise handling.
 
-Use `create` to create a new instance and save the record into the database table `Simple_Pokemon`.
+Use `Model#create` static method to create a new instance and save the record into the database table `Simple_Pokemon`.
 
 ```js
   const pikachu = {

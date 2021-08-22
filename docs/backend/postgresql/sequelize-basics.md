@@ -324,6 +324,16 @@ Sequelize allows you to define custom getters and setters for the attributes of 
 
 [Virtual fields](https://sequelize.org/master/manual/getters-setters-virtuals.html#virtual-fields) are fields that Sequelize populates under the hood, but in reality they don't even exist in the database. Sequelize provides `DataTypes.VIRTUAL` that does not cause a column in the table to exist. However, the model will appear to have the virtual field after we define the custom getter.
 
+## Inject Sequelize Dependency into Models
+We have a working model definition now. Do you notice that the model itself having dependency onto an active database connection? Could you think of the downsides of this behaviour?
+
+It's common for us to import the data models in multiple places, due to business logics. Models having dependency to actual database connectivity will bring us the following inconvenience.
+1. When there is a database connection issues, a few components are reporting errors, and introduce complexities to troubleshooting.
+2. The unit testing for a lot of components across different layers will now be blocked, or we have to maintain database for unit testing.
+
+Making a data model to be independent will resolve the issues. We could move the dependency to the app entry point or the controller level.
+See: [Sequelize CRUD - Independent Imports of Sequelize Models](backend/postgresql/sequelize-crud?id=independent-imports-of-sequelize-models)
+
 ## More about Model Definition
 
 It's recommended to follow [Sequelize CRUD - Create](https://thoughtworks-sea.github.io/developer-training/#/backend/postgresql/sequelize-crud?id=create) and [Unit Testing with Jest and SuperTest](https://thoughtworks-sea.github.io/developer-training/#/backend/postgresql/postgres-testing?id=unit-testing-with-jest-and-supertest) before continuing to this section. Creating a database record will help better understand how a model could be use, and appreciate the differences for model definition.
@@ -356,9 +366,6 @@ SimplePokemon.init({
   ],
   underscored: true
 });
-
-const synchronizeModel = async () => await SimplePokemon.sync({ force: true });
-await synchronizeModel();
 ```
 
 Upon starting the application, you will find in the logs, the SQL statements that Sequelize generated for us. Compare the logs as above, you will see the changes in database column naming strategy and a unique index being created.
