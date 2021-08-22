@@ -106,15 +106,15 @@
   - [Express.js async await](backend/express-async-await)
   - [Lab: Express.js express](backend/express-lab)
   - [Express.js env variable](backend/express-env-variable)
-  <!-- MongoDB -->
-  <!-- - [MongoDB basics](backend/mongodb/mongodb-basics) -->
-  <!-- - [MongoDB vs relational](backend/mongodb/mongodb-vs-relational) -->
-  <!-- - [Mongoose basics](backend/mongodb/mongoose-basics) -->
-  <!-- - [Mongoose CRUD](backend/mongodb/mongoose-crud) -->
-  <!-- - [Mongoose virtuals](backend/mongodb/mongoose-virtuals) -->
-  <!-- - [Mongoose validation](backend/mongodb/mongoose-validation) -->
-  <!-- - [Mongoose and express controllers](backend/mongodb/mongoose-express) -->
-  <!-- - [Mongoose testing](backend/mongodb/mongoose-testing) -->
+    <!-- MongoDB -->
+    <!-- - [MongoDB basics](backend/mongodb/mongodb-basics) -->
+    <!-- - [MongoDB vs relational](backend/mongodb/mongodb-vs-relational) -->
+    <!-- - [Mongoose basics](backend/mongodb/mongoose-basics) -->
+    <!-- - [Mongoose CRUD](backend/mongodb/mongoose-crud) -->
+    <!-- - [Mongoose virtuals](backend/mongodb/mongoose-virtuals) -->
+    <!-- - [Mongoose validation](backend/mongodb/mongoose-validation) -->
+    <!-- - [Mongoose and express controllers](backend/mongodb/mongoose-express) -->
+    <!-- - [Mongoose testing](backend/mongodb/mongoose-testing) -->
   - [Databases](backend/database-basics)
   <!-- PostgreSQL -->
   - [PostgreSQL basics](backend/postgresql/postgresql-basics)
@@ -132,8 +132,10 @@
   - [Security cookie](backend/security-cookie)
   <!-- - [Mongoose middleware](backend/mongodb/mongoose-middleware) -->
   - [Security jwt](backend/security-jwt)
-  <!-- - [Security jwt testing](backend/security-jwt-testing) -->
-  <!-- - [Lab: Express.js Mongoose](backend/mongodb/express-mongoose-lab) -->
+  <!-- - [Quick start for JWT](backend/mongodb/jwt-quick-start) -->
+  - [Quick start for JWT](backend/postgresql/jwt-quick-start)
+    <!-- - [Security jwt testing](backend/security-jwt-testing) -->
+    <!-- - [Lab: Express.js Mongoose](backend/mongodb/express-mongoose-lab) -->
   - [Express.js to production](backend/express-to-production)
   <!-- - [Express.js deploy](backend/express-deploy-mongo) -->
   - [Express.js deploy](backend/express-deploy-postgres)
