@@ -131,6 +131,7 @@
     <!-- - [Security hashing and others](backend/security-hash-others) -->
   - [Security cookie](backend/security-cookie)
   <!-- - [Mongoose middleware](backend/mongodb/mongoose-middleware) -->
+  - [Hashing passwords](backend/postgresql/hashing-passwords)
   - [Security jwt](backend/security-jwt)
   <!-- - [Quick start for JWT](backend/mongodb/jwt-quick-start) -->
   - [Quick start for JWT](backend/postgresql/jwt-quick-start)
