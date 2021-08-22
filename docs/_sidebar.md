@@ -130,18 +130,20 @@
     <!-- - [Security encrypt decrypt](backend/security-encrypt-decrypt) -->
     <!-- - [Security hashing and others](backend/security-hash-others) -->
   - [Security cookie](backend/security-cookie)
-  <!-- - [Mongoose middleware](backend/mongodb/mongoose-middleware) -->
-  - [Hashing passwords](backend/postgresql/hashing-passwords)
+    <!-- - [Hashing passwords with Mongoose middleware](backend/mongodb/mongoose-middleware) -->
+  - [Hashing passwords](backend/postgresql/sequelize-hooks-hashing-passwords)
   - [Security jwt](backend/security-jwt)
-  <!-- - [Quick start for JWT](backend/mongodb/jwt-quick-start) -->
+    <!-- - [Quick start for JWT](backend/mongodb/jwt-quick-start) -->
   - [Quick start for JWT](backend/postgresql/jwt-quick-start)
     <!-- - [Security jwt testing](backend/security-jwt-testing) -->
-    <!-- - [Lab: Express.js Mongoose](backend/mongodb/express-mongoose-lab) -->
+  <!-- Path to Production -->
   - [Express.js to production](backend/express-to-production)
-  <!-- - [Express.js deploy](backend/express-deploy-mongo) -->
+    <!-- - [Express.js deploy](backend/express-deploy-mongo) -->
   - [Express.js deploy](backend/express-deploy-postgres)
-    <!-- - [Lab: Company reviews](backend/company-reviews-lab) -->
-    <!-- - [Labs: Express / Mongoose](backend/backend-labs) -->
+  <!-- Old Labs -->
+  <!-- - [Lab: Express.js Mongoose](backend/mongodb/express-mongoose-lab) -->
+  <!-- - [Lab: Company reviews](backend/company-reviews-lab) -->
+  <!-- - [Labs: Express / Mongoose](backend/backend-labs) -->
 
 - **Delivering Software**
 
