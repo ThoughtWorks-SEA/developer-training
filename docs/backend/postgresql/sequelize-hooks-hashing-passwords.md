@@ -1,6 +1,6 @@
 # Hashing password with Sequelize & bcrypt
 
-As we already know, it is extremely unsafe to store passwords as plaintext. We need to hash the passwords before we store them in the database. This way, if anyone gains access to the database, they will see only the hashes of the passwords, and will not be able to use the value as actual credentials to log into the affected user accounts.
+As we already know, it is extremely unsafe to store passwords in plain text. We need to hash the passwords before we store them in the database. This way, if anyone gains access to the database, they will see only the hashes of the passwords, and will not be able to use the value as actual credentials to log into the affected user accounts.
 
 ## Create User model
 
@@ -61,11 +61,11 @@ User.init(
 );
 ```
 
-If you can try to create a User now with `password: "password123"`, and log its details, you will be able to see that the value of password is not in fact "password123", but a hashed value.
+If you try to create a User now with `password: "password123"`, and log its details, you will be able to see that the value of password is not in fact "password123", but a hashed value.
 
 ## beforeUpdate hook
 
-What about if the user chooses to update their password though?
+What about if the user chooses to update their password?
 
 In addition to having a `beforeCreate` hook, we also need a `beforeUpdate` hook - to hash the new password before updating the User model:
 
