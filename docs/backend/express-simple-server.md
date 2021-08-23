@@ -73,11 +73,11 @@ cURL is by default already installed in Mac OS. For Windows, if you have anythin
 
 You can send different HTTP requests using cURL.
 
-For example, let's send a POST request to https://localhost:3000/ with a JSON message body.
+For example, let's send a POST request to http://localhost:3000/ with a JSON message body.
 
 ```sh
 curl --request POST \
-  --url https://localhost:3000/ \
+  --url http://localhost:3000/ \
   --header 'content-type: application/json' \
   --data '{
     "username": "babel",
