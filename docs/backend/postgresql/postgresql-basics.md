@@ -116,6 +116,18 @@ createdb devtraining
 psql -d devtraining
 ```
 
+**Create Another Database And User In PSQL**
+
+In the psql session, run the following. You might want to explore limiting the [privileges](https://www.postgresql.org/docs/13/ddl-priv.html).
+_Note_: [Stack Overflow: Postgres Case Sensitivity](https://stackoverflow.com/questions/21796446/postgres-case-sensitivity)
+
+```
+CREATE DATABASE database_name;
+
+CREATE USER user;
+GRANT all privileges ON DATABASE database_name TO user;
+```
+
 **Create Users table**
 
 ```
@@ -152,14 +164,14 @@ brew install --cask pgadmin4
 
 - To reset your PostgreSQL admin password: https://community.progress.com/s/article/How-to-reset-PostgreSQL-admin-password (Windows)
 
-## (WIP) Key Concepts
+## Key Concepts
 You could refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/13/sql.html) for details.
 
 * Concepts
   * Table/Row/Column
   * Schema
     * Schema Migration
-  * Primary Key, Foreign Key
+  * Database Constraints: Primary Key, Foreign Key, Unique, Not Null etc.
   * [Index](https://8thlight.com/blog/kyle-annen/2018/10/09/an-introduction-to-database-indexing.html)
   * [View](https://ecomputernotes.com/fundamental/what-is-a-database/what-is-a-database-view)
   * SQL Query
@@ -169,7 +181,12 @@ You could refer to the [PostgreSQL documentation](https://www.postgresql.org/doc
     * [ACID Compliance](https://mariadb.com/resources/blog/acid-compliance-what-it-means-and-why-you-should-care)
     * Lock
 
-### Primary Key
+### Database Constraints
+
+SQL database usually provide supports to define constraints on columns and tables, with respect to other columns or rows. When there is attempts to store data in a column that would violate a constraint, an error is raised. Checkout the [Postgres Constraints Documentation](https://www.postgresql.org/docs/current/ddl-constraints.html).
+
+**Primary Key**
+
 In a database table(also known as schema), it is a common requirement for rows to be uniquely identifiable.  
 Primary key refers to a column or a set of columns in a database table that uniquely identifies every record in the table.
 
@@ -192,28 +209,31 @@ An example - a customers tables contains the following columns
 - Name may not be unique. Phone number and address may change.
 - Hence, it is better to create a fact-less auto-increment number, say customerID, as the primary key.
 
-### (WIP) Relationship
-**Primary Key + Foreign Key**
+**Foreign Key**
 
-**Referential Integrity Rule**
+A foreign key constraint specifies that the values in a column (or a group of columns) must match the values appearing in some row of another table. To illustrate, the foreign key in "Table A" could be references to primary key column or multiple columns (aka composite key) in "Table B".
+
+A table can have more than one foreign key constraint. This is used to implement many-to-many relationships between tables. For example, the through tables are usually created to independently hold the many-to-many relationship. The columns in the through tables are usually just the references to other tables.
 
 ### Indexing
 Without advance preparation, the database system would have to scan the entire table to find all matching entries. Maintain an index on a column could provide the database system a more efficient method for locating matching rows. For instance, it might only have to walk a few levels deep into a search tree. 
 
 It is the task of the database programmer to foresee which indexes will be useful. The index naming could be named freely, thus it is recommended to pick something that we could easily remember later what the index was for.
 
-Some of the commonly used index types are:
-- Unique Index: [PostgreSQL automatically creates a unique index when a unique constraint or primary key is defined for a table. The index covers the columns that make up the primary key or unique constraint (a multicolumn index, if appropriate), and is the mechanism that enforces the constraint.](https://www.postgresql.org/docs/current/indexes-unique.html)
-- Foreign Key ?
+Unique Index is one of the most commonly used indexes.
 
-#### Index Types
+The foreign key constraint is often a candidate for indexing, however database provider doesn't create an implicit ones as they usually does with primary key constraints. See: [Stack Overflow](https://stackoverflow.com/questions/836167/does-a-foreign-key-automatically-create-an-index)
+
+In Postgres, a [unique index](https://www.postgresql.org/docs/current/indexes-unique.html) is automatically created when a unique constraint or primary key is defined for a table. The index covers the columns that make up the primary key or unique constraint (a multicolumn index, if appropriate, and is the mechanism that enforces the constraint. An index can also be defined on more than one column of a table. See: [Multicolumn Indexes](https://www.postgresql.org/docs/current/indexes-multicolumn.html)
+
+**Index Types**
 PostgreSQL provides several index types: `B-tree`, `Hash`, `GiST`, `SP-GiST`, `GIN` and `BRIN`. Each index type uses a different algorithm that is best suited to different types of queries. By default, the `CREATE INDEX` command creates `B-tree` indexes, which fit the most common situations.
 
 References:
 - https://www.postgresql.org/docs/current/indexes.html
 - https://www.postgresql.org/docs/current/indexes-types.html
 
-## ACID compliance
+### ACID compliance
 ACID properties stands for:
   - Atomaticity
   - Consistency
@@ -248,8 +268,16 @@ In general, there are mainly 4 steps to designing a database
   * `one-to-one`
 * Step 4 - Normalization
 
-## (WIP) Best Practices
-  - **Normalization**
+### Best Practices
+
+**Integrity Rule**
+
+* `Entity Integrity Rule`: The primary key cannot contain NULL. Otherwise, it cannot uniquely identify the row. For composite key made up of several columns, none of the column can contain NULL. Most of the RDBMS check and enforce this rule.
+* `Referential Integrity Rule`: Each foreign key value must be matched to a primary key value in the table referenced \(or parent table\). You can insert a row with a foreign key in the child table only if the value exists in the parent table. If the value of the key changes in the parent table \(e.g., the row updated or deleted\), all rows with this foreign key in the child table\(s\) must be handled accordingly. You could either \(a\) disallow the changes; \(b\) cascade the change \(or delete the records\) in the child tables accordingly; \(c\) set the key value in the child tables to NULL. Most RDBMS can be setup to perform the check and ensure the referential integrity, in the specified manner.
+
+**Normalization**
+
+Normalization is a database design technique which organizes tables in a manner that minimizes redundancy and dependency of data. It divides larger tables to smaller tables and links them using relationships. Here is a good resource for understanding normalization - [Normalization of database](https://www.studytonight.com/dbms/database-normalization.php)
 
 ## Application Interaction with database - Native or ORM ?
 
