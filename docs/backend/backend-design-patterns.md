@@ -53,7 +53,7 @@ For simplicity in this course, we will organise our server-side components into 
 2. `controllers`
 3. `models`
 
-## (WIP) Exercises
+## Exercises
 
 Refactor your router codes by extracting the main logic into controllers. See [this example](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/routes#create_the_catalog_route_module) for a guide on how to implement this.
 
@@ -72,5 +72,5 @@ describe.skip("pokemon CRUD", () => {
     - Create a pokemon router and mount it on the app.
 1. Create `PokemonController` to store all the CRUD functions that we created previously.
 1. Update the pokemon router to use different functions in `PokemonController` for the `/pokemon` routes.
-1. Using Postman, test out your routes. Do `POST http://localhost:3000/pokemons` and pass in json content in the body `{ "name": "new pokemon", "baseHP": 100, "category": "NEW POKEMON" }`. Then do `GET http://localhost:3000/pokemons` - you should see an array containing the song you just created! Continue create and testing for all the other routes - DELETE, PUT, GET /:id.
+1. Using Postman, test out your routes. Do `POST http://localhost:3000/pokemons` and pass in json content in the body `{ "name": "new pokemon", "baseHP": 100, "category": "NEW POKEMON" }`. Then do `GET http://localhost:3000/pokemons` - you should see an array containing the pokemon you just created! Continue create and testing for all the other routes - DELETE, PUT, GET /:id.
 1. Refactor your code by extracting the main database logic into a controller - `controllers/pokemons.controller.js`. There are many styles of doing this - feel free to pick whichever way you prefer!

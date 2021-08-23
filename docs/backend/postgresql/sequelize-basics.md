@@ -30,8 +30,6 @@ CREATE USER devtraining;
 GRANT all privileges ON DATABASE "devtraining" TO devtraining;
 ```
 
-Let's quick start a NodeJS repo with ES6 support, refer to GitHub repo: ?? .
-
 We need the following npm packages to connect to the database instance.
 
 - `pg` : The database driver, a non-blocking PostgreSQL client for Node.js.
@@ -44,7 +42,7 @@ npm install pg pg-hstore sequelize
 
 ## Connecting to PostgreSQL server
 
-Let's start exploring sequelize by creating a file `utils/db.js`.
+Let's start exploring sequelize by creating a config file `config/database.js` and file `db/index.js`. For env vars, you can refer to [node-postgres documentation](https://node-postgres.com/features/connecting#environment-variables).
 
 Following the Sequelize documentation on [connection pool](https://sequelize.org/master/manual/connection-pool.html), we will create only one Sequelize instance and export the instance from the module. This will serve as our entry point to the database.
 
@@ -54,34 +52,56 @@ Some reading materials for details on why connection pooling is recommended.
 - https://stackoverflow.blog/2020/10/14/improve-database-performance-with-connection-pooling/
 
 ```js
-// utils/db.js
+// config/database.js
 
-import Sequelize from "sequelize";
+module.exports = {
+  development: {
+    username: 'devtraining',
+    password: null,
+    database: 'database_development',
+    host: '127.0.0.1',
+    dialect: 'postgres'
+  },
+  test: {
+    username: 'devtraining',
+    password: null,
+    database: 'database_test',
+    host: '127.0.0.1',
+    dialect: 'postgres'
+  },
+  production: {
+    username: process.env.PGUSER,
+    password: process.env.PGPASSWORD,
+    database: process.env.PGDATABASE,
+    host: process.env.PGHOST,
+    port: process.env.PGPORT,
+    dialect: 'postgres'
+  }
+};
+```
 
-const dbDialect = "postgres";
-const dbName = process.env.PG_DB_NAME || "devtraining";
-const dbUser = process.env.PG_USER || "user";
-const dbPass = process.env.PG_PASS;
-const dbHost = process.env.PG_HOST || "localhost";
-const dbPort = process.env.PG_PORT || 5432;
+```js
+// db/index.js
+
+const Sequelize = require('sequelize');
+
+const env = process.env.NODE_ENV || 'development';
+const config = require('../config/database.js')[env];
 
 // SSL connection
 // https://github.com/sequelize/sequelize/issues/10015
-// https://stackoverflow.com/questions/58965011/sequelizeconnectionerror-self-signed-certificate
-const dbConnectViaSsl = process.env.PG_SSL_MODE !== "false"; // Note: Set PG_SSL_MODE=false in your local .env
-const dbDialectOptions = dbConnectViaSsl
+// https://stackoverflow.com/questions/58965011/sequelizeconnectionerror-self-signed-certificat
+const dbDialectOptions = process.env.NODE_ENV === 'production'
   ? {
       ssl: {
-        require: dbConnectViaSsl,
-        rejectUnauthorized: false,
-      },
+        require: true,
+        rejectUnauthorized: false
+      }
     }
   : {};
 
-const sequelize = new Sequelize(dbName, dbUser, dbPass, {
-  host: dbHost,
-  port: dbPort,
-  dialect: dbDialect,
+const dbConfig = {
+  ...config,
   dialectOptions: dbDialectOptions,
   // logging: console.log,                  // Default, displays the first parameter of the log function call
   // logging: (...msg) => console.log(msg), // Displays all log function call parameters
@@ -91,36 +111,34 @@ const sequelize = new Sequelize(dbName, dbUser, dbPass, {
     min: 0, // default: 0
     idle: 10000, // default: 10000ms
     acquire: 30000, // default: 60000ms
-    evict: 1000, // default: 1000ms
-  },
-});
-
-const connectDb = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
-  } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    evict: 1000 // default: 1000ms
   }
 };
 
-export { connectDb };
-export default sequelize;
+const sequelize = new Sequelize(dbConfig);
+
+module.exports = sequelize;
 ```
 
-To connect to the database, we will import the function and invoke it in "index.js":
+To test the connection to the database, we can require the sequelize connection instance in "index.js":
 
 ```js
 // index.js
-import { connectDb } from "./utils/db.js";
-connectDb();
+const sequelize = require('../db/index.js');
+
+try {
+  await sequelize.authenticate();
+  console.log("Connection has been established successfully.");
+} catch (error) {
+  console.error("Unable to connect to the database:", error);
+}
 ```
 
 To access the sequelize instance later, in order to initialize sequelize models, we could use:
 
 ```js
 // *.model.js
-import sequelize from "./utils/db.js";
+const sequelize = require('./db/index.js');
 ```
 
 ## Key Concepts
@@ -154,9 +172,9 @@ Let's begin to create our first model file `db/models/simple-pokemon.model.js`.
 ```javascript
 // simple-pokemon.model.js
 
-import sequelizeConnection from '../../utils/db.js'; // Reference to the database connection instance
+const sequelizeConnection = require('../../db/index.js'); // Reference to the database connection instance
 
-import sequelize from 'sequelize';
+const sequelize = require('sequelize');
 const { DataTypes, Model } = sequelize;
 
 class SimplePokemon extends Model {}
@@ -199,12 +217,12 @@ SimplePokemon.init(
 const synchronizeModel = async () => await SimplePokemon.sync({ force: true });
 synchronizeModel();
 
-export default SimplePokemon;
+module.exports = SimplePokemon;
 ```
 
 Import the model in our entry point `index.js`.
 ```js
-import SimplePokemon from './db/models/simple-pokemon.model.js';
+const SimplePokemon = require('./db/models/simple-pokemon.model.js');
 ```
 
 At this point of time, you should have a NodeJS folder structure looks like below.
@@ -214,11 +232,10 @@ At this point of time, you should have a NodeJS folder structure looks like belo
 ├── index.js
 ├── package-lock.json
 ├── package.json
-├── db
-│   └── models
-│       └── simple-pokemon.model.js
-└── utils
-    └── db.js
+└── db
+    └── models
+        └── simple-pokemon.model.js
+    └── index.js
 ```
 
 Your package.json should include these:

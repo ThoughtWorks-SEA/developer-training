@@ -1,8 +1,6 @@
 # Sequelize CRUD
 
-This page of notes is simplified from [Sequelize Core Concepts - Model Instances](https://sequelize.org/master/manual/model-instances.html). Please read the Sequelize Documentations for more details.
-
-- [API reference for Sequelize Model](https://sequelize.org/master/class/lib/model.js~Model.html)
+This page of notes is simplified from [Sequelize Core Concepts - Model Instances](https://sequelize.org/master/manual/model-instances.html). Please read the [Sequelize API Reference](https://sequelize.org/master/class/lib/model.js~Model.html) for more details.
 
 ## Pre-requisite
 Assuming that you followed the notes in [Sequelize Basics](https://thoughtworks-sea.github.io/developer-training/#/backend/postgresql/sequelize-basics?id=create-a-simple-model), you should have created the `SimplePokemon` model for and acquired a database connection instance.
@@ -24,7 +22,6 @@ After the refactoring, we could then import the `SimplePokemon` model into our p
 
 `simple-pokemon.model.js`
 ```js
-import sequelize from 'sequelize';
 const { DataTypes, Model } = sequelize;
 
 class SimplePokemon extends Model { }
@@ -70,14 +67,8 @@ const initializeModel = async (sequelizeConnection) => {
   // synchronizeModel();
 };
 
-export const initOrGetSimplePokemonModel = async (sequelizeConnection) => {
-  console.log('===================DEBUG====================');
-  console.log(`Has model ${MODEL_NAME} defined?`, sequelizeConnection.isDefined(MODEL_NAME));
-  console.log('===================DEBUG====================');
-
-  if (!sequelizeConnection.isDefined(MODEL_NAME)) {
-    await initializeModel(sequelizeConnection);
-  }
+module.exports = (sequelizeConnection) => {
+  initializeModel(sequelizeConnection);
   return SimplePokemon;
 };
 ```
@@ -85,14 +76,19 @@ export const initOrGetSimplePokemonModel = async (sequelizeConnection) => {
 `index.js`
 ```js
 // index.js
-import sequelizeConnection from './utils/db.js';
-import { initOrGetSimplePokemonModel } from './db/models/simple-pokemon.model.js';
-
-await sequelizeConnection.sync({ force: true });
-console.info("All models were synchronized successfully.");
+const sequelizeConnection = require('../db/index.js');
+const getSimplePokemonModel = require('../db/models/simple-pokemon.model.js');
 
 // A sequelize model instance that has been connected to the database for usage later.
-const SimplePokemon = await initOrGetSimplePokemonModel(sequelizeConnection);
+let SimplePokemon;
+
+Promise
+  .resolve(sequelizeConnection.sync({ force: true }))
+  // .resolve(sequelizeConnection.sync()
+  .then(console.info('All models were synchronized successfully.'))
+  .then(function () {
+    SimplePokemon = getSimplePokemonModel(sequelizeConnection); }
+  );
 ```
 
 ## Create
@@ -166,11 +162,11 @@ Let's try to update our model slightly.
 In the example, we will add an unique index to the `name` field. Let's restart your application with the codes above to create 2 pokemons named `pikachu` with differrent `id`. What do you find?
 1. Next, we explore [field validation](backend/postgresql/sequelize-basics?id=sequelize-validation) done by Sequelize.
 
-## (WIP ?) Read
+## Read
 
-The returned result will be similar to what was displayed when we created the record. It is an instance of Sequelize Model.
+The returned result will be an array of Sequelize Model instances.
 
-### (WIP ?) FindAll
+### FindAll
 
 `findAll()` is the the main way we query the database with sequelize. The first parameter of find is a **options** object. Refer to the [API Reference](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) for the list of supported options. If an empty object is passed or nothing is passed, then it will return all records.
 
@@ -191,188 +187,93 @@ Some notable options are grouped into:
   - `logging`
   - `benchmark`
 
-```js
-await SimplePokemon.create([
-  {
-    name: "Pikachu",
-    japaneseName: "ピカチュウ",
-    baseHP: 35,
-    category: "Mouse Pokemon",
-  },
-  {
-    name: "Squirtle",
-    japaneseName: "ゼニガメ",
-    baseHP: 44,
-    category: "Tiny Turtle Pokemon",
-  },
-  {
-    name: "Wartortle",
-    japaneseName: "カメール",
-    baseHP: 59,
-    category: "Turtle Pokémon",
-  },
-  {
-    name: "Meowth",
-    japaneseName: "ニャース",
-    baseHP: 40,
-    category: "Scratch Cat Pokémon",
-  },
-]);
+#### Filtering Operators
 
-const foundPokemons = await SimplePokemon.findAll();
-return foundPokemons;
-```
-
-#### (WIP ?) basic filter
-
-You can filter through Pokemon by their attributes, using `where`.
-
-For example, to find all instances where `category` == "Mouse Pokemon":
-
-```js
-const filteredPokemons = await SimplePokemon.findAll({
-  where: { category: "Mouse Pokemon" },
-});
-```
-
-Or to find 1 instance where `name` == "Pikachu":
-
-```js
-const filteredPokemons = await SimplePokemon.findOne({
-  where: { name: "Pikachu" },
-});
-```
-
-### (WIP ?) Query operator
+In Sequelize, you can simply query with a powerful `where` clause. You can filter through Pokemon by their attributes, using `where`. Refer to [Querying Operators](https://sequelize.org/master/manual/model-querying-basics.html#operators).
 
 https://sequelize.org/master/manual/model-querying-basics.html#postgres-only-range-operators
 https://sequelize.org/master/manual/model-querying-basics.html#operators
 
-We can use comparison operators `$lt`, `$gt`, `$lte`, and `$gte`
+We can use comparison operators `lt`, `gt`, `lte`, and `gte`.
 
-Less than:
-
-```js
-const filterHPGreaterThan = async (HP) => {
-  const filteredPokemons = await SimplePokemon.find({
-    baseHP: { $gt: HP },
-  });
-  return filteredPokemons;
-};
-
-filterHPGreaterThan(40).then((data) => {
-  console.log(`filterHPGreaterThan: ${data}`);
-});
-```
-
-Now try to use `$lte` with a string. Strings will be compared using their unicode.
-
-How do you sort the results?
-
-#### (WIP ?) Regular expression
-
-Suppose you want to find characters whose rank contains 'turtle'. In SQL, you would use the LIKE operator. In Sequelize, you can simply query with a [powerful `where` clause](https://sequelize.org/master/manual/model-querying-basics.html#applying-where-clauses).
+Suppose you want to find characters whose category contains 'turtle'. In SQL, you would use the LIKE operator. Sequelize offers operators like `like`, `iLike`, `regexp`, `notRegexp`.
 
 ```js
-const filterByCategory = async (category) => {
-  const regex = new RegExp(category, "gi");
-  const filteredPokemons = await SimplePokemon.find({ category: regex });
-  return filteredPokemons;
-};
-
-filterByCategory("turtle").then((pokemons) => {
-  console.log(`filterByCategory: ${pokemons}`);
-
-  // ??? Sequelize may return the pokemons in any order unless you explicitly sort
-  pokemons.map((pokemon) => pokemon.name).sort();
-});
-```
-
-```js
-const pokemons = await SimplePokemon.find({
-  category: { $eq: /turtle/ },
-});
-```
-
-#### (WIP ?) multiple filter
-
-Match multiple filter properties (AND)
-
-```js
-import { Op } from 'sequelize';
-
-const pokemons = await SimplePokemon.findAll({
+const foundPokemons = await SimplePokemon.findAll({
   where: {
-    baseHP: { 
-      [Op.gte]: 39
-    },
-    category: {
-      [Op.regexp]: '/turtle/'
+    baseHP: {
+      [Op.gt]: 40
     }
   }
 });
 
-pokemons.map((pokemon) => pokemon.name);
+const pokemons = await SimplePokemon.findAll({
+    where: {
+      [Op.or]: [
+        { name : 'Pikachu'},
+        { baseHP: 59 }
+      ]
+    }
+  });
 ```
 
-## (WIP ?) Update
+## Update
 
 The model static method `update()` update multiple instances that match the where options.
 
 ```js
-const pikachu = {
-  name: "Pikachu",
-  japaneseName: "ピカチュウ",
-  baseHP: 35,
-  category: "Mouse Pokemon",
-};
-const created = await SimplePokemon.create(pikachu);
-console.log(created.toJSON());
-
-// Change baseHP for Pokemon(s) with a name "Pikachu"
-const updated = await SimplePokemon.update({ baseHP: 40 }, {
+// No returning records by default
+const numberOfAffectedRecords = await SimplePokemon.update({ baseHP: 100 }, {
   where: {
-    name: "Pikachu"
+    category: {
+      [Op.like]: '%Turtle%'
+    }
   }
 });
-console.log(updated.toJSON());
+
+// With updated records
+const [numberOfAffectedRecords, updatedPokemons] = await SimplePokemon.update({ baseHP: 100 }, {
+  where: {
+    category: {
+      [Op.like]: '%Turtle%'
+    }
+  },
+  returning: true
+});
 ```
 
-- **TODO**: How to update just One ? Need to invoke [count()](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-count) and validate first ?
+How to update just one pokemon? We could use [count()](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-count) to validate first.
 - Try running Sequelize with debug logging to see what queries Sequelize executes.
 
-### update(), upsert() vs save()
+### update(), upsert(), save()
 
-**TODO**
-- `async update()` (Class-level): Update multiple instances that match the where options. Each row is subject to validation before it is inserted. The whole insert will fail if one row fails validation.
-- `async upsert()` (Instance-level): This is the same as calling `set()` and then calling `save()` but it only saves the exact values passed to it, making it more atomic and safer.
-- `async upsert()` (Class-level): Insert or update a single row. An update will be executed if a row which matches the supplied values on either the primary key or a unique key is found. Requires the unique index to be defined in sequelize model as well as the database table. Run validations before the row is inserted.
-- `async save()` (Instance-level): Validates this instance, and if the validation passes, persists it to the database. This method is optimized to perform an UPDATE only when the fields have changed. If nothing has changed, no SQL query will be performed. This method is not aware of eager loaded associations.
-- `set()` (Instance-level): Set is used to update values on the instance (the sequelize representation of the instance that is, remember that nothing will be persisted before you actually call save).
+| Method            | Level           | Description                                                                                                                                                          |
+| :---------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `async update()`  | Class-level     | Update multiple instances that match the where options. Each row is subject to validation before it is inserted. The whole insert will fail if one row fails validation.
+| `async upsert()`  | Instance-level  | This is the same as calling `set()` and then calling `save()` but it only saves the exact values passed to it, making it more atomic and safer.
+| `async upsert()`  | Class-level     | Insert or update a single row. An update will be executed if a row which matches the supplied values on either the primary key or a unique key is found. Requires the unique index to be defined in sequelize model as well as the database table. Run validations before the row is inserted.
+| `async save()`    | Instance-level  | Validates this instance, and if the validation passes, persists it to the database. This method is optimized to perform an UPDATE only when the fields have changed. If nothing has changed, no SQL query will be performed. This method is not aware of eager loaded associations.
 
-## (WIP ?) Delete
+## Delete
+
+The model static method `delete()` could delete multiple instances, or set their deletedAt timestamp to the current time if paranoid is enabled.
 
 ```js
-const deleteOneById = async (id) => {
-  try {
-    await SimplePokemon.findByIdAndDelete(id);
-  } catch (err) {
-    handleError(err);
-  }
+const numberOfDeletedRecord = async (id) => {
+  await SimplePokemon.destroy({
+    where: {
+      id: 1
+    }
+  })
 };
 
-const deleteAll = async () => {
-  try {
-    await SimplePokemon.deleteMany();
-  } catch (err) {
-    handleError(err);
-  }
-};
+// Truncate the table
+await SimplePokemon.destroy({
+  truncate: true
+});
 ```
 
-## (WIP ??) What is atomicity?
-
-Optimistic Locking? - to confirm : https://sequelize.org/master/manual/optimistic-locking.html
+## What is atomicity?
 
 An atomic operation is an operation that ensures whatever it is editing is only currently edited by the operation. When you want to update a database record, atomicity means that the database record is locked (not available to other operations) until the database record is updated.
 
@@ -381,22 +282,9 @@ If we do not have atomicity and there are 2 operations to be runs at the same ti
 2. Update pokemon1 baseHP++
 Both operations will find a pokemon with baseHP that is 4, then both will add 1 to `baseHP = 4` and update the baseHP of the same pokemon to `baseHP = 5`. The final baseHP will be 5 instead of 6.
 
-
-
 Sequelize has built-in support for optimistic locking through a model instance version count.
 
-Optimistic locking is **disabled by default** and can be enabled by setting the version property to true in a specific model definition or global model configuration. See model configuration for more details.
-
-Optimistic locking allows concurrent access to model records for edits and prevents conflicts from overwriting data. It does this by checking whether another process has made changes to a record since it was read and throws an OptimisticLockError when a conflict is detected.
-
-**To confirm**: Has Sequelize remove/change built-in Optimistic Locking from v5 to v6?
-- https://sequelize.org/v5/manual/models-definition.html#optimistic-locking
-- The `options.version` wasn't mentioned in API reference for both versions, but [v6 documentation is missing after movement](https://sequelize.org/master/manual/models-definition.html#configuration)
-
-References:
-- [`where(checkVersion: boolean)`](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-where)
-  - **Upcoming**: How to use [`sequelize.where`](https://sequelize.org/master/manual/model-querying-basics.html#advanced-queries-with-functions--not-just-columns-)
-- [Read Replication](https://sequelize.org/master/manual/read-replication.html)
+Optimistic locking is **disabled by default** and can be enabled by setting the version property to true in a specific model definition or global model configuration. See [model definition](https://sequelize.org/v5/manual/models-definition.html#optimistic-locking). Optimistic locking allows concurrent access to model records for edits and prevents conflicts from overwriting data. It does this by checking whether another process has made changes to a record since it was read and throws an OptimisticLockError when a conflict is detected.
 
 ## FYI: Sequelize Convenience Methods for aggregations
 

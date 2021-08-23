@@ -1,4 +1,4 @@
-## (Coming Soon) Defining Associations
+## Defining Associations
 
 This section of notes are extracted and summarised from various parts of [Sequelize Manual](https://sequelize.org/master/manual/assocs.html).
 
