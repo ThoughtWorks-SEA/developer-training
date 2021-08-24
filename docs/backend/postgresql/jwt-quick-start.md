@@ -283,8 +283,8 @@ module.exports = app;
 routes/trainers.js
 
 ```js
-import express from "express";
-import db from "../models/index.js";
+const express = require("express");
+const db = require("../models/index");
 
 const router = express.Router();
 
@@ -307,7 +307,7 @@ module.exports = router;
 Add trainer route before the exporting the app function
 
 ```js
-import trainersRoutes from "./routes/trainers.mjs";
+const trainersRouter = require("./routes/trainers.js");
 app.use("/trainers", trainersRoutes);
 ```
 
