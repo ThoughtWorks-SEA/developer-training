@@ -200,6 +200,22 @@ npx sequelize-cli init:config
 npx sequelize-cli init:seeders
 ```
 
+Once you are done with this step, a file `db/models/index.js` will be automatically generated to initiatialise all the models during NodeJS application start up.
+You could access the following through the `db` variable exported from the boilerplate codes in `db/models/index.js`.
+The variable `db` will also be the common gate to link up the associated models.
+
+```js
+// app.js
+const db = require('./db/models');
+const Trainer = require();
+
+// To access your db connection instance. We most likely don't need it.
+const dbConnection = db.sequelize;
+
+// To access your defined models.
+const Trainer = db.Trainer;
+```
+
 ### Create a Trainer model with username and password
 
 Run these commands in the terminal:
