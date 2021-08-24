@@ -82,6 +82,8 @@ const getBlogPost = async (req, res, next) => {
 
 The above will result in a `UnhandledPromiseRejectionWarning`.
 
+<!-- Note: this may not be the case anymore with newer versions of node? New batches of trainees could not replicate this UnhandledPromiseRejectionWarning -->
+
 ```sh
 (node:25429) UnhandledPromiseRejectionWarning: Error: Network Connection Error
     at Timeout.setTimeout [as _onTimeout] (/Users/.../express-playground/async_await_example.js:36:29)
@@ -126,8 +128,9 @@ We use `Promise.resolve` to ensure we are always dealing with a promise when we 
 Read more about the wrapping async functions on [Stack Overflow](https://stackoverflow.com/questions/51391080/handling-errors-in-express-async-middleware/51391081) and [the 80/20 guide to Express Error Handling](http://thecodebarbarian.com/80-20-guide-to-express-error-handling).
 
 If you prefer to use async/await syntax, this is the equivalent code.
+
 ```js
-const asyncFunctionHandler = customFunc => async (req, res, next) => {
+const asyncFunctionHandler = (customFunc) => async (req, res, next) => {
   try {
     return await customFunc(req, res);
   } catch (err) {
