@@ -19,24 +19,20 @@ There are few ways to define associations in Sequelize. The hasOne and belongsTo
 ```javascript
 
 // Option 1
-Foo.hasOne(Bar, {
-  foreignKey: 'myFooId'
-});
+Foo.hasOne(Bar, { foreignKey: 'myFooId' });
 Bar.belongsTo(Foo);
 
 // Option 2
 Foo.hasOne(Bar, {
   foreignKey: {
-    name: 'myFooId',
+    name: 'myFooId'
   }
 });
 Bar.belongsTo(Foo);
 
 // Option 3
 Foo.hasOne(Bar);
-Bar.belongsTo(Foo, {
-  foreignKey: 'myFooId'
-});
+Bar.belongsTo(Foo, { foreignKey: 'myFooId' });
 
 // Option 4
 Foo.hasOne(Bar);
@@ -160,9 +156,19 @@ Define through `sequelize-cli`.
 References to define migration files:
 - https://levelup.gitconnected.com/creating-sequelize-associations-with-the-sequelize-cli-tool-d83caa902233
 
-## Lab - Pokemon Trainer
+## Lab (One-To-Many)
 
-Create a database to model the relationship: _A trainer that has many pokemons_ .
+**Pokemon Trainer**
+
+Create an application with the following.
+1. A trainer has many pokemons.
+2. A trainer has a login profile: unique username and password needs to be present.
+3. Registration of pokemons and trainers could be done independently.
+4. Retrieving a trainer record should show their assigned pokemons as well.
+5. A trainer could stop training a pokemon at any time.
+6. A pokemon could only have at most 1 trainer at any time. They could have no trainer and they could change trainer too.
+7. Trainers and Pokemons are free to leave this system.
+8. We create the password with a default value in our database. _Assuming that in the future, the trainers could only manage their pokemons upon login. He/She needs to set his/her password on first login._
 
 **1. Bootstrap project dependencies**
 
@@ -183,7 +189,14 @@ References to create a closest attributes:
 - https://github.com/sequelize/cli/blob/be5b445619b59115f36f06507bfff7aa87528db8/docs/FAQ.md#how-can-i-generate-a-model
 - https://github.com/sequelize/cli/blob/be5b445619b59115f36f06507bfff7aa87528db8/src/helpers/model-helper.js#L10-L61
 
-**3. Modify the Migration Scripts**
+**3. Modify the Migration Scripts and Models**
 
-```js
-```
+- Modify pokemon:
+  - add `allowNull: false` and `unique: true` to `name` field.
+  - associate with Trainer model
+- Modify trainer:
+  - associate with Pokemon model
+
+**4. Create NodeJS/Express Application**
+
+Configure the app to sync models at start up and verify the SQL commands in start up logs.
