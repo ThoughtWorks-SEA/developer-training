@@ -13,23 +13,22 @@ echo ".env" >> .gitignore
 git init
 ```
 
-You'll also need to create your `index.js`, `app.js`, `utils/db.js` files.
+You'll also need to create your `index.js` and `app.js` files.
 
-Add the usual code necessary to start your server in these files (refer to your old practice projects!). Remember to:
-
-Connect to the database in app.js:
-
-```js
-import { connectDb } from "./utils/db.js";
-await connectDb();
-```
-
-Add your start scripts in your `package.json` file:
+Add the usual code necessary to start your server in these files (refer to your old practice projects!). Remember to add your start scripts in your `package.json` file:
 
 ```js
 "start": "node index.js",
 "start:dev": "nodemon index.js",
 ```
+
+<!--
+Connect to the database in app.js:
+
+```js
+import { connectDb } from "./utils/db.js";
+await connectDb();
+``` -->
 
 ### Using cookies and same origin policy
 
@@ -43,7 +42,7 @@ In app.js, we use this middleware.
 
 ```js
 // app.js
-import cookieParser from "cookie-parser";
+const cookieParser = require("cookie-parser");
 
 app.use(cookieParser());
 ```
@@ -56,105 +55,272 @@ Install the star of the show, the token we will be creating and reading.
 npm install jsonwebtoken
 ```
 
-We shall use bcryptjs for hashing our passwords. (which uses bcrypt)
+We shall use bcryptjs (which uses bcrypt) for hashing our passwords.
 
 ```
 npm install bcryptjs
 ```
 
-### Add a Trainer model with username and password
+### Install Sequelize
+
+```
+npm install sequelize
+```
+
+We will also make use of `sequelize-cli` to help us generate the template for our Sequelize setup.
+
+```
+npm install --save-dev sequelize-cli
+```
+
+### Sequelize config
+
+A typical sequelize project has four subdirectories: **config, migrations, models, and seeders**.
+
+We will create the config file manually instead of using the sequelize-cli generator as we prefer a .js setup file instead of a .json file (a .js file allows us to refer to environment variables)
+
+1. create the config folder in the root folder
+1. create a config.js file with the content below in the config folder
+1. replace the username and password with the credentials for your postgres server
+1. replace the database key with the database name you prefer
 
 ```js
-import sequelize from "sequelize";
-import bcrypt from "bcryptjs";
-const { DataTypes, Model } = sequelize;
+module.exports = {
+  development: {
+    // replace the `username` and `password` with the credentials for your postgres server
+    username: "postgres",
+    password: null,
+    database: "database_development",
+    host: "127.0.0.1",
+    dialect: "postgres",
+  },
+  test: {
+    // replace the `username` and `password` with the credentials for your postgres server
+    username: "postgres",
+    password: null,
+    database: "database_test",
+    host: "127.0.0.1",
+    dialect: "postgres",
+  },
+  production: {
+    username: process.env.PG_USER,
+    password: process.env.PG_PASS,
+    database: process.env.PG_DB_NAME,
+    host: process.env.PG_HOST,
+    port: process.env.PG_PORT,
+    dialect: "postgres",
+  },
+};
+```
 
-class Trainer extends Model {}
+### Set up Sequelize directory config
 
-export default async (sequelizeConnection) => {
-  Trainer.init(
-    {
+1. Create an empty `.sequelizerc` file at the project root directory and copy the following code
+
+```js
+// config/config.js
+const path = require("path");
+
+module.exports = {
+  config: path.resolve("config", "config.js"),
+};
+```
+
+This file allows you to overwrite the default path of sequelize folders and is very useful for customizing folder directories.
+
+### Create the database
+
+In this example, we are using `npx` to run sequelize-cli's `sequelize` package with the command `db:create`.
+Without `npx`, you will need to refer to the full node_modules path when running any commands from the sequelize-cli package
+
+Let's create a database in the development environment with the name stated in the config file:
+
+```
+npx sequelize db:create
+```
+
+- By default, the command will run against the development environment.
+- To change the environment to run against, prepend the NODE_ENV to the command. E.g. `NODE_ENV=test npx sequelize db:create`
+
+If it says `permission denied`, you may need to alter the role of the postgres user that you are using `ALTER USER <postgres_username> SUPERUSER`, for example:
+
+```
+$ psql
+
+// make user a superuser
+user=# ALTER USER sabrina SUPERUSER;
+ALTER ROLE
+
+// check list of roles and their permissions
+user=# \du
+
+List of roles
+    Role name    |                         Attributes                         | Member of
+-----------------+------------------------------------------------------------+-----------
+ sabrina         | Superuser                                                  | {}
+ postgres        | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+```
+
+### Add a Trainer model with username and password
+
+Run these commands in the terminal:
+
+```bash
+// To initialize the models and migration setup
+npx sequelize init:models
+npx sequelize init:migrations
+
+// Generate a trainer model
+npx sequelize model:generate --name Trainer --attributes username:string,password:string
+```
+
+Take note that this generation script will create 2 files: a model class file, and a migration file.
+
+```bash
+New model was created at security-jwt/models/trainer.js .
+New migration was created at security-jwt/migrations/20210823035441-create-trainer.js .
+```
+
+### Updating the Trainer migration file
+
+A database migration system captures every single changes to the database.
+
+It is used to keep the states of the database in every environment in sync.
+For example, here are some common issues faced with syncing database states
+
+1. Production tables should not be dropped, changes should be added incrementally
+   - We create a migration file that adds a new column to an existing table and let sequelize migration handles the updating of states
+1. Production database's state is different and lag behind development's database
+   - We can easily test if the new database changes will cause a conflict to the existing production state by running migrations
+   - Migration files also keep track of the individual schema changes in the codebase
+
+Let's go ahead and add the unique and allowNull keys to keep the migration file behavior in sync with the model file.
+
+```js
+"use strict";
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable("Trainers", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
       username: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
+        allowNull: false, // here
         unique: true,
       },
       password: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
+        allowNull: false, // here
       },
-    },
-    {
-      sequelize: sequelizeConnection, // We need to pass the connection instance
-      underscored: true,
-      hooks: {
-        beforeCreate: async (trainer) => {
-          if (trainer.password) {
-            const salt = await bcrypt.genSaltSync(10);
-            trainer.password = bcrypt.hashSync(trainer.password, salt);
-          }
-        },
-        beforeUpdate: async (trainer) => {
-          if (trainer.password) {
-            const salt = await bcrypt.genSaltSync(10);
-            trainer.password = bcrypt.hashSync(trainer.password, salt);
-          }
-        },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
       },
-    }
-  );
-
-  // Not recommended for production level due to destructive operation
-  const synchronizeModel = async () => await Trainer.sync({ force: true });
-  await synchronizeModel();
-
-  return Trainer;
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
+  },
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable("Trainers");
+  },
 };
+```
+
+### Running the Trainer migration file
+
+Important difference between migrations and models
+
+- Migration keep track of the changes and running migrations make the changes to the database directly.
+- Models represent the database tables by mapping it into an object we can refer to in the codebase
+
+Run this command to create the Trainer table in your database
+`npx sequelize db:migrate`
+
+- Running this command multiple times will not cause any conflicts as it will only run new migration files once
+- Sequelize knows which migration files are new as it keeps track of database states with the metadata captured from each migration
+
+**A Tip for migration is to always make sure changes to a database state can be undo and redo without breaking anything**
+
+So it is a good practice to try the rollback/undo script when testing your migration scripts
+
+```
+npx sequelize db:migrate
+npx sequelize db:migrate:undo
+npx sequelize db:migrate
+```
+
+### Connect and initialise database for the main app
+
+app.js
+
+```js
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const db = require("./models/index");
+
+// sync will make sure the that the database is connected and the models are properly setup on app startup
+db.sequelize.sync();
+
+const app = express();
+app.use(cookieParser());
+
+app.use(express.json());
+
+module.exports = app;
 ```
 
 ### New trainer route for creating a new Trainer
 
-routes/trainers.route.js
+routes/trainers.js
 
 ```js
 import express from "express";
-import dbConnection from "../utils/db.js";
-
-import InitTrainer from "../db/models/trainer.model.js";
-let Trainer;
+import db from "../models/index.js";
 
 const router = express.Router();
 
 // Add POST /trainers route
 router.post("/", async (req, res) => {
   try {
-    const newTrainer = await Trainer.create(req.body);
+    const newTrainer = await db.Trainer.create(req.body);
     res.send(newTrainer);
   } catch (err) {
     console.error(err);
+    res.sendStatus(400);
   }
 });
 
-export default () => {
-  return router;
-};
-
-export const mockTrainerModel = (mockModel) => {
-  Trainer = mockModel;
-};
-
-export const initTrainerModel = async () => {
-  Trainer = await InitTrainer(dbConnection);
-};
+module.exports = router;
 ```
 
-app.js
+### Add trainer route to app.js
+
+Add trainer route before the exporting the app function
 
 ```js
-import { initTrainerModel } from "./routes/trainers.route.js";
-import trainersRouter from "./routes/trainers.route.js";
-await initTrainerModel();
-
-app.use("/trainers", trainersRouter());
+import trainersRoutes from "./routes/trainers.mjs";
+app.use("/trainers", trainersRoutes);
 ```
+
+index.js
+
+```js
+const app = require("./app");
+
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}...`);
+});
+```
+
+#### Test if setup is working correctly
 
 Using [Postman](https://www.postman.com/downloads/), try to create a Trainer through the `POST` method and `http://localhost:XXXX/trainers` request URL.
 
