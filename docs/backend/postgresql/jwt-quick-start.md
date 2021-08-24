@@ -1,4 +1,4 @@
-## (WIP) Lab: Quick start security-jwt
+## Lab: Quick start security-jwt
 
 Let's create a new simple project to practice.
 
