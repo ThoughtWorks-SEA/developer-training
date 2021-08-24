@@ -37,5 +37,5 @@ https://stackoverflow.com/questions/45692456/whats-the-difference-between-tomatc
 Refer to [GitHub repo](https://github.com/ThoughtWorks-SEA/sequelize-basics-crud)
 
 - Complete the unit test for SimplePokemon CRUD routes.
-- Create integration testing with Sequelize Mock for SimplePokemon CRUD routes, to test business logic.
+- Create / Modify the test to perform API testing for SimplePokemon CRUD routes, to test business logic.
 - Integrate Postgres into your testing for your song routes.
