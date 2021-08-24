@@ -357,15 +357,18 @@ If you choose to use a base64 key, read the key into a Buffer using `Buffer.from
 
 Save it in `.env` file and do not commit it. Remember to add the `.env` file to `.gitignore`.
 
+```
+JWT_SECRET_KEY=udhwhd89237er8hejkfnekf28ynf2397r5983tryn938gh34589
+```
+
 ### Generating a JWT token and finding the secret
 
-- Create the config folder
 - Create a `jwt.js` file inside the config folder, with the `getJWTSecret` function.
 
-src/config/jwt.js
+config/jwt.js
 
 ```js
-var jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 const getJWTSecret = () => {
   const secret = process.env.JWT_SECRET_KEY;
@@ -375,7 +378,6 @@ const getJWTSecret = () => {
   return secret;
 };
 
-// the logic for creating a JWT token can also be moved to trainer.model.js instead, but will work here as well
 const createJWTToken = (username) => {
   const today = new Date();
   const exp = new Date(today);
@@ -393,6 +395,8 @@ module.exports = createJWTToken;
 
 For your tests and your code to be able to find the `JWT_SECRET_KEY`, you can load the environment variables using `dotenv` in **app.js**.
 
+Place this line at the top of your app.js:
+
 ```js
 require("dotenv").config();
 ```
@@ -403,22 +407,27 @@ In the example above, the expiration date of the JWT token is set to 60 days lat
 
 What is this exp field? Why must I use this term?
 
-It represents **Token Expiration,** and you can find [more details here](https://www.npmjs.com/package/jsonwebtoken#token-expiration-exp-claim). Once this field is set in a token, it's validated later on when we call the jwt.verify(token, secret). So a token that passes the expiration time will fail the verification.
+It represents **Token Expiration,** and you can find [more details here](https://www.npmjs.com/package/jsonwebtoken#token-expiration-exp-claim).
+
+Once this field is set in a token, it's validated later on when we call the jwt.verify(token, secret). A token that passes the expiration time will fail the verification.
 
 ### Protect a route trying to find trainers by username
 
-Now that we have our JWT_SECRET_KEY set up, let's create a `protectRoute` middleware and use it for our `GET /trainers/:username` route:
+Now that we have our `JWT_SECRET_KEY` set up, let's create a `protectRoute` middleware and use it for our `GET /trainers/:username` route:
+
+middleware/protectRoute.js
 
 ```js
 const protectRoute = (req, res, next) => {
   try {
     if (!req.cookies.token) {
       throw new Error("You are not authorized");
-      /* you can set a default error handler in app.js instead and do this:
-      const err = new Error("You are not authorized");
-      next(err);
+      /* Alternatively, you can set a default error handler in app.js instead and do this:
+        const err = new Error("You are not authorized");
+        next(err);
       */
     } else {
+      //`req.cookies` is populated by the `cookie-parser` middleware.
       req.user = jwt.verify(req.cookies.token, process.env.JWT_SECRET_KEY);
       next();
     }
@@ -428,21 +437,58 @@ const protectRoute = (req, res, next) => {
   }
 };
 
-router.get("/:username", protectRoute, async (req, res, next) => {
+module.exports = {
+  protectRoute,
+};
+```
+
+To add the feature of allowing users to search for a trainer by their username, add a new GET /trainers/:username route:
+
+routes/trainers.js
+
+```js
+router.get("/:username", async (req, res, next) => {
   try {
     const username = req.params.username;
-    const regex = new RegExp(username, "gi");
-    const trainer = await Trainer.findOne({ username: regex });
+    // [db.Sequelize.Op.iLike] allows you to do case-insensitive querying
+    const trainer = await db.Trainer.findOne({
+      where: { username: { [db.Sequelize.Op.iLike]: "%" + username + "%" } },
+    });
     res.send(trainer);
   } catch (err) {
-    next(err);
+    console.error(err);
+    res.sendStatus(400);
   }
 });
 ```
 
-`req.cookies` is populated by the `cookie-parser` middleware.
+1. Create a Trainer with username and password, using POST /trainers
+1. You should be able to GET the trainer using /trainers/:username
 
-Now, try making a call to `GET /trainers/:username`. The username should be of a Trainer that you have previously created. You should see an error: "You are not authorized". In order to be authorised, the request needs to have a cookie with a valid token in the headers. That's where our `/login` API comes in:
+What if we only want authenticated users to access this endpoint?
+
+We can protect the endpoint by using the `protectRoute` middleware we created earlier:
+
+```js
+const { protectRoute } = require("../middleware/protectRoute");
+
+router.get("/:username", protectRoute, async (req, res, next) => {
+  try {
+    const username = req.params.username;
+    const trainer = await db.Trainer.findOne({
+      where: { username: { [db.Sequelize.Op.iLike]: "%" + username + "%" } },
+    });
+    res.send(trainer);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(400);
+  }
+});
+```
+
+Now, try making a call to `GET /trainers/:username` again.
+
+You should see an error: "You are not authorized". In order to be authorised, the request needs to have a cookie with a valid token in the headers. That's where our `/login` API comes in:
 
 #### Login and logout
 
