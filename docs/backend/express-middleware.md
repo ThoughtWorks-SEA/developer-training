@@ -38,7 +38,7 @@ Middleware also give you a chance to do some pre-processing on a request before 
 Middleware is simply a function that takes three arguments: a request object, a response object and a `next()` function.
 
 ```js
-function(req, res, next) {
+(req, res, next) => {
   // do something useful here
 
   // don't forget to call next

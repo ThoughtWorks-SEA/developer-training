@@ -84,10 +84,16 @@ Refer to the script: [Express.js playground: error_handler_example_3](https://gi
 If you call an asynchronous API in a route handler and you would like to handle errors returned/thrown by those asynchronous operations, you just need to call `next(err)` when some error happens. That is, you call the `next` callback (which is an argument of every middleware and route handler) with an instance of _Error_.
 
 ```js
-app.get("/", (req, res, next) => {
-  // assume some asynchronous error happens because of an network issue
-  const err = new Error("Unexpected network error");
-  next(err);
+app.get("/", async (req, res, next) => {
+  try {
+    // assume some asynchronous error happens because of an network issue
+    const result = await callAnotherAPI();
+    res.send(result);
+  } catch (err) {
+    const err = new Error("Unexpected network error");
+    err.status(503);
+    next(err);
+  }
 });
 ```
 
@@ -145,7 +151,7 @@ To see the value of having error handling middleware, imagine having the followi
 ```js
 const fs = require("fs");
 
-app.get("/", function (req, res, next) {
+app.get("/", (req, res, next) => {
   fs.readFile("/file-does-not-exist", function (err, data) {
     if (err) {
       res.status(500).json({ error: error.toString() });
@@ -156,33 +162,38 @@ app.get("/", function (req, res, next) {
 });
 ```
 
-This is acceptable if you have one or two endpoints dealing with asynchronous functions, but chances are that you are going to have to maintain many more endpoints. You will find that this method is quickly not scalable. If it is suddenly decided that the _503 response code_ is more appropriate than _500 internal server error_, you're going to have to change that for every single endpoint.
+This is acceptable if you have one or two endpoints dealing with asynchronous functions, but chances are that you are going to have to maintain many more endpoints. You will find that this method is quickly not scalable. If it is suddenly decided that the _503 response code_ is more appropriate than _500 internal server error_, you're going to _have to change that for every single endpoint_.
 
 How about responding to different types of error conditions? Error handlers can easily do that.
 
 ```js
 const { AssertionError } = require("assert");
 const { MongoError } = require("mongodb");
+const { BaseError, ValidationError } = require("sequelize");
+const SequelizeError = BaseError;
 
-app.use(handleAssertionError(err, req, res, next) => {
-  if (err instanceof AssertionError) {
+const handleAssertionError = (err, req, res, next) => {
+  if (err instanceof AssertionError || err instanceof ValidationError) {
     return res.status(400).json({
       type: "AssertionError",
       message: err.message,
     });
   }
   next(err);
-});
+};
 
-app.use(handleDatabaseError(err, req, res, next) => {
-  if (err instanceof MongoError) {
+const handleDatabaseError = (err, req, res, next) => {
+  if (err instanceof MongoError || err instanceof SequelizeError) {
     return res.status(503).json({
       type: "MongoError",
       message: err.message,
     });
   }
   next(err);
-});
+};
+
+app.use(handleAssertionError);
+app.use(handleDatabaseError);
 ```
 
 Example is from http://thecodebarbarian.com/80-20-guide-to-express-error-handling.

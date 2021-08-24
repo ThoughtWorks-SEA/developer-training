@@ -9,6 +9,8 @@ Use the express.Router class to create modular, mountable route handlers. Each R
 You can mount them to an app. For example, a router can be mounted to the `/empty` route of an app.
 
 ```js
+// empty.route.js
+
 const router = express.Router();
 
 router.get("/", (res, req) => res.end());
@@ -72,7 +74,7 @@ module.exports = router;
 Setup the routes for your app by using the routers.
 
 ```js
-// express_basic_example_with_router.js
+// index.js + app.js (should be refactored out for testing)
 const express = require("express");
 const app = express();
 const PORT = 3000;
