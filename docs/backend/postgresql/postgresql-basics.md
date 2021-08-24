@@ -163,8 +163,14 @@ brew install --cask pgadmin4
 ## Troubleshooting
 
 - To reset your PostgreSQL admin password: https://community.progress.com/s/article/How-to-reset-PostgreSQL-admin-password (Windows)
+- To set the password for an existing user, run `ALTER USER <user> WITH PASSWORD '<password>'` in your psql shell. For example:
+
+```bash
+postgres=# ALTER USER exampleuser WITH PASSWORD 'yournewpassword';
+```
 
 ## Key Concepts
+
 You could refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/13/sql.html) for details.
 
 * Concepts
