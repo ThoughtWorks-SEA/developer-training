@@ -152,3 +152,38 @@ Note that on the above `Many-To-Many` example, we are manually defining a key th
 
 References:
 - https://sequelize.org/master/manual/naming-strategies.html#when-defining-a-reference-key-in-a-model
+
+## Migration Scripts
+
+Define through `sequelize-cli`.
+
+References to define migration files:
+- https://levelup.gitconnected.com/creating-sequelize-associations-with-the-sequelize-cli-tool-d83caa902233
+
+## Lab - Pokemon Trainer
+
+Create a database to model the relationship: _A trainer that has many pokemons_ .
+
+**1. Bootstrap project dependencies**
+
+Follow previous notes to bootstrap with: `pg pg-hstore sequelize` , dev dependencies: `sequelize-cli` . 
+Configure `sequelize-cli` and run relevant `sequelize-cli init` commands.
+
+**2. Generate boiler plate for database strucure**
+
+Run the following to generate database model and migration scripts. We will need to update the contents later.
+
+```bash
+// Generate a trainer and pokemon model
+npx sequelize-cli model:generate --name Trainer --attributes username:string,password:string
+npx sequelize-cli model:generate --name Pokemon --attributes name:string,japaneseName:string,baseHP:integer,category:string,trainerId:integer
+```
+
+References to create a closest attributes:
+- https://github.com/sequelize/cli/blob/be5b445619b59115f36f06507bfff7aa87528db8/docs/FAQ.md#how-can-i-generate-a-model
+- https://github.com/sequelize/cli/blob/be5b445619b59115f36f06507bfff7aa87528db8/src/helpers/model-helper.js#L10-L61
+
+**3. Modify the Migration Scripts**
+
+```js
+```

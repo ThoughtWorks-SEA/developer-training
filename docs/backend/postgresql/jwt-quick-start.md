@@ -67,7 +67,7 @@ npm install bcryptjs
 ### Install Sequelize and Sequelize-CLI
 
 ```
-npm install sequelize
+npm install pg pg-hstore sequelize
 ```
 
 We will also make use of `sequelize-cli` to help us generate the template for our Sequelize setup and run database migration for us. See: [Sequelize Migration](https://sequelize.org/master/manual/migrations.html)
@@ -144,7 +144,7 @@ Steps:
 const path = require('path');
 
 module.exports = {
-  'config': path.resolve('config', 'database.json'),
+  'config': path.resolve('config', 'database.js'),
   'models-path': path.resolve('db', 'models'),
   'seeders-path': path.resolve('db', 'seeders'),
   'migrations-path': path.resolve('db', 'migrations')
@@ -184,17 +184,29 @@ List of roles
  postgres        | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
 ```
 
+**Initialize Folders for Sequelize CLI**
+
+These commands will generate the folder, based on your `.sequelizerc` configuration.
+
+```bash
+# To store database migration scripts
+npx sequelize-cli init:migrations
+
+# To store models definition, and index.js for model reference in the application.
+npx sequelize-cli init:models
+
+# For advanced usage
+npx sequelize-cli init:config
+npx sequelize-cli init:seeders
+```
+
 ### Create a Trainer model with username and password
 
 Run these commands in the terminal:
 
 ```bash
-// To initialize the models and migration setup
-npx sequelize init:models
-npx sequelize init:migrations
-
 // Generate a trainer model
-npx sequelize model:generate --name Trainer --attributes username:string,password:string
+npx sequelize-cli model:generate --name Trainer --attributes username:string,password:string
 ```
 
 Take note that this generation script will create 2 files: a model class file, and a migration file.
