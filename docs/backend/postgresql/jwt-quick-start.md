@@ -15,20 +15,23 @@ git init
 
 You'll also need to create your `index.js` and `app.js` files.
 
-Add the usual code necessary to start your server in these files (refer to your old practice projects!). Remember to add your start scripts in your `package.json` file:
+Add the usual code necessary to start your server in these files (refer to your old practice projects!).
+
+Remember to add your start scripts in your `package.json` file:
 
 ```js
 "start": "node index.js",
 "start:dev": "nodemon index.js",
 ```
 
-<!--
-Connect to the database in app.js:
+Remember to add the default error handler in your app.js, so that we can pass on errors simply by using `next(err)` in a try...catch:
 
 ```js
-import { connectDb } from "./utils/db.js";
-await connectDb();
-``` -->
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  res.status(err.statusCode).send(err.message);
+});
+```
 
 ### Using cookies and same origin policy
 
@@ -292,7 +295,7 @@ router.post("/", async (req, res) => {
     res.send(newTrainer);
   } catch (err) {
     console.error(err);
-    res.sendStatus(400);
+    next(err);
   }
 });
 
@@ -411,9 +414,9 @@ It represents **Token Expiration,** and you can find [more details here](https:/
 
 Once this field is set in a token, it's validated later on when we call the jwt.verify(token, secret). A token that passes the expiration time will fail the verification.
 
-### Protect a route trying to find trainers by username
+### Protect a route
 
-Now that we have our `JWT_SECRET_KEY` set up, let's create a `protectRoute` middleware and use it for our `GET /trainers/:username` route:
+Now that we have our `JWT_SECRET_KEY` set up, let's create a `protectRoute` middleware:
 
 middleware/protectRoute.js
 
@@ -457,7 +460,7 @@ router.get("/:username", async (req, res, next) => {
     res.send(trainer);
   } catch (err) {
     console.error(err);
-    res.sendStatus(400);
+    next(err);
   }
 });
 ```
@@ -481,7 +484,7 @@ router.get("/:username", protectRoute, async (req, res, next) => {
     res.send(trainer);
   } catch (err) {
     console.error(err);
-    res.sendStatus(400);
+    next(err);
   }
 });
 ```
@@ -490,7 +493,7 @@ Now, try making a call to `GET /trainers/:username` again.
 
 You should see an error: "You are not authorized". In order to be authorised, the request needs to have a cookie with a valid token in the headers. That's where our `/login` API comes in:
 
-#### Login and logout
+### Login and logout
 
 Read documentation about `res.cookie` and `res.clearCookie`:
 
