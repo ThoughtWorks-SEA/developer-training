@@ -200,3 +200,21 @@ References to create a closest attributes:
 **4. Create NodeJS/Express Application**
 
 Configure the app to sync models at start up and verify the SQL commands in start up logs.
+- Reference: https://levelup.gitconnected.com/sequelize-cli-and-express-fb3ddefb9786
+
+**5. Try out the Sequelize Migration**
+
+Compare the SQL statements from `sequelize` (app lifecycle) and `sequelize-cli` (independent database migrations).
+For production, we might want to run migration in separate operations, thus it is important to ensure the definition of the database tables are the same, independent of environment and how the database table being set up.
+
+Here is the steps.
+1. Note down the SQL statements in application start up logs.
+2. Drop the development database.
+3. Try to run the `sequelize-cli db:migrate` and compare the following.
+   - database tables definition
+   - constraints, such as primary key and foreign key
+   - indexes, such as unique index
+
+**6. Implement the CRUD**
+
+Try to do TDD approach. For convenience of testing, you might want to begin with a service / controller without the routing test.
