@@ -421,6 +421,8 @@ Now that we have our `JWT_SECRET_KEY` set up, let's create a `protectRoute` midd
 middleware/protectRoute.js
 
 ```js
+const jwt = require("jsonwebtoken");
+
 const protectRoute = (req, res, next) => {
   try {
     if (!req.cookies.token) {
@@ -507,7 +509,17 @@ const createJWTToken = require("../config/jwt");
 router.post("/login", async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    const trainer = await Trainer.findOne({ username });
+    const trainer = await db.Trainer.findOne({
+      where: { username: { [db.Sequelize.Op.iLike]: "%" + username + "%" } },
+    });
+
+    // return if Trainer does not exist
+    // message returned is intentionally vague for security reasons
+    if (!trainer) {
+      return res.status(422).json({ message: "Invalid username or password." });
+    }
+
+    // check if user input password matches hashed password in the db
     const result = await bcrypt.compare(password, trainer.password);
 
     if (!result) {
@@ -516,12 +528,13 @@ router.post("/login", async (req, res, next) => {
 
     const token = createJWTToken(trainer.username);
 
+    // calculation to determine expiry date - this is up to your team to decide
     const oneDay = 24 * 60 * 60 * 1000;
     const oneWeek = oneDay * 7;
     const expiryDate = new Date(Date.now() + oneWeek);
 
+    // you are setting the cookie here, and the name of your cookie is `token`
     res.cookie("token", token, {
-      // you are setting the cookie here, and the name of your cookie is `token`
       expires: expiryDate,
       httpOnly: true, // client-side js cannot access cookie info
       secure: true, // use HTTPS
@@ -537,6 +550,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/logout", (req, res) => {
+  // clears the 'token' cookie from your browser
   res.clearCookie("token").send("You are now logged out!");
 });
 ```
