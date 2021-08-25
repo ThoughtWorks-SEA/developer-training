@@ -80,7 +80,13 @@ module.exports = {
     database: process.env.PGDATABASE,
     host: process.env.PGHOST,
     port: process.env.PGPORT,
-    dialect: 'postgres'
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
   }
 };
 ```
@@ -93,21 +99,8 @@ const Sequelize = require('sequelize');
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/database.js')[env];
 
-// SSL connection
-// https://github.com/sequelize/sequelize/issues/10015
-// https://stackoverflow.com/questions/58965011/sequelizeconnectionerror-self-signed-certificat
-const dbDialectOptions = process.env.NODE_ENV === 'production'
-  ? {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false
-      }
-    }
-  : {};
-
 const dbConfig = {
   ...config,
-  dialectOptions: dbDialectOptions,
   // logging: console.log,                  // Default, displays the first parameter of the log function call
   // logging: (...msg) => console.log(msg), // Displays all log function call parameters
   // logging: false,                        // Disables logging
@@ -145,8 +138,9 @@ connectDb();
 To access the sequelize instance later, in order to initialize sequelize models, we could use:
 
 ```js
-// *.model.js
-const sequelize = require('./db/index.js');
+// *.js (in root folder)
+const db = require('./db/index.js');
+db.sequelize.sync();  // This will create the tables based on model definition if no migration has been done to create a new table.
 ```
 
 ## Key Concepts
