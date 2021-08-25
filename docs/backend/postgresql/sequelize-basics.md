@@ -61,6 +61,7 @@ Some reading materials for details on why connection pooling is recommended.
 
 module.exports = {
   development: {
+    // replace credentials
     username: 'devtraining',
     password: null,
     database: 'database_development',
@@ -68,6 +69,7 @@ module.exports = {
     dialect: 'postgres'
   },
   test: {
+    // replace credentials
     username: 'devtraining',
     password: null,
     database: 'database_test',
@@ -124,6 +126,7 @@ To test the connection to the database, we can require the sequelize connection 
 // index.js
 const sequelize = require('./db/index.js');
 
+// [1] Just test connection, we don't neeed this in actual.
 const connectDb = async () => {
   try {
     await sequelize.authenticate();
@@ -133,14 +136,19 @@ const connectDb = async () => {
   }
 }
 connectDb();
-```
 
-To access the sequelize instance later, in order to initialize sequelize models, we could use:
-
-```js
-// *.js (in root folder)
-const db = require('./db/index.js');
-db.sequelize.sync();  // This will create the tables based on model definition if no migration has been done to create a new table.
+// [2] For dev exploration convenience, we forced synchronisation.
+/*
+  This will drop the database table and recreate empty table whenever application restarts.
+  Should not use for production level due to destructive operation.
+*/
+sequelize.sync({ force: true });
+/*
+  In production, we should use this instead. This will create the tables based on model
+  definition if no migration has been done to create a new table beforehand.
+  However, do consider Migration support.
+*/
+// sequelize.sync();
 ```
 
 ## Key Concepts
@@ -176,8 +184,7 @@ Let's begin to create our first model file `db/models/simple-pokemon.model.js`.
 
 const sequelizeConnection = require('../index.js'); // Reference to the database connection instance
 
-const sequelize = require('sequelize');
-const { DataTypes, Model } = sequelize;
+const { DataTypes, Model } = require('sequelize');
 
 class SimplePokemon extends Model {}
 
@@ -213,18 +220,42 @@ SimplePokemon.init(
   }
 );
 
-// This will drop the database table and recreate empty table whenever application restarts.
-// Not recommended for production level due to destructive operation, but we will use this to demonstrate.
-// For production level, to consider Migration support (advanced topic).
-const synchronizeModel = async () => await SimplePokemon.sync({ force: true });
-synchronizeModel();
-
 module.exports = SimplePokemon;
 ```
 
-Import the model in our entry point `index.js`.
+In practice, models are imported in multiple routers. For now, let's import the model in our entry point `index.js`.
+
 ```js
+// index.js
+const sequelize = require('./db/index.js');
+
+// [3] This is required to create the model with sequelize connection
+// It will be in the app/router code later
 const SimplePokemon = require('./db/models/simple-pokemon.model.js');
+
+// [1] Just test connection, we don't neeed this in actual.
+const connectDb = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("Connection has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+}
+connectDb();
+
+// [2] For dev exploration convenience, we forced synchronisation.
+/*
+  This will drop the database table and recreate empty table whenever application restarts.
+  Should not use for production level due to destructive operation.
+*/
+sequelize.sync({ force: true });
+/*
+  In production, we should use this instead. This will create the tables based on model
+  definition if no migration has been done to create a new table beforehand.
+  However, do consider Migration support.
+*/
+// sequelize.sync();
 ```
 
 At this point of time, you should have a NodeJS folder structure looks like below.
