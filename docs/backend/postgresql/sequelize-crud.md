@@ -117,14 +117,13 @@ module.exports = (sequelize, DataTypes) => {
 // index.js
 const db = require('./db/models/index.js'); // --> REPLACE THIS
 
-// [3] This is required to create the model with sequelize connection
-// It will be in the app/router code later
-const SimplePokemon = require('./db/models/simple-pokemon.model.js');
-
 // [1] Just test connection, we don't neeed this in actual. --> REMOVE THIS SECTION
 // [2] For dev exploration convenience, we forced synchronisation.
 db.sequelize.sync({ force: true }); // --> REPLACE THIS
 // db.sequelize.sync(); // --> REPLACE THIS
+
+// [3] Use this syntax to refer to the model in the app/router code later --> ADDED THIS SECTION
+// const SimplePokemon = await db.SimplePokemon.create();
 ```
 
 ## Create
@@ -138,12 +137,32 @@ To facilitate the process, Sequelize Model offers another method to combines the
 
 Use `Model#create` static method to create a new instance and save the record into the database table `Simple_Pokemon`.
 
-```js
-  // fakeEntryPoint.js
-  const sequelizeConnection = require('../db/index');
+Update your `index.js` and create `crud/create.js`.
 
-  const initOrGetSimplePokemonModel = require('../db/models/simple-pokemon.model.js');
-  const SimplePokemon = initOrGetSimplePokemonModel(sequelizeConnection);
+```js
+// index.js
+const db = require('./db/models/index.js');
+
+const createPikachu = require('./crud/create'); //  --> ADDED THIS
+
+// [1] Just test connection, we don't neeed this in actual.
+// [2] For dev exploration convenience, we forced synchronisation.
+db.sequelize.sync({ force: true });
+// db.sequelize.sync();
+
+// [3] Use this to refer to the model in the app/router code later
+// const SimplePokemon = await db.SimplePokemon.create();
+
+// [4] Set timeout to simulate async calls to play with model --> ADDED THIS SECTION
+// We need to hold a while for db sync
+setTimeout(createPikachu, 500);
+```
+
+```js
+// crud/create.js
+const db = require('../db/models/index.js');
+
+const createPikachu = async () => {
 
   const pikachu = {
     name: "Pikachu",
@@ -151,11 +170,16 @@ Use `Model#create` static method to create a new instance and save the record in
     baseHP: 35,
     category: "Mouse Pokemon",
   };
-  const created = await SimplePokemon.create(pikachu);
+  console.log("HERE");
+  const created = await db.SimplePokemon.create(pikachu);
+  console.log("HERE");
 
   console.log('Pikachu was saved to the database!');
-  console.log(created); // Not recommended, since Sequelize instances have a lot of things attached. This might produce a lot of clutter.
-  console.log(created.toJSON()); // The recommended way to log an instance, but do note that this might still log sensitive data stored in database.
+  // console.log(created); // Not recommended, since Sequelize instances have a lot of things attached. This might produce a lot of clutter.
+  console.log(created.toJSON()); // The recommended way to log an instance, but do note that this might still log sensitive data stored in database. Need processing.
+}
+
+module.exports = createPikachu;
 ```
 
 Upon a successful save, the result of the `create` method is a promise which resolves to the saved.
@@ -203,6 +227,31 @@ Let's try to update our model slightly.
 1. Following the notes in [Sequelize Basics - More about Model Definition](backend/postgresql/sequelize-basics?id=more-about-model-definition).
 In the example, we will add an unique index to the `name` field. Let's restart your application with the codes above to create 2 pokemons named `pikachu` with differrent `id`. What do you find?
 1. Next, we explore [field validation](backend/postgresql/sequelize-basics?id=sequelize-validation) done by Sequelize.
+
+You can try to create more pokemons with this stub data.
+
+```js
+const pokemons = [
+  {
+    name: 'Squirtle',
+    japaneseName: 'ゼニガメ',
+    baseHP: 44,
+    category: 'Tiny Turtle Pokemon'
+  },
+  {
+    name: 'Wartortle',
+    japaneseName: 'カメール',
+    baseHP: 59,
+    category: 'Turtle Pokémon'
+  },
+  {
+    name: 'Meowth',
+    japaneseName: 'ニャース',
+    baseHP: 40,
+    category: 'Scratch Cat Pokémon'
+  }
+];
+```
 
 ## Read
 
