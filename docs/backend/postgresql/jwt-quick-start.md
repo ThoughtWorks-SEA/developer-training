@@ -209,12 +209,18 @@ The variable `db` will also be the common gate to link up the associated models.
 const db = require('./db/models');
 const Trainer = require();
 
-// To access your db connection instance. We most likely don't need it.
+// To synchronise the database table with models. This will create the database table for new models if absence.
+// Other synchronisation have tendency to cause destructive operations to the existing data.
+// For Production, we should consider on DB migration and expect no modification to database table during the application start up.
 const dbConnection = db.sequelize;
+db.sequelize.sync();
 
 // To access your defined models.
 const Trainer = db.Trainer;
 ```
+
+At the point of writing, the data models generated need some manual fix for undefined variable `Sequelize` (default export) vs `DataTypes` (named export) which are exported from `sequelize` module.
+You will need to adjust the models, migration and seeding scripts to fit your needs. See: [Query Interface](https://sequelize.org/master/class/lib/dialects/abstract/query-interface.js~QueryInterface.html).
 
 ### Create a Trainer model with username and password
 
@@ -249,6 +255,7 @@ Let's go ahead and add the unique and allowNull keys to keep the migration file 
 
 ```js
 "use strict";
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("Trainers", {

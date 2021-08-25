@@ -25,9 +25,14 @@ We should also refer to [Sequelize API Reference](https://sequelize.org/master/i
 ## Installation
 
 You have previously created a database through the terminal command `createdb devtraining`. You could verify via `psql -d devtraining`. If the default user isn't `devtraining`, please run the following in the psql terminal.
-```sh
+```sql
+-- In psql
 CREATE USER devtraining;
 GRANT all privileges ON DATABASE "devtraining" TO devtraining;
+
+-- If you face any issue with the user password
+ALTER  USER <username> WITH PASSWORD '<password here>';
+ALTER USER devtraining WITH PASSWORD NULL;
 ```
 
 We need the following npm packages to connect to the database instance.
@@ -124,14 +129,12 @@ To test the connection to the database, we can require the sequelize connection 
 
 ```js
 // index.js
-const sequelize = require('../db/index.js');
+const sequelize = require('./db/index.js');
 
-try {
-  await sequelize.authenticate();
-  console.log("Connection has been established successfully.");
-} catch (error) {
-  console.error("Unable to connect to the database:", error);
-}
+new Promise((resolve, reject) => {
+  sequelize.authenticate();
+}).then(() => console.info("Connection has been established successfully."))
+  .catch((error) => console.error("Unable to connect to the database:", error););
 ```
 
 To access the sequelize instance later, in order to initialize sequelize models, we could use:
