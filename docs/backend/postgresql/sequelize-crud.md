@@ -290,22 +290,50 @@ We can use comparison operators `lt`, `gt`, `lte`, and `gte`.
 Suppose you want to find characters whose category contains 'turtle'. In SQL, you would use the LIKE operator. Sequelize offers operators like `like`, `iLike`, `regexp`, `notRegexp`.
 
 ```js
-const foundPokemons = await SimplePokemon.findAll({
-  where: {
-    baseHP: {
-      [Op.gt]: 40
-    }
-  }
-});
+// index.js
+const Read = require('./crud/read');
 
-const pokemons = await SimplePokemon.findAll({
+setTimeout(() => Read.findPokemonsWithBaseHPGreaterThan(40), 500);
+setTimeout(() => Read.findPokemonWithNameOrBaseHP('Pikachu', 59), 500);
+```
+
+```js
+// crud/read.js
+const db = require('../db/models/index.js');
+
+const { Op } = require('sequelize');
+
+const findPokemonsWithBaseHPGreaterThan = async (baseHP) => {
+  const foundPokemons = await db.SimplePokemon.findAll({
+    where: {
+      baseHP: {
+        [Op.gt]: baseHP
+      }
+    }
+  });
+  console.log(`RESULT FOR findPokemonsWithBaseHPGreaterThan: ${foundPokemons.length}`);
+  console.log(foundPokemons);
+  return foundPokemons;
+};
+
+const findPokemonWithNameOrBaseHP = async (name, baseHP) => {
+  const foundPokemons = await db.SimplePokemon.findAll({
     where: {
       [Op.or]: [
-        { name : 'Pikachu'},
-        { baseHP: 59 }
+        { name: name },
+        { baseHP: baseHP }
       ]
     }
   });
+  console.log(`RESULT FOR findPokemonWithNameOrBaseHP: ${foundPokemons.length}`);
+  console.log(foundPokemons);
+  return foundPokemons;
+};
+
+module.exports = {
+  findPokemonsWithBaseHPGreaterThan,
+  findPokemonWithNameOrBaseHP
+};
 ```
 
 ## Update
