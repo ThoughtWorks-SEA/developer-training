@@ -131,10 +131,15 @@ To test the connection to the database, we can require the sequelize connection 
 // index.js
 const sequelize = require('./db/index.js');
 
-new Promise((resolve, reject) => {
-  sequelize.authenticate();
-}).then(() => console.info("Connection has been established successfully."))
-  .catch((error) => console.error("Unable to connect to the database:", error););
+const connectDb = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("Connection has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+}
+connectDb();
 ```
 
 To access the sequelize instance later, in order to initialize sequelize models, we could use:
@@ -175,7 +180,7 @@ Let's begin to create our first model file `db/models/simple-pokemon.model.js`.
 ```javascript
 // simple-pokemon.model.js
 
-const sequelizeConnection = require('../../db/index.js'); // Reference to the database connection instance
+const sequelizeConnection = require('../index.js'); // Reference to the database connection instance
 
 const sequelize = require('sequelize');
 const { DataTypes, Model } = sequelize;
@@ -241,12 +246,11 @@ At this point of time, you should have a NodeJS folder structure looks like belo
     └── index.js
 ```
 
-Your package.json should include these:
+Your package.json should include these. Please ensure that `"type": "module"` line is absence in this file, because some libraries are not supporting ESM at the point of writing. _npm init with npm v7 will generate with ESM by default_
 
 ```json
 {
   ...
-  "type": "module",
   "scripts": {
     "start": "node index.js",
     "start:dev": "nodemon index.js"
@@ -301,7 +305,7 @@ Some notable options are:
 | `paranoid`        | false         | If set to true, calling destroy will not delete the model, but instead set a deletedAt timestamp                                                                     |
 | `createdAt`       | "createdAt"   | Override the name of the createdAt attribute. Timestamps must be true. Disable it if false.                                                                          |
 | `updatedAt`       | "updatedAt"   | Override the name of the updatedAt attribute. Timestamps must be true. Disable it if false.                                                                          |
-| `updatedAt`       | false         | Override the name of the deletedAt attribute. Timestamps must be true. Disable it if false.                                                                          |
+| `deletedAt`       | false         | Override the name of the deletedAt attribute. Timestamps must be true. Disable it if false.                                                                          |
 | `hooks`           | optional      | An object of hook function that are called before and after certain lifecycle events. See: [hooks](https://sequelize.org/master/manual/hooks.html)                   |
 | `validate`        | optional      | An object of model wide validations. See: [Validations and constraints](https://sequelize.org/master/manual/validations-and-constraints.html#model-wide-validations) |
 

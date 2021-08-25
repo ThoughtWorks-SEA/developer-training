@@ -22,15 +22,13 @@ After the refactoring, we could then import the `SimplePokemon` model into our p
 
 `simple-pokemon.model.js`
 ```js
-const { DataTypes, Model } = sequelize;
+const { DataTypes, Model } = require('sequelize');
 
 class SimplePokemon extends Model { }
 
-// Extract constant to faciliate checking if a model has been initialized.
 const MODEL_NAME = 'SimplePokemon';
 
-// Wrap `SimplePokemon.init` into an async function
-const initializeModel = async (sequelizeConnection) => {
+const initializeModel = (sequelizeConnection) => {
   SimplePokemon.init(
     {
       name: {
@@ -56,15 +54,12 @@ const initializeModel = async (sequelizeConnection) => {
       }
     },
     {
-      sequelize: sequelizeConnection, // Dependency of the connection instance
-      modelName: MODEL_NAME, // Pass in local constant MODEL_NAME to facilitate checking of the initialization state
-      tableName: 'Simple_Pokemon'
+      sequelize: sequelizeConnection, // We need to pass the connection instance
+      modelName: MODEL_NAME, // We could set the model name instead of using the Class name
+      // freezeTableName: true, // We could skip the pluralization for database naming
+      tableName: 'Simple_Pokemon' // We could lock the name of the database table directly
     }
   );
-
-  // Remove these dead code: We sychronise all the database tables only when the application starts instead
-  // const synchronizeModel = async () => await SimplePokemon.sync({ force: true });
-  // synchronizeModel();
 };
 
 module.exports = (sequelizeConnection) => {
@@ -75,21 +70,20 @@ module.exports = (sequelizeConnection) => {
 
 `index.js`
 ```js
-// index.js
-const sequelizeConnection = require('../db/index.js');
-const getSimplePokemonModel = require('../db/models/simple-pokemon.model.js');
+const sequelizeConnection = require('./db/index.js');
 
-// A sequelize model instance that has been connected to the database for usage later.
-let SimplePokemon;
+// Entry point to try CRUD functions
+const fakeEntryPoint = require('./fakeEntryPoint.js');
 
 Promise
   .resolve(sequelizeConnection.sync({ force: true }))
-  // .resolve(sequelizeConnection.sync()
-  .then(console.info('All models were synchronized successfully.'))
-  .then(function () {
-    SimplePokemon = getSimplePokemonModel(sequelizeConnection); }
-  );
+  .then(logger.info('All models were synchronized successfully.'))
+  .then(function () { fakeEntryPoint(); })
+
+logger.info('Done!');
 ```
+
+Create a `fakeEntryPoint.js` for the entry point for us to explore CRUD.
 
 ## Create
 
@@ -103,6 +97,8 @@ To facilitate the process, Sequelize Model offers another method to combines the
 Use `Model#create` static method to create a new instance and save the record into the database table `Simple_Pokemon`.
 
 ```js
+  // fakeEntryPoint.js
+
   const pikachu = {
     name: "Pikachu",
     japaneseName: "ピカチュウ",
@@ -247,12 +243,12 @@ How to update just one pokemon? We could use [count()](https://sequelize.org/mas
 
 ### update(), upsert(), save()
 
-| Method            | Level           | Description                                                                                                                                                          |
-| :---------------- | :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `async update()`  | Class-level     | Update multiple instances that match the where options. Each row is subject to validation before it is inserted. The whole insert will fail if one row fails validation.
-| `async upsert()`  | Instance-level  | This is the same as calling `set()` and then calling `save()` but it only saves the exact values passed to it, making it more atomic and safer.
-| `async upsert()`  | Class-level     | Insert or update a single row. An update will be executed if a row which matches the supplied values on either the primary key or a unique key is found. Requires the unique index to be defined in sequelize model as well as the database table. Run validations before the row is inserted.
-| `async save()`    | Instance-level  | Validates this instance, and if the validation passes, persists it to the database. This method is optimized to perform an UPDATE only when the fields have changed. If nothing has changed, no SQL query will be performed. This method is not aware of eager loaded associations.
+| Method           | Level          | Description                                                                                                                                                                                                                                                                                    |
+| :--------------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `async update()` | Class-level    | Update multiple instances that match the where options. Each row is subject to validation before it is inserted. The whole insert will fail if one row fails validation.                                                                                                                       |
+| `async upsert()` | Instance-level | This is the same as calling `set()` and then calling `save()` but it only saves the exact values passed to it, making it more atomic and safer.                                                                                                                                                |
+| `async upsert()` | Class-level    | Insert or update a single row. An update will be executed if a row which matches the supplied values on either the primary key or a unique key is found. Requires the unique index to be defined in sequelize model as well as the database table. Run validations before the row is inserted. |
+| `async save()`   | Instance-level | Validates this instance, and if the validation passes, persists it to the database. This method is optimized to perform an UPDATE only when the fields have changed. If nothing has changed, no SQL query will be performed. This method is not aware of eager loaded associations.            |
 
 ## Delete
 
