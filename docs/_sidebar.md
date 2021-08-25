@@ -120,6 +120,7 @@
   - [PostgreSQL basics](backend/postgresql/postgresql-basics)
   - [Sequelize basics](backend/postgresql/sequelize-basics)
   - [Sequelize CRUD](backend/postgresql/sequelize-crud)
+  - [Quick start for Sequelize](backend/postgresql/sequelize-quick-start)
   - [Backend Architecture / Design Patterns](backend/backend-design-patterns)
   - [Postgres testing](backend/postgresql/postgres-testing)
   - [Sequelize Associations](backend/postgresql/sequelize-associations)
@@ -135,15 +136,15 @@
   - [Security jwt](backend/security-jwt)
     <!-- - [Quick start for JWT](backend/mongodb/jwt-quick-start) -->
   - [Quick start for JWT](backend/postgresql/jwt-quick-start)
-    <!-- - [Security jwt testing](backend/security-jwt-testing) -->
-  <!-- Path to Production -->
+      <!-- - [Security jwt testing](backend/security-jwt-testing) -->
+    <!-- Path to Production -->
   - [Express.js to production](backend/express-to-production)
     <!-- - [Express.js deploy](backend/express-deploy-mongo) -->
   - [Express.js deploy](backend/express-deploy-postgres)
-  <!-- Old Labs -->
-  <!-- - [Lab: Express.js Mongoose](backend/mongodb/express-mongoose-lab) -->
-  <!-- - [Lab: Company reviews](backend/company-reviews-lab) -->
-  <!-- - [Labs: Express / Mongoose](backend/backend-labs) -->
+    <!-- Old Labs -->
+    <!-- - [Lab: Express.js Mongoose](backend/mongodb/express-mongoose-lab) -->
+    <!-- - [Lab: Company reviews](backend/company-reviews-lab) -->
+    <!-- - [Labs: Express / Mongoose](backend/backend-labs) -->
 
 - **Delivering Software**
 
