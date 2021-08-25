@@ -98,6 +98,10 @@ Use `Model#create` static method to create a new instance and save the record in
 
 ```js
   // fakeEntryPoint.js
+  const sequelizeConnection = require('../db/index');
+
+  const initOrGetSimplePokemonModel = require('../db/models/simple-pokemon.model.js');
+  const SimplePokemon = initOrGetSimplePokemonModel(sequelizeConnection);
 
   const pikachu = {
     name: "Pikachu",
