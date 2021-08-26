@@ -63,9 +63,9 @@ module.exports = {
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false
-      }
-    }
+        rejectUnauthorized: false,
+      },
+    },
   },
 };
 ```
@@ -79,13 +79,14 @@ Steps:
 1. Create an empty `.sequelizerc` file at the project root directory
 2. Copy the following code for the recommended code organisation.
 
+<!-- prettier-ignore -->
 ```js
 // .sequelizerc
 
 const path = require("path");
 
 module.exports = {
-  config: path.resolve("config", "database.js"),
+  "config": path.resolve("config", "database.js"),
   "models-path": path.resolve("db", "models"),
   "seeders-path": path.resolve("db", "seeders"),
   "migrations-path": path.resolve("db", "migrations"),
