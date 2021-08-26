@@ -348,16 +348,17 @@ module.exports = {
 };
 ```
 
-To add the feature of allowing users to search for a trainer by their username, add a new GET /trainers/:username route:
+To add the feature of allowing users to search for trainers by their username, add a new GET /trainers/:username route:
 
 routes/trainers.js
 
 ```js
-router.get("/:username", async (req, res, next) => {
+router.get("/search/:username", async (req, res, next) => {
   try {
     const username = req.params.username;
-    // [db.Sequelize.Op.iLike] allows you to do case-insensitive querying
-    const trainer = await db.Trainer.findOne({
+    // [db.Sequelize.Op.iLike] allows you to do case-insensitive + partial querying
+    // e.g. "Sa" will return Samantha, Samuel..
+    const trainer = await db.Trainer.findAll({
       where: { username: { [db.Sequelize.Op.iLike]: "%" + username + "%" } },
     });
     res.send(trainer);
@@ -378,10 +379,11 @@ We can protect the endpoint by using the `protectRoute` middleware we created ea
 ```js
 const { protectRoute } = require("../middleware/protectRoute");
 
-router.get("/:username", protectRoute, async (req, res, next) => {
+router.get("/search/:username", protectRoute, async (req, res, next) => {
   try {
     const username = req.params.username;
-    const trainer = await db.Trainer.findOne({
+
+    const trainer = await db.Trainer.findAll({
       where: { username: { [db.Sequelize.Op.iLike]: "%" + username + "%" } },
     });
     res.send(trainer);
@@ -411,7 +413,7 @@ router.post("/login", async (req, res, next) => {
   try {
     const { username, password } = req.body;
     const trainer = await db.Trainer.findOne({
-      where: { username: { [db.Sequelize.Op.iLike]: "%" + username + "%" } },
+      where: { username },
     });
 
     // return if Trainer does not exist
