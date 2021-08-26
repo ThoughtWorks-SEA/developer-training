@@ -17,7 +17,9 @@ router.get("/", (req, res) => res.end());
 router.post("/", (req, res) => res.end());
 
 module.exports = router;
+```
 
+```js
 // app.js
 const emptyRouter = require("./routes/empty.route");
 

@@ -120,9 +120,9 @@
   - [PostgreSQL basics](backend/postgresql/postgresql-basics)
   - [Sequelize basics](backend/postgresql/sequelize-basics)
   - [Sequelize CRUD](backend/postgresql/sequelize-crud)
-  - [Quick start for Sequelize](backend/postgresql/sequelize-quick-start)
   - [Backend Architecture / Design Patterns](backend/backend-design-patterns)
   - [Postgres testing](backend/postgresql/postgres-testing)
+  - [Quick start for Sequelize / Migration](backend/postgresql/sequelize-quick-start)
   - [Sequelize Associations](backend/postgresql/sequelize-associations)
   - [Sequelize / Postgres advanced topics](backend/postgresql/postgres-advanced)
   <!-- Backend App Security -->

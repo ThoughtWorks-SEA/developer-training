@@ -209,7 +209,7 @@ If you try to create another pokemon with the same `id` value,
     id: 1,
     ...pikachu,
   }
-  const created2 = await SimplePokemon.create(pikachu2)
+  const created2 = await db.SimplePokemon.create(pikachu2)
   console.log(created2.toJSON());
 ```
 
@@ -342,23 +342,29 @@ The model static method `update()` update multiple instances that match the wher
 
 ```js
 // No returning records by default
-const numberOfAffectedRecords = await SimplePokemon.update({ baseHP: 100 }, {
-  where: {
-    category: {
-      [Op.like]: '%Turtle%'
+const [numberOfAffectedRecords, updatedPokemons] = await db.SimplePokemon.update(
+  { baseHP: 100 },                // target
+  {                               // query option
+    where: {
+      category: {
+        [Op.like]: '%Turtle%'
+      }
     }
   }
-});
+);
 
 // With updated records
-const [numberOfAffectedRecords, updatedPokemons] = await SimplePokemon.update({ baseHP: 100 }, {
-  where: {
-    category: {
-      [Op.like]: '%Turtle%'
-    }
-  },
-  returning: true
-});
+const [numberOfAffectedRecords, updatedPokemons] = await db.SimplePokemon.update(
+  { baseHP: 100 },                // target
+  {                               // query option
+    where: {
+      category: {
+        [Op.like]: '%Turtle%'
+      }
+    },
+    returning: true // This will return updated result
+  }
+);
 ```
 
 How to update just one pokemon? We could use [count()](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-count) to validate first.
@@ -379,11 +385,12 @@ The model static method `delete()` could delete multiple instances, or set their
 
 ```js
 const numberOfDeletedRecord = async (id) => {
-  await SimplePokemon.destroy({
+  const numberOfDeletedRecord = await db.SimplePokemon.destroy({
     where: {
       id: 1
     }
-  })
+  });
+  return numberOfDeletedRecord;
 };
 
 // Truncate the table
@@ -391,6 +398,8 @@ await SimplePokemon.destroy({
   truncate: true
 });
 ```
+
+How do you return a deleted record?
 
 ## What is atomicity?
 
