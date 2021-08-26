@@ -14,9 +14,7 @@ Try it out [here](https://sqlbolt.com/lesson/introduction)!
 
 **Mac**
 
-Follow the instructions for the installation [here](https://www.postgresqltutorial.com/install-postgresql-macos/). 
-
-Alternatively, you can use Homebrew:
+Follow the instructions for the installation [here](https://www.postgresqltutorial.com/install-postgresql-macos/). Alternatively, you can use Homebrew:
 
 ```
 brew install postgresql
@@ -27,16 +25,18 @@ brew install postgresql
 Follow the instructions for the installation [here](https://www.postgresqltutorial.com/install-postgresql/).
 
 ### Start/Stop Postgres server
-#### For installation via download of Postgres App
+
+https://tableplus.com/blog/2018/10/how-to-start-stop-restart-postgresql-server.html
+
+#### Mac
+
+**For installation via download of Postgres App**
 1. Open the Postgres App.
 1. You should see the postgres icon in your system tray when the App is running
 1. If the server is new/empty, click the initialise button.  
 1. Click the start button to start the postgres server
 
-#### For installation via homebrew
-https://tableplus.com/blog/2018/10/how-to-start-stop-restart-postgresql-server.html
-
-**Mac**
+**For installation via homebrew**
 
 ```
 brew services start postgresql
@@ -72,13 +72,10 @@ pg_ctl -D "C:\Program Files\PostgreSQL\13\data" stop
 psql
 ```
 
-If you can successfully launch the Postgres terminal, your server is running.
-
-You might need to run the following if you hit `psql: error: FATAL: database <database-name> does not exist`.
-
-```
-createdb
-```
+- If you can successfully launch the Postgres terminal, your server is running.
+- If you hit `command not found` error, see: https://postgresapp.com/documentation/cli-tools.html .
+- If you hit `psql: error: FATAL: database <database-name> does not exist`, run: `createdb` .
+- If you hit issue with , please see [Troubleshooting](http://localhost:3000/#/backend/postgresql/postgresql-basics?id=troubleshooting)
 
 ### Using the command shell
 
@@ -89,7 +86,7 @@ createdb
 \l
 
 # connect to a database
-\c <database-name>
+\c <database-name> [<user-name>]
 
 # show currently connected database
 SELECT current_database();
@@ -106,31 +103,11 @@ SELECT current_database();
 # help
 \?
 ```
-
-**Create Another Database And Enter Command Shell**
-
-In the terminal, run the following.
-
-```
-createdb devtraining
-psql -d devtraining
-```
-
-**Create Another Database And User In PSQL**
-
-In the psql session, run the following. You might want to explore limiting the [privileges](https://www.postgresql.org/docs/13/ddl-priv.html).
-_Note_: [Stack Overflow: Postgres Case Sensitivity](https://stackoverflow.com/questions/21796446/postgres-case-sensitivity)
-
-```
-CREATE DATABASE database_name;
-
-CREATE USER user;
-GRANT all privileges ON DATABASE database_name TO user;
-```
+#### Try in default database
 
 **Create Users table**
 
-```
+```sql
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL
@@ -146,6 +123,29 @@ INSERT into users VALUES
   (3, 'Sabrine');
 ```
 
+#### Database and User Management
+
+**Create Another Database And User In PSQL**
+
+In the psql session, run the following. You might want to explore limiting the [privileges](https://www.postgresql.org/docs/13/ddl-priv.html).
+_Note_: [Stack Overflow: Postgres Case Sensitivity](https://stackoverflow.com/questions/21796446/postgres-case-sensitivity)
+
+```sql
+CREATE DATABASE database_name;
+
+CREATE USER my_username;
+GRANT all privileges ON DATABASE database_name TO my_username;
+```
+
+**Create Another Database And Enter Command Shell**
+
+In the terminal, run the following.
+
+```sh
+createdb devtraining
+psql -d devtraining
+```
+
 ## Exploring the PostgreSQL databases
 
 ### Graphical Tools
@@ -158,15 +158,6 @@ You can also install [pgAdmin](https://www.pgadmin.org/download/) via Homebrew. 
 
 ```
 brew install --cask pgadmin4
-```
-
-## Troubleshooting
-
-- To reset your PostgreSQL admin password: https://community.progress.com/s/article/How-to-reset-PostgreSQL-admin-password (Windows)
-- To set the password for an existing user, run `ALTER USER <user> WITH PASSWORD '<password>'` in your psql shell. For example:
-
-```bash
-postgres=# ALTER USER exampleuser WITH PASSWORD 'yournewpassword';
 ```
 
 ## Key Concepts
@@ -323,3 +314,13 @@ References:
 - https://blog.logrocket.com/why-you-should-avoid-orms-with-examples-in-node-js-e0baab73fa5/
 
 In following examples, we will be using `Sequelize` to demonstrate features of ORM.
+
+## Troubleshooting
+
+- To reset your PostgreSQL admin password: https://community.progress.com/s/article/How-to-reset-PostgreSQL-admin-password (Windows)
+- To set the password for an existing user, run `ALTER USER <user> WITH PASSWORD '<password>'` in your psql shell. For example:
+
+```s
+postgres=# ALTER USER exampleuser WITH PASSWORD 'yournewpassword';
+postgres=# ALTER USER devtraining WITH PASSWORD NULL;
+```
