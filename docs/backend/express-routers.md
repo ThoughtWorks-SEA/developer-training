@@ -10,13 +10,18 @@ You can mount them to an app. For example, a router can be mounted to the `/empt
 
 ```js
 // empty.route.js
-
+const express = require("express");
 const router = express.Router();
 
-router.get("/", (res, req) => res.end());
-router.post("/", (res, req) => res.end());
+router.get("/", (req, res) => res.end());
+router.post("/", (req, res) => res.end());
 
-app.use("/empty", router);
+module.exports = router;
+
+// app.js
+const emptyRouter = require("./routes/empty.route");
+
+app.use("/empty", emptyRouter);
 ```
 
 ## Implementation
