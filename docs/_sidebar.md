@@ -104,7 +104,7 @@
   - [Express.js error handling](backend/express-error-handling)
   - [Express.js Joi validation](backend/express-joi-validation)
   - [Express.js async await](backend/express-async-await)
-  - [Lab: Express.js express](backend/express-lab)
+  - [Lab: Express.js](backend/express-lab)
   - [Express.js env variable](backend/express-env-variable)
     <!-- MongoDB -->
     <!-- - [MongoDB basics](backend/mongodb/mongodb-basics) -->
@@ -117,7 +117,7 @@
     <!-- - [Mongoose testing](backend/mongodb/mongoose-testing) -->
   - [Databases](backend/database-basics)
   <!-- PostgreSQL -->
-  - [PostgreSQL basics](backend/postgresql/postgresql-basics)
+  - [PostgreSQL basics](backend/postgresql/postgres-basics)
   - [Sequelize basics](backend/postgresql/sequelize-basics)
   - [Sequelize CRUD](backend/postgresql/sequelize-crud)
   - [Backend Architecture / Design Patterns](backend/backend-design-patterns)

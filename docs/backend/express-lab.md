@@ -18,8 +18,8 @@ Expected response:
   "0": "GET    /",
   "1": "GET    /jumplings",
   "2": "POST   /jumplings",
-  "3": "GET /jumplings/:name",
-  "4": "PUT /jumplings/:id",
+  "3": "GET    /jumplings/:name",
+  "4": "PUT    /jumplings/:id",
   "5": "DELETE /jumplings/:id",
   "6": "-----------------------",
   "7": "GET    /jumplings/presenter"
@@ -143,6 +143,7 @@ app.use((err, req, res, next) => {
 - package-lock.json
 - src
   - routes
+  - middlewares
 - app.js
 - index.js
 - __tests__

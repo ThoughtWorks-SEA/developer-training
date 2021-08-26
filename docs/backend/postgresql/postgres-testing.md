@@ -39,3 +39,25 @@ Refer to [GitHub repo](https://github.com/ThoughtWorks-SEA/sequelize-basics-crud
 - Complete the unit test for SimplePokemon CRUD routes.
 - Create / Modify the test to perform API testing for SimplePokemon CRUD routes, to test business logic.
 - Integrate Postgres into your testing for your song routes.
+
+## Typical Folder structure
+
+For a more complex project, it could have individual `__test__` folders, within the .
+```
+- package.json
+- package-lock.json
+- src
+  - db
+    - models
+    - migrations
+  - routes
+    - __tests__
+  - services
+    - __tests__
+  - utils
+    - middlewares
+    - utils.js
+  - app.js
+  - app.test.js
+- index.js
+```

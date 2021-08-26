@@ -25,7 +25,7 @@ Integration tests, as the name suggests, tests that the different layers of your
 
 In contrast, there is another type of tests, called Unit Test, which focus on testing a module/class/function works alone. For example, react testing library is often used to unit test a single React component.
 
-## Tests for API
+## API Testing
 
 To verify that your API works as expected, usually you need to send some requests to a running instance of your application, and check the responses. This can be done manually using tools like Postman or Insomnia, but we prefer to automate those tests.
 
