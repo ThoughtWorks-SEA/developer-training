@@ -86,7 +86,7 @@ HTTP protocol defines a set of status codes that you can use in HTTP responses. 
 
 In deciding what resources are within your system, name them as _nouns_ as opposed to verbs or actions. In other words, a REST URI should refer to a resource that is a thing instead of referring to an action.
 
-#### Plurals for names?
+**Plurals for names?**
 
 Since those resources are nouns, you need to decide if you should use singular form or plural form. For example, should your URI for retrieving a representation of a customer resource look like this:
 GET http://www.example.com/**customer**/33245 or: GET http://www.example.com/**customers**/33245
@@ -108,11 +108,11 @@ To be idempotent, the API should allow clients to make that same call to the API
 In other words, with an idempotent API, making multiple identical requests has the same effect as making a single request.
 An API with this property makes the consumer's life much easier.
 
-#### Is GET always idempotent?
+**Is GET always idempotent?**
 
 For example, GET is idempotent according to the HTTP specification, because it is supposed to only read resources. But there’s nothing to stop you from implementing a non-idempotent method in your API. You could allow your API to update your resource when a GET request is received, resulting in unexpected consequences for the client. Idempotence is important to GET requests.
 
-#### Making DELETE idempotent
+**Making DELETE idempotent**
 
 For example, assuming we have this API to delete a user:
 
@@ -124,9 +124,9 @@ If the API returns error when the user with ID 101 does not exist, then an API c
 
 On the other hand, if the effect of calling the API ensures the user is deleted, no matter how many times it's called, then the API consumer can call it safely without worrying about if the user has been deleted or not.
 
-#### POST is not idempotent
+**POST is not idempotent**
 
-Notice that POST is at times naturally not idempotent due to the resource being created. Calling the API multiple times might result in different results (more resources created).
+Notice that POST is at times naturally not idempotent due to the resource being created. Calling the API multiple times might result in different results, such as more resources created, or attribute changes.
 
 ### Evolving APIs over time
 
@@ -147,6 +147,18 @@ API versioning is a difficult topic. You could read about [how Stripe does its A
 The result of HTTP GET methods might be cached by the browsers (and the intermediate routers in the network). As an API developer, you can control how those responses are cached using _Cache Control Headers_.
 
 ### Designing a good API
+
+#### API Interface
+
+**Input Data**
+
+As API developer, you will need to decide on how to user passing the data into the API, such as URI parameters, querystrings, or JSON body.
+
+For create or update operation, you should consider using JSON body.
+
+**Returning Data**
+
+When there is returning information to the client, the convention is to return a JSON response. Sometimes, a short message could also be acceptable.
 
 #### Not all HTTP methods might be available to you
 
