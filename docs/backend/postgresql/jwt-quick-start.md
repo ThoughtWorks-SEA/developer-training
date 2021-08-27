@@ -84,6 +84,10 @@ New model was created at security-jwt/db/models/trainer.js .
 New migration was created at security-jwt/db/migrations/20210823035441-create-trainer.js .
 ```
 
+### Add hooks to hash Trainer password
+
+See [guide on hashing passwords](backend/postgresql/sequelize-hooks-hashing-passwords)
+
 ### Updating the Trainer migration file
 
 A database migration system captures every single changes to the database.
