@@ -323,12 +323,12 @@ Once this field is set in a token, it's validated later on when we call the jwt.
 
 Now that we have our `JWT_SECRET_KEY` set up, let's create a `protectRoute` middleware:
 
-middleware/protectRoute.js
-
 ```js
+// middleware/auth.js
+
 const jwt = require("jsonwebtoken");
 
-const protectRoute = (req, res, next) => {
+const auth = (req, res, next) => {
   try {
     if (!req.cookies.token) {
       throw new Error("You are not authorized");
@@ -348,7 +348,7 @@ const protectRoute = (req, res, next) => {
 };
 
 module.exports = {
-  protectRoute,
+  auth,
 };
 ```
 
