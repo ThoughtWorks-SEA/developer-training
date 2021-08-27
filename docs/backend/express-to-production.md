@@ -45,6 +45,13 @@ If you don’t set up a proper CORS policy on the **backend server** that allows
 
 If you build the API using Express, you can configure the Express CORS middleware to allow the API to be called by another React application loaded from Heroku.
 
+**Cookies with CORS**
+
+If you are using front end cookies, and requires CORS at the backend, you will need to set `withCredentials: true` at your front end and consider anti-CSRF security handling.
+See:
+- [StackOverflow](https://stackoverflow.com/questions/46288437/set-cookies-for-cross-origin-requests)
+- [MDN: Set-Cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie)
+
 ### Enabling CORS in Express.js
 
 Install the `cors` package.
@@ -109,7 +116,7 @@ origin: [/http:\/\/localhost:.*/, /http[s]*:\/\/.*\.herokuapp.com/],
 
 Without using the npm package `cors`, you will have to add the headers to the response manually to enable CORS.
 
-The following code is taken from [enable-cors.org](enable-cors.org).
+The following code is taken from [enable-cors.org](https://enable-cors.org/).
 
 ```js
 app.use(function (req, res, next) {
