@@ -321,7 +321,7 @@ Once this field is set in a token, it's validated later on when we call the jwt.
 
 ### Protect a route
 
-Now that we have our `JWT_SECRET_KEY` set up, let's create a `protectRoute` middleware:
+Now that we have our `JWT_SECRET_KEY` set up, let's create a `auth` middleware:
 
 ```js
 // middleware/auth.js
@@ -378,12 +378,12 @@ router.get("/search/:username", async (req, res, next) => {
 
 What if we only want authenticated users to access this endpoint?
 
-We can protect the endpoint by using the `protectRoute` middleware we created earlier:
+We can protect the endpoint by using the `auth` middleware we created earlier:
 
 ```js
-const { protectRoute } = require("../middleware/protectRoute");
+const { auth } = require("../middleware/auth");
 
-router.get("/search/:username", protectRoute, async (req, res, next) => {
+router.get("/search/:username", auth, async (req, res, next) => {
   try {
     const username = req.params.username;
 
