@@ -9,7 +9,7 @@ npm install pg pg-hstore sequelize
 We will also make use of `sequelize-cli` to help us generate the template for our Sequelize setup and run database migration for us. See: [Sequelize Migration](https://sequelize.org/master/manual/migrations.html)
 
 ```
-npm install --save-dev sequelize-cli
+npm install sequelize-cli -D
 ```
 
 ### Sequelize Configuration for Migration and Application
