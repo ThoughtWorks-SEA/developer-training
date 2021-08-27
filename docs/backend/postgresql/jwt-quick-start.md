@@ -194,7 +194,7 @@ const db = require("../models/index");
 const router = express.Router();
 
 // Add POST /trainers route
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const newTrainer = await db.Trainer.create(req.body);
     res.send(newTrainer);
