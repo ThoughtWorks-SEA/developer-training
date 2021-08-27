@@ -104,6 +104,8 @@ For example, here are some common issues faced with syncing database states
 Let's go ahead and add the unique and allowNull keys to keep the migration file behavior in sync with the model file.
 
 ```js
+// models/trainer.js
+
 "use strict";
 
 module.exports = {
@@ -165,9 +167,9 @@ npx sequelize db:migrate
 
 ### Connect and initialise database for the main app
 
-app.js
-
 ```js
+// app.js
+
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const db = require("./models/index");
@@ -185,9 +187,9 @@ module.exports = app;
 
 ### New trainer route for creating a new Trainer
 
-routes/trainers.js
-
 ```js
+// routes/trainer.route.js
+
 const express = require("express");
 const db = require("../db/models/index");
 
@@ -212,13 +214,15 @@ module.exports = router;
 Add trainer route before the exporting the app function
 
 ```js
+// app.js
+
 const trainersRouter = require("./routes/trainers.js");
 app.use("/trainers", trainersRoutes);
 ```
 
-index.js
-
 ```js
+// index.js
+
 const app = require("./app");
 
 const PORT = process.env.PORT || 4000;
@@ -255,27 +259,35 @@ You can generate a good random 256 bits key (crypographically strong pseudorando
 node -e "console.log(require('crypto').randomBytes(256 / 8).toString('hex'));"
 ```
 
-You can also generate a base64 key with:
+You can also generate a base64 key. If you choose to use a base64 key, read the key into a Buffer using `Buffer.from(key, "base64")` and use it with `jwt.sign` and `jwt.verify`.
 
 ```sh
 node -e "console.log(require('crypto').randomBytes(256 / 8).toString('base64'));"
 ```
 
-If you choose to use a base64 key, read the key into a Buffer using `Buffer.from(key, "base64")` and use it with `jwt.sign` and `jwt.verify`.
+Save it in `.env` file and do not commit it.
 
-Save it in `.env` file and do not commit it. Remember to add the `.env` file to `.gitignore`.
+```sh
+# .env
 
+JWT_SECRET_KEY=<YOUR_NODE_COMMAND_OUTPUT_ABOVE>
 ```
-JWT_SECRET_KEY=udhwhd89237er8hejkfnekf28ynf2397r5983tryn938gh34589
+
+You could setup the JWT secret using:
+
+```sh
+echo "JWT_SECRET_KEY=$(node -e "console.log(require('crypto').randomBytes(256 / 8).toString('hex'));")" >> .env
 ```
+
+Remember to add the `.env` file to `.gitignore`.
 
 ### Generating a JWT token and finding the secret
 
 - Create a `jwt.js` file inside the config folder, with the `getJWTSecret` function.
 
-config/jwt.js
-
 ```js
+// config/jwt.js
+
 const jwt = require("jsonwebtoken");
 
 const getJWTSecret = () => {
@@ -352,35 +364,18 @@ module.exports = {
 };
 ```
 
-To add the feature of allowing users to search for trainers by their username, add a new GET /trainers/:username route:
+To add the feature of allowing users to search for trainers by their username, add a new `GET /trainers/:username` route:
 
-routes/trainers.js
-
-```js
-router.get("/search/:username", async (req, res, next) => {
-  try {
-    const username = req.params.username;
-    // [db.Sequelize.Op.iLike] allows you to do case-insensitive + partial querying
-    // e.g. "Sa" will return Samantha, Samuel..
-    const trainer = await db.Trainer.findAll({
-      where: { username: { [db.Sequelize.Op.iLike]: "%" + username + "%" } },
-    });
-    res.send(trainer);
-  } catch (err) {
-    console.error(err);
-    next(err);
-  }
-});
-```
-
-1. Create a Trainer with username and password, using POST /trainers
-1. You should be able to GET the trainer using /trainers/:username
+1. Create a Trainer with username and password, using `POST /trainers`.
+2. You should be able to GET the trainer using /trainers/:username
 
 What if we only want authenticated users to access this endpoint?
 
 We can protect the endpoint by using the `auth` middleware we created earlier:
 
 ```js
+// trainer.route.js
+
 const { auth } = require("../middleware/auth");
 
 router.get("/search/:username", auth, async (req, res, next) => {
@@ -410,6 +405,8 @@ Read documentation about `res.cookie` and `res.clearCookie`:
 - http://expressjs.com/en/api.html#res.clearCookie
 
 ```js
+// trainer.route.js
+
 const bcrypt = require("bcryptjs");
 const createJWTToken = require("../config/jwt");
 
