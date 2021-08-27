@@ -173,9 +173,9 @@ Create an application with the following.
 **1. Bootstrap project dependencies**
 
 Follow previous notes to bootstrap with: `pg pg-hstore sequelize` , dev dependencies: `sequelize-cli` . 
-Configure `sequelize-cli` and run relevant `sequelize-cli init` commands.
+Setup `.sequelizerc` to configure `sequelize-cli` and run relevant `sequelize-cli init` commands.
 
-**2. Generate boiler plate for database strucure**
+**2. Generate boiler plate for database structure**
 
 Run the following to generate database model and migration scripts. We will need to update the contents later.
 
@@ -185,19 +185,41 @@ npx sequelize-cli model:generate --name Trainer --attributes username:string,pas
 npx sequelize-cli model:generate --name Pokemon --attributes name:string,japaneseName:string,baseHP:integer,category:string,trainerId:integer
 ```
 
-References to create a closest attributes:
-- https://github.com/sequelize/cli/blob/be5b445619b59115f36f06507bfff7aa87528db8/docs/FAQ.md#how-can-i-generate-a-model
-- https://github.com/sequelize/cli/blob/be5b445619b59115f36f06507bfff7aa87528db8/src/helpers/model-helper.js#L10-L61
+The data types support:
+- [Sequelize API documentation](https://sequelize.org/master/class/lib/data-types.js~VIRTUAL.html) _At the point of writing, the bottom left of this page listed the supported values_
+- [GitHub example (Sequelize CLI)](https://github.com/sequelize/cli/blob/be5b445619b59115f36f06507bfff7aa87528db8/docs/FAQ.md#how-can-i-generate-a-model)
+- [GitHub code (Sequelize CLI)](https://github.com/sequelize/cli/blob/be5b445619b59115f36f06507bfff7aa87528db8/src/helpers/model-helper.js#L10-L61)
 
-**3. Modify the Migration Scripts and Models**
+Notes: _If you are updating an existing model, it's expected to fail out. Proceed to next step instead._
 
+**3. Create / Modify the Migration Scripts and Models**
+
+Notes: _If you are updating and existing database model, run migration:generate instead of model_generate._
+
+```sh
+npx sequelize-cli migration:generate --name update-pokemon-with-trainer-id
+```
+
+Changes to the database model:
 - Modify pokemon:
   - add `allowNull: false` and `unique: true` to `name` field.
   - associate with Trainer model
 - Modify trainer:
   - associate with Pokemon model
 
+Add defination to the migration scripts:
+
+```js
+// up
+await queryInterface.addColumn('Pokemons', 'trainerId', Sequelize.INTEGER);
+
+// down
+await queryInterface.removeColumn('Pokemons', 'trainerId');
+```
+
 **4. Create NodeJS/Express Application**
+
+_Skip this if you want a table to be created strictly only through migration_, see section below: [Creating Table via Sequelize vs Migration](backend/postgresql/sequelize-associations?id=creating-table-via-sequelize-vs-migration)
 
 Configure the app to sync models at start up and verify the SQL commands in start up logs.
 - Reference: https://levelup.gitconnected.com/sequelize-cli-and-express-fb3ddefb9786
@@ -209,12 +231,51 @@ For production, we might want to run migration in separate operations, thus it i
 
 Here is the steps.
 1. Note down the SQL statements in application start up logs.
-2. Drop the development database.
-3. Try to run the `sequelize-cli db:migrate` and compare the following.
+2. Drop the development database and run the `sequelize-cli db:migrate`. You could skip this and just compare if you have applied all migration script.
+3. Compare the following in the application SQL and the existing SQL definition of the table structure.
    - database tables definition
-   - constraints, such as primary key and foreign key
-   - indexes, such as unique index
+   - constraints, such as primary key, foreign key and unique constraints
+   - indexes
+
+Example on how we patch in the missing constraint.
+
+```sh
+npx sequelize-cli migration:generate --name update-pokemon-with-trainer-foreign-key
+```
+
+```js
+// up
+await queryInterface.addConstraint('Pokemons', {
+  fields: ['trainerId'],
+  type: 'foreign key',
+  name: 'Pokemons_trainerId_fkey',
+  references: { //Required field
+    table: 'Trainers',
+    field: 'id'
+  },
+  onDelete: 'no action',
+  onUpdate: 'cascade'
+});
+
+// down
+await queryInterface.removeConstraint('Pokemons', 'Pokemons_trainerId_fkey');
+```
 
 **6. Implement the CRUD**
 
 Try to do TDD approach. For convenience of testing, you might want to begin with a service / controller without the routing test.
+
+## Creating Table via Sequelize vs Migration
+
+It is important to ensure the definition of the database tables are the same, independent of environment and how the database table being set up.
+
+Extracted from [Sequelize Migration Guide](https://sequelize.org/master/manual/migrations.html#creating-the-first-model--and-migration-):
+
+> **Note**: Sequelize will only use Model files, it's the table representation. On the other hand, the migration file is a change in that model or more specifically that table, used by CLI. Treat migrations like a commit or a log for some change in database.
+
+When a table is created via `db.sequelize.sync()` , ie. the database table wasn't created via migration, the SQL generated by `sequelize` have additional constraints with it, because `sequelize` is using Model which has the concept of associations. When we are creating a table via migration, **we need to write the migration scripts** ourselves, to include information that is abstracted and handle by `sequelize`. Similarly, when you add a unique contraints after a table is created to a column, you will need to create a migration script to add the unique constraint at the same time.
+
+**Hint**: To simplify the efforts to write the migration script, we could borrow sequelize by comparing
+- the SQL statements that are generated by a fresh app with fresh database, usually in developer machine
+- the SQL representations of all the associated models, eg. the `REFERENCES` and the `ON DELETE` and `ON UPDATE` actions
+- run `sequelize-cli migration:generate` command and update the content by referring to [Sequelize Query Interface](https://sequelize.org/master/class/lib/dialects/abstract/query-interface.js~QueryInterface.html).
