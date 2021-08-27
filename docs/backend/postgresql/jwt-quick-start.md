@@ -189,7 +189,7 @@ routes/trainers.js
 
 ```js
 const express = require("express");
-const db = require("../models/index");
+const db = require("../db/models/index");
 
 const router = express.Router();
 
