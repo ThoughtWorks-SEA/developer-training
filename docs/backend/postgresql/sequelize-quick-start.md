@@ -1,4 +1,6 @@
-### Install Sequelize and Sequelize-CLI
+### Installation
+
+Install Sequelize and Postgres-related packages
 
 ```
 npm install pg pg-hstore sequelize
