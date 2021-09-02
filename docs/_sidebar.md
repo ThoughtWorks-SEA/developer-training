@@ -139,12 +139,12 @@
       <!-- - [Security jwt testing](backend/security-jwt-testing) -->
     <!-- Path to Production -->
   - [Express.js to production](backend/express-to-production)
-    <!-- - [Express.js deploy](backend/express-deploy-mongo) -->
-  - [Express.js deploy](backend/express-deploy-postgres)
-    <!-- Old Labs -->
-    <!-- - [Lab: Express.js Mongoose](backend/mongodb/express-mongoose-lab) -->
-    <!-- - [Lab: Company reviews](backend/company-reviews-lab) -->
-    <!-- - [Labs: Express / Mongoose](backend/backend-labs) -->
+      <!-- - [Express.js deploy](backend/express-deploy-mongo) -->
+    <!-- - [Express.js deploy](backend/express-deploy-postgres) -->
+      <!-- Old Labs -->
+      <!-- - [Lab: Express.js Mongoose](backend/mongodb/express-mongoose-lab) -->
+      <!-- - [Lab: Company reviews](backend/company-reviews-lab) -->
+      <!-- - [Labs: Express / Mongoose](backend/backend-labs) -->
 
 - **Delivering Software**
 
@@ -154,7 +154,7 @@
   - [Git collab](delivering-software/git-collab)
   - [Clean code](delivering-software/clean-code)
   - [Refactoring](delivering-software/refactoring)
-  - [Deploying on Heroku](delivering-software/deploying-full-stack)
+  <!-- - [Deploying on Heroku](delivering-software/deploying-full-stack) -->
 
 - **Computer Science**
 
